@@ -1,0 +1,18 @@
+#include ".../../inc/SFcarConstants.h"
+#include <thread>      // includes the thread library, std::thread
+
+void SFgenerateCar::SFcarConstants(){
+	// This generates the car itself and will store it in a list
+};
+
+void SFgenerateCar::SFcarConstants(){
+	// This will hold the calls to update the car data for moving on the GUI
+}; 
+
+double SFgenerateCar::getWaitTime(double time){
+	// This will hold wait times
+};	
+
+double SFgenerateCar::getAvgTime(double time){
+	// This will hold average wait times
+};	
