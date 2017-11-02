@@ -6,11 +6,11 @@ class DJTrafficLightManager
 public:
     DJTrafficLightManager(int laneNum, int dirNum);
 
-    void initAllLights(int direction, int lane);
+    void initAllLights(int numLanes);
     // take total number of lines and find a way to 
     // map them on a per-lane/direction basis, along with
     // initializing them with proper values, user config-able
-    void initStateTable(int direction, int lane);
+    void initStateTable(int numLanes);
     // initializes the state table for the lights to be used
     // to calculate states of individual traffic lights.
     // made with regards to user input from initAllLights
@@ -30,11 +30,19 @@ public:
     // and modulus it (tentatively) by timeRate 
     // TODO: define exact equation for this
     // return cycleTime(double)
-    void manageState(int singleLight, double time, double timeRate);  
+    int manageState(int singleLight, double time, double timeRate);  
     // keeps track of and updates each light
     // does not return anything, but is vital to
     // manage the states and ensure no lights have
     // incorrect states.
+    void recoverFromBadState(int errCode);
+    // takes in the traffic light with a bad state
+    // will update it's state to reflect a good change
+    // based on conditions externally set
+    void setState(int singleLight, int tState);
+    // for testing, allows a light state to be set to anything
+    // useful when testing manageState function, will do nothing
+    // until that is set up
 
 private:
     int state;
