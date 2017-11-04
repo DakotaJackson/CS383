@@ -55,6 +55,10 @@ DJallTest:
 ############################################################################
 #Begin Joe
 
+
+JJTestOutput.o: test/JJTestOutput.cpp test/JJTestOutput.h
+	$(CPP) $(CPPFLAGS) JJTestOutput.cpp JJTestOutput.h
+
 JJbuildTest: 
 JJallTest: 
 #End Joe
