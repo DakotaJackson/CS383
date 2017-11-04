@@ -16,7 +16,10 @@
  * JPDirectionOutOfBounds
  */
 
-
+/**
+ * \defgroup EXC Exceptions
+ * @{
+ */
 
 
 //to add: IntersectionException super class, cannotFinalizeException, maybe laneAlreadyExistsException
@@ -31,6 +34,7 @@ public:
 	virtual const char* what() const throw();\
 };
 
+/** \brief Configuration steps were performed out of order */
 class JPConfigurationOrderException : public JPIntersectionException
 {
 public:
@@ -39,18 +43,25 @@ public:
 	int getDetail();
 	virtual ~JPConfigurationOrderException() throw();
 	virtual const char* what() const throw();
-	static const int CONFIG_FINALIZED = 1; /** \brief The configuration has already been finalized. */
-	static const int CONFIG_OFFSET_AFTER_LANES = 2; /** \brief Offset cannot be set after you have begun adding lanes. */
-	static const int CONFIG_LANES_BEFORE_OFFSET = 3; /** \brief Lanes cannot be added without first setting the offsets. */
-	static const int FINALIZE_MISSING_SPEED_LIMITS = 4; /** \brief Speed Limits must be set before attempting to finalize. */
-	static const int FINALIZE_MISSING_LANES = 5; /** \brief Cannot finalize because lanes are missing. */
-	static const int FINALIZE_MISSING_LANE_LENGTHS = 6; /** \brief Cannot finalize because lane lengths are missing. */
+	/** \brief The configuration has already been finalized. */
+	static const int CONFIG_FINALIZED = 1;
+	/** \brief Offset cannot be set after you have begun adding lanes. */
+	static const int CONFIG_OFFSET_AFTER_LANES = 2;
+	/** \brief Lanes cannot be added without first setting the offsets. */
+	static const int CONFIG_LANES_BEFORE_OFFSET = 3;
+	/** \brief Speed Limits must be set before attempting to finalize. */
+	static const int FINALIZE_MISSING_SPEED_LIMITS = 4;
+	/** \brief Cannot finalize because lanes are missing. */
+	static const int FINALIZE_MISSING_LANES = 5;
+	/** \brief Cannot finalize because lane lengths are missing. */
+	static const int FINALIZE_MISSING_LANE_LENGTHS = 6;
 	//static const int CONFIG_FINALIZED = 1; /** \brief  */
 
 private:
 	int _detail;
 };
 
+/** \brief The intersection has been configured improperly */
 class JPMalformedIntersectionException: public JPIntersectionException
 {
 public:
@@ -67,9 +78,7 @@ private:
 	int _direction;
 };
 
-/**
- * \brief User has tried to create more than one intersection
- */
+/** \brief User has tried to create more than one intersection */
 class JPMultipleIntersectionsException: public std::exception
 {
 public:
@@ -101,10 +110,10 @@ private:
 	int _collidingLane;
 };
 
-class JPLaneCollidesWithOncomingLane: public JPMalformedIntersectionException
+class JPLaneCollidesWithOncomingLaneException: public JPMalformedIntersectionException
 {
 public:
-	JPLaneCollidesWithOncomingLane(int direction, int thisLane, int collidingLane );
+	JPLaneCollidesWithOncomingLaneException(int direction, int thisLane, int collidingLane );
 	virtual const char* what() const throw();
 	/**
 	 * \brief Returns the other lane from the same directions that this lane is trying to turn into.
@@ -114,32 +123,34 @@ private:
 	int _collidingLane;
 };
 
-class JPTurningLaneCrossingStraightLane: public JPMalformedIntersectionException
+class JPTurningLaneCrossingStraightLaneException: public JPMalformedIntersectionException
 {
 public:
-	JPTurningLaneCrossingStraightLane(int direction, int thisLane);
+	JPTurningLaneCrossingStraightLaneException(int direction, int thisLane);
 	virtual const char* what() const throw();
 };
 
-class JPLaneOffsetMismatch: public JPMalformedIntersectionException
+class JPLaneOffsetMismatchException: public JPMalformedIntersectionException
 {
 public:
-	JPLaneOffsetMismatch();
+	JPLaneOffsetMismatchException();
 	virtual const char* what() const throw();
 };
 
-class JPLaneNumberOutOfBounds: public JPMalformedIntersectionException
+class JPLaneNumberOutOfBoundsException: public JPMalformedIntersectionException
 {
 public:
-	JPLaneNumberOutOfBounds(int lane);
+	JPLaneNumberOutOfBoundsException(int lane);
 	virtual const char* what() const throw();
 };
 
-class JPDirectionOutOfBounds: public JPMalformedIntersectionException
+class JPDirectionOutOfBoundsException: public JPMalformedIntersectionException
 {
 public:
-	JPDirectionOutOfBounds(int direction);
+	JPDirectionOutOfBoundsException(int direction);
 	virtual const char* what() const throw();
 };
+
+/** @} */
 
 #endif /* SRC_JAMES_MALFORMEDINTERSECTIONEXCEPTION_H_ */

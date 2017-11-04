@@ -14,25 +14,70 @@
 #include "JPTrafficModel.h"
 #include "JPUpdatableInterface.h"
 #include "../src/james/SFCar.h"
+#include "DJTrafficLightManager.h"
 
+/**
+ * \defgroup ENG Simulation Engine
+ * @{
+ */
+
+/**
+ * \brief The main computational engine for the simulation.
+ *
+ * This class is responsible for advancing the state of the simulation. It does this primarily by
+ * using one of the two step functions. While not necesary, it is recomend to run init seperately.
+ * Usage
+ *	\code
+ *	//setup
+ * JPSimulationEngine *engine = new JPSimulationEngine();
+ * engine->setTrafficModel(model);
+ * engine->setIntersection(intersection);
+ * engine->setTrafficLight(light);
+ * engine->init();
+ *
+ * //running the simulation
+ * while(true == stillWantToRun)
+ * {
+ * 	engine->step(0.1);
+ * 	//do something such as draw the cars
+ * }
+ *
+ *	\endcode
+ */
 class JPSimulationEngine {
 public:
 	JPSimulationEngine();
 	virtual ~JPSimulationEngine();
 
+	/** @{ */
 	//control
 	void start();
 	void pause();
-	void step();
-	void step(double sec); /** \brief Advance the simulation by sec seconds */
-	void end(); /** \brief Terminate the simulation allow for report generation */
 
-	//configuration
+	/** \brief Advance the simulation by preset time. */
+	void step();
+	 /** \brief Advance the simulation by sec seconds */
+	void step(double sec);
+	 /** \brief Terminate the simulation allow for report generation */
+	void end();
+	/** \brief Initialize the simulation and run for a short time to populate the lanes */
+	void init();
+	/** @} */
+
+
+	//configuration /** @{ */
+	/** \brief Add a class with an update function that can be called after each step. */
 	void setVisualization(JPUpdatableInterface *interface);
+	/** \brief Add the traffic model to the simulation */
 	void setTrafficModel(JPTrafficModel *model);
+	/** \brief Add the intersection to the simulation */
 	void setIntersection(JPIntersection *intersection);
-	//void setTrafficLight(DJTrafficLightManager *light);
-	void setInitTime(double secs); /** \brief Set how long the initialization phase runs */
+	//** \brief Add the traffic light to the simulation */
+	void setTrafficLight(DJTrafficLightManager *light);
+	/** \brief Set how long the initialization phase runs */
+	void setInitTime(double secs);
+	/** \brief Set the preset interval for advancing the simulation */
+	void setStepInterval(double secs);
 
 	//double* getThroughput(int direction, int &laneCount);
 	//getWhateverElseWeTracked()
@@ -55,11 +100,12 @@ private:
 	JPIntersection *_intersection;
 	JPIntersectionGrid *_iGrid;
 	JPTrafficModel *_trafficModel;
-	//DJTrafficLightManager *_light
+	DJTrafficLightManager *_light;
 
 	//Running Variables
 	double _time;
 	bool _paused;
+	bool _initialized;
 	//long _throughput[4][MAX_LANES_MACRO];
 	double _nextCreationTime[4];
 	double _yellowTime[4];
@@ -76,5 +122,5 @@ private:
 	void addCars(int direction, JPLane lane, double timeStep);
 
 };
-
+/** @} */
 #endif /* JPSIMULATIONENGINE_H_ */

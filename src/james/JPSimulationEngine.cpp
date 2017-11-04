@@ -19,6 +19,7 @@ JPSimulationEngine::JPSimulationEngine()
 	int i;
 	for(i = 0; i<4;  i++)
 		_laneCounts[i] = 0;
+
 }
 
 JPSimulationEngine::~JPSimulationEngine()
@@ -35,12 +36,14 @@ void JPSimulationEngine::pause()
 {
 }
 
-void JPSimulationEngine::step()
-{
-}
+void JPSimulationEngine::step(){ step(_stepTime); }
 
 void JPSimulationEngine::step(double sec)
 {
+	if( ! _initialized)
+		init();
+
+	//todo cycle through directions and lanes
 }
 
 /*
@@ -62,24 +65,53 @@ double JPSimulationEngine::intersectionDeceleration(double pos, double speed,
 	return 0.0;
 }
 
-void JPSimulationEngine::end() {
-}
-
-void JPSimulationEngine::setVisualization(JPUpdatableInterface* interface) {
-}
-
-void JPSimulationEngine::setTrafficModel(JPTrafficModel* model) {
-}
-
-void JPSimulationEngine::setIntersection(JPIntersection* intersection) {
-}
-
-void JPSimulationEngine::setInitTime(double secs) {
-}
-
-void JPSimulationEngine::processLane(JPLane* lane)
+void JPSimulationEngine::end()
 {
 }
 
-void JPSimulationEngine::addCars(int direction, JPLane lane, double timeStep) {
+void JPSimulationEngine::setVisualization(JPUpdatableInterface* interface)
+{
+	//todo impilment visualization
+}
+
+void JPSimulationEngine::setTrafficModel(JPTrafficModel* model){ _trafficModel = model; }
+void JPSimulationEngine::setIntersection(JPIntersection* intersection){ _intersection = intersection; }
+void JPSimulationEngine::setTrafficLight(DJTrafficLightManager* light){ _light = light; }
+void JPSimulationEngine::setStepInterval(double secs){ _stepTime = secs; }
+void JPSimulationEngine::setInitTime(double secs) { _initTime = secs; }
+
+void JPSimulationEngine::processLane(JPLane* lane)
+{
+	//todo write process lane
+	double prevSpeed = -1;
+}
+
+void JPSimulationEngine::init()
+{
+	_initialized = true; //prevent infinite recursion
+	//todo initialize next car time
+	_time = 0;
+	//todo raise initTime to the next highest cycle time
+	//todo step through 95% of init time 2 sec/step
+	//todo step through rest of init time at 0.1 sec/step
+	_time = 0;
+}
+
+/**
+ * Add cars to the simulation and schedule the next arrival
+ */
+void JPSimulationEngine::addCars(int direction, JPLane lane, double timeStep)
+{
+	double effTime = _time + timeStep;
+
+	//handle rates of zero by skipping
+	if(_nextCreationTime[direction] < 0)
+		return;
+
+	while(effTime < _nextCreationTime[direction])
+	{
+		//todo new Car(_trafficModel->getNextTurnDirection(direction))
+		_nextCreationTime[direction] =_trafficModel->getNextTiming(direction);
+	}
+
 }

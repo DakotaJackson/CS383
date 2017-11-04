@@ -21,19 +21,6 @@ const char* JPTrafficModelException::what() const throw ()
 	return "";
 }
 
-JPDirectionOutOfBoundsException::JPDirectionOutOfBoundsException()
-{
-}
-
-const char* JPDirectionOutOfBoundsException::what() const throw ()
-{
-	return "";
-}
-
-JPDirectionOutOfBoundsException::~JPDirectionOutOfBoundsException() throw ()
-{
-}
-
 JPRateLessThanZeroException::JPRateLessThanZeroException()
 {
 }

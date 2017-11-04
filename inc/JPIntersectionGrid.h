@@ -9,6 +9,10 @@
 #define SRC_JAMES_JPINTERSECTIONGRID_H_
 #include "../src/james/SFCar.h"
 #include "JPIntersection.h"
+/**
+ * \addtogroup ENG
+ * @{
+ */
 
 /**
  * \brief A grid representation of the inside of the intersection used for determining cross-directional interference.
@@ -44,5 +48,5 @@ private:
 	const int _incX[4] = {-1,1,-1,1}; //not set accurately
 	const int _incY[4] = {-1,1,-1,1}; //not set accurately
 };
-
+/** @} */
 #endif /* SRC_JAMES_JPINTERSECTIONGRID_H_ */

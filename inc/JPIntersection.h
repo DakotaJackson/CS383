@@ -8,6 +8,12 @@
 #ifndef SRC_JAMES_JPINTERSECTION_H_
 #define SRC_JAMES_JPINTERSECTION_H_
 #include "JPLane.h"
+#include "JPIntersectionExceptions.h"
+
+/**
+ * \addtogroup ENG
+ * @{
+ */
 
 /**
  * \brief A class that serves as a container and validator for an intersection.
@@ -33,7 +39,7 @@
  *	//alternatively setLaneOffsets(int direction, double distance) can be used
  *	intersection->setLaneOffsets(2.5,2.5,2,2);
  *
- *	intersection->setSpeedLimits(35);
+ *	intersection->setSpeedLimits(35,35);
  *
  *	//add the individual lanes
  *	//addLane(int direction, int position, int turnOptions, int leftTarget, int rightTarget);
@@ -166,17 +172,25 @@ public:
 
 	JPIntersection();
 
-	void setLaneOffsets(double north, double south, double east, double west); /** \brief Set the offset (in lanes) of the rightmost lane. */
-	void setLaneOffset(int direction, double offset);							/** \brief Set the offset (in lanes) of the rightmost lane. */
-	void setTrackedLaneLengths(double north, double south, double east, double west); /** \brief Set the distance (in feet) that simulation tracks cars before the center of the intersection */
+	/** \brief Set the offset (in lanes) of the rightmost lane. */
+	void setLaneOffsets(double north, double south, double east, double west);
+	/** \brief Set the offset (in lanes) of the rightmost lane. */
+	void setLaneOffset(int direction, double offset);
+	/** \brief Set the distance (in feet) that simulation tracks cars before the center of the intersection */
+	void setTrackedLaneLengths(double north, double south, double east, double west);
 	void setTrackedLaneLength(int direction, double distance);
 	void setTrackedExitLengths(double northSouth, double eastWest);
-	void setSpeedLimits(double northSouth, double eastWest); /** \brief Set speed limits in miles per hour */
+	/** \brief Set speed limits in miles per hour */
+	void setSpeedLimits(double northSouth, double eastWest);
+	/** \brief Add a lane to the intersection in the specified position and direction */
 	void addLane(int direction, int position, int turnOptions, int leftTarget, int rightTarget);
 
-	double getSpeedLimits(int direction); /** \brief Return the speed limit in MPH */
-	double getSpeedLimitsInFPS(int direction); /** \brief Return the speed limit in ft/s */
-	void finalize(); /** \brief Finalize the configuration preventing further changes. */
+	/** \brief Return the speed limit in MPH */
+	double getSpeedLimits(int direction);
+	/** \brief Return the speed limit in ft/s */
+	double getSpeedLimitsInFPS(int direction);
+	/** \brief Finalize the configuration preventing further changes. */
+	void finalize();
 
 
 
@@ -235,6 +249,12 @@ public:
 
 	virtual ~JPIntersection();
 
+	inline static void valdiateDirection(int direction)
+	{
+		if( direction < 0 || direction > 3)
+			throw JPDirectionOutOfBoundsException(direction);
+	}
+
 private:
 	//direction specific variables
 	int _laneCounts[4];
@@ -277,4 +297,5 @@ private:
  */
 //static const int LEFT_ON_SIGNAL_ONLY = 8;
 
+/** @} */
 #endif /* SRC_JAMES_JPINTERSECTION_H_ */

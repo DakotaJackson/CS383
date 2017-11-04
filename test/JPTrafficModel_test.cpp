@@ -10,6 +10,7 @@
 #include "../inc/JPConstants.h"
 #include "../inc/JPIntersection.h"
 
+
 int directionOutOfBoundsTest();
 int rateLessThanZeroTest();
 int probabilityLessThanZeroTest();
@@ -29,22 +30,92 @@ int main()
 	return 0;
 }
 
+/**
+ * Verify that direction out of bounds is properly thrown when the direction is out of bounds.
+ */
 inline int directionOutOfBoundsTest()
 {
-	//verify that an out of bounds direction causes the correct exception
-	return 1;
+	JPTrafficModel tm;
+
+	try//test probability direction low
+	{
+		tm.setProbability(-1, 1, 2, 3);
+		return 1;
+	}
+	catch(JPDirectionOutOfBoundsException &ex){}
+
+	try//test probability direction high
+	{
+		tm.setProbability(5, 1, 2, 3);
+		return 1;
+	}
+	catch(JPDirectionOutOfBoundsException &ex){}
+
+	try//test traffic rate direction high
+	{
+		tm.setTrafficRate(5,25);
+		return 1;
+	}
+	catch(JPDirectionOutOfBoundsException &ex){}
+
+	try//test traffic rate direction low
+	{
+		tm.setTrafficRate(-1,25);
+		return 1;
+	}
+	catch(JPDirectionOutOfBoundsException &ex){}
+
+	return 0;
 }
 
 inline int rateLessThanZeroTest()
 {
-	//verify that a rate of less than 0 causes the correct exception
-	return 1;
+	JPTrafficModel tm;
+	try//test traffic rate less than 0
+	{
+		tm.setTrafficRate(0,-1);
+		return 1;
+	}
+	catch(JPRateLessThanZeroException &ex){}
+
+	return 0;
 }
 
 inline int probabilityLessThanZeroTest()
 {
-	//verify that a probability less than zero causes the correct exception
-	return 1;
+	JPTrafficModel tm;
+	try//test right probability less than 0
+	{
+		tm.setProbability(2	, -1, 2, 3);
+		return 1;
+	}
+	catch(JPProbabilityLessThanZeroException &ex){}
+
+	try//test left probability less than 0
+	{
+		tm.setProbability(3, 1, 2, -1);
+		return 1;
+	}
+	catch(JPProbabilityLessThanZeroException &ex){}
+
+	try//test straight probability less than 0
+	{
+		tm.setProbability(3, 1, 2, -1);
+		return 1;
+	}
+	catch(JPProbabilityLessThanZeroException &ex){}
+
+	try //verify zeros do not throw the exception
+	{
+		tm.setProbability(3, 0, 0, 0);
+		return 0;
+	}
+	catch(JPProbabilityLessThanZeroException &ex)
+	{
+		return 1;
+	}
+
+	return -1;
 }
 
 inline int distributionTests()
@@ -62,17 +133,39 @@ inline int distributionTests()
 	tm.setTrafficRate(JPIntersection::WEST, 1000);
 
 	//20,000 calls getNextTiming()
-	//verify distributions.
-	consts::testOuptut("JPTrafficModel: Direction Distribution Test", 1);
-	consts::testOuptut("JPTrafficModel: Rate Distribution Test", 1);
-	return 1;
-}
-/*
-Errors
-direction != N/S/E/W
-rate <= 0;
-probability < 0
+	int i,dir, dest;
+	double time;
+	double sumTime[4];
+	int dircounter[4][3];
+	for(i = 0; i < 20000; i++)
+	{
+		for(dir = 0; dir < 4; dir++)
+		{
+			time = tm.getNextTiming(dir);
+			sumTime += time; //add to sum for future averaging
+			//todo add to
 
-Tests
-each invalid input
+			//check destination and increment appropriately
+			dest = tm.getNextTurnDirection(dir);
+			//todo check against actual direction from SFCar
+			if(0 == dest)
+				dircounter[dir][0]++;
+			else if(1 == dest)
+				dircounter[dir][1]++;
+			else if(2 == dest)
+				dircounter[dir][2]++;
+
+		}
+	}
+
+	//verify distributions.
+	//todo verify outputs
+	consts::testOuptut("JPTrafficModel: Direction Distribution Test", -1);
+	consts::testOuptut("JPTrafficModel: Rate Distribution Test", -1);
+/*
+	int i,j;
+	for(i = 0; i < 50; i++)
+		printf("%f\n", tm.getNextTiming(JPIntersection::EAST,j));
 */
+	return -1;
+}

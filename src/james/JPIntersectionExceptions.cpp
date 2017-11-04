@@ -73,56 +73,56 @@ const char* JPMultipleIntersectionsException::what() const throw ()
 }
 
 
-JPLaneCollidesWithOncomingLane::JPLaneCollidesWithOncomingLane(int direction,
+JPLaneCollidesWithOncomingLaneException::JPLaneCollidesWithOncomingLaneException(int direction,
 		int thisLane, int collidingLane)
 {
 	_collidingLane = collidingLane;
 }
 
-const char* JPLaneCollidesWithOncomingLane::what() const throw ()
+const char* JPLaneCollidesWithOncomingLaneException::what() const throw ()
 {
 	return "";
 }
 
-int JPLaneCollidesWithOncomingLane::getCollidingLane()
+int JPLaneCollidesWithOncomingLaneException::getCollidingLane()
 {
 	return _collidingLane;
 }
 
-JPTurningLaneCrossingStraightLane::JPTurningLaneCrossingStraightLane(
+JPTurningLaneCrossingStraightLaneException::JPTurningLaneCrossingStraightLaneException(
 		int direction, int thisLane)
 {
 }
 
-const char* JPTurningLaneCrossingStraightLane::what() const throw ()
+const char* JPTurningLaneCrossingStraightLaneException::what() const throw ()
 {
 	return "";
 }
 
-JPLaneOffsetMismatch::JPLaneOffsetMismatch()
+JPLaneOffsetMismatchException::JPLaneOffsetMismatchException()
 {
 
 }
 
-const char* JPLaneOffsetMismatch::what() const throw ()
-{
-	return "";
-}
-
-JPLaneNumberOutOfBounds::JPLaneNumberOutOfBounds(int lane)
-{
-}
-
-const char* JPLaneNumberOutOfBounds::what() const throw ()
+const char* JPLaneOffsetMismatchException::what() const throw ()
 {
 	return "";
 }
 
-JPDirectionOutOfBounds::JPDirectionOutOfBounds(int direction)
+JPLaneNumberOutOfBoundsException::JPLaneNumberOutOfBoundsException(int lane)
 {
 }
 
-const char* JPDirectionOutOfBounds::what() const throw ()
+const char* JPLaneNumberOutOfBoundsException::what() const throw ()
+{
+	return "";
+}
+
+JPDirectionOutOfBoundsException::JPDirectionOutOfBoundsException(int direction)
+{
+}
+
+const char* JPDirectionOutOfBoundsException::what() const throw ()
 {
 	return "";
 }
@@ -138,8 +138,8 @@ const char* JPIntersectionException::what() const throw ()
 	return "";
 }
 
-JPConfigurationOrderException::JPConfigurationOrderException() {
-}
+JPConfigurationOrderException::JPConfigurationOrderException()
+{_detail = 0; }
 
 JPConfigurationOrderException::~JPConfigurationOrderException() throw ()
 {

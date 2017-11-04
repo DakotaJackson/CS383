@@ -6,36 +6,91 @@
  */
 
 #include "../../inc/JPTrafficModel.h"
+#include "../../inc/JPTrafficModelExceptions.h"
 #include "../../inc/JPIntersection.h"
+//and car when available
 
 JPTrafficModel::JPTrafficModel()
 {
-	_rate = 1;
-	_turnCDF[0]=0;
-	_turnCDF[1]=1;
-	_turnCDF[2]=2;
+	int i;
+	for(i = 0; i < 4; i++)
+	{
+		_rate[i] = 1.0;
+		_turnCDF[i][0] = 0.0;
+		_turnCDF[i][1] = 1.0;
+		_turnCDF[i][2] = 2.0;
+	}
+
+	gen = new std::default_random_engine;
+	uniform = new std::uniform_real_distribution<double>(0.0, 1.0);
+
+	//todo set direction map
+	_directionMappings[0] = 1; //SFCar::DESIRE_RIGHT;
+	_directionMappings[1] = 2;
+	_directionMappings[2] = 3;
 }
+
+/**
+ * \throws JPDirectionOutOfBoundsException If direction is not one of those defined in \link JPIntersection \endlink
+ * \throws JPProbabilityLessThanZeroException If any probability is less than zero.
+ */
 void JPTrafficModel::setProbability(int direction, double left, double right, double straight)
 {
+	//validate
+	if(left < 0)
+		throw JPProbabilityLessThanZeroException();
+	if(right < 0)
+		throw JPProbabilityLessThanZeroException();
+	if(straight < 0)
+		throw JPProbabilityLessThanZeroException();
+	JPIntersection::valdiateDirection(direction);
 
+	_turnCDF[direction][0] = left;
+	_turnCDF[direction][1] = _turnCDF[direction][0] + right;
+	_turnCDF[direction][2] = _turnCDF[direction][1] + straight;
 }
+
+/**
+ * \throws JPDirectionOutOfBounds if direction is not one of those defined in \link JPIntersection \endlink
+ * \throws JPRateLessThanZeroException if the rate is negative.
+ */
 void JPTrafficModel::setTrafficRate(int direction, double rate)
 {
-	//if(rate <= 0 || rate > 2000)
-	if(JPIntersection::NORTH == direction ||
-			JPIntersection::SOUTH == direction ||
-			JPIntersection::EAST == direction ||
-			JPIntersection::WEST == direction)
-		_rate = rate;
-	//else do error things
+	JPIntersection::valdiateDirection(direction);
+	if(rate < 0)
+		throw JPRateLessThanZeroException();
+
+	_rate[direction] = rate;
+	poisson[direction] = new poisson_distribution<long>(3600/rate);
 }
-double JPTrafficModel::getNextTiming(int direction, int &turnDirection)
+
+
+double JPTrafficModel::getNextTiming(int direction)
 {
-	turnDirection = 1;
-	return 0.0;
+	//don't try to return infinity
+	if(0 == _rate[direction])
+		return -1.0;
+
+	//return Poisson distributed time
+	return (*poisson[direction])(*gen);
 }
-JPTrafficModel::~JPTrafficModel()
+
+int JPTrafficModel::getNextTurnDirection(int direction)
 {
-	// TODO Auto-generated destructor stub
+	//Get a uniformly distributed value and multiply
+	//by the maximum value of the CDF
+	double p = (*uniform)(*gen);
+	p *= _turnCDF[direction][2];
+
+	//Iterate over the cumulative distribution function
+	//Price is Right style (as close without going over)
+	//The highest index reached without exceeding p is
+	//the chosen direction
+	int i;
+	for(i = 0; p > _turnCDF[direction][i] && i < 3; i++);
+
+	return _directionMappings[i];
 }
+
+JPTrafficModel::~JPTrafficModel(){}
 

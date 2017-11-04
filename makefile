@@ -24,8 +24,8 @@
 #setup usage of qt
 
 LIBS = -lm
-CPP=g++
-CPPFLAGS = -g -Wall
+CPP=g++ 
+CPPFLAGS = -g -Wall -pipe -O2
 
 .PHONY: clean docs test SFBuildTest SFallTest BGbuildTest BGallTest DJbuildTest DJallTest JJbuildTest JJallTest JPbuildTest JPallTest cleandocs
 ############################################################################
@@ -88,8 +88,10 @@ JPLtest: test/JPLane_test.exe
 	test/JPLane_test.exe
 
 #Intersection
-JPIntersection.o: src/james/JPIntersection.cpp src/james/JPIntersectionExceptions.cpp inc/JPConstants.h  inc/JPIntersection.h inc/JPIntersectionExceptions.h JPLane.o SFCar.o
+JPIntersectionExceptions.o: src/james/JPIntersectionExceptions.cpp inc/JPIntersectionExceptions.h
 	$(CPP) $(CPPFLAGS) -c src/james/JPIntersectionExceptions.cpp
+
+JPIntersection.o: src/james/JPIntersection.cpp  inc/JPConstants.h  inc/JPIntersection.h  JPLane.o SFCar.o JPIntersectionExceptions.o
 	$(CPP) $(CPPFLAGS) -c src/james/JPIntersection.cpp
 
 test/JPIntersection_test.exe: JPLane.o  test/JPIntersection_test.cpp JPIntersection.o
@@ -112,11 +114,11 @@ JPIGtest: test/JPIntersectionGrid_test.exe
 JPTrafficModelExceptions.o: inc/JPConstants.h
 	$(CPP) $(CPPFLAGS) -c src/james/JPTrafficModelExceptions.cpp src/james/JPTrafficModelExceptions.cpp inc/JPTrafficModelExceptions.h
 
-JPTrafficModel.o: src/james/JPTrafficModel.cpp inc/JPConstants.h inc/JPTrafficModel.h  JPTrafficModelExceptions.o inc/JPTrafficModelExceptions.h
+JPTrafficModel.o: src/james/JPTrafficModel.cpp inc/JPConstants.h inc/JPTrafficModel.h  JPTrafficModelExceptions.o  JPIntersectionExceptions.o  
 	$(CPP) $(CPPFLAGS) -c src/james/JPTrafficModel.cpp 
 
 test/JPTrafficModel_test.exe: JPTrafficModel.o test/JPTrafficModel_test.cpp
-	$(CPP) $(CPPFLAGS) JPTrafficModel.o JPTrafficModelExceptions.o test/JPTrafficModel_test.cpp  $(LIBS) -o test/JPTrafficModel_test
+	$(CPP) $(CPPFLAGS) JPTrafficModel.o JPTrafficModelExceptions.o JPIntersectionExceptions.o test/JPTrafficModel_test.cpp  $(LIBS) -o test/JPTrafficModel_test
 	
 JPTMtest: test/JPTrafficModel_test.exe
 	test/JPTrafficModel_test.exe

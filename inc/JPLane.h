@@ -14,16 +14,10 @@
 //using namespace::std;
 #include "../src/james/LinkedList.cpp"
 
-/*
-namespace std
-{
-	class runtime_error;
-	template<typename  T>
-	class Iterator;
-	template<typename T>
-	class LinkedList;
-}
-*/
+/**
+ * \addtogroup ENG
+ * @{
+ */
 
 /**
  * \brief A lane object that serves as an iterable container for cars.
@@ -157,5 +151,5 @@ private:
 
 	//bool _renderFlagged; //dropping this
 };
-
+/** @} */
 #endif /* SRC_JAMES_JPLANE_H_ */

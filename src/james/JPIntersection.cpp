@@ -43,7 +43,7 @@ JPIntersection::JPIntersection()
 void JPIntersection::setLaneOffset(int direction, double offset)
 {
 	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
+		throw JPDirectionOutOfBoundsException(direction);
 	/*
 
 	if(offset <= 0)
@@ -57,9 +57,7 @@ void JPIntersection::setLaneOffset(int direction, double offset)
 
 void JPIntersection::setTrackedLaneLength(int direction, double distance)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
+	valdiateDirection(direction);
 
 	//enforce maximum and minimum distances
 	if(distance < 150)
@@ -77,7 +75,7 @@ void JPIntersection::setSpeedLimits(double northSouth, double eastWest)
 {
 	if(northSouth < 5)
 		throw JPMalformedIntersectionException(0);
-	if(northSouth < 5)
+	if(eastWest < 5)
 		throw JPMalformedIntersectionException(1);
 
 	_speedLimits[0] = northSouth;
@@ -89,28 +87,19 @@ void JPIntersection::setSpeedLimits(double northSouth, double eastWest)
  */
 double JPIntersection::getTrackedLaneLength(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return _laneLengths[direction];
 }
 
 double JPIntersection::getSpeedLimits(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return _speedLimits[direction % 2];
 }
 
 double JPIntersection::getSpeedLimitsInFPS(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return _speedLimits[direction % 2] * 5280.0/3600;
 }
 
@@ -120,9 +109,11 @@ JPIntersection::~JPIntersection()
 	count = 0;
 }
 
+/**
+ * This will call \link validate()\endlink if not already called and can rethrow all validate's exceptions.
+ */
 void JPIntersection::finalize()
 {
-	//todo many checks
 	_finalized = true;
 }
 /**
@@ -168,13 +159,9 @@ void JPIntersection::setTrackedExitLengths(double northSouth,
 void JPIntersection::addLane(int direction, int position, int turnOptions,
 		int leftTarget, int rightTarget)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
-	//verify position
+	valdiateDirection(direction);
 	if(position > MAX_LANES)
-		throw JPLaneNumberOutOfBounds(position);
+		throw JPLaneNumberOutOfBoundsException(position);
 
 	//todo check lane overlap, two into one, left crossing, others?
 	if(0 != _lanes[direction][position])
@@ -187,19 +174,13 @@ void JPIntersection::addLane(int direction, int position, int turnOptions,
 
 double JPIntersection::getLaneOffset(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return _laneOffsets[direction];
 }
 
 double JPIntersection::getLaneOffsetInFeet(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return 10.0 * _laneOffsets[direction];
 }
 
@@ -212,10 +193,7 @@ void JPIntersection::getLaneCounts(int counts[])
 
 int JPIntersection::getLaneCount(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return _laneCounts[direction];
 }
 
@@ -224,19 +202,13 @@ int JPIntersection::getLaneCount(int direction)
  */
 double JPIntersection::getTrackedExitLength(int direction)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	return _laneExit[direction % 2];
 }
 
 JPLane* JPIntersection::getLane(int direction, int position)
 {
-	//check for array out of bounds
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBounds(direction);
-
+	valdiateDirection(direction);
 	//todo validate position
 	return _lanes[direction][position];
 }
