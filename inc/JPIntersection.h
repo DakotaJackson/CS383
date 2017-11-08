@@ -76,6 +76,12 @@
  * 	}
  * }
  * \endcode
+ *
+ *  The directions are GUARANTEED to be the consecutive
+ *  numbers between 0 and 3 in a circular direction.
+ *  It also follows that the opposite direction is always computable
+ *  by adding two and computing the modulus.
+ *  For example: SOUTHBOUND := (NORTHBOUND + 2) % 4.
  */
 class JPIntersection {
 public:

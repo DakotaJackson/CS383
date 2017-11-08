@@ -4,29 +4,11 @@
 #include <cmath>
 
 /**
- *  \brief A group of constants used throughout the program.
+ *  \brief Originally meant to be a holder for constants used to communicate between classes/modules.
+ *  This caused confusion and constants have (mostly?) migrated to members of their applicable class.
+ *  Now it serves as a holder for some useful functions for testing that I felt the rest of the group
+ *  might want to use.
  *
- *  This namespace includes constants that are used throughout the
- *  project for communication between classes. It includes positions
- *  (NORTH, EAST, SOUTH, WEST) which are synonymous with travel directions
- *  (SOUTHBOUND, WESTBOUND, NORTHBOUND, EASTBOUND).
- *
- *  The positions and directions are GUARANTEED to be the consecutive
- *  numbers between 0 and 3 in a circular direction. It follows that all lanes can be iterated over
- *  using a numeric loop. For example to use the first lane of every direction:
- *  \code{cpp}
- *  int i;
- *  Lane lane;
- *  for (i = 0; i < 4; i++)
- *  {
- *  	lane = myIntersection.getLane(i, 0);
- *  	//do stuff with lane...
- *  }
- *  \endcode
- *
- *  It also follows that the opposite direction is always computable
- *  by adding two and computing the modulus.
- *  For example: SOUTHBOUND := (NORTHBOUND + 2) % 4.
  */
 namespace consts
 {
@@ -61,7 +43,7 @@ namespace consts
 	}
 
 	/**
-	 * \brief compare near equality for doubles
+	 * \brief Compare near equality for doubles
 	 */
 	inline bool deq(double d1, double d2)
 	{
@@ -71,6 +53,32 @@ namespace consts
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * \brief Return the percent error.
+	 *
+	 * \return The error as a percent (i.e. upto 100.0)
+	 */
+	inline double percentError(double target, double measured )
+	{
+		double error = (target - measured)/target;
+		return std::abs(100.0 * error );
+	}
+
+	inline double computeStdDev(double vals[], double mean, int numVals)
+	{
+		double sum = 0;
+		int i;
+		//printf("Mean: %f\n", mean);
+		for(i = 0; i < numVals; i++)
+		{
+			//printf("[%d]: %f\t %f\n", i, vals[i], pow(vals[i] - mean, 2));
+			sum += pow(vals[i] - mean, 2);
+		}
+		double dev = sqrt( sum / (numVals-1));
+		//printf("\t%f\n", dev * dev);
+		return dev;
 	}
 }
 #endif

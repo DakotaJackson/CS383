@@ -8,6 +8,7 @@
 #include "../../inc/JPTrafficModel.h"
 #include "../../inc/JPTrafficModelExceptions.h"
 #include "../../inc/JPIntersection.h"
+#include <chrono> //for seeding
 //and car when available
 
 JPTrafficModel::JPTrafficModel()
@@ -21,13 +22,14 @@ JPTrafficModel::JPTrafficModel()
 		_turnCDF[i][2] = 2.0;
 	}
 
-	gen = new std::default_random_engine;
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	gen = new std::default_random_engine(seed);
 	uniform = new std::uniform_real_distribution<double>(0.0, 1.0);
 
 	//todo set direction map
-	_directionMappings[0] = 1; //SFCar::DESIRE_RIGHT;
-	_directionMappings[1] = 2;
-	_directionMappings[2] = 3;
+	_directionMappings[0] = 1; //left
+	_directionMappings[1] = 2; //SFCar::DESIRE_RIGHT;
+	_directionMappings[2] = 3; //str
 }
 
 /**
