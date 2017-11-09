@@ -15,7 +15,7 @@
 #include "JPUpdatableInterface.h"
 #include "../src/james/SFCar.h"
 #include "DJTrafficLightManager.h"
-
+#include "JPObservableSimulation.h"
 /**
  * \defgroup ENG Simulation Engine
  * @{
@@ -44,7 +44,8 @@
  *
  *	\endcode
  */
-class JPSimulationEngine {
+class JPSimulationEngine: JPObservableSimulation
+{
 public:
 	JPSimulationEngine();
 	virtual ~JPSimulationEngine();
@@ -120,6 +121,7 @@ private:
 	//double translatePosition(int direction, int lnNum,
 	void processLane(JPLane *lane);
 	void addCars(int direction, JPLane lane, double timeStep);
+	void checkPrereqs();
 
 };
 /** @} */

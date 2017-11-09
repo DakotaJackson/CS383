@@ -29,7 +29,7 @@ int main()
 			rateLessThanZeroTest() );
 	consts::testOuptut("JPTrafficModel: Probability Less Than Zero Test",
 			probabilityLessThanZeroTest() );
-	printf("%d\n", distributionTests());
+	distributionTests();
 
 	return 0;
 }

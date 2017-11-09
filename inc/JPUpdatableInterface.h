@@ -16,7 +16,9 @@ public:
 	JPUpdatableInterface();
 	virtual ~JPUpdatableInterface();
 	//uniquely named update method
-	virtual void uniquelyNamedUpdateMethod();
+	virtual void updateState();
+	virtual void updateAddObject(void *object, int objType);
+	virtual void updateRemoveObject(void *object, int objType);
 };
 
 #endif /* SRC_JAMES_JPUPDATABLEINTERFACE_H_ */
