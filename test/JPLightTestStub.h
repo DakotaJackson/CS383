@@ -9,6 +9,11 @@
 #define SRC_JAMES_TESTLIGHTSTUB_H_
 
 /**
+ * \addtogroup TST
+ * @{
+ */
+
+/**
  * \brief a test stub for testing JPSimulation Engine.
  *
  * Provides specific traffic light situations for testing of the simulation engine.
@@ -24,5 +29,5 @@ public:
 private:
 	int _testCase;
 };
-
+/** @} */
 #endif /* SRC_JAMES_TESTLIGHTSTUB_H_ */

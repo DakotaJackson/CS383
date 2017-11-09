@@ -80,7 +80,7 @@ private:
 	double _rate[4];
 	/** \brief A cumulative distribution function of the turn directions  for each interesection direction. */
 	double _turnCDF[4][3];
-	/** \bruef maps indices of the CDF to turn directions */
+	/** \brief maps indices of the CDF to turn directions */
 	int _directionMappings[3];
 
 	//random number generator stuff

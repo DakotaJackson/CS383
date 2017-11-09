@@ -25,7 +25,7 @@
 
 LIBS = -lm
 CPP=g++ 
-CPPFLAGS = -g -Wall -pipe -O2
+CPPFLAGS = -g -Wall -pipe -O2 -std=c++11
 QTFLAGS = 
 QTINC =
 QTLIB = 
@@ -139,7 +139,7 @@ JPTMtest: test/JPTrafficModel_test.exe
 	test/JPTrafficModel_test.exe
 
 #Simulation Engine
-JPSimulationEngine.o: src/james/JPSimulationEngine.cpp inc/JPConstants.h inc/ inc/JPSimulationEngine.h SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o
+JPSimulationEngine.o: src/james/JPSimulationEngine.cpp inc/JPConstants.h inc/JPSimulationEngine.h SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o
 	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationEngine.cpp
 
 test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_test.cpp

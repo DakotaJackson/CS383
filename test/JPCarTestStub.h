@@ -9,6 +9,10 @@
 #define TEST_JPCARTESTSTUB_H_
 
 /**
+ * \addtogroup TST
+ * @{
+ */
+/**
  * \brief A configurable car test stub for testing the simulation.
  */
 class JPCarTestStub
@@ -19,5 +23,5 @@ public:
 	double getDesiredSpeed();
 	double getLength();
 };
-
+/** @} */
 #endif /* TEST_JPCARTESTSTUB_H_ */

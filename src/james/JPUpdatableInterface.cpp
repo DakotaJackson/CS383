@@ -7,27 +7,15 @@
 
 #include "../../inc/JPUpdatableInterface.h"
 
-JPUpdatableInterface::JPUpdatableInterface() {
-	// TODO Auto-generated constructor stub
+JPUpdatableInterface::JPUpdatableInterface() {}
 
-}
-
-JPUpdatableInterface::~JPUpdatableInterface() {
-	// TODO Auto-generated destructor stub
-}
+JPUpdatableInterface::~JPUpdatableInterface() {}
 
 /**
  * \brief an overridable update function
  */
-void JPUpdatableInterface::updateState()
-{
-}
+void JPUpdatableInterface::updateState() {}
 
-void JPUpdatableInterface::updateAddObject(void *object, int objType)
-{
+void JPUpdatableInterface::updateAddObject(void *object, int objType){}
 
-}
-
-void JPUpdatableInterface::updateRemoveObject(void *object, int objType)
-{
-}
+void JPUpdatableInterface::updateRemoveObject(void *object, int objType){}
