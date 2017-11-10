@@ -2,6 +2,20 @@
 
 - Feel free to edit this with your own notes/info. Could help for communication
 
+## Building
+### To build with MSYS/MinGw
+make test
+### To build with Qt5.9.2/MinGw
+- Get the installer at https://download.qt.io/official_releases/online_installers/
+- Ensure MinGw is selected durring the install (other compilers are optional)
+- From the cmd console add the appropriate directory for the compiler.
+
+path=%path%;C:\Qt\Tools\mingw530_32\bin; 
+
+- Compile
+
+mingw32-make test
+
 ## Some notes from dj (don't think we can put our names?)
 
 - Milestone 1 (60%) due Wednesday, October 25th
