@@ -45,7 +45,7 @@ void JPTrafficModel::setProbability(int direction, double left, double right, do
 		throw JPProbabilityLessThanZeroException();
 	if(straight < 0)
 		throw JPProbabilityLessThanZeroException();
-	JPIntersection::valdiateDirection(direction);
+	JPIntersection::validateDirection(direction);
 
 	_turnCDF[direction][0] = left;
 	_turnCDF[direction][1] = _turnCDF[direction][0] + right;
@@ -58,7 +58,7 @@ void JPTrafficModel::setProbability(int direction, double left, double right, do
  */
 void JPTrafficModel::setTrafficRate(int direction, double rate)
 {
-	JPIntersection::valdiateDirection(direction);
+	JPIntersection::validateDirection(direction);
 	if(rate < 0)
 		throw JPRateLessThanZeroException();
 

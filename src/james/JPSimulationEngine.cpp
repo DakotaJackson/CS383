@@ -6,17 +6,17 @@
  */
 
 #include "../../inc/JPSimulationEngine.h"
+JPSimulationEngine *JPSimulationEngine::_unique = 0;
 
 JPSimulationEngine::JPSimulationEngine()
 {
 	// TODO Auto-generated constructor stub
-	_duration = 0.0;
 	_initTime = -1; //flag for needing to be set
-	_timeScale = 1.0;
 	_time = 0.0;
 	_paused = 1;
 	_stepTime = 0.1; //default step time is 0.1 seconds
 	_initialized = false;
+	_updating = false;
 
 	int i;
 	for(i = 0; i<4;  i++)
@@ -34,15 +34,18 @@ JPSimulationEngine::~JPSimulationEngine()
 {
 	// TODO Auto-generated destructor stub
 }
-
+/*
+//Control functions should really be in their own class
 void JPSimulationEngine::start()
 {
-
 }
-
 void JPSimulationEngine::pause()
 {
 }
+void JPSimulationEngine::terminate()
+{
+}
+ */
 
 void JPSimulationEngine::step(){ step(_stepTime); }
 
@@ -68,19 +71,6 @@ void JPSimulationEngine::step(double sec)
 	_time += sec;
 }
 
-/*
-double* JPSimulationEngine::getThroughput(int direction, int &laneCount)
-{
-	double *throughput;
-	throughput = new double[consts::MAX_LANES];
-	return throughput;
-}
-*/
-void JPSimulationEngine::run()
-{
-
-}
-
 double JPSimulationEngine::intersectionDeceleration(double pos, double speed,
 		double pcPos, double pcSpeed, SFCar* car)
 {
@@ -89,6 +79,7 @@ double JPSimulationEngine::intersectionDeceleration(double pos, double speed,
 
 void JPSimulationEngine::end()
 {
+	//todo delete cars from the simulation and pushRemUppdate
 }
 
 void JPSimulationEngine::setVisualization(JPUpdatableInterface* interface)
@@ -106,6 +97,22 @@ void JPSimulationEngine::processLane(JPLane* lane)
 {
 	//todo write process lane
 	double prevSpeed = -1;
+}
+
+ JPSimulationEngine* JPSimulationEngine::getInstance()
+{
+	if(! _unique)
+		_unique = new JPSimulationEngine();
+
+	return _unique;
+}
+void JPSimulationEngine::destory()
+{
+	if(_unique)
+	{
+		delete _unique;
+		_unique = 0;
+	}
 }
 
 void JPSimulationEngine::checkPrereqs()
@@ -167,6 +174,7 @@ void JPSimulationEngine::addCars(int direction, JPLane lane, double timeStep)
 	while(effTime < _nextCreationTime[direction])
 	{
 		//todo new Car(_trafficModel->getNextTurnDirection(direction))
+		//todo push car update
 		_nextCreationTime[direction] += _trafficModel->getNextTiming(direction);
 	}
 

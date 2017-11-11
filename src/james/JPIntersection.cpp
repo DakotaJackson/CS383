@@ -8,15 +8,8 @@
 #include "../../inc/JPIntersection.h"
 #include "../../inc/JPIntersectionExceptions.h"
 
-static int count = 0; //enforce only 1 intersection
-
 JPIntersection::JPIntersection()
 {
-	if(1 == count)
-		throw JPMultipleIntersectionsException();
-	else
-		count = 1;
-
 	//lane exists have defaults
 	_laneExit[0] = 600.0;
 	_laneExit[1] = 600.0;
@@ -24,7 +17,7 @@ JPIntersection::JPIntersection()
 	_speedLimits[0] = 35;
 	_speedLimits[1] = 35; //TODO change these to -1 flags?
 
-	//set all of these to default values values
+	//set all of these to default values
 	//or to -1 flagging them as not set
 	int i,j;
 	for(i = 0; i < 4; i++)
@@ -38,12 +31,11 @@ JPIntersection::JPIntersection()
 }
 
 /**
- * \throw JPDirectionOutOfBounds if direction is not one of ( TODO )
+ * \throw JPDirectionOutOfBounds if direction is not one of ( JPIntersection::NORTH, JPIntersection::SOUTH, JPIntersection::EAST, JPIntersection::WEST, JPIntersection::NORTHBOUND, JPIntersection::SOUTHBOUND, JPIntersection::EASTBOUND, or JPIntersection::WESTBOUND)
  */
 void JPIntersection::setLaneOffset(int direction, double offset)
 {
-	if(direction < 0 || direction >= 4)
-		throw JPDirectionOutOfBoundsException(direction);
+	validateDirection(direction);
 	/*
 
 	if(offset <= 0)
@@ -57,7 +49,7 @@ void JPIntersection::setLaneOffset(int direction, double offset)
 
 void JPIntersection::setTrackedLaneLength(int direction, double distance)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 
 	//enforce maximum and minimum distances
 	if(distance < 150)
@@ -83,39 +75,48 @@ void JPIntersection::setSpeedLimits(double northSouth, double eastWest)
 }
 
 /**
- * \throw JPDirectionOutOfBounds TODO
+ * \copydoc JPIntersection::validateDirection()
  */
 double JPIntersection::getTrackedLaneLength(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return _laneLengths[direction];
 }
 
+/**
+ * \copydoc JPIntersection::validateDirection()
+ */
 double JPIntersection::getSpeedLimits(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return _speedLimits[direction % 2];
 }
 
+/**
+ * \copydoc JPIntersection::validateDirection()
+ */
 double JPIntersection::getSpeedLimitsInFPS(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return _speedLimits[direction % 2] * 5280.0/3600;
 }
 
 JPIntersection::~JPIntersection()
 {
-	//todo destructor delete lanes
-	count = 0;
+	int i,j;
+	for(i = 0; i< 4; i++)
+		for(j = 0; j < _laneCounts[i]; j++)
+			delete _lanes[i][j];
 }
 
 /**
- * This will call \link validate()\endlink if not already called and can rethrow all validate's exceptions.
+ *
  */
 void JPIntersection::finalize()
 {
 	_finalized = true;
 }
+
 /**
  * \brief set the offset (in lanes) of the rightmost lane.
  *
@@ -124,7 +125,6 @@ void JPIntersection::finalize()
  * with 3 south bound lanes and 3 northbound lanes. For both directions
  *
  */
-
 void JPIntersection::setLaneOffsets(double north, double south, double east,
 		double west)
 {
@@ -156,10 +156,13 @@ void JPIntersection::setTrackedExitLengths(double northSouth,
 	_laneExit[1] = eastWest;
 }
 
+/**
+ * \copydoc JPIntersection::validateDirection()
+ */
 void JPIntersection::addLane(int direction, int position, int turnOptions,
 		int leftTarget, int rightTarget)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	if(position > MAX_LANES)
 		throw JPLaneNumberOutOfBoundsException(position);
 
@@ -174,13 +177,13 @@ void JPIntersection::addLane(int direction, int position, int turnOptions,
 
 double JPIntersection::getLaneOffset(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return _laneOffsets[direction];
 }
 
 double JPIntersection::getLaneOffsetInFeet(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return 10.0 * _laneOffsets[direction];
 }
 
@@ -193,7 +196,7 @@ void JPIntersection::getLaneCounts(int counts[])
 
 int JPIntersection::getLaneCount(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return _laneCounts[direction];
 }
 
@@ -202,13 +205,16 @@ int JPIntersection::getLaneCount(int direction)
  */
 double JPIntersection::getTrackedExitLength(int direction)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	return _laneExit[direction % 2];
 }
 
+/**
+ * \copydoc JPIntersection::validateDirection()
+ */
 JPLane* JPIntersection::getLane(int direction, int position)
 {
-	valdiateDirection(direction);
+	validateDirection(direction);
 	//todo validate position
 	return _lanes[direction][position];
 }

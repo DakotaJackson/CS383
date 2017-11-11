@@ -47,13 +47,12 @@
 class JPSimulationEngine: JPObservableSimulation
 {
 public:
-	JPSimulationEngine();
-	virtual ~JPSimulationEngine();
 
 	/** @{ */
 	//control
-	void start();
-	void pause();
+	//void start();
+	//void pause();
+	//void terminate();
 
 	/** \brief Advance the simulation by preset time. */
 	void step();
@@ -79,6 +78,9 @@ public:
 	void setInitTime(double secs);
 	/** \brief Set the preset interval for advancing the simulation */
 	void setStepInterval(double secs);
+	virtual ~JPSimulationEngine();
+
+	static JPSimulationEngine* getInstance();
 
 	//double* getThroughput(int direction, int &laneCount);
 	//getWhateverElseWeTracked()
@@ -86,10 +88,10 @@ public:
 private:
 	//Base configuration
 	int _laneCounts[4];
-	double _duration;  //not used at present
 	double _initTime;  //default 5 minutes
-	double _timeScale; //default 1.0 = realtime
 	double _stepTime; //seconds default 0.1
+	//double _duration;  //not used at present
+	//double _timeScale; //default 1.0 = realtime
 
 	//Internal Constants
 	const double turnSpeed = 20 * 5280/3600; //20 mph
@@ -107,12 +109,20 @@ private:
 	double _time;
 	bool _paused;
 	bool _initialized;
+	bool _updating;
 	//long _throughput[4][MAX_LANES_MACRO];
 	double _nextCreationTime[4];
 	double _yellowTime[4];
 
+	//private members for singleton control
+	static JPSimulationEngine *_unique;
+	static void destory(); //private method that destroys the instance for testing
+	JPSimulationEngine();
+	JPSimulationEngine(JPSimulationEngine const&){};  //copy constructor
+	//JPSimulationEngine& operator=(JPSimulationEngine const&){}; //assignment operator
+	friend class SETestClass;
+
 	//Internal Methods
-	void run();
 	double intersectionDeceleration(double pos, double speed, double pcPos, double pcSpeed, SFCar *car);
 	//previous car's speed/pos
 	//double carDeceleration(SFCar &car, double prevSpeed, double prevPos);

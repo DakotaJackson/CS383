@@ -255,7 +255,10 @@ public:
 
 	virtual ~JPIntersection();
 
-	inline static void valdiateDirection(int direction)
+	/**
+	 * \throw JPDirectionOutOfBounds if direction is not one of ( JPIntersection::NORTH, JPIntersection::SOUTH, JPIntersection::EAST, JPIntersection::WEST, JPIntersection::NORTHBOUND, JPIntersection::SOUTHBOUND, JPIntersection::EASTBOUND, or JPIntersection::WESTBOUND)
+	 */
+	inline static void validateDirection(int direction)
 	{
 		if( direction < 0 || direction > 3)
 			throw JPDirectionOutOfBoundsException(direction);

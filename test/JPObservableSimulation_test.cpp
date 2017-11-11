@@ -349,7 +349,6 @@ int testState(ObservableTest *sim, StateObserverTest &state, AllObserverTest &al
 
 int main()
 {
-
 	//create a simulation
 	ObservableTest *mySim = new ObservableTest();
 
@@ -368,5 +367,4 @@ int main()
 			testState(mySim, stateObserver, allObserver, addObserver, removeObserver));
 
 	return 0;
-
 }

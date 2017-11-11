@@ -7,53 +7,94 @@
 
 #include "../inc/JPSimulationEngine.h"
 
+/* now they are member functions
 int straightGreenTest();
 int rightTurnRedTest();
 int leftTurnGreenTest();
 int leftTurnBlinkYellowTest();
 int matchPaceTest();
 int redLightStopTest();
+*/
+
+/**
+ * \addtogroup TST
+ * @{
+ */
+
+class SETestClass
+{
+private:
+	void destroyEngine(JPSimulationEngine *engine)
+	{
+		engine->destory();
+	}
+
+	int straightGreenTest()
+	{
+		return -1;
+	}
+
+	int rightTurnRedTest()
+	{
+		JPSimulationEngine *eng = JPSimulationEngine::getInstance();
+		return -1;
+	}
+
+	int leftTurnGreenTest()
+	{
+		return -1;
+	}
+
+	int leftTurnBlinkYellowTest()
+	{
+		return -1;
+	}
+
+	int matchPaceTest()
+	{
+		return -1;
+	}
+
+	int redLightStopTest()
+	{
+		return -1;
+	}
+
+public:
+	SETestClass(){}
+	int run()
+	{
+		int ret;
+		ret = consts::testOuptut(
+				"JPSimulationEngine: ",
+				rightTurnRedTest() );
+		ret = consts::testOuptut(
+				"JPSimulationEngine: ",
+				rightTurnRedTest() );
+		ret = consts::testOuptut(
+				"JPSimulationEngine: ",
+				leftTurnGreenTest() );
+		ret = consts::testOuptut(
+				"JPSimulationEngine: ",
+				leftTurnBlinkYellowTest() );
+		ret = consts::testOuptut(
+				"JPSimulationEngine: ",
+				matchPaceTest() );
+		ret = consts::testOuptut(
+				"JPSimulationEngine: ",
+				redLightStopTest() );
+		return ret;
+	}
+
+};
 
 int main()
 {
-	int ret;
-	ret = consts::testOuptut(
-			"JPSimulationEngine: ",
-			rightTurnRedTest() );
-	ret = consts::testOuptut(
-			"JPSimulationEngine: ",
-			rightTurnRedTest() );
-	ret = consts::testOuptut(
-			"JPSimulationEngine: ",
-			leftTurnGreenTest() );
-	ret = consts::testOuptut(
-			"JPSimulationEngine: ",
-			leftTurnBlinkYellowTest() );
-	ret = consts::testOuptut(
-			"JPSimulationEngine: ",
-			matchPaceTest() );
-	ret = consts::testOuptut(
-			"JPSimulationEngine: ",
-			redLightStopTest() );
-
-	if(ret == 100 ) printf("Stop warning me I know I don't use ret");
+	//put all the test code in the class so the destroy
+	//function can private non static
+	SETestClass test;
+	test.run();
 	return 0;
 }
 
-inline int straightGreenTest() { return 1;
-}
-
-inline int rightTurnRedTest() {return 1;
-}
-
-inline int leftTurnGreenTest() {return 1;
-}
-
-inline int leftTurnBlinkYellowTest() {return 1;
-}
-
-inline int matchPaceTest() {return 1;
-}
-
-inline int redLightStopTest() {return 1;
-}
+/** @} */
