@@ -38,13 +38,16 @@ private:
     void drawLights(QPainter *qp);
     void drawText(QPainter *qp);
     Ui::JJDisplayOutput *ui;
-    //QGraphicsScene *scene;
+    
+    //placeholder for cars
     int m_cars[2][4]; //for now 2/4
+    
     QImage carImage[maxCarImages];
     QImage *redCar;
     QImage *lightImage;
     QImage *textImage;
 
+    //placeholder for lanes
     int m_northLane;
     int m_southLane;
     int m_westLane;
