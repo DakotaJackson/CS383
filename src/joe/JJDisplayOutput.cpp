@@ -51,7 +51,6 @@ void JJDisplayOutput::resizeEvent(QResizeEvent *e)
 }
 
 void JJDisplayOutput::initCars(){
-    //carImage = new QImage();
     for(int i = 0; i < maxCarImages; i++){
         carImage[i].load("C:\\Users\\Joe\\Desktop\\JJDisplayOutput\\car.png");
     }
@@ -89,8 +88,6 @@ void JJDisplayOutput::drawCar(QPainter *qp, int x, int y, int imgIndex, int angl
 
     QTransform trans;
     // Move to the center of the image
-
-
     trans.translate(x+carImage[imgIndex].width()/2, y+carImage[imgIndex].height()/2);
     trans.rotate(angle);
     qp->setTransform(trans);
@@ -128,13 +125,6 @@ void JJDisplayOutput::drawLights(QPainter *qp)
     qp->drawRect(m_laneLength - 25, m_laneLength + (m_laneWidth * m_westLane),           25, m_laneWidth);
     //EW Right
     qp->drawRect(m_laneLength + roadWidthNS, m_laneLength,                           25, m_laneWidth);
-
-    //lightImage = new QImage();
-    //lightImage->load("C:\\Users\\Joe\\Desktop\\JJDisplayOutput\\car.png");
-    //qp->drawImage(m_laneLength + (m_laneWidth * northLane), m_laneLength, *lightImage);
-    //qp->drawImage(m_laneLength, m_laneLength + (m_laneWidth * westLane), *lightImage);
-    //qp->drawPicture();
-
 }
 
 void JJDisplayOutput::drawText(QPainter *qp)
@@ -150,13 +140,7 @@ void JJDisplayOutput::step()
 
 
 void JJDisplayOutput::drawRoad(QPainter *qp){
-    //QRect rec(10,10,100,100);
-    //QPen framePen(Qt::red);
-
-
-
-    //int roadLeftNS = (screenWidth - roadWidthNS) / 2;
-    //int roadTopEW = (screenHeight - roadWidthEW) / 2;
+    
     int roadWidthNS = ((m_northLane + m_southLane) * m_laneWidth);
     int roadWidthEW = ((m_westLane + m_eastLane) * m_laneWidth);
 
