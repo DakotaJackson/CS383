@@ -148,11 +148,19 @@ test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_t
 JPSEtest: test/JPSimulationEngine_test.exe
 	test/JPSimulationEngine_test.exe
 
+JPSimulationControler.o: src/james/JPSimulationControler.cpp inc/JPConstants.h inc/JPSimulationControler.h JPSimulationEngine.o SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o
+	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationControler.cpp
 
-JPbuildTest: test/JPLane_test.exe test/JPIntersection_test.exe test/JPIntersectionGrid_test.exe test/JPTrafficModel_test.exe test/JPSimulationEngine_test.exe test/JPObservableSimulation_test.exe
-JPallTest: JPLtest JPItest JPIGtest JPTMtest JPSEtest JPOStest 
+test/JPSimulationControler_test.exe: JPSimulationControler.o test/JPSimulationControler_test.cpp
+	$(CPP) $(CPPFLAGS) JPSimulationControler.o SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o test/JPSimulationControler_test.cpp  $(LIBS) -o test/JPSimulationControler_test
+	
+JPSCtest: test/JPSimulationControler_test.exe
+	test/JPSimulationControler_test.exe
 
-buildTest: JPbuildTest BGbuildTest DJbuildTest SFbuildTest JJbuildTest
+JPbuildTest: test/JPLane_test.exe test/JPIntersection_test.exe test/JPIntersectionGrid_test.exe test/JPTrafficModel_test.exe test/JPSimulationEngine_test.exe test/JPObservableSimulation_test.exe test/JPSimulationControler_test.exe
+JPallTest: JPLtest JPItest JPIGtest JPTMtest JPSEtest JPOStest JPSCtest
+
+buildTest: JPbuildTest BGbuildTest DJbuildTest SFbuildTest JJbuildTest 
 test: JPallTest BGallTest DJallTest SFallTest JJallTest
  	
 clean:

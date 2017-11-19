@@ -85,8 +85,8 @@ private:
 
 	//random number generator stuff
 	std::default_random_engine *gen; //An input stream for the RNGs
-	std::poisson_distribution<long> *poisson[4]; //four Poisson distributions, one for each direction
 	std::uniform_real_distribution<double> *uniform; //A single uniform distribution
+	std::poisson_distribution<long> *poisson[4]; //four Poisson distributions, one for each direction
 };
 /** @} */
 #endif /* SRC_JAMES_TRAFFICMODEL_H_ */
