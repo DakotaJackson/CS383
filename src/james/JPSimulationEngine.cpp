@@ -13,7 +13,6 @@ JPSimulationEngine::JPSimulationEngine()
 	// TODO Auto-generated constructor stub
 	_initTime = -1; //flag for needing to be set
 	_time = 0.0;
-	_paused = 1;
 	_stepTime = 0.1; //default step time is 0.1 seconds
 	_initialized = false;
 	_updating = false;
@@ -127,11 +126,12 @@ void JPSimulationEngine::init()
 	_initialized = true; //prevent infinite recursion
 
 	//initialize car creation and yellow times
-	int dir = 0;
+	int dir, ln;
 	for(dir = 0; dir < 4; dir++)
 	{
 		_nextCreationTime[dir] =  _trafficModel->getNextTiming(dir);
-		_yellowTime[dir] = -1;
+		for(ln = 0; ln < _laneCounts[dir]; ln++)
+			_yellowTime[dir][ln] = -1;
 	}
 
 	if( -1 == _initTime  )

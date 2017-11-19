@@ -13,6 +13,7 @@ var searchData=
   ['_7ejpobservablesimulation',['~JPObservableSimulation',['../classJPObservableSimulation.html#a4b31c9ec809616b69d2aec08d528ef4c',1,'JPObservableSimulation']]],
   ['_7ejpprobabilitylessthanzeroexception',['~JPProbabilityLessThanZeroException',['../classJPProbabilityLessThanZeroException.html#a566efb9d885c18e69b522ad66ff4d804',1,'JPProbabilityLessThanZeroException']]],
   ['_7ejpratelessthanzeroexception',['~JPRateLessThanZeroException',['../classJPRateLessThanZeroException.html#a73f4ff51ba1980428ba8f1324f7f55be',1,'JPRateLessThanZeroException']]],
+  ['_7ejpsimulationcontroler',['~JPSimulationControler',['../classJPSimulationControler.html#a4276062e4f0ecd8dc19f5ef7bfbc8989',1,'JPSimulationControler']]],
   ['_7ejpsimulationengine',['~JPSimulationEngine',['../classJPSimulationEngine.html#a022d14f1debb5610894c5560a8927cf9',1,'JPSimulationEngine']]],
   ['_7ejptrafficmodel',['~JPTrafficModel',['../classJPTrafficModel.html#a0c90b2d63cebfc47efb15081bf47a262',1,'JPTrafficModel']]],
   ['_7ejptrafficmodelexception',['~JPTrafficModelException',['../classJPTrafficModelException.html#a7df79706466f1c1bf0016a828770ea61',1,'JPTrafficModelException']]],

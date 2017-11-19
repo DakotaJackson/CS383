@@ -18,6 +18,7 @@ var searchData=
   ['jpobservablesimulation',['JPObservableSimulation',['../classJPObservableSimulation.html',1,'']]],
   ['jpprobabilitylessthanzeroexception',['JPProbabilityLessThanZeroException',['../classJPProbabilityLessThanZeroException.html',1,'']]],
   ['jpratelessthanzeroexception',['JPRateLessThanZeroException',['../classJPRateLessThanZeroException.html',1,'']]],
+  ['jpsimulationcontroler',['JPSimulationControler',['../classJPSimulationControler.html',1,'']]],
   ['jpsimulationengine',['JPSimulationEngine',['../classJPSimulationEngine.html',1,'']]],
   ['jptrafficmodel',['JPTrafficModel',['../classJPTrafficModel.html',1,'']]],
   ['jptrafficmodelexception',['JPTrafficModelException',['../classJPTrafficModelException.html',1,'']]],

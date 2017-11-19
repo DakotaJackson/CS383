@@ -18,6 +18,7 @@ var searchData=
   ['removeobservertest',['RemoveObserverTest',['../classRemoveObserverTest.html#a74dd1c645313839242e53a3931656117',1,'RemoveObserverTest']]],
   ['reset',['reset',['../classObserverTest.html#a87539d777561cabad16f243f15f27d53',1,'ObserverTest']]],
   ['resettofirstcar',['resetToFirstCar',['../classJPLane.html#aaa801870d5544c6def3b27acd5b10d01',1,'JPLane']]],
+  ['resizeevent',['resizeEvent',['../classJJDisplayOutput.html#a44a5b7033bf8528351c117ae135015b1',1,'JJDisplayOutput']]],
   ['rightturnredtest',['rightTurnRedTest',['../classSETestClass.html#add5a8874e753ac208d7b3d4e574499da',1,'SETestClass']]],
   ['run',['run',['../classSETestClass.html#a04f3f7a2a9956d52b22d6ead3c1663d1',1,'SETestClass']]]
 ];

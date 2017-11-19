@@ -50,9 +50,6 @@ public:
 
 	/** @{ */
 	//control
-	//void start();
-	//void pause();
-	//void terminate();
 
 	/** \brief Advance the simulation by preset time. */
 	void step();
@@ -90,8 +87,6 @@ private:
 	int _laneCounts[4];
 	double _initTime;  //default 5 minutes
 	double _stepTime; //seconds default 0.1
-	//double _duration;  //not used at present
-	//double _timeScale; //default 1.0 = realtime
 
 	//Internal Constants
 	const double turnSpeed = 20 * 5280/3600; //20 mph
@@ -107,12 +102,11 @@ private:
 
 	//Running Variables
 	double _time;
-	bool _paused;
 	bool _initialized;
 	bool _updating;
 	//long _throughput[4][MAX_LANES_MACRO];
 	double _nextCreationTime[4];
-	double _yellowTime[4];
+	double _yellowTime[4][MAX_LANES_MACRO];
 
 	//private members for singleton control
 	static JPSimulationEngine *_unique;

@@ -12,6 +12,9 @@ var searchData=
   ['directionoutofboundstest',['directionOutOfBoundsTest',['../JPTrafficModel__test_8cpp.html#a967f432525b6c331e4609705d13284b3',1,'JPTrafficModel_test.cpp']]],
   ['distributiontests',['distributionTests',['../JPTrafficModel__test_8cpp.html#ac365b2b3152b72cdfe85cca5a2c427ed',1,'JPTrafficModel_test.cpp']]],
   ['djtrafficlightmanager',['DJTrafficLightManager',['../classDJTrafficLightManager.html#a70d75e047bf73e4f5104ef3e03eb810c',1,'DJTrafficLightManager']]],
-  ['drawcars',['drawCars',['../classJJDisplayOutput.html#a6519b880cd0df7d22acb0bd8e6a5dc33',1,'JJDisplayOutput']]],
-  ['drawlights',['drawLights',['../classJJDisplayOutput.html#acf90383b406c93406298080cba4f14ad',1,'JJDisplayOutput']]]
+  ['drawcar',['drawCar',['../classJJDisplayOutput.html#adb7611fd4eedc1116f2e9a2a6f623e8c',1,'JJDisplayOutput']]],
+  ['drawcars',['drawCars',['../classJJDisplayOutput.html#a0bb7938c095b4cc536359674be2b9d3a',1,'JJDisplayOutput']]],
+  ['drawlights',['drawLights',['../classJJDisplayOutput.html#a05c023f3357d55cbded379e7e8596108',1,'JJDisplayOutput']]],
+  ['drawroad',['drawRoad',['../classJJDisplayOutput.html#aecf84ff27157a72822fdfdce6a4cdaac',1,'JJDisplayOutput']]],
+  ['drawtext',['drawText',['../classJJDisplayOutput.html#a6e6910f06928b2bc136b36c89b4e2d82',1,'JJDisplayOutput']]]
 ];
