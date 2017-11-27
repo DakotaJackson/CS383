@@ -78,6 +78,10 @@ public:
 	virtual ~JPSimulationEngine();
 
 	static JPSimulationEngine* getInstance();
+	/** \brief get the calculation interval (step time)*/
+	double getStepTime() const;
+	/** \brief set the calculation interval (step time)*/
+	void setStepTime(double stepTime);
 
 	//double* getThroughput(int direction, int &laneCount);
 	//getWhateverElseWeTracked()

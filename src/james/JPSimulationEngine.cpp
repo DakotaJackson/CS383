@@ -114,6 +114,11 @@ void JPSimulationEngine::destory()
 	}
 }
 
+/** The step time is how far the simulation advances in each step. For example with a step time of 0.1 calling the step function would move all of the cars to where they would be 0.1 seconds from now and advance the simulation's internal clock by 0.1 seconds. */
+void JPSimulationEngine::setStepTime(double stepTime) { _stepTime = stepTime; }
+/** \copydetail JPSimulationEngine::setStepTime() */
+double JPSimulationEngine::getStepTime() const { return _stepTime; }
+
 void JPSimulationEngine::checkPrereqs()
 {
 	//todo check that the intersection is finalized

@@ -370,6 +370,15 @@ inline int addLanesCheck()
 		}
 	}
 
+	//check to make sure the getLaneCount works
+	int laneCounts[4];
+	inter.getLaneCounts(laneCounts);
+	for(i = 0; i < 4; i++)
+		if(laneCounts[i] != JPIntersection::MAX_LANES)
+		{
+			printf("[%d]: %d, %d\n",i, laneCounts[i], inter.getLaneCount(i));
+			//return 2;
+		}
 
 	return 0;
 }

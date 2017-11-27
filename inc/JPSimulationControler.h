@@ -8,6 +8,7 @@
 #ifndef SRC_JAMES_SIMULATIONCONTROLER_H_
 #define SRC_JAMES_SIMULATIONCONTROLER_H_
 #include "JPSimulationEngine.h"
+#include <sys/time.h>
 
 /**
  * \defgroup ENG Simulation Engine
@@ -40,11 +41,15 @@ public:
 
 //	void setTimeScale(double speed);
 //	void setDuration();
-	/** \brief Hopefully not needed */
 
 private:
 	JPSimulationControler();
 	virtual ~JPSimulationControler();
+	/** return the time in seconds since simulation epoch */
+	double getTime();
+	void run();
+	/** sleep until time seconds past controller start */
+	void sleepTill(double time);
 
 	JPSimulationEngine *_engine;
 	static JPSimulationControler *_unique;
@@ -53,6 +58,7 @@ private:
 	double _duration;  //not used at present
 	double _timeScale; //default 1.0 = realtime
 	double _simTime;
+	struct timeval _simEpoch;
 
 };
 /** @} */

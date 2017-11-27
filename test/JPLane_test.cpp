@@ -37,7 +37,6 @@ int main()
 			addCarAtPositionTest() );
 
 
-
 	ret = consts::testOuptut(
 			"JPLane: Remove Car Early Test",
 			removeCarEarlyTest() );
@@ -90,12 +89,18 @@ inline int iterateTest()
 
 	//iterate once
 	lane->resetToFirstCar();
-	for(i = 0; i < 10; i++)
+	int end = lane->getSize();
+	if(10 != end)
+		return 1;
+	for(i = 0; i < end; i++)
 	{
 		car = lane->getNextCar();
 		if( cars[i] != car)
-			return 1;
+			return 2;
 	}
+	if(NULL != lane->getNextCar() )
+		return 3;
+
 
 	//iterate second time
 	lane->resetToFirstCar();
@@ -103,8 +108,10 @@ inline int iterateTest()
 	{
 		car = lane->getNextCar();
 		if( cars[i] != car)
-			return 1;
+			return 4;
 	}
+	if(NULL != lane->getNextCar() )
+		return 5;
 
 
 	delete lane;

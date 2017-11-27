@@ -89,3 +89,18 @@ JPLane::~JPLane()
 	*/
 }
 
+bool JPLane::isEmpty() const
+{
+	if( 0 == _list->getSize())
+		return 1;
+	else
+		return 0;
+}
+
+int JPLane::getSize() const
+{
+	return _list->getSize();
+}
+
+void JPLane::addLast(SFCar* car) {
+}
