@@ -31,7 +31,7 @@ JPIntersection::JPIntersection()
 }
 
 /**
- * \throw JPDirectionOutOfBounds if direction is not one of ( JPIntersection::NORTH, JPIntersection::SOUTH, JPIntersection::EAST, JPIntersection::WEST, JPIntersection::NORTHBOUND, JPIntersection::SOUTHBOUND, JPIntersection::EASTBOUND, or JPIntersection::WESTBOUND)
+ * \copydoc JPIntersection::validateDirection()
  */
 void JPIntersection::setLaneOffset(int direction, double offset)
 {
@@ -47,6 +47,9 @@ void JPIntersection::setLaneOffset(int direction, double offset)
 	_laneOffsets[direction] = offset;
 }
 
+/**
+ * \copydoc JPIntersection::validateDirection()
+*/
 void JPIntersection::setTrackedLaneLength(int direction, double distance)
 {
 	validateDirection(direction);
@@ -172,7 +175,7 @@ void JPIntersection::addLane(int direction, int position, int turnOptions,
 
 	JPLane *lane = new JPLane(turnOptions, leftTarget, rightTarget );
 	_lanes[direction][position] = lane;
-	_laneCounts[direction] = std::max(_laneCounts[direction], position);
+	_laneCounts[direction] = std::max(_laneCounts[direction], position + 1);
 }
 
 double JPIntersection::getLaneOffset(int direction)
