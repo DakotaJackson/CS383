@@ -142,8 +142,10 @@ JPTMtest: test/JPTrafficModel_test.exe
 JPSimulationEngine.o: src/james/JPSimulationEngine.cpp inc/JPConstants.h inc/JPSimulationEngine.h SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o
 	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationEngine.cpp
 
-test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_test.cpp
-	$(CPP) $(CPPFLAGS) SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o test/JPSimulationEngine_test.cpp  $(LIBS) -o test/JPSimulationEngine_test
+test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_test.cpp test/JPLightTestStub.cpp test/JPLightTestStub.h test/JPCarTestStub.cpp test/JPCarTestStub.h
+	$(CPP) $(CPPFLAGS) -c test/JPCarTestStub.cpp
+	$(CPP) $(CPPFLAGS) -c test/JPLightTestStub.cpp
+	$(CPP) $(CPPFLAGS) SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o JPLightTestStub.o JPCarTestStub.o test/JPSimulationEngine_test.cpp  $(LIBS) -o test/JPSimulationEngine_test
 	
 JPSEtest: test/JPSimulationEngine_test.exe
 	test/JPSimulationEngine_test.exe

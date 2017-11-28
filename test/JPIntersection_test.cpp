@@ -18,10 +18,9 @@ int directionAndBoundOppositeCheck();
 
 //error checks
 int addingAfterFinalizedCheck();
-int multipleIntersectionCheck();
 int laneCollidesWithOncomingLaneCheck();
 int twoLanesTurningToOneCheck();
-int laneOffsetMismatchCheck();
+int laneOffsetCheck();
 int turningLaneCrossingStraightLaneCheck();
 int laneNumberOutOfBoundsCheck();
 int directionOutOfBoundsCheck();
@@ -59,7 +58,7 @@ int main()
 
 	ret = consts::testOuptut(
 				"JPIntersection: Lane Offset Mismatch Error",
-				laneOffsetMismatchCheck() );
+				laneOffsetCheck() );
 
 	ret = consts::testOuptut(
 				"JPIntersection: Turning Lane Crossing Straight Lane Error",
@@ -72,10 +71,6 @@ int main()
 	ret = consts::testOuptut(
 				"JPIntersection: Lane Direction Out of Bounds Error",
 				directionOutOfBoundsCheck() );
-
-	ret = consts::testOuptut(
-				"JPIntersection: Missing Lanes Error",
-				multipleIntersectionCheck() );
 
 	ret = consts::testOuptut(
 				"JPIntersection: Adding After Finalized Error",
@@ -203,7 +198,7 @@ int directionAndBoundOppositeCheck()
  * constant in the set, then that constant is added to the field.
  */
 
-inline int addingAfterFinalizedCheck()
+int addingAfterFinalizedCheck()
 {
 	try
 	{
@@ -217,22 +212,8 @@ inline int addingAfterFinalizedCheck()
 	}
 }
 
-inline int multipleIntersectionCheck()
-{
-	try
-	{
-		//bad news if you made it here
-		return -1;
-	}
-	catch(JPEXCEPTION_REPLACE_ME & e)
-	{
-		//some checks on output
-		return 0;
-	}
 
-}
-
-inline int laneCollidesWithOncomingLaneCheck()
+int laneCollidesWithOncomingLaneCheck()
 {
 	try
 	{
@@ -247,7 +228,7 @@ inline int laneCollidesWithOncomingLaneCheck()
 
 }
 
-inline int twoLanesTurningToOneCheck()
+int twoLanesTurningToOneCheck()
 {
 	try
 	{
@@ -261,7 +242,7 @@ inline int twoLanesTurningToOneCheck()
 	}
 }
 
-inline int laneOffsetMismatchCheck()
+inline int laneOffsetCheck()
 {
 	try
 	{

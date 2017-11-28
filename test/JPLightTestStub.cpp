@@ -17,7 +17,10 @@ JPLightTestStub::~JPLightTestStub()
 	// TODO Auto-generated destructor stub
 }
 
-void JPLightTestStub::JPLightTestStub(int testCase)
+JPLightTestStub::JPLightTestStub(int testCase)
 {
 	_testCase = testCase;
 }
+
+int JPLightTestStub::getTestCase() const {	return _testCase; }
+void JPLightTestStub::setTestCase(int testCase) { _testCase = testCase; }

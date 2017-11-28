@@ -63,8 +63,6 @@ public:
 
 
 	//configuration /** @{ */
-	/** \brief Add a class with an update function that can be called after each step. */
-	void setVisualization(JPUpdatableInterface *interface);
 	/** \brief Add the traffic model to the simulation */
 	void setTrafficModel(JPTrafficModel *model);
 	/** \brief Add the intersection to the simulation */

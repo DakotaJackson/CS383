@@ -287,6 +287,10 @@ A sample intersection</div></div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">JPDirectionOutOfBounds</td><td>if direction is not one of ( <a class="el" href="classJPIntersection.html#a8f1da2fc7e47aab5c89b3b421d11ac57" title="The north position. ">JPIntersection::NORTH</a>, <a class="el" href="classJPIntersection.html#ae2eb139dc5e0db008055878bdcbebbe2" title="The south position. ">JPIntersection::SOUTH</a>, <a class="el" href="classJPIntersection.html#af620f3ff96083e35f17d7cdcb2b6dfb0" title="The east position. ">JPIntersection::EAST</a>, <a class="el" href="classJPIntersection.html#a11519481dc35d5ef11c9fd94f40cff6b" title="The west position. ">JPIntersection::WEST</a>, <a class="el" href="classJPIntersection.html#ab34996a2189b11c1cf2cc53ffc7827f2" title="Designates a lane where traffic travels in the north direction. ">JPIntersection::NORTHBOUND</a>, <a class="el" href="classJPIntersection.html#aaa3332ce5292ad029ef3ed94e3b03bc8" title="Designates a lane where traffic travels in the south direction. ">JPIntersection::SOUTHBOUND</a>, <a class="el" href="classJPIntersection.html#a3bc39db5805b6d86b24060b560427086" title="Designates a lane where traffic travels in the east direction. ">JPIntersection::EASTBOUND</a>, or <a class="el" href="classJPIntersection.html#a9845edf67dff671235332e20c29db605" title="Designates a lane where traffic travels in the west direction. ">JPIntersection::WESTBOUND</a>) </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJPLaneNumberOutOfBoundsException.html" title="This exception is thrown when no lane exists for the specified lane number. ">JPLaneNumberOutOfBoundsException</a></td><td>if the lane number exceeds <a class="el" href="classJPIntersection.html#ae27ce1ba0a66e92b74d6946e7fc43c5f" title="The maximum number of lanes supported. Presently 6. ">JPIntersection::MAX_LANES</a> </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJPTwoLanesToOneException.html" title="Two turn lanes are trying to turn into the same lane. ">JPTwoLanesToOneException</a></td><td>if the specified rightTarget or leftTarget will cause the added lane to turn into the same lane as an existing lane </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJPLaneCollidesWithOncomingLaneException.html" title="Added lane will collide with an oncomming lane. ">JPLaneCollidesWithOncomingLaneException</a></td><td>if the added lane will collide with an oncomming lane </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJPTurningLaneCrossingStraightLaneException.html" title="A turning lane will cross a straight lane. ">JPTurningLaneCrossingStraightLaneException</a></td><td>if A) the added lane is a right turn lane and there is a lane to the right that permits straight, B) if the added lane is a left turn lane and there is a lane to the left that permits straight, or C) the added lane permits straight and there is either a right turn lane to the left or a left turn lane to the right </td></tr>
   </table>
   </dd>
 </dl>
@@ -350,6 +354,7 @@ A sample intersection</div></div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">JPDirectionOutOfBounds</td><td>if direction is not one of ( <a class="el" href="classJPIntersection.html#a8f1da2fc7e47aab5c89b3b421d11ac57" title="The north position. ">JPIntersection::NORTH</a>, <a class="el" href="classJPIntersection.html#ae2eb139dc5e0db008055878bdcbebbe2" title="The south position. ">JPIntersection::SOUTH</a>, <a class="el" href="classJPIntersection.html#af620f3ff96083e35f17d7cdcb2b6dfb0" title="The east position. ">JPIntersection::EAST</a>, <a class="el" href="classJPIntersection.html#a11519481dc35d5ef11c9fd94f40cff6b" title="The west position. ">JPIntersection::WEST</a>, <a class="el" href="classJPIntersection.html#ab34996a2189b11c1cf2cc53ffc7827f2" title="Designates a lane where traffic travels in the north direction. ">JPIntersection::NORTHBOUND</a>, <a class="el" href="classJPIntersection.html#aaa3332ce5292ad029ef3ed94e3b03bc8" title="Designates a lane where traffic travels in the south direction. ">JPIntersection::SOUTHBOUND</a>, <a class="el" href="classJPIntersection.html#a3bc39db5805b6d86b24060b560427086" title="Designates a lane where traffic travels in the east direction. ">JPIntersection::EASTBOUND</a>, or <a class="el" href="classJPIntersection.html#a9845edf67dff671235332e20c29db605" title="Designates a lane where traffic travels in the west direction. ">JPIntersection::WESTBOUND</a>) </td></tr>
+    <tr><td class="paramname"><a class="el" href="classJPLaneNumberOutOfBoundsException.html" title="This exception is thrown when no lane exists for the specified lane number. ">JPLaneNumberOutOfBoundsException</a></td><td>if the lane number does not correspond to an existing lane </td></tr>
   </table>
   </dd>
 </dl>
@@ -593,8 +598,9 @@ A sample intersection</div></div>
 </div><div class="memdoc">
 
 <p>Set the offset (in lanes) of the rightmost lane. </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
+<p>This function is used to setup the physical configuration of the lane. It sets how far from the center of the intersection the first lane should start measured in lanes. For example consider an intersection with 3 south bound lanes and 3 northbound lanes. For both directions </p><dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classJPLaneOffsetException.html" title="Lane offset is less than 1. ">JPLaneOffsetException</a></td><td>if any offset is less than 1. </td></tr>
     <tr><td class="paramname">JPDirectionOutOfBounds</td><td>if direction is not one of ( <a class="el" href="classJPIntersection.html#a8f1da2fc7e47aab5c89b3b421d11ac57" title="The north position. ">JPIntersection::NORTH</a>, <a class="el" href="classJPIntersection.html#ae2eb139dc5e0db008055878bdcbebbe2" title="The south position. ">JPIntersection::SOUTH</a>, <a class="el" href="classJPIntersection.html#af620f3ff96083e35f17d7cdcb2b6dfb0" title="The east position. ">JPIntersection::EAST</a>, <a class="el" href="classJPIntersection.html#a11519481dc35d5ef11c9fd94f40cff6b" title="The west position. ">JPIntersection::WEST</a>, <a class="el" href="classJPIntersection.html#ab34996a2189b11c1cf2cc53ffc7827f2" title="Designates a lane where traffic travels in the north direction. ">JPIntersection::NORTHBOUND</a>, <a class="el" href="classJPIntersection.html#aaa3332ce5292ad029ef3ed94e3b03bc8" title="Designates a lane where traffic travels in the south direction. ">JPIntersection::SOUTHBOUND</a>, <a class="el" href="classJPIntersection.html#a3bc39db5805b6d86b24060b560427086" title="Designates a lane where traffic travels in the east direction. ">JPIntersection::EASTBOUND</a>, or <a class="el" href="classJPIntersection.html#a9845edf67dff671235332e20c29db605" title="Designates a lane where traffic travels in the west direction. ">JPIntersection::WESTBOUND</a>) </td></tr>
   </table>
   </dd>
@@ -642,7 +648,12 @@ A sample intersection</div></div>
 
 <p>Set the offset (in lanes) of the rightmost lane. </p>
 <p>set the offset (in lanes) of the rightmost lane.</p>
-<p>This function is used to setup the physical configuration of the lane. It sets how far from the center of the intersection the first lane should start measured in lanes. For example consider an intersection with 3 south bound lanes and 3 northbound lanes. For both directions </p>
+<p>This function is used to setup the physical configuration of the lane. It sets how far from the center of the intersection the first lane should start measured in lanes. For example consider an intersection with 3 south bound lanes and 3 northbound lanes. For both directions </p><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classJPLaneOffsetException.html" title="Lane offset is less than 1. ">JPLaneOffsetException</a></td><td>if any offset is less than 1. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -735,6 +746,14 @@ A sample intersection</div></div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p></p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">JPDirectionOutOfBounds</td><td>if direction is not one of ( <a class="el" href="classJPIntersection.html#a8f1da2fc7e47aab5c89b3b421d11ac57" title="The north position. ">JPIntersection::NORTH</a>, <a class="el" href="classJPIntersection.html#ae2eb139dc5e0db008055878bdcbebbe2" title="The south position. ">JPIntersection::SOUTH</a>, <a class="el" href="classJPIntersection.html#af620f3ff96083e35f17d7cdcb2b6dfb0" title="The east position. ">JPIntersection::EAST</a>, <a class="el" href="classJPIntersection.html#a11519481dc35d5ef11c9fd94f40cff6b" title="The west position. ">JPIntersection::WEST</a>, <a class="el" href="classJPIntersection.html#ab34996a2189b11c1cf2cc53ffc7827f2" title="Designates a lane where traffic travels in the north direction. ">JPIntersection::NORTHBOUND</a>, <a class="el" href="classJPIntersection.html#aaa3332ce5292ad029ef3ed94e3b03bc8" title="Designates a lane where traffic travels in the south direction. ">JPIntersection::SOUTHBOUND</a>, <a class="el" href="classJPIntersection.html#a3bc39db5805b6d86b24060b560427086" title="Designates a lane where traffic travels in the east direction. ">JPIntersection::EASTBOUND</a>, or <a class="el" href="classJPIntersection.html#a9845edf67dff671235332e20c29db605" title="Designates a lane where traffic travels in the west direction. ">JPIntersection::WESTBOUND</a>) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1245,7 +1264,7 @@ A sample intersection</div></div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 19 2017 14:35:31 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 04:33:09 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

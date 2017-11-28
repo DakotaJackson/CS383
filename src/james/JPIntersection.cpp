@@ -15,7 +15,7 @@ JPIntersection::JPIntersection()
 	_laneExit[1] = 600.0;
 	_finalized = false;
 	_speedLimits[0] = 35;
-	_speedLimits[1] = 35; //TODO change these to -1 flags?
+	_speedLimits[1] = 35;
 
 	//set all of these to default values
 	//or to -1 flagging them as not set
@@ -24,32 +24,31 @@ JPIntersection::JPIntersection()
 	{
 		_laneOffsets[i] = -1;
 		_laneCounts[i] = 0;
-		_laneLengths[i] = 5280;
+		_laneLengths[i] = 5280/4;
 		for(j = 0; j < MAX_LANES; j++)
 		_lanes[i][j] = 0;
 	}
 }
 
 /**
+ * This function is used to setup the physical configuration of the lane. It sets how far from the center
+ * of the intersection the first lane should start measured in lanes. For example consider an intersection
+ * with 3 south bound lanes and 3 northbound lanes. For both directions
+ * \throw JPLaneOffsetException if any offset is less than 1.
  * \copydoc JPIntersection::validateDirection()
  */
 void JPIntersection::setLaneOffset(int direction, double offset)
 {
 	validateDirection(direction);
-	/*
-
-	if(offset <= 0)
-		throw TODO;
-	if( oposing offset is not the same (e.g. both must be x.0 or x.5))
-	 	 throw TODO
-	*/
+	if(offset < 1)
+		throw JPLaneOffsetException();
 
 	_laneOffsets[direction] = offset;
 }
 
 /**
  * \copydoc JPIntersection::validateDirection()
-*/
+ */
 void JPIntersection::setTrackedLaneLength(int direction, double distance)
 {
 	validateDirection(direction);
@@ -126,12 +125,14 @@ void JPIntersection::finalize()
  * This function is used to setup the physical configuration of the lane. It sets how far from the center
  * of the intersection the first lane should start measured in lanes. For example consider an intersection
  * with 3 south bound lanes and 3 northbound lanes. For both directions
+ * \throw JPLaneOffsetException if any offset is less than 1.
  *
  */
 void JPIntersection::setLaneOffsets(double north, double south, double east,
 		double west)
 {
-	//todo checks
+	if(north < 1 || south < 1 || east < 1 || west < 1)
+		throw JPLaneOffsetException();
 	_laneOffsets[JPIntersection::NORTH] = north;
 	_laneOffsets[JPIntersection::SOUTH] = south;
 	_laneOffsets[JPIntersection::EAST] = east;
@@ -161,6 +162,10 @@ void JPIntersection::setTrackedExitLengths(double northSouth,
 
 /**
  * \copydoc JPIntersection::validateDirection()
+ * \throw JPLaneNumberOutOfBoundsException if the lane number exceeds JPIntersection::MAX_LANES
+ * \throw JPTwoLanesToOneException if the specified rightTarget or leftTarget will cause the added lane to turn into the same lane as an existing lane
+ * \throw JPLaneCollidesWithOncomingLaneException if the added lane will collide with an oncomming lane
+ * \throw JPTurningLaneCrossingStraightLaneException if A) the added lane is a right turn lane and there is a lane to the right that permits straight, B) if the added lane is a left turn lane and there is a lane to the left that permits straight, or C) the added lane permits straight and there is either a right turn lane to the left or a left turn lane to the right
  */
 void JPIntersection::addLane(int direction, int position, int turnOptions,
 		int leftTarget, int rightTarget)
@@ -214,6 +219,7 @@ double JPIntersection::getTrackedExitLength(int direction)
 
 /**
  * \copydoc JPIntersection::validateDirection()
+ * \throw JPLaneNumberOutOfBoundsException if the lane number does not correspond to an existing lane
  */
 JPLane* JPIntersection::getLane(int direction, int position)
 {

@@ -67,6 +67,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A turning lane will cross a straight lane.  
+ <a href="classJPTurningLaneCrossingStraightLaneException.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="JPIntersectionExceptions_8h_source.html">JPIntersectionExceptions.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for JPTurningLaneCrossingStraightLaneException:</div>
@@ -75,7 +78,7 @@ Inheritance diagram for JPTurningLaneCrossingStraightLaneException:</div>
   <img src="classJPTurningLaneCrossingStraightLaneException.png" usemap="#JPTurningLaneCrossingStraightLaneException_map" alt=""/>
   <map id="JPTurningLaneCrossingStraightLaneException_map" name="JPTurningLaneCrossingStraightLaneException_map">
 <area href="classJPMalformedIntersectionException.html" title="The intersection has been configured improperly. " alt="JPMalformedIntersectionException" shape="rect" coords="0,112,274,136"/>
-<area href="classJPIntersectionException.html" alt="JPIntersectionException" shape="rect" coords="0,56,274,80"/>
+<area href="classJPIntersectionException.html" title="A base class of intersection related exceptions. " alt="JPIntersectionException" shape="rect" coords="0,56,274,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -104,7 +107,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8a0346f4baf6c7aa6f00db3e8cbe2781 inherit pub_methods_classJPIntersectionException"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionException.html#a8a0346f4baf6c7aa6f00db3e8cbe2781">~JPIntersectionException</a> ()  throw ()</td></tr>
 <tr class="separator:a8a0346f4baf6c7aa6f00db3e8cbe2781 inherit pub_methods_classJPIntersectionException"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A turning lane will cross a straight lane. </p>
+<p>Thrown when A) the added lane is a right turn lane and there is a lane to the right that permits straight, B) if the added lane is a left turn lane and there is a lane to the left that permits straight, or C) the added lane permits straight and there is either a right turn lane to the left or a left turn lane to the right </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa201242deefd519351041851b19511b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa201242deefd519351041851b19511b3">&#9670;&nbsp;</a></span>JPTurningLaneCrossingStraightLaneException()</h2>
 
@@ -174,7 +180,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 19 2017 14:35:37 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 04:33:14 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

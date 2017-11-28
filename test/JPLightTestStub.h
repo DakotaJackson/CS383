@@ -23,7 +23,9 @@ class JPLightTestStub
 
 public:
 	JPLightTestStub();
+	JPLightTestStub(int testCase);
 	virtual ~JPLightTestStub();
+	int getTestCase() const;
 	void setTestCase(int testCase);
 
 private:

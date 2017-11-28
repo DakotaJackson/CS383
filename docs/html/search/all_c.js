@@ -15,6 +15,5 @@ var searchData=
   ['max_5flane_5fleng',['MAX_LANE_LENG',['../classJPIntersection.html#ab61688693491460dcbdd780be9ba7db0',1,'JPIntersection']]],
   ['max_5flanes',['MAX_LANES',['../classJPIntersection.html#ae27ce1ba0a66e92b74d6946e7fc43c5f',1,'JPIntersection']]],
   ['max_5flanes_5fmacro',['MAX_LANES_MACRO',['../JPIntersection_8h.html#a865fae065234691647e726a77915bb28',1,'JPIntersection.h']]],
-  ['maxcarimages',['maxCarImages',['../classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da',1,'JJDisplayOutput']]],
-  ['multipleintersectioncheck',['multipleIntersectionCheck',['../JPIntersection__test_8cpp.html#a2c9034ac0b9c2b38daf3f069b699f53a',1,'JPIntersection_test.cpp']]]
+  ['maxcarimages',['maxCarImages',['../classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da',1,'JJDisplayOutput']]]
 ];

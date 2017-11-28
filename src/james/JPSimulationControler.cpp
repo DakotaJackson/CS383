@@ -43,13 +43,13 @@ void JPSimulationControler::run()
 	//todo build start
 	_paused = false;
 	//double initialSimTime;
-	double initialRealTime;
+	double initialRealTime = -1;
 	double initialStepTime = -1;
 	double initialSpeed = _timeScale;
 	//double currentRealTime;
-	double stepTime;
+	double stepTime; //how long is a step
 	double target;
-	long steps;
+	long steps = 0;
 
 	//cycle until paused or duration is reached
 	while( (! _paused) &&
@@ -103,7 +103,7 @@ bool JPSimulationControler::isPaused() const { return _paused; }
 double JPSimulationControler::getSimTime() const { return _simTime; }
 /** This is the proportion of simulated to real time. (i.e.) 1.0 is real time, < 1.0 is faster than real time, > 1.0 is greater than real time. The default is 1.0 */
 double JPSimulationControler::getTimeScale() const { return _timeScale; }
-/** \copydetail JPSimulationControler::getTimeScale() */
+/** \copydetails JPSimulationControler::getTimeScale() */
 void JPSimulationControler::setTimeScale(double timeScale) {
 	_timeScale = timeScale;
 }
@@ -130,7 +130,6 @@ void JPSimulationControler::sleepTill(double time)
 {
 	//calculate how long to sleep
 	double seconds = time - getTime();
-	double ipart, fpart;
 	if( seconds < 0)
 		return; //we are behind schedule
 
@@ -138,6 +137,7 @@ void JPSimulationControler::sleepTill(double time)
 	Sleep(milisec);
 
 	/* Works in cygwin and linux, but not mingw
+	//double ipart, fpart;
 	//construct a timespec
 	struct timespec delay;
 	fpart = modf(seconds, &ipart);

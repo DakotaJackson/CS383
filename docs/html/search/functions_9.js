@@ -3,7 +3,7 @@ var searchData=
   ['lanecollideswithoncominglanecheck',['laneCollidesWithOncomingLaneCheck',['../JPIntersection__test_8cpp.html#a8f52a81b6b3d7ea6dfe3ecc50932dfa8',1,'JPIntersection_test.cpp']]],
   ['lanedirectionbitfieldcheck',['laneDirectionBitFieldCheck',['../JPLane__test_8cpp.html#abaca57877fe6e5fa948f9d6a98b07b91',1,'JPLane_test.cpp']]],
   ['lanenumberoutofboundscheck',['laneNumberOutOfBoundsCheck',['../JPIntersection__test_8cpp.html#a3329fad7e93032ffa252122f1ca445ed',1,'JPIntersection_test.cpp']]],
-  ['laneoffsetmismatchcheck',['laneOffsetMismatchCheck',['../JPIntersection__test_8cpp.html#aff86e1ed3aa2bd2f9cac70c1c87c6fec',1,'JPIntersection_test.cpp']]],
+  ['laneoffsetcheck',['laneOffsetCheck',['../JPIntersection__test_8cpp.html#a44b2c0b760e38eafebb02199942cf9b8',1,'JPIntersection_test.cpp']]],
   ['lastindexof',['lastIndexOf',['../classLinkedList.html#a8c50aae0ca11d89e9be2b418db54a70a',1,'LinkedList']]],
   ['leftturnblinkyellowtest',['leftTurnBlinkYellowTest',['../classSETestClass.html#a6742d001949653e1f6ccf99dccdeaf5d',1,'SETestClass']]],
   ['leftturngreentest',['leftTurnGreenTest',['../classSETestClass.html#a80bcf5803b69210dd6a19eedd7aa3f4b',1,'SETestClass']]],

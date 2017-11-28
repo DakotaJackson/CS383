@@ -65,13 +65,6 @@ int JPTwoLanesToOneException::getCollidingLane()
 	return _collidingLane;
 }
 
-JPMultipleIntersectionsException::JPMultipleIntersectionsException(){}
-
-const char* JPMultipleIntersectionsException::what() const throw ()
-{
-	return "You can only instantiate one instance of JPIntersection";
-}
-
 
 JPLaneCollidesWithOncomingLaneException::JPLaneCollidesWithOncomingLaneException(int direction,
 		int thisLane, int collidingLane)
@@ -99,23 +92,18 @@ const char* JPTurningLaneCrossingStraightLaneException::what() const throw ()
 	return "";
 }
 
-JPLaneOffsetMismatchException::JPLaneOffsetMismatchException()
+JPLaneOffsetException::JPLaneOffsetException(){}
+const char* JPLaneOffsetException::what() const throw ()
 {
-
-}
-
-const char* JPLaneOffsetMismatchException::what() const throw ()
-{
-	return "";
+	return "Lane offset must be at least one.";
 }
 
 JPLaneNumberOutOfBoundsException::JPLaneNumberOutOfBoundsException(int lane)
 {
 }
-
 const char* JPLaneNumberOutOfBoundsException::what() const throw ()
 {
-	return "";
+	return "The lane number is out of bounds";
 }
 
 JPDirectionOutOfBoundsException::JPDirectionOutOfBoundsException(int direction)
@@ -148,7 +136,7 @@ JPConfigurationOrderException::~JPConfigurationOrderException() throw ()
 
 const char* JPConfigurationOrderException::what() const throw ()
 {
-	return "";
+	return "Something was configured out of order";
 }
 
 JPConfigurationOrderException::JPConfigurationOrderException(int which)
@@ -156,7 +144,4 @@ JPConfigurationOrderException::JPConfigurationOrderException(int which)
 	_detail = which;
 }
 
-int JPConfigurationOrderException::getDetail()
-{
-	return _detail;
-}
+int JPConfigurationOrderException::getDetail(){ return _detail; }

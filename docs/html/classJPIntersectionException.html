@@ -67,6 +67,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A base class of intersection related exceptions.  
+ <a href="classJPIntersectionException.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="JPIntersectionExceptions_8h_source.html">JPIntersectionExceptions.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for JPIntersectionException:</div>
@@ -76,11 +79,11 @@ Inheritance diagram for JPIntersectionException:</div>
   <map id="JPIntersectionException_map" name="JPIntersectionException_map">
 <area href="classJPConfigurationOrderException.html" title="Configuration steps were performed out of order. " alt="JPConfigurationOrderException" shape="rect" coords="0,112,274,136"/>
 <area href="classJPMalformedIntersectionException.html" title="The intersection has been configured improperly. " alt="JPMalformedIntersectionException" shape="rect" coords="710,112,984,136"/>
-<area href="classJPDirectionOutOfBoundsException.html" alt="JPDirectionOutOfBoundsException" shape="rect" coords="0,168,274,192"/>
-<area href="classJPLaneCollidesWithOncomingLaneException.html" alt="JPLaneCollidesWithOncomingLaneException" shape="rect" coords="284,168,558,192"/>
-<area href="classJPLaneNumberOutOfBoundsException.html" alt="JPLaneNumberOutOfBoundsException" shape="rect" coords="568,168,842,192"/>
-<area href="classJPLaneOffsetMismatchException.html" alt="JPLaneOffsetMismatchException" shape="rect" coords="852,168,1126,192"/>
-<area href="classJPTurningLaneCrossingStraightLaneException.html" alt="JPTurningLaneCrossingStraightLaneException" shape="rect" coords="1136,168,1410,192"/>
+<area href="classJPDirectionOutOfBoundsException.html" title="The specified direction is not valid. " alt="JPDirectionOutOfBoundsException" shape="rect" coords="0,168,274,192"/>
+<area href="classJPLaneCollidesWithOncomingLaneException.html" title="Added lane will collide with an oncomming lane. " alt="JPLaneCollidesWithOncomingLaneException" shape="rect" coords="284,168,558,192"/>
+<area href="classJPLaneNumberOutOfBoundsException.html" title="This exception is thrown when no lane exists for the specified lane number. " alt="JPLaneNumberOutOfBoundsException" shape="rect" coords="568,168,842,192"/>
+<area href="classJPLaneOffsetException.html" title="Lane offset is less than 1. " alt="JPLaneOffsetException" shape="rect" coords="852,168,1126,192"/>
+<area href="classJPTurningLaneCrossingStraightLaneException.html" title="A turning lane will cross a straight lane. " alt="JPTurningLaneCrossingStraightLaneException" shape="rect" coords="1136,168,1410,192"/>
 <area href="classJPTwoLanesToOneException.html" title="Two turn lanes are trying to turn into the same lane. " alt="JPTwoLanesToOneException" shape="rect" coords="1420,168,1694,192"/>
 </map>
  </div></div>
@@ -94,7 +97,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ef9babe3420bdf995a240e0868d5cda"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionException.html#a3ef9babe3420bdf995a240e0868d5cda">what</a> () const  throw ()</td></tr>
 <tr class="separator:a3ef9babe3420bdf995a240e0868d5cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A base class of intersection related exceptions. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a99e3192cfc1ef189806596a8d695077b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99e3192cfc1ef189806596a8d695077b">&#9670;&nbsp;</a></span>JPIntersectionException()</h2>
 
@@ -173,7 +178,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classJPDirectionOutOfBoundsException.html#afce09fddab04301333328d97c18d19cf">JPDirectionOutOfBoundsException</a>, <a class="el" href="classJPLaneNumberOutOfBoundsException.html#a70649c8ee544861c4b6fa2d5c661e821">JPLaneNumberOutOfBoundsException</a>, <a class="el" href="classJPLaneOffsetMismatchException.html#a020a3d5b3797ece69d81c1dfe7e8f8ca">JPLaneOffsetMismatchException</a>, <a class="el" href="classJPTurningLaneCrossingStraightLaneException.html#ace78b62766ad4435472174dc593d8fd3">JPTurningLaneCrossingStraightLaneException</a>, <a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a7c7754b16f1ab52e67a0666eb0bc66ac">JPLaneCollidesWithOncomingLaneException</a>, <a class="el" href="classJPTwoLanesToOneException.html#aa6aa45b8b3bd831c07fa6dde540e5528">JPTwoLanesToOneException</a>, <a class="el" href="classJPMalformedIntersectionException.html#acb0e1c8019f57fb9f5aff5acf5560336">JPMalformedIntersectionException</a>, and <a class="el" href="classJPConfigurationOrderException.html#a0eb9815d7b0be23a0c2d436d8e519422">JPConfigurationOrderException</a>.</p>
+<p>Reimplemented in <a class="el" href="classJPDirectionOutOfBoundsException.html#afce09fddab04301333328d97c18d19cf">JPDirectionOutOfBoundsException</a>, <a class="el" href="classJPLaneNumberOutOfBoundsException.html#a70649c8ee544861c4b6fa2d5c661e821">JPLaneNumberOutOfBoundsException</a>, <a class="el" href="classJPLaneOffsetException.html#a4ed7982ba40bb5d87dcf66ce2c4ef619">JPLaneOffsetException</a>, <a class="el" href="classJPTurningLaneCrossingStraightLaneException.html#ace78b62766ad4435472174dc593d8fd3">JPTurningLaneCrossingStraightLaneException</a>, <a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a7c7754b16f1ab52e67a0666eb0bc66ac">JPLaneCollidesWithOncomingLaneException</a>, <a class="el" href="classJPTwoLanesToOneException.html#aa6aa45b8b3bd831c07fa6dde540e5528">JPTwoLanesToOneException</a>, <a class="el" href="classJPMalformedIntersectionException.html#acb0e1c8019f57fb9f5aff5acf5560336">JPMalformedIntersectionException</a>, and <a class="el" href="classJPConfigurationOrderException.html#a0eb9815d7b0be23a0c2d436d8e519422">JPConfigurationOrderException</a>.</p>
 
 </div>
 </div>
@@ -184,7 +189,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 19 2017 14:35:31 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 04:33:10 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -46,6 +46,7 @@ var searchData=
   ['_5frate',['_rate',['../classJPTrafficModel.html#a352497c5f12ff32fa70cae6779ca0eb9',1,'JPTrafficModel']]],
   ['_5fremovesubscribers',['_removeSubscribers',['../classJPObservableSimulation.html#a9ae74c717a51e313ae647a68305ab161',1,'JPObservableSimulation']]],
   ['_5frighttarget',['_rightTarget',['../classJPLane.html#af78a924a984b6edc9c26433d1337741f',1,'JPLane']]],
+  ['_5fsimepoch',['_simEpoch',['../classJPSimulationControler.html#a9e43a0903f5191f70e98a0ae9e00ac78',1,'JPSimulationControler']]],
   ['_5fsimtime',['_simTime',['../classJPSimulationControler.html#a0cd23b723663ac40655676cf83356545',1,'JPSimulationControler']]],
   ['_5fspeed',['_speed',['../classSFCar.html#ae013782949f67cd2b75e33837eddef49',1,'SFCar']]],
   ['_5fspeedlimits',['_speedLimits',['../classJPIntersection.html#ab87c476052a78c698c1eb41b04df43d4',1,'JPIntersection']]],

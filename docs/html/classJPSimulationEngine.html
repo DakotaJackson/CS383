@@ -101,9 +101,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ga7f053f1df3474d9d057853bfefe7ff0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ENG.html#ga7f053f1df3474d9d057853bfefe7ff0e">init</a> ()</td></tr>
 <tr class="memdesc:ga7f053f1df3474d9d057853bfefe7ff0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the simulation and run for a short time to populate the lanes.  <a href="group__ENG.html#ga7f053f1df3474d9d057853bfefe7ff0e">More...</a><br /></td></tr>
 <tr class="separator:ga7f053f1df3474d9d057853bfefe7ff0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1794170285c3a8458946b43f024fa5af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a1794170285c3a8458946b43f024fa5af">setVisualization</a> (<a class="el" href="classJPUpdatableInterface.html">JPUpdatableInterface</a> *interface)</td></tr>
-<tr class="memdesc:a1794170285c3a8458946b43f024fa5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a class with an update function that can be called after each step.  <a href="#a1794170285c3a8458946b43f024fa5af">More...</a><br /></td></tr>
-<tr class="separator:a1794170285c3a8458946b43f024fa5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bb7c6daa7feb57b98a426085cf9e1be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a1bb7c6daa7feb57b98a426085cf9e1be">setTrafficModel</a> (<a class="el" href="classJPTrafficModel.html">JPTrafficModel</a> *model)</td></tr>
 <tr class="memdesc:a1bb7c6daa7feb57b98a426085cf9e1be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the traffic model to the simulation.  <a href="#a1bb7c6daa7feb57b98a426085cf9e1be">More...</a><br /></td></tr>
 <tr class="separator:a1bb7c6daa7feb57b98a426085cf9e1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +117,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a33b4144a45a14bec7dea29f19f63bf89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a022d14f1debb5610894c5560a8927cf9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a022d14f1debb5610894c5560a8927cf9">~JPSimulationEngine</a> ()</td></tr>
 <tr class="separator:a022d14f1debb5610894c5560a8927cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab946c28d43ce0ec2d56b0c122d19af6c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#ab946c28d43ce0ec2d56b0c122d19af6c">getStepTime</a> () const</td></tr>
+<tr class="memdesc:ab946c28d43ce0ec2d56b0c122d19af6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the calculation interval (step time)  <a href="#ab946c28d43ce0ec2d56b0c122d19af6c">More...</a><br /></td></tr>
+<tr class="separator:ab946c28d43ce0ec2d56b0c122d19af6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd5858a48ae78acb19ab54934ce60ed7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#afd5858a48ae78acb19ab54934ce60ed7">setStepTime</a> (double stepTime)</td></tr>
+<tr class="memdesc:afd5858a48ae78acb19ab54934ce60ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the calculation interval (step time)  <a href="#afd5858a48ae78acb19ab54934ce60ed7">More...</a><br /></td></tr>
+<tr class="separator:afd5858a48ae78acb19ab54934ce60ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -410,6 +413,26 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="ab946c28d43ce0ec2d56b0c122d19af6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab946c28d43ce0ec2d56b0c122d19af6c">&#9670;&nbsp;</a></span>getStepTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JPSimulationEngine::getStepTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the calculation interval (step time) </p>
+<p>The step time is how far the simulation advances in each step. For example with a step time of 0.1 calling the step function would move all of the cars to where they would be 0.1 seconds from now and advance the simulation's internal clock by 0.1 seconds. </p>
+
+</div>
+</div>
 <a id="a5d17b49aa08b70449deb97dc36580cfa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d17b49aa08b70449deb97dc36580cfa">&#9670;&nbsp;</a></span>intersectionDeceleration()</h2>
 
@@ -550,6 +573,27 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="afd5858a48ae78acb19ab54934ce60ed7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd5858a48ae78acb19ab54934ce60ed7">&#9670;&nbsp;</a></span>setStepTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JPSimulationEngine::setStepTime </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>stepTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the calculation interval (step time) </p>
+<p>The step time is how far the simulation advances in each step. For example with a step time of 0.1 calling the step function would move all of the cars to where they would be 0.1 seconds from now and advance the simulation's internal clock by 0.1 seconds. </p>
+
+</div>
+</div>
 <a id="a596271d4ace93ad663c897ecdc4b6a6a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a596271d4ace93ad663c897ecdc4b6a6a">&#9670;&nbsp;</a></span>setTrafficLight()</h2>
 
@@ -585,26 +629,6 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Add the traffic model to the simulation. </p>
-
-</div>
-</div>
-<a id="a1794170285c3a8458946b43f024fa5af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1794170285c3a8458946b43f024fa5af">&#9670;&nbsp;</a></span>setVisualization()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JPSimulationEngine::setVisualization </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classJPUpdatableInterface.html">JPUpdatableInterface</a> *&#160;</td>
-          <td class="paramname"><em>interface</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a class with an update function that can be called after each step. </p>
 
 </div>
 </div>
@@ -991,7 +1015,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 19 2017 14:35:36 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 04:33:13 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

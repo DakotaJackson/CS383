@@ -26,6 +26,9 @@
 #ifndef SRC_JAMES_MALFORMEDINTERSECTIONEXCEPTION_H_
 #define SRC_JAMES_MALFORMEDINTERSECTIONEXCEPTION_H_
 
+/**
+ * \brief A base class of intersection related exceptions.
+ */
 class JPIntersectionException: public std::exception
 {
 public:
@@ -49,12 +52,12 @@ public:
 	static const int CONFIG_OFFSET_AFTER_LANES = 2;
 	/** \brief Lanes cannot be added without first setting the offsets. */
 	static const int CONFIG_LANES_BEFORE_OFFSET = 3;
-	/** \brief Speed Limits must be set before attempting to finalize. */
-	static const int FINALIZE_MISSING_SPEED_LIMITS = 4;
+	//** \brief Speed Limits must be set before attempting to finalize. */
+	//static const int FINALIZE_MISSING_SPEED_LIMITS = 4;
 	/** \brief Cannot finalize because lanes are missing. */
 	static const int FINALIZE_MISSING_LANES = 5;
-	/** \brief Cannot finalize because lane lengths are missing. */
-	static const int FINALIZE_MISSING_LANE_LENGTHS = 6;
+	//** \brief Cannot finalize because lane lengths are missing. */
+	//static const int FINALIZE_MISSING_LANE_LENGTHS = 6;
 	//static const int CONFIG_FINALIZED = 1; /** \brief  */
 
 private:
@@ -76,14 +79,6 @@ public:
 private:
 	int _lane;
 	int _direction;
-};
-
-/** \brief User has tried to create more than one intersection */
-class JPMultipleIntersectionsException: public std::exception
-{
-public:
-	JPMultipleIntersectionsException();
-	virtual const char* what() const throw();
 };
 
 /**
@@ -110,6 +105,9 @@ private:
 	int _collidingLane;
 };
 
+/**
+ * \brief Added lane will collide with an oncomming lane
+ */
 class JPLaneCollidesWithOncomingLaneException: public JPMalformedIntersectionException
 {
 public:
@@ -123,6 +121,11 @@ private:
 	int _collidingLane;
 };
 
+/**
+ * \brief A turning lane will cross a straight lane.
+ *
+ *  Thrown when A) the added lane is a right turn lane and there is a lane to the right that permits straight, B) if the added lane is a left turn lane and there is a lane to the left that permits straight, or C) the added lane permits straight and there is either a right turn lane to the left or a left turn lane to the right
+ */
 class JPTurningLaneCrossingStraightLaneException: public JPMalformedIntersectionException
 {
 public:
@@ -130,13 +133,19 @@ public:
 	virtual const char* what() const throw();
 };
 
-class JPLaneOffsetMismatchException: public JPMalformedIntersectionException
+/**
+ * \brief Lane offset is less than 1
+ */
+class JPLaneOffsetException: public JPMalformedIntersectionException
 {
 public:
-	JPLaneOffsetMismatchException();
+	JPLaneOffsetException();
 	virtual const char* what() const throw();
 };
 
+/**
+ * \brief This exception is thrown when no lane exists for the specified lane number.
+ */
 class JPLaneNumberOutOfBoundsException: public JPMalformedIntersectionException
 {
 public:
@@ -144,6 +153,11 @@ public:
 	virtual const char* what() const throw();
 };
 
+/**
+ * \brief The specified direction is not valid.
+ *
+ * Direction must be one of ( JPIntersection::NORTH, JPIntersection::SOUTH, JPIntersection::EAST, JPIntersection::WEST, JPIntersection::NORTHBOUND, JPIntersection::SOUTHBOUND, JPIntersection::EASTBOUND, or JPIntersection::WESTBOUND)
+ */
 class JPDirectionOutOfBoundsException: public JPMalformedIntersectionException
 {
 public:

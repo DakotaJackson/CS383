@@ -106,16 +106,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a850aa4bc707cdc0098fcfdc05f52d666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#a850aa4bc707cdc0098fcfdc05f52d666">setTimeScale</a> (double timeScale)</td></tr>
 <tr class="memdesc:a850aa4bc707cdc0098fcfdc05f52d666"><td class="mdescLeft">&#160;</td><td class="mdescRight">set how fast the simulation advances compared to real time  <a href="#a850aa4bc707cdc0098fcfdc05f52d666">More...</a><br /></td></tr>
 <tr class="separator:a850aa4bc707cdc0098fcfdc05f52d666"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fcde86ae3aa2f804aa1f0ee26c1be2a"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classJPSimulationEngine.html">JPSimulationEngine</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#a1fcde86ae3aa2f804aa1f0ee26c1be2a">getEngine</a> () const</td></tr>
-<tr class="separator:a1fcde86ae3aa2f804aa1f0ee26c1be2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d9b5ed96070b4e63d79086aa85cf5ac"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classJPSimulationEngine.html">JPSimulationEngine</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#a9d9b5ed96070b4e63d79086aa85cf5ac">getEngine</a> () const</td></tr>
+<tr class="separator:a9d9b5ed96070b4e63d79086aa85cf5ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:adf209f5676887d1bc7133c9500ffbe94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#adf209f5676887d1bc7133c9500ffbe94">JPSimulationControler</a> ()</td></tr>
-<tr class="memdesc:adf209f5676887d1bc7133c9500ffbe94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hopefully not needed.  <a href="#adf209f5676887d1bc7133c9500ffbe94">More...</a><br /></td></tr>
 <tr class="separator:adf209f5676887d1bc7133c9500ffbe94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4276062e4f0ecd8dc19f5ef7bfbc8989"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#a4276062e4f0ecd8dc19f5ef7bfbc8989">~JPSimulationControler</a> ()</td></tr>
 <tr class="separator:a4276062e4f0ecd8dc19f5ef7bfbc8989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b78e8f1f4577c97c5c07f342181101"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#af4b78e8f1f4577c97c5c07f342181101">getTime</a> ()</td></tr>
+<tr class="separator:af4b78e8f1f4577c97c5c07f342181101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf4bab2d595f12deab4deb568b55435"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#adbf4bab2d595f12deab4deb568b55435">run</a> ()</td></tr>
+<tr class="separator:adbf4bab2d595f12deab4deb568b55435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe813c410dd62dd9c22ebed8af69c20e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#afe813c410dd62dd9c22ebed8af69c20e">sleepTill</a> (double time)</td></tr>
+<tr class="separator:afe813c410dd62dd9c22ebed8af69c20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -131,6 +136,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a6344edf5700f31a23426b9af4dbbcc3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cd23b723663ac40655676cf83356545"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#a0cd23b723663ac40655676cf83356545">_simTime</a></td></tr>
 <tr class="separator:a0cd23b723663ac40655676cf83356545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e43a0903f5191f70e98a0ae9e00ac78"><td class="memItemLeft" align="right" valign="top">struct timeval&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationControler.html#a9e43a0903f5191f70e98a0ae9e00ac78">_simEpoch</a></td></tr>
+<tr class="separator:a9e43a0903f5191f70e98a0ae9e00ac78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -160,8 +167,6 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Hopefully not needed. </p>
 
 </div>
 </div>
@@ -210,14 +215,14 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1fcde86ae3aa2f804aa1f0ee26c1be2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fcde86ae3aa2f804aa1f0ee26c1be2a">&#9670;&nbsp;</a></span>getEngine()</h2>
+<a id="a9d9b5ed96070b4e63d79086aa85cf5ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d9b5ed96070b4e63d79086aa85cf5ac">&#9670;&nbsp;</a></span>getEngine()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classJPSimulationEngine.html">JPSimulationEngine</a> *&amp; JPSimulationControler::getEngine </td>
+          <td class="memname">const <a class="el" href="classJPSimulationEngine.html">JPSimulationEngine</a> * JPSimulationControler::getEngine </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -260,6 +265,32 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>returns the amount of time elapsed in the simulation </p>
+
+</div>
+</div>
+<a id="af4b78e8f1f4577c97c5c07f342181101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4b78e8f1f4577c97c5c07f342181101">&#9670;&nbsp;</a></span>getTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JPSimulationControler::getTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return the time in seconds since simulation epoch </p>
 
 </div>
 </div>
@@ -338,6 +369,31 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="adbf4bab2d595f12deab4deb568b55435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf4bab2d595f12deab4deb568b55435">&#9670;&nbsp;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JPSimulationControler::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a793a54aa2aaadaed2720e048e2dbc2bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a793a54aa2aaadaed2720e048e2dbc2bf">&#9670;&nbsp;</a></span>setDuration()</h2>
 
@@ -355,6 +411,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>set the duration that simulation is supposed to run </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>The amount of time the simulation should run. -1 if it should run infinitely </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -395,7 +457,34 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>set how fast the simulation advances compared to real time </p>
-<p><a class="el" href="classJPSimulationControler.html#afad0d9e118694893ee618cc98a18b50e" title="returns the time scale (e.g. comparison to real time ">JPSimulationControler::getTimeScale()</a> </p>
+<p>This is the proportion of simulated to real time. (i.e.) 1.0 is real time, &lt; 1.0 is faster than real time, &gt; 1.0 is greater than real time. The default is 1.0 </p>
+
+</div>
+</div>
+<a id="afe813c410dd62dd9c22ebed8af69c20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe813c410dd62dd9c22ebed8af69c20e">&#9670;&nbsp;</a></span>sleepTill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JPSimulationControler::sleepTill </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>sleep until time seconds past controller start </p>
 
 </div>
 </div>
@@ -522,6 +611,28 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9e43a0903f5191f70e98a0ae9e00ac78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e43a0903f5191f70e98a0ae9e00ac78">&#9670;&nbsp;</a></span>_simEpoch</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct timeval JPSimulationControler::_simEpoch</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0cd23b723663ac40655676cf83356545"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0cd23b723663ac40655676cf83356545">&#9670;&nbsp;</a></span>_simTime</h2>
 
@@ -595,7 +706,7 @@ Static Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 19 2017 14:35:35 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 04:33:13 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

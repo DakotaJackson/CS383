@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Traffic Simulator: JPLaneCollidesWithOncomingLaneException Class Reference</title>
+<title>Traffic Simulator: JPLaneOffsetException Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,37 +61,33 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="classJPLaneCollidesWithOncomingLaneException-members.html">List of all members</a>  </div>
+<a href="classJPLaneOffsetException-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">JPLaneCollidesWithOncomingLaneException Class Reference<div class="ingroups"><a class="el" href="group__EXC.html">Exceptions</a></div></div>  </div>
+<div class="title">JPLaneOffsetException Class Reference<div class="ingroups"><a class="el" href="group__EXC.html">Exceptions</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Added lane will collide with an oncomming lane.  
- <a href="classJPLaneCollidesWithOncomingLaneException.html#details">More...</a></p>
+<p>Lane offset is less than 1.  
+ <a href="classJPLaneOffsetException.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="JPIntersectionExceptions_8h_source.html">JPIntersectionExceptions.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for JPLaneCollidesWithOncomingLaneException:</div>
+Inheritance diagram for JPLaneOffsetException:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classJPLaneCollidesWithOncomingLaneException.png" usemap="#JPLaneCollidesWithOncomingLaneException_map" alt=""/>
-  <map id="JPLaneCollidesWithOncomingLaneException_map" name="JPLaneCollidesWithOncomingLaneException_map">
-<area href="classJPMalformedIntersectionException.html" title="The intersection has been configured improperly. " alt="JPMalformedIntersectionException" shape="rect" coords="0,112,264,136"/>
-<area href="classJPIntersectionException.html" title="A base class of intersection related exceptions. " alt="JPIntersectionException" shape="rect" coords="0,56,264,80"/>
+  <img src="classJPLaneOffsetException.png" usemap="#JPLaneOffsetException_map" alt=""/>
+  <map id="JPLaneOffsetException_map" name="JPLaneOffsetException_map">
+<area href="classJPMalformedIntersectionException.html" title="The intersection has been configured improperly. " alt="JPMalformedIntersectionException" shape="rect" coords="0,112,207,136"/>
+<area href="classJPIntersectionException.html" title="A base class of intersection related exceptions. " alt="JPIntersectionException" shape="rect" coords="0,56,207,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3928825657b92bf0e1dda024430a2714"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a3928825657b92bf0e1dda024430a2714">JPLaneCollidesWithOncomingLaneException</a> (int direction, int thisLane, int collidingLane)</td></tr>
-<tr class="separator:a3928825657b92bf0e1dda024430a2714"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c7754b16f1ab52e67a0666eb0bc66ac"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a7c7754b16f1ab52e67a0666eb0bc66ac">what</a> () const  throw ()</td></tr>
-<tr class="separator:a7c7754b16f1ab52e67a0666eb0bc66ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefe844000e022279dfbf32057627c1fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#aefe844000e022279dfbf32057627c1fb">getCollidingLane</a> ()</td></tr>
-<tr class="memdesc:aefe844000e022279dfbf32057627c1fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the other lane from the same directions that this lane is trying to turn into.  <a href="#aefe844000e022279dfbf32057627c1fb">More...</a><br /></td></tr>
-<tr class="separator:aefe844000e022279dfbf32057627c1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a380ae55c866007858d8123c2181c026a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLaneOffsetException.html#a380ae55c866007858d8123c2181c026a">JPLaneOffsetException</a> ()</td></tr>
+<tr class="separator:a380ae55c866007858d8123c2181c026a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed7982ba40bb5d87dcf66ce2c4ef619"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLaneOffsetException.html#a4ed7982ba40bb5d87dcf66ce2c4ef619">what</a> () const  throw ()</td></tr>
+<tr class="separator:a4ed7982ba40bb5d87dcf66ce2c4ef619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classJPMalformedIntersectionException"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classJPMalformedIntersectionException')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classJPMalformedIntersectionException.html">JPMalformedIntersectionException</a></td></tr>
 <tr class="memitem:afe789c01003617f45baf86def2f6f9ad inherit pub_methods_classJPMalformedIntersectionException"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPMalformedIntersectionException.html#afe789c01003617f45baf86def2f6f9ad">JPMalformedIntersectionException</a> ()</td></tr>
 <tr class="separator:afe789c01003617f45baf86def2f6f9ad inherit pub_methods_classJPMalformedIntersectionException"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,58 +106,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a99e3192cfc1ef189806596a8d695077b inherit pub_methods_classJPIntersectionException"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a0346f4baf6c7aa6f00db3e8cbe2781 inherit pub_methods_classJPIntersectionException"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionException.html#a8a0346f4baf6c7aa6f00db3e8cbe2781">~JPIntersectionException</a> ()  throw ()</td></tr>
 <tr class="separator:a8a0346f4baf6c7aa6f00db3e8cbe2781 inherit pub_methods_classJPIntersectionException"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:a80cc2482182813887b55abec0662a2ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a80cc2482182813887b55abec0662a2ed">_collidingLane</a></td></tr>
-<tr class="separator:a80cc2482182813887b55abec0662a2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Added lane will collide with an oncomming lane. </p>
+<div class="textblock"><p>Lane offset is less than 1. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3928825657b92bf0e1dda024430a2714"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3928825657b92bf0e1dda024430a2714">&#9670;&nbsp;</a></span>JPLaneCollidesWithOncomingLaneException()</h2>
+<a id="a380ae55c866007858d8123c2181c026a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a380ae55c866007858d8123c2181c026a">&#9670;&nbsp;</a></span>JPLaneOffsetException()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">JPLaneCollidesWithOncomingLaneException::JPLaneCollidesWithOncomingLaneException </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>thisLane</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>collidingLane</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="aefe844000e022279dfbf32057627c1fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefe844000e022279dfbf32057627c1fb">&#9670;&nbsp;</a></span>getCollidingLane()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int JPLaneCollidesWithOncomingLaneException::getCollidingLane </td>
+          <td class="memname">JPLaneOffsetException::JPLaneOffsetException </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -169,12 +125,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the other lane from the same directions that this lane is trying to turn into. </p>
-
 </div>
 </div>
-<a id="a7c7754b16f1ab52e67a0666eb0bc66ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c7754b16f1ab52e67a0666eb0bc66ac">&#9670;&nbsp;</a></span>what()</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4ed7982ba40bb5d87dcf66ce2c4ef619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed7982ba40bb5d87dcf66ce2c4ef619">&#9670;&nbsp;</a></span>what()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +138,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * JPLaneCollidesWithOncomingLaneException::what </td>
+          <td class="memname">const char * JPLaneOffsetException::what </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -206,29 +161,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a80cc2482182813887b55abec0662a2ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80cc2482182813887b55abec0662a2ed">&#9670;&nbsp;</a></span>_collidingLane</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int JPLaneCollidesWithOncomingLaneException::_collidingLane</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>inc/<a class="el" href="JPIntersectionExceptions_8h_source.html">JPIntersectionExceptions.h</a></li>
 <li>src/james/<a class="el" href="JPIntersectionExceptions_8cpp.html">JPIntersectionExceptions.cpp</a></li>
@@ -236,7 +168,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 28 2017 04:33:10 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 04:33:11 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
