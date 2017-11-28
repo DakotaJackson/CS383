@@ -8,6 +8,7 @@ var searchData=
   ['desire_5fstraight',['DESIRE_STRAIGHT',['../classSFCar.html#a4a3583828bfe8ded0ae48196599708ee',1,'SFCar::DESIRE_STRAIGHT()'],['../namespaceconsts.html#afca59ac6ead1204691002fdce7c916e5',1,'consts::DESIRE_STRAIGHT()']]],
   ['destory',['destory',['../classJPSimulationEngine.html#ad02d0d199abcab3dd8a8c258ac103f6e',1,'JPSimulationEngine']]],
   ['destroyengine',['destroyEngine',['../classSETestClass.html#a705f7da27b76f150cf3f41478260d82a',1,'SETestClass']]],
+  ['details',['details',['../classJPMissingParameterException.html#af1172285c8dde4ef9f6187cefab0f4bb',1,'JPMissingParameterException']]],
   ['directionandboundoppositecheck',['directionAndBoundOppositeCheck',['../JPIntersection__test_8cpp.html#acf9c11f15992a6124f99bff227f25614',1,'JPIntersection_test.cpp']]],
   ['directiondistributioncheck',['directionDistributionCheck',['../JPTrafficModel__test_8cpp.html#a0b0412ce96cac8cac8b55910a72d0fac',1,'JPTrafficModel_test.cpp']]],
   ['directioniterationcheck',['directionIterationCheck',['../JPIntersection__test_8cpp.html#acf562d3f89cfbd29c747d133a9706a2f',1,'JPIntersection_test.cpp']]],

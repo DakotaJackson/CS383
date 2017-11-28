@@ -21,7 +21,19 @@ namespace consts
 	const int DESIRE_RIGHT = 2;
 	const int DESIRE_LEFT = 4;
 
-	//Traffic light colors have been taken over by Dakota
+	//Traffic light colors have been taken over by Dakota. Or not? Temporarily back here.
+	/** The light is red */
+	const int RED = 1;
+	/** The light is yellow */
+	const int YELLOW = 2;
+	/** The light is green */
+	const int GREEN = 4;
+	/** The left arrow is green */
+	const int LEFT_GREEN = 8;
+	/** The left arrow is flashing yellow */
+	const int LEFT_YIELD = 16;
+	/** The left arrow is solid yellow */
+	const int LEFT_CAUTION = 32;
 
 	/**
 	 * \brief a simple portable test report function.

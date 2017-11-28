@@ -34,7 +34,7 @@ class JPIntersectionException: public std::exception
 public:
 	JPIntersectionException();
 	virtual ~JPIntersectionException() throw();
-	virtual const char* what() const throw();\
+	virtual const char* what() const throw();
 };
 
 /** \brief Configuration steps were performed out of order */

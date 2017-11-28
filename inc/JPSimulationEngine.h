@@ -16,6 +16,8 @@
 #include "../src/james/SFCar.h"
 #include "DJTrafficLightManager.h"
 #include "JPObservableSimulation.h"
+#include "../test/JPLightTestStub.h" //todo remove on merge
+#include "JPOtherException.h"
 /**
  * \defgroup ENG Simulation Engine
  * @{
@@ -68,7 +70,9 @@ public:
 	/** \brief Add the intersection to the simulation */
 	void setIntersection(JPIntersection *intersection);
 	//** \brief Add the traffic light to the simulation */
-	void setTrafficLight(DJTrafficLightManager *light);
+	//void setTrafficLight(DJTrafficLightManager *light); //todo swap on merge
+	void setTrafficLight(JPLightTestStub *light);
+
 	/** \brief Set how long the initialization phase runs */
 	void setInitTime(double secs);
 	/** \brief Set the preset interval for advancing the simulation */
@@ -96,11 +100,12 @@ private:
 	//const double reactionTime= 0.25; //probably not used
 
 	//internal simulation objects
-	JPUpdatableInterface *_graphic;
+	//JPUpdatableInterface *_graphic;
 	JPIntersection *_intersection;
 	JPIntersectionGrid *_iGrid;
 	JPTrafficModel *_trafficModel;
-	DJTrafficLightManager *_light;
+	//DJTrafficLightManager *_light; //todo swap on merge
+	JPLightTestStub *_light;
 
 	//Running Variables
 	double _time;

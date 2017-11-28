@@ -18,7 +18,7 @@ var searchData=
   ['getcollidinglane',['getCollidingLane',['../classJPTwoLanesToOneException.html#aee8903abe1678283b903f06753ffae30',1,'JPTwoLanesToOneException::getCollidingLane()'],['../classJPLaneCollidesWithOncomingLaneException.html#aefe844000e022279dfbf32057627c1fb',1,'JPLaneCollidesWithOncomingLaneException::getCollidingLane()']]],
   ['getcycletime',['getCycleTime',['../classDJTrafficLightManager.html#a4743a78d0f8d92218327b1b1925d6a34',1,'DJTrafficLightManager']]],
   ['getdesiredspeed',['getDesiredSpeed',['../classSFCar.html#ae9dced77113e21f3b0ceb5424b80926c',1,'SFCar::getDesiredSpeed()'],['../classJPCarTestStub.html#af649cdbed261419b546a3ab099e063d7',1,'JPCarTestStub::getDesiredSpeed()']]],
-  ['getdetail',['getDetail',['../classJPConfigurationOrderException.html#a4e77fa6eb2c0fbf94139ccad8fea7dab',1,'JPConfigurationOrderException']]],
+  ['getdetail',['getDetail',['../classJPConfigurationOrderException.html#a4e77fa6eb2c0fbf94139ccad8fea7dab',1,'JPConfigurationOrderException::getDetail()'],['../classJPMissingParameterException.html#a0237cc578b7e9acab49071ffb5d2eadb',1,'JPMissingParameterException::getDetail()']]],
   ['getdirection',['getDirection',['../classJPMalformedIntersectionException.html#ac06bfe5d3b4406f678cc374bd45ae5ab',1,'JPMalformedIntersectionException']]],
   ['getduration',['getDuration',['../classJPSimulationControler.html#a496d91de0d8031c9d45b4e89fae59021',1,'JPSimulationControler']]],
   ['getengine',['getEngine',['../classJPSimulationControler.html#a9d9b5ed96070b4e63d79086aa85cf5ac',1,'JPSimulationControler']]],
@@ -50,6 +50,7 @@ var searchData=
   ['gettargetlane',['getTargetLane',['../classJPTwoLanesToOneException.html#aba221ed72ca17ee6901d4c2586ada18a',1,'JPTwoLanesToOneException']]],
   ['gettersandsetterstest',['gettersAndSettersTest',['../JPIntersection__test_8cpp.html#aa2e1a10c2c2ec1d10341397d473e8880',1,'JPIntersection_test.cpp']]],
   ['gettestcase',['getTestCase',['../classJPLightTestStub.html#a64f60e7ece947431dd8f26bd79c31d36',1,'JPLightTestStub']]],
+  ['getthestate',['getTheState',['../classJPLightTestStub.html#a5a51bab7f457df73fbef7a21201a7c7b',1,'JPLightTestStub']]],
   ['gettheta',['getTheta',['../classSFCar.html#abbe7aac50f5becfe21b59ae631bd24a0',1,'SFCar']]],
   ['gettime',['getTime',['../classJPSimulationControler.html#af4b78e8f1f4577c97c5c07f342181101',1,'JPSimulationControler']]],
   ['gettimeinsim',['getTimeInSim',['../classSFCar.html#a22d0e08071b7c221f91ead347a1b2324',1,'SFCar']]],
@@ -62,5 +63,8 @@ var searchData=
   ['getwaittime',['getWaitTime',['../classSFCar.html#adcda6a46ae6cd92d1bb737e8c6440395',1,'SFCar']]],
   ['getx',['getX',['../classSFCar.html#ad67efc460b0b734e3a920d42ddbcdfbe',1,'SFCar']]],
   ['gety',['getY',['../classSFCar.html#ab664078a870a146f3bb35bd1d2963061',1,'SFCar']]],
-  ['gizmo',['Gizmo',['../classGizmo.html',1,'Gizmo'],['../classGizmo.html#a7da1a36838e575ca0602f2ffbc2df0ce',1,'Gizmo::Gizmo()']]]
+  ['gizmo',['Gizmo',['../classGizmo.html',1,'Gizmo'],['../classGizmo.html#a7da1a36838e575ca0602f2ffbc2df0ce',1,'Gizmo::Gizmo()']]],
+  ['green',['GREEN',['../namespaceconsts.html#a11f9e84139864d91e8e577b812a183cf',1,'consts']]],
+  ['green_5few',['GREEN_EW',['../classJPLightTestStub.html#a14e301e59312f28c36097145f2815722abb34c28387912ecd4c0565e794fd49dd',1,'JPLightTestStub']]],
+  ['green_5fns',['GREEN_NS',['../classJPLightTestStub.html#a14e301e59312f28c36097145f2815722a7f8fbd11d914e8e4b4aafcc6f6501df2',1,'JPLightTestStub']]]
 ];

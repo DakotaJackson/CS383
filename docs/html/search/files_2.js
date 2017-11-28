@@ -24,6 +24,8 @@ var searchData=
   ['jpobservablesimulation_2ecpp',['JPObservableSimulation.cpp',['../JPObservableSimulation_8cpp.html',1,'']]],
   ['jpobservablesimulation_2eh',['JPObservableSimulation.h',['../JPObservableSimulation_8h.html',1,'']]],
   ['jpobservablesimulation_5ftest_2ecpp',['JPObservableSimulation_test.cpp',['../JPObservableSimulation__test_8cpp.html',1,'']]],
+  ['jpotherexception_2ecpp',['JPOtherException.cpp',['../JPOtherException_8cpp.html',1,'']]],
+  ['jpotherexception_2eh',['JPOtherException.h',['../JPOtherException_8h.html',1,'']]],
   ['jpsimulationcontroler_2ecpp',['JPSimulationControler.cpp',['../JPSimulationControler_8cpp.html',1,'']]],
   ['jpsimulationcontroler_2eh',['JPSimulationControler.h',['../JPSimulationControler_8h.html',1,'']]],
   ['jpsimulationcontroler_5ftest_2ecpp',['JPSimulationControler_test.cpp',['../JPSimulationControler__test_8cpp.html',1,'']]],

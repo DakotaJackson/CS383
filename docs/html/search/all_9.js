@@ -6,6 +6,7 @@ var searchData=
   ['initcars',['initCars',['../classJJDisplayOutput.html#aa3416256d39c51444283364761828f9a',1,'JJDisplayOutput']]],
   ['initializeroad',['initializeRoad',['../classJJDisplayOutput.html#a43ec8af70975b4262b64f87185f57711',1,'JJDisplayOutput']]],
   ['initstatetable',['initStateTable',['../classDJTrafficLightManager.html#a64cff78fe5e4bd45420b609b9140f75a',1,'DJTrafficLightManager']]],
+  ['intersection',['INTERSECTION',['../classJPMissingParameterException.html#af1172285c8dde4ef9f6187cefab0f4bba7e715cf0868520964ddd749199433920',1,'JPMissingParameterException']]],
   ['intersectiondeceleration',['intersectionDeceleration',['../classJPSimulationEngine.html#a5d17b49aa08b70449deb97dc36580cfa',1,'JPSimulationEngine']]],
   ['isempty',['isEmpty',['../classJPLane.html#a21f2541f4de086b18972c9ea5906c288',1,'JPLane::isEmpty()'],['../classLinkedList.html#a0001a22886e83acd372f089b34797aa2',1,'LinkedList::isEmpty()']]],
   ['ismultithread',['isMultiThread',['../classJPSimulationControler.html#a0727899f6883074676f4f44cebd94371',1,'JPSimulationControler']]],

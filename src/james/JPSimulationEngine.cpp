@@ -22,11 +22,10 @@ JPSimulationEngine::JPSimulationEngine()
 		_laneCounts[i] = 0;
 
 	//set null pointers to the needed parameters
-	_graphic = 0;
-	_intersection = 0;
+	_intersection = NULL;
 	_iGrid = 0;
-	_trafficModel = 0;
-	_light = 0;
+	_trafficModel = NULL;
+	_light = NULL;
 }
 
 JPSimulationEngine::~JPSimulationEngine()
@@ -81,9 +80,10 @@ void JPSimulationEngine::end()
 	//todo delete cars from the simulation and pushRemUppdate
 }
 
+void JPSimulationEngine::setTrafficLight(JPLightTestStub* light){ _light = light; }//todo swap on merge
+//void JPSimulationEngine::setTrafficLight(DJTrafficLightManager* light){ _light = light; }
 void JPSimulationEngine::setTrafficModel(JPTrafficModel* model){ _trafficModel = model; }
 void JPSimulationEngine::setIntersection(JPIntersection* intersection){ _intersection = intersection; }
-void JPSimulationEngine::setTrafficLight(DJTrafficLightManager* light){ _light = light; }
 void JPSimulationEngine::setStepInterval(double secs){ _stepTime = secs; }
 void JPSimulationEngine::setInitTime(double secs) { _initTime = secs; }
 
@@ -116,10 +116,18 @@ void JPSimulationEngine::setStepTime(double stepTime) { _stepTime = stepTime; }
 /** \copydetails JPSimulationEngine::setStepTime() */
 double JPSimulationEngine::getStepTime() const { return _stepTime; }
 
+/**
+ * \throw JPMissingParameterException if either the intersection, traffic light, traffic model are not set.
+ */
 void JPSimulationEngine::checkPrereqs()
 {
-	//todo check that the intersection is finalized
-	//todo check that all of the inputs are set.
+	if(NULL == _intersection )
+		throw JPMissingParameterException(JPMissingParameterException::details::INTERSECTION);
+	if(NULL == _light )
+		throw JPMissingParameterException(JPMissingParameterException::details::TRAFFIC_LIGHT);
+	if(NULL == _trafficModel )
+		throw JPMissingParameterException(JPMissingParameterException::details::TRAFFIC_MODEL);
+	_intersection->finalize();
 	//todo setup _iGrid
 }
 void JPSimulationEngine::init()

@@ -26,6 +26,7 @@ int redLightStopTest();
 class SETestClass
 {
 private:
+	JPLightTestStub *light;
 	void destroyEngine(JPSimulationEngine *engine)
 	{
 		engine->destory();
@@ -56,6 +57,8 @@ private:
 			inter->addLane(dir,0,JPLane::RIGHT + JPLane::STRAIGHT,1,0);
 			inter->addLane(dir,0,JPLane::LEFT,1,0);
 		}
+
+		return inter;
 	}
 
 	JPSimulationEngine *getType1Setup()
@@ -70,18 +73,76 @@ private:
 		return eng;
 	}
 
+	/**
+	 * \brief Test the prerequisite check for starting the simulation.
+	 */
 	int prereqTest()
 	{
 		//get all the parts
 		JPTrafficModel *tm = getNullTrafficModel();
 		JPIntersection *inter = getType1Intersection();
-		//DJTrafficLightManager *tl = new JPLightTestStub();
-		JPLightTestStub *tl = new JPLightTestStub();
+		//DJTrafficLightManager *light = new JPLightTestStub();
+		JPSimulationEngine *eng;
+		light = new JPLightTestStub();
 
-		printf("Here0\n");
-		JPSimulationEngine *eng = JPSimulationEngine::getInstance();
+		//without traffic model
+		eng = JPSimulationEngine::getInstance();
+		eng->setIntersection(inter);
+		eng->setTrafficLight(light);
+		try{
+			eng->init(); //should throw exception
+			return 1;
+		}
+		catch(JPMissingParameterException &e)
+		{
+			eng->destory();
+		}
 
-		return -1;
+		//without traffic light
+		eng = JPSimulationEngine::getInstance();
+		eng->setIntersection(inter);
+		//eng->setTrafficLight(tl);
+		eng->setTrafficModel(tm);
+		try{
+			eng->init(); //should throw exception
+			return 2;
+		}
+		catch(JPMissingParameterException &e)
+		{
+			eng->destory();
+		}
+
+		//without intersection
+		eng = JPSimulationEngine::getInstance();
+		//eng->setIntersection(inter);
+		eng->setTrafficLight(light);
+		eng->setTrafficModel(tm);
+		try{
+			eng->init(); //should throw exception
+			return 3;
+		}
+		catch(JPMissingParameterException &e)
+		{
+			eng->destory();
+		}
+
+		//with all the correct parameters
+		eng = JPSimulationEngine::getInstance();
+		eng->setIntersection(inter);
+		eng->setTrafficLight(light);
+		eng->setTrafficModel(tm);
+		try{
+			eng->init(); //should throw exception
+			eng->destory();
+			return 0;
+		}
+		catch(JPMissingParameterException &e)
+		{
+			eng->destory();
+			return 4;
+		}
+
+		return 0;
 	}
 
 	int straightGreenTest()
@@ -91,7 +152,7 @@ private:
 
 	int rightTurnRedTest()
 	{
-		JPSimulationEngine *eng = JPSimulationEngine::getInstance();
+		//JPSimulationEngine *eng = JPSimulationEngine::getInstance();
 		return -1;
 	}
 
@@ -108,9 +169,7 @@ private:
 
 	int matchPaceTest()
 	{
-		printf("Here1\n");
-		return -1;
-		JPSimulationEngine *eng = getType1Setup();
+		//JPSimulationEngine *eng = getType1Setup();
 
 		return -1;
 	}
@@ -121,7 +180,11 @@ private:
 	}
 
 public:
-	SETestClass(){}
+	SETestClass()
+	{
+		light = NULL;
+	}
+
 	int run()
 	{
 		int ret;

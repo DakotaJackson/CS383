@@ -4,6 +4,7 @@ var searchData=
   ['ratelessthanzerotest',['rateLessThanZeroTest',['../JPTrafficModel__test_8cpp.html#a2d4b78cc190fa963c819fe21c7431364',1,'JPTrafficModel_test.cpp']]],
   ['recoverfrombadstate',['recoverFromBadState',['../classDJTrafficLightManager.html#ad1ca10a0a92f5c492e0003ea148291c4',1,'DJTrafficLightManager']]],
   ['recoveryfrominvalidstatecheck',['recoveryFromInvalidStateCheck',['../DJTrafficLightManager__test_8cpp.html#a2ef9d3381e2bb3be77757f63a647e808',1,'DJTrafficLightManager_test.cpp']]],
+  ['red',['RED',['../namespaceconsts.html#a79ca838cde02d7bdbcab3bad1859fdb6',1,'consts']]],
   ['redcar',['redCar',['../classJJDisplayOutput.html#a63adb4d6a033edd3511f7ef81eec6499',1,'JJDisplayOutput']]],
   ['redlightstoptest',['redLightStopTest',['../classSETestClass.html#a0a2ef96977d0318658ddb93671dc4474',1,'SETestClass']]],
   ['remove',['remove',['../classLinkedList.html#a6c4973ae9956ddb037a9093cffa2adb1',1,'LinkedList']]],

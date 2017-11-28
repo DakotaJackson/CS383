@@ -22,11 +22,14 @@ class JPLightTestStub
 {
 
 public:
+	enum Cases {GREEN_EW, GREEN_NS};
 	JPLightTestStub();
 	JPLightTestStub(int testCase);
 	virtual ~JPLightTestStub();
 	int getTestCase() const;
 	void setTestCase(int testCase);
+	/** a placeholder function to ease catching all changes when integrating */
+	int getTheState(int direction, int lane, double time);
 
 private:
 	int _testCase;

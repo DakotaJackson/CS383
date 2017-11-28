@@ -14,6 +14,7 @@ var searchData=
   ['jplaneoffsetexception',['JPLaneOffsetException',['../classJPLaneOffsetException.html',1,'']]],
   ['jplightteststub',['JPLightTestStub',['../classJPLightTestStub.html',1,'']]],
   ['jpmalformedintersectionexception',['JPMalformedIntersectionException',['../classJPMalformedIntersectionException.html',1,'']]],
+  ['jpmissingparameterexception',['JPMissingParameterException',['../classJPMissingParameterException.html',1,'']]],
   ['jpobservablesimulation',['JPObservableSimulation',['../classJPObservableSimulation.html',1,'']]],
   ['jpprobabilitylessthanzeroexception',['JPProbabilityLessThanZeroException',['../classJPProbabilityLessThanZeroException.html',1,'']]],
   ['jpratelessthanzeroexception',['JPRateLessThanZeroException',['../classJPRateLessThanZeroException.html',1,'']]],

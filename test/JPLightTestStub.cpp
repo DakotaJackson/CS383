@@ -6,6 +6,8 @@
  */
 
 #include "JPLightTestStub.h"
+#include "../inc/JPConstants.h"
+#include "../inc/JPIntersection.h"
 
 JPLightTestStub::JPLightTestStub()
 {
@@ -23,4 +25,26 @@ JPLightTestStub::JPLightTestStub(int testCase)
 }
 
 int JPLightTestStub::getTestCase() const {	return _testCase; }
-void JPLightTestStub::setTestCase(int testCase) { _testCase = testCase; }
+void JPLightTestStub::setTestCase(int testCase)
+{
+	_testCase = testCase;
+}
+
+int JPLightTestStub::getTheState(int direction, int lane, double time)
+{
+	switch(_testCase)
+	{
+		case GREEN_NS:
+			if(direction %2 == JPIntersection::NORTH % 2)
+				return consts::GREEN;
+			else
+				return consts::RED;
+		case GREEN_EW:
+			if(direction %2 == JPIntersection::EAST % 2)
+				return consts::GREEN;
+			else
+				return consts::RED;
+	}
+
+	return 0;
+}

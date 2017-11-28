@@ -23,7 +23,7 @@ var searchData=
   ['settrackedexitlengths',['setTrackedExitLengths',['../classJPIntersection.html#ade327b46cf50f9a2345d3da0a9b76e7a',1,'JPIntersection']]],
   ['settrackedlanelength',['setTrackedLaneLength',['../classJPIntersection.html#a54f6b30c1fc254ee2a2e3c7f4ddba77b',1,'JPIntersection']]],
   ['settrackedlanelengths',['setTrackedLaneLengths',['../classJPIntersection.html#ac77eeba4a1e1947edb6f8c6af96387f7',1,'JPIntersection']]],
-  ['settrafficlight',['setTrafficLight',['../classJPSimulationEngine.html#a596271d4ace93ad663c897ecdc4b6a6a',1,'JPSimulationEngine']]],
+  ['settrafficlight',['setTrafficLight',['../classJPSimulationEngine.html#ab0333b3f19f9d07d3fdcb4beb69245ff',1,'JPSimulationEngine']]],
   ['settrafficmodel',['setTrafficModel',['../classJPSimulationEngine.html#a1bb7c6daa7feb57b98a426085cf9e1be',1,'JPSimulationEngine']]],
   ['settrafficrate',['setTrafficRate',['../classJPTrafficModel.html#ad751a9a39ba60c178a15ded3908d4848',1,'JPTrafficModel']]],
   ['setturndirection',['setTurnDirection',['../classSFCar.html#a2a49850d4a13d0aebf0351fb041e1610',1,'SFCar']]],
