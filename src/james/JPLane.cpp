@@ -102,5 +102,6 @@ int JPLane::getSize() const
 	return _list->getSize();
 }
 
-void JPLane::addLast(SFCar* car) {
-}
+int JPLane::getLeftTarget() const { return _leftTarget; }
+int JPLane::getRightTarget() const { return _rightTarget; }
+int JPLane::getTurnOptions() const {return _turnOptions; }

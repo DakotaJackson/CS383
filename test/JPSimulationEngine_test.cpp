@@ -10,6 +10,8 @@
 #include "JPCarTestStub.h"
 #include "../inc/JPUpdatableInterface.h"
 #include <stdio.h>
+#include <string.h>
+#include <windows.h> /* sleep for demo */
 
 
 /* now they are member functions
@@ -32,10 +34,13 @@ private:
 	JPLightTestStub *light; //Stays a stub
 	JPTrafficModel *model;
 	JPIntersection *inter;
-	int carCount[4][4];
+	int _carCount[4][4];
 	int test;
 	int position;
-	int testResult;
+	int _testResult;
+	int _lane;
+	int _direction;
+
 	enum tests {NULL_TEST, MAKE_CAR, ADD_CAR};
 
 	void destroyEngine(JPSimulationEngine *engine)
@@ -63,46 +68,142 @@ private:
 				x, y, theta, trn, speed, insim, wait);
 	}
 
-	int makeCarVilidation(SFCar *car)
+	void makeCarValidation(SFCar *car, double x[4][3], double y[4][3], double theta[4])
 	{
-		printCar(car);
-		//X, Y, Theta,
+		//verify car is as expected.
+		int dir = _direction;
+		int ln = _lane;
+
+		//printf("Dir %d, Lane: %d\n", dir, ln);
+		//printf("Exp X: %f\tY: %f\tTheta: %f\n", x[dir][ln], y[dir][ln], theta[dir]);
+		//theta
+		if(! consts::deq(theta[dir], car->getTheta()) )
+			_testResult += 1;
+
+		//x
+		if(! consts::deq(x[dir][ln], car->getX()) )
+			_testResult += 2;
+
+		//y
+		if(! consts::deq(x[dir][ln], car->getX()) )
+			_testResult += 4;
+
+		//times
+		if( (! consts::deq(1, 1 + car->getTimeInSim())) ||
+				(! consts::deq(1, 1 + car->getWaitTime())) )
+		{
+			_testResult += 8;
+		}
 	}
+
+	void makeCarValidation(SFCar *car)
+	{
+		//printCar(car);
+		//X, Y, Theta,
+		double theta[] = {180,270,0,90};
+
+		//x and y for intersection 1 (last col not used for this intersection)
+		double y1[4][3] =
+		{{300,300, 0},
+		{10, 0, 0},
+		{-300,-300,0},
+		{-10, 0, 0}};
+
+		double x1[4][3] =
+		{{-10,0, 0},
+		{300,300,0},
+		{10, 0, 0},
+		{-300,-300,0}};
+
+		//intersection 2
+		double y2[4][3] =
+		{{1320,1320, 0},
+		{15, 5,0},
+		{-1320,-1320,0},
+		{-15, -5,0}};
+
+		double x2[4][3] =
+		{{-15, -5, 0},
+		{1320,1320,0},
+		{15, 5, 0},
+		{-1320,-1320,0}};
+
+		//intersection 3 (offset 3)
+		double y3[4][3] =
+		{{400, 400, 400},
+		{25, 15, 5},
+		{-500,-500,-500},
+		{-25, -15, -5}};
+
+		double x3[4][3] =
+		{{-25,-15, -5},
+		{450,450,450},
+		{25,15,5},
+		{-550,-550,-550}};
+
+		//pick the correct solution set
+		switch(position)
+		{
+			case 1:
+				makeCarValidation(car, x1, y1, theta);
+				break;
+			case 2:
+				makeCarValidation(car, x2, y2, theta);
+				break;
+			case 3:
+				makeCarValidation(car, x3, y3, theta);
+				break;
+		}
+
+	}
+
+	/**
+	 * \brief Track where cars were added for testing of add car function.
+	 */
+	void addCarTracking(SFCar *car)
+	{
+		int dir = 0; //todo get dir from theta
+		double theta = car->getTheta();
+
+		if(consts::deq(theta,0))
+			dir = JPIntersection::NORTHBOUND;
+		if(consts::deq(theta,90))
+			dir = JPIntersection::EASTBOUND;
+		if(consts::deq(theta,180))
+			dir = JPIntersection::SOUTHBOUND;
+		if(consts::deq(theta,270))
+			dir = JPIntersection::WESTBOUND;
+
+		_carCount[dir][0]++;
+		//double time = JPSimulationEngine::getInstance()->getTime();
+		//printf("%f::[%d]\t%d\n", time, dir, _carCount[dir][0]);
+
+		switch(car->getTurnDirection())
+		{
+			case SFCar::DESIRE_LEFT: _carCount[dir][1]++; break;
+			case SFCar::DESIRE_RIGHT: _carCount[dir][2]++; break;
+			case SFCar::DESIRE_STRAIGHT: _carCount[dir][3]++; break;
+		}
+
+	}
+
+	/**
+	 * \brief Observer function. Called when a car is added to the sim.
+	 * Dispatches to the appropriate test handler based on what test is in progress.
+	 */
 	void updateAddObject(void *object, int objType)
 	{
 		SFCar *car = (SFCar*) object;
 
 		if(MAKE_CAR == test)
-			makeCarVilidation(car);
+			makeCarValidation(car);
 		else if(ADD_CAR == test)
-		{
-			int dir = 0; //todo get dir from theta
-			double theta = car->getTheta();
-
-			if(consts::deq(theta,0))
-				dir = JPIntersection::NORTHBOUND;
-			if(consts::deq(theta,90))
-				dir = JPIntersection::EASTBOUND;
-			if(consts::deq(theta,180))
-				dir = JPIntersection::SOUTHBOUND;
-			if(consts::deq(theta,270))
-				dir = JPIntersection::WESTBOUND;
-
-			carCount[dir][0]++;
-
-			switch(car->getTurnDirection())
-			{
-				case SFCar::DESIRE_LEFT: carCount[dir][1]++; break;
-				case SFCar::DESIRE_RIGHT: carCount[dir][2]++; break;
-				case SFCar::DESIRE_STRAIGHT: carCount[dir][3]++; break;
-			}
-		}
+			addCarTracking(car);
 
 	}
 
 	JPTrafficModel *getNullTrafficModel()
 	{
-		printf("Here:TM\n");
 		model = new JPTrafficModel();
 		for(int dir = 0; dir < 4; dir++)
 		{
@@ -112,29 +213,41 @@ private:
 		return model;
 	}
 
+	JPIntersection *getFreshIntersection()
+	{
+		if(NULL != inter)
+			delete inter;
+
+		inter = new JPIntersection();
+		return inter;
+	}
+
 	/**
 	 * \brief Get an intersection with two lanes in each direction: 1SR, 1L
 	 */
 	JPIntersection *getType1Intersection()
 	{
-		printf("HereT1I\n");
-		inter = new JPIntersection();
+		//printf("HereT1I\n");
+		getFreshIntersection();
 		int dir;
 		for(dir = 0; dir < 4; dir++)
+		{
 			inter->setLaneOffset(dir,1.5);
+			inter->setTrackedLaneLength(dir, 300);
+		}
 
 		for(dir = 0; dir < 4; dir++)
 		{
 			inter->addLane(dir,0,JPLane::RIGHT + JPLane::STRAIGHT,1,0);
-			inter->addLane(dir,0,JPLane::LEFT,1,0);
+			inter->addLane(dir,1,JPLane::LEFT,1,0);
 		}
 
 		return inter;
 	}
 	JPIntersection *getType2Intersection()
 	{
-		printf("HereT1I\n");
-		inter = new JPIntersection();
+		//printf("HereT2I\n");
+		getFreshIntersection();
 		int dir;
 		for(dir = 0; dir < 4; dir++)
 			inter->setLaneOffset(dir,2);
@@ -142,7 +255,7 @@ private:
 		for(dir = 0; dir < 4; dir++)
 		{
 			inter->addLane(dir,0,JPLane::RIGHT + JPLane::STRAIGHT,1,0);
-			inter->addLane(dir,0,JPLane::LEFT,1,0);
+			inter->addLane(dir,1,JPLane::LEFT,1,0);
 		}
 
 		return inter;
@@ -150,20 +263,69 @@ private:
 
 	JPIntersection *getType3Intersection()
 	{
-		printf("HereT1I\n");
-		inter = new JPIntersection();
+		//printf("HereT3I\n");
+		getFreshIntersection();
 		int dir;
 		for(dir = 0; dir < 4; dir++)
 			inter->setLaneOffset(dir,3);
 
+		inter->setTrackedLaneLength(JPIntersection::NORTH, 400);
+		inter->setTrackedLaneLength(JPIntersection::EAST, 450);
+		inter->setTrackedLaneLength(JPIntersection::SOUTH, 500);
+		inter->setTrackedLaneLength(JPIntersection::WEST, 550);
+
 		for(dir = 0; dir < 4; dir++)
 		{
 			inter->addLane(dir,0,JPLane::RIGHT + JPLane::STRAIGHT,1,0);
-			inter->addLane(dir,0,JPLane::STRAIGHT,1,0);
-			inter->addLane(dir,0,JPLane::LEFT,2,0);
+			inter->addLane(dir,1,JPLane::STRAIGHT,1,0);
+			inter->addLane(dir,2,JPLane::LEFT,2,0);
 		}
 
 		return inter;
+	}
+
+	/**
+	 * A setup of lanes with various turnOptions to make sure cars get added to the correct lanes
+	 */
+	JPIntersection *getType4Intersection()
+	{
+		getFreshIntersection();
+
+		inter->setLaneOffsets(4,4,3,3);
+
+		//NORTH 4 lanes 0R, 1,2S, 3L
+		inter->addLane(JPIntersection::NORTH,0,JPLane::RIGHT,1,0);
+		inter->addLane(JPIntersection::NORTH,1,JPLane::STRAIGHT,0,0);
+		inter->addLane(JPIntersection::NORTH,2,JPLane::STRAIGHT,0,0);
+		inter->addLane(JPIntersection::NORTH,3,JPLane::LEFT,2,0);
+
+		//SOUTH two lefs, 1 Straight, 1 straight right
+		inter->addLane(JPIntersection::SOUTH,0,JPLane::RIGHT + JPLane::STRAIGHT,1,0);
+		inter->addLane(JPIntersection::SOUTH,1,JPLane::STRAIGHT,1,0);
+		inter->addLane(JPIntersection::SOUTH,2,JPLane::LEFT,1,0);
+		inter->addLane(JPIntersection::SOUTH,3,JPLane::LEFT,2,0);
+
+		//EAST a left straight, a straight, and a right
+		inter->addLane(JPIntersection::EAST,0,JPLane::RIGHT,1,0);
+		inter->addLane(JPIntersection::EAST,1,JPLane::STRAIGHT,0,0);
+		inter->addLane(JPIntersection::EAST,2,JPLane::LEFT + JPLane::STRAIGHT,2,0);
+
+		//WEST1 1 left, 1 straight right straight, 1 right
+		inter->addLane(JPIntersection::WEST,0,JPLane::RIGHT,1,0);
+		inter->addLane(JPIntersection::WEST,1,JPLane::STRAIGHT+JPLane::RIGHT,0,0);
+		inter->addLane(JPIntersection::WEST,2,JPLane::LEFT,2,0);
+		return inter;
+	}
+
+	/**
+	 * \brief Obtain a new blank unconfigured simulation engine.
+	 */
+	JPSimulationEngine *getFreshSim()
+	{
+		JPSimulationEngine *eng = JPSimulationEngine::getInstance();
+		eng->destory(); //cleanup after any failed test
+		eng = JPSimulationEngine::getInstance();
+		return eng;
 	}
 
 	JPSimulationEngine *getSetup(int iType)
@@ -174,11 +336,13 @@ private:
 			case 1: getType1Intersection(); break;
 			case 2: getType2Intersection(); break;
 			case 3: getType3Intersection(); break;
+			case 4: getType4Intersection(); break;
 		}
 
-		JPSimulationEngine *eng = JPSimulationEngine::getInstance();
+		JPSimulationEngine *eng = getFreshSim();
 		eng->setInitTime(0);
 		eng->setIntersection(inter);
+		light = new JPLightTestStub();
 		eng->setTrafficLight(light);
 		eng->setTrafficModel(model);
 		//eng->init();
@@ -291,6 +455,127 @@ private:
 		return -1;
 	}
 
+	int determineLaneTest()
+	{
+		JPSimulationEngine *eng;
+		//model->setProbability(JPIntersection::NORTHBOUND, 100, 0, 0);
+		//model->setProbability(JPIntersection::SOUTHBOUND, 0, 100, 0);
+		//east and west are straight
+
+		eng = getSetup(4);
+		//eng->subscribeObjectAdded(this);
+		eng->init();
+
+		//add 1000 cars in each direction
+		//make sure each valid option appears and no invalid options appear
+		int runs = 1000; //00;
+		int i, desire, ln;
+		int valids[50];
+		for(i = 0; i < runs; i++)
+		{
+			switch(i%3)
+			{
+				case 0: desire = SFCar::DESIRE_LEFT; break;
+				case 1: desire = SFCar::DESIRE_STRAIGHT; break;
+				case 2: desire = SFCar::DESIRE_RIGHT; break;
+			}
+
+			SFCar car;
+			car.setTurnDirection(desire);
+
+			//NORTH 4 lanes 0R, 1,2S, 3L
+			ln = eng->determineLane(&car, JPIntersection::NORTH);
+			if(SFCar::DESIRE_LEFT == desire) //lane must be 3
+				if(3 == ln )
+					valids[0]++;
+				else
+					return 1;
+			else if (SFCar::DESIRE_RIGHT == desire) //lane must be 0
+				if(0 == ln )
+					valids[1]++;
+				else
+					return 2;
+			else //lane must be 1 or 2
+				if(1 == ln )
+					valids[2]++;
+				else if(2 == ln )
+					valids[3]++;
+				else
+					return 3;
+
+			//SOUTH two lefs, 1 Straight, 1 straight right
+			ln = eng->determineLane(&car, JPIntersection::SOUTH);
+			if (SFCar::DESIRE_RIGHT == desire) //lane must be 0
+				if(0 == ln )
+					valids[4]++;
+				else
+					return 4;
+			else if(SFCar::DESIRE_STRAIGHT == desire) //lane must be 0 or 1
+				if(0 == ln )
+					valids[5]++;
+				else if(1 == ln )
+					valids[6]++;
+				else
+					return 5;
+			else //lane must be 2 or 3
+				if(2 == ln )
+					valids[7]++;
+				else if(3 == ln )
+					valids[8]++;
+				else
+					return 6;
+
+			//EAST a left straight, a straight, and a right
+			ln = eng->determineLane(&car, JPIntersection::EAST);
+			if (SFCar::DESIRE_RIGHT == desire) //lane must be 0
+				if(0 == ln )
+					valids[9]++;
+				else
+					return 7;
+			else if(SFCar::DESIRE_STRAIGHT == desire) //lane must be 1 or 2
+				if(1 == ln )
+					valids[10]++;
+				else if(2 == ln )
+					valids[11]++;
+				else
+					return 8;
+			else //left must be 2
+				if(2 == ln )
+					valids[12]++;
+				else
+					return 9;
+
+			//WEST1 1 left, 1 straight right straight, 1 right
+			ln = eng->determineLane(&car, JPIntersection::WEST);
+			if (SFCar::DESIRE_RIGHT == desire) //lane must be 0 or 1
+				if(0 == ln )
+					valids[13]++;
+				else if(1 == ln )
+					valids[14]++;
+				else
+					return 10;
+			else if(SFCar::DESIRE_STRAIGHT == desire) //lane must be 1
+				if(1 == ln )
+					valids[15]++;
+				else
+					return 11;
+			else //left must be 2
+				if(2 == ln )
+					valids[16]++;
+				else
+					return 12;
+		}
+
+
+		//now make sure all of excpected valid locations received cars
+		for(i = 0; i <= 16; i++)
+			if( ! valids[i])
+				return 100+i; //100 distinguishes error codes from above
+
+		eng->destory();
+		return 0;
+	}
+
 	//add cars with two different layouts, verify they are correctly positioned
 	int makeCarSubTest(int type, int numLanes)
 	{
@@ -298,16 +583,24 @@ private:
 		model->setProbability(JPIntersection::NORTHBOUND, 100, 0, 0);
 		model->setProbability(JPIntersection::SOUTHBOUND, 0, 100, 0);
 		//east and west are straight
-
-		eng = getSetup(1);
+		eng = getSetup(type);
 		eng->subscribeObjectAdded(this);
-		int dir, ln;
-		for(dir = 0; dir < 4; dir++)
-			for(ln = 0; ln < 4; ln++)
+		eng->init();
+		int dir, ncars;
+		int nruns = 10;
+		position++;
+		for(ncars = 0; ncars < nruns; ncars++)
+			for(dir = 0; dir < 4; dir++)
 			{
-				eng->makeCar(dir, ln);
-				position++;
+				_testResult = 0;
+				_direction = dir;
+				eng->makeCar(dir,_lane);
+
+				//if there were any errors exit
+				if(_testResult)
+					return _testResult;
 			}
+
 
 		eng->destory();
 		return -1;
@@ -317,16 +610,22 @@ private:
 	{
 		test = MAKE_CAR;
 		position = 0;
-		makeCarSubTest(1, 2);
-		makeCarSubTest(2, 2);
-		makeCarSubTest(3, 2);
+		_testResult = 0;
+		try{
+			makeCarSubTest(1, 2);
+			makeCarSubTest(2, 2);
+			makeCarSubTest(3, 2);
+		}catch(exception &e) { e.what(); }
 
-		return -1;
+		return _testResult;
 	}
-/*
- * 1) AddCar can't be lane specific must be direction specific
- * 2) change speed limits for makeCar case2
- */
+
+	void initCarCount()
+	{
+		for(int i = 0; i < 4; i ++)
+			for(int j = 0; j < 4; j ++)
+				_carCount[i][j] = 0;
+	}
 
 	//three pass of equal with different steps verify correct number is added
 	int addCarTest()
@@ -340,40 +639,174 @@ private:
 		int dir;
 		for(dir = 0; dir < 4; dir++)
 			model->setProbability(dir, 25, 40, 35);
-		//model->setTrafficRate(JPIntersection::NORTHBOUND, 720); //5 sec pe
-		//model->setTrafficRate(JPIntersection::SOUTHBOUND, 360); //10 sec per
-		//model->setTrafficRate(JPIntersection::EASTBOUND, 275); //13.9 sec per
-		//model->setTrafficRate(JPIntersection::WESTBOUND, 200); //18 sec per
+		model->setTrafficRate(JPIntersection::NORTH, 720); //5 sec pe
+		model->setTrafficRate(JPIntersection::EAST, 360); //10 sec per
+		model->setTrafficRate(JPIntersection::SOUTH, 275); //13.9 sec per
+		model->setTrafficRate(JPIntersection::WEST, 200); //18 sec per
 
 		//re-init to change the start times
+		eng->init();
 
-		eng->destory();
-		return -1;
-	}
+		//run 1 hr worth of sim in 0.1 sec steps
+		int i, steps = 36000;
+		initCarCount();
+		for(i = 0; i < steps; i++)
+			eng->step(0.1);
 
-	int getNextCarTest()
-	{
-		return -1;
-	}
+		//verify
+		int target[4][4] =
+			{{720, 180, 288, 252},
+			{360, 90, 144, 126},
+			{275, 69, 110, 96},
+			{200, 50, 80, 70}
+		};
 
-public:
-	SETestClass()
-	{
-		light = NULL;
-		model = NULL;
-		inter = NULL;
-
-		test = NULL_TEST;
-		position = 0;
-
-		int dir, j;
 		for(dir = 0; dir < 4; dir++)
 		{
-			for(j = 0; j < 4; j++)
-				carCount[dir][j] = 0;
+			//8% error acceptable for totals
+			if(consts::percentError(target[dir][0], _carCount[dir][0]) > 10)
+				return 1;
+
+			//15% error acceptable for individual directions
+			for(i = 1; i < 4; i++)
+				if(consts::percentError(target[dir][i], _carCount[dir][i]) > 20)
+					return 1+i;
 		}
+
+		eng->destory();
+		return 0;
 	}
 
+	int getNextCarCheck(JPSimulationEngine *eng, int dir, double leng, double x, double y, double pos)
+	{
+		JPCarTestStub *stub;
+		stub = new JPCarTestStub(leng, x, y, 25, -5);
+
+		JPLane *lane = inter->getLane(dir, 0);
+		lane->addCarAtEnd(stub);
+		lane->resetToFirstCar();
+		double nleng, npos, nspeed, ndspeed;
+		double dspeed = inter->getSpeedLimitsInFPS(dir) - 5 *5280.0/3600;
+		SFCar *car = eng->getNextCar(lane, dir, nleng, npos, nspeed, ndspeed);
+		stub = (JPCarTestStub*)car;
+
+		//begin checks
+		if(! consts::deq(nleng,leng) )
+			return 1;
+		if(! consts::deq(npos,pos) )
+			return 2;
+		if(! consts::deq(nspeed,25) )
+			return 3;
+		if(! consts::deq(ndspeed, dspeed) )
+			return 4;
+
+		//otherwise all is good
+		return 0;
+	}
+	int getNextCarTest()
+	{
+		JPSimulationEngine *eng = getSetup(1);
+
+		// 1) check that we get the right cars back
+		int dir = 0;
+		SFCar *cars[10];
+		SFCar *car;
+		JPLane *lane = inter->getLane(dir,1);
+
+		int i;
+		for(i = 0; i < 10; i++)
+		{
+			cars[i] = new SFCar();
+			lane->addCarAtEnd(cars[i]);
+		}
+
+		lane->resetToFirstCar();
+		double leng, pos, speed, dspeed;
+		//verify A) all cars are retrieved in the correct order and NULL terminates the last
+		for(i = 0; true; i++)
+		{
+			car = eng->getNextCar(lane, dir, leng, pos, speed, dspeed);
+			if(NULL == car)
+				break;
+
+			if(i >= 10)
+				return 1;
+			if(cars[i] != car)
+				return 2;
+		}
+		if( i < 10)
+			return 3;
+
+		//cleanup
+		for(i = 0; i < 10; i++)
+			delete lane->removeFirstCar();
+
+		//2 check computations and retrievals
+		int ret = 0;
+		double inx[] = {-1,	  125,	   1, -175};
+		double iny[] = {100,  1,	-150,   -1};
+		double opos[]={-100,  -125, -150, -175};
+		double lengs[]= {10, 12, 14, 15};
+		for(dir = 0; dir < 4; dir++)
+		{
+			ret = getNextCarCheck(eng, dir, lengs[dir], inx[dir], iny[dir], opos[dir]);
+			if(ret)
+				return ret + 10 * dir;
+		}
+
+		return 0;
+	}
+
+	int prevCarDecelTest()
+	{
+		JPSimulationEngine eng;
+
+		//getPrevCarDecel(pSpeed, pPos, speed, dSpeed, pos, timeStep)
+		double accel, expected;
+
+		//test 1 no previous car, going desired speed
+		accel = eng.getPrevCarDecel(-1, 0, 32, 32, 100, 0.1);
+		if(! consts::deq(accel,0))
+			return 1;
+
+		//test 2 no previous car, going slower than desired speed
+		accel = eng.getPrevCarDecel(-1, 0, 32, 100, 100, 0.1);
+		expected = 5 * 5280./3600;
+		if(! consts::deq(accel,expected))
+			return 2;
+
+		//test 3 no previous car, going slower accel bound by dspeed
+		accel = eng.getPrevCarDecel(-1, 0, 32, 32.5, 100, 0.1);
+		expected = .5 /.1;
+		if(! consts::deq(accel,expected))
+			return 3;
+
+
+		//test 4 previous car, no change need
+		accel = eng.getPrevCarDecel(0, 5, 60, 60, -1075, 0.1);
+		expected = 0;
+		if(! consts::deq(accel,expected))
+			return 4;
+
+		//test 5 previous car stopped
+		//getPrevCarDecel(pSpeed, pPos, speed, dSpeed, pos, timeStep)
+		accel = eng.getPrevCarDecel(0, 5, 60, 60, -175, 0.1);
+		expected = -10;
+		if(! consts::deq(accel,expected))
+			return 5;
+
+		//test 6 previous car stopped (slow per car accel)
+		//getPrevCarDecel(pSpeed, pPos, speed, dSpeed, pos, timeStep)
+		accel = eng.getPrevCarDecel(0, 5, 60, 60, -238, 0.1);
+		expected = -7.33;
+		//printf("%f\t%f\n", accel, expected);
+		if(! consts::deq(accel,expected))
+			return 6;
+
+		//todo maybe more
+		return 0;
+	}
+public:
 	int run()
 	{
 		int ret;
@@ -382,16 +815,25 @@ public:
 				prereqTest() );
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Get Next Car Test",
-				rightTurnRedTest() );
+				getNextCarTest() );
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Make Car Test",
 				makeCarTest() );
 		ret = consts::testOuptut(
+				"JPSimulationEngine: Determine Lane Test",
+				determineLaneTest() );
+
+		ret = consts::testOuptut(
 				"JPSimulationEngine: Add Car Test",
 				addCarTest() );
+
+		ret = consts::testOuptut(
+				"JPSimulationEngine: Previous Car Deceleration Test",
+				prevCarDecelTest() );
+printf("Ret: %d\n", ret);
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
-				rightTurnRedTest() );
+				matchPaceTest() );
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
 				rightTurnRedTest() );
@@ -403,21 +845,82 @@ public:
 				leftTurnBlinkYellowTest() );
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
-				matchPaceTest() );
-		ret = consts::testOuptut(
-				"JPSimulationEngine: ",
 				redLightStopTest() );
 		return ret;
 	}
 
+	void printIntersection()
+	{
+		int dir, ln;
+		JPLane *lane;
+		SFCar *car;
+		for(dir = 0; dir < 4; dir++)
+			for(ln = 0; ln < inter->getLaneCount(dir); ln++)
+			{
+				lane = inter->getLane(dir,ln);
+				lane->resetToFirstCar();
+				while(0 != (car = lane->getNextCar()) )
+				   this->printCar(car);
+			}
+	}
+
+	void demo()
+	{
+		JPSimulationEngine *eng = getSetup(1);
+		int dir;
+		for(dir = 0; dir < 4; dir++)
+			model->setProbability(dir, 25,25,50);
+		model->setTrafficRate(JPIntersection::SOUTHBOUND, 1200);
+		model->setTrafficRate(JPIntersection::NORTHBOUND, 1200);
+		eng->init();
+
+		printf("Ctrl+c to exit\n");
+		long cycles = 0;
+		for(cycles = 0; 1; cycles++)
+		{
+			eng->step(0.1);
+			Sleep(100);
+			if(cycles % 50 == 0)
+			{
+				printf("Time: %f\n", JPSimulationEngine::getInstance()->getTime());
+				printIntersection();
+			}
+		}
+
+
+	}
+	SETestClass()
+	{
+		light = NULL;
+		model = NULL;
+		inter = NULL;
+		_lane = 0;
+
+		test = NULL_TEST;
+		position = 0;
+		_testResult = 0;
+		_direction = 0;
+
+
+		int dir, j;
+		for(dir = 0; dir < 4; dir++)
+		{
+			for(j = 0; j < 4; j++)
+				_carCount[dir][j] = 0;
+		}
+	}
+
 };
 
-int main()
+int main(int argc, char *argv[])
 {
 	//put all the test code in the class so the destroy
 	//function can be private non static
 	SETestClass test;
-	test.run();
+	if(2 == argc && 0 == strcmp("-d", argv[1]))
+		test.demo();
+	else
+		test.run();
 	return 0;
 }
 

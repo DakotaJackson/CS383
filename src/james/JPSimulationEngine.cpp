@@ -6,6 +6,9 @@
  */
 
 #include "../../inc/JPSimulationEngine.h"
+#include <stdlib.h> /* rand */
+#include <time.h> /* time for seeding rand */
+
 JPSimulationEngine *JPSimulationEngine::_unique = 0;
 
 JPSimulationEngine::JPSimulationEngine()
@@ -26,6 +29,8 @@ JPSimulationEngine::JPSimulationEngine()
 	_iGrid = 0;
 	_trafficModel = NULL;
 	_light = NULL;
+
+	srand(time(NULL)); //seed RNG for lane selection
 }
 
 JPSimulationEngine::~JPSimulationEngine(){ end(); }
@@ -56,11 +61,13 @@ void JPSimulationEngine::step(double sec)
 {
 	if( ! _initialized)
 		init();
-
 	int dir, laneNum;
 	for(dir = 0; dir < 4; dir++)
+	{
 		for(laneNum = 0; laneNum < _laneCounts[dir]; laneNum++)
-			processLane(_intersection->getLane(dir,laneNum), dir);
+			processLane(_intersection->getLane(dir,laneNum), dir, sec);
+		addCars(dir, sec);
+	}
 	_time += sec;
 }
 
@@ -82,16 +89,109 @@ void JPSimulationEngine::setIntersection(JPIntersection* intersection){ _interse
 void JPSimulationEngine::setStepInterval(double secs){ _stepTime = secs; }
 void JPSimulationEngine::setInitTime(double secs) { _initTime = secs; }
 
-void JPSimulationEngine::processLane(JPLane* lane, int direction)
+/**
+ * \breif Determine the ammount of deceleration required or acceleration possible without coming within
+ * 5 feet of the next car.
+ */
+double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
+		const double dSpeed, const double pos, const double timeStep) const
+{
+		double capableAccel = this->acceleration;
+		double accel = 0;
+		double lookAhead = 5;
+
+		//if there is no next car only look at the possibility
+		if(-1 == pSpeed )
+		{
+			if(speed < dSpeed)
+			{
+				accel = capableAccel;
+
+				//but don't exceed desired speed
+				if(speed + accel * timeStep > dSpeed)
+					accel = (dSpeed - speed)/timeStep;
+			}
+			else
+				accel = 0;
+			return accel;
+		}
+
+		//will we hit the car ahead if we don't slow down?
+		double pnext, next, reqdDecl;
+		pnext = pPos + pSpeed * lookAhead; //where the car will
+		next = pos + speed * lookAhead; //where we will be
+//printf("pnext: %f, next %f\n", pnext, next);
+
+		//this gives either the required deceleration (-) to not come within 5 feet
+		//of the car in front or the allowable acceleration (+) to do the same
+		reqdDecl =  2 * (pnext - 5 - next)/pow(5, 2); //maintain 5ft + gap
+		if( reqdDecl < 0) //we need to slow down
+		{
+			//slow down at the car's normal acceleration rate or however fast we need to
+			accel = std::min(reqdDecl, -capableAccel);
+
+			//but don't slow down to less than the prevCar speed
+			if(speed + accel * timeStep < pSpeed)
+				accel = (pSpeed - speed)/timeStep;
+		}
+		else if( speed < dSpeed && reqdDecl > 0)
+		{
+			//speed up as fast as we can
+			accel = std::min(reqdDecl, capableAccel);
+
+			//but don't exceed desired speed
+			if(speed + accel * timeStep > dSpeed)
+				accel = (dSpeed - speed)/timeStep;
+		}
+		return accel;
+}
+void JPSimulationEngine::updateCar(SFCar *car, int dir, double &speed,double &pos,const double accel, const double timeStep)
+{
+	//calculate new position and speed
+	pos += 0.5 * accel * pow(timeStep, 2) + speed * timeStep;
+	speed = speed + accel * timeStep;
+	if(speed < 0) //ugh floating points and those -1e-50
+		speed = 0;
+
+	//translate position to x/y
+	switch(dir)
+	{
+		case JPIntersection::SOUTHBOUND: car->setY(-pos); break;
+		case JPIntersection::NORTHBOUND: car->setY(pos);  break;
+		case JPIntersection::EASTBOUND: car->setX(pos);   break;
+		case JPIntersection::WESTBOUND: car->setX(-pos);  break;
+	}
+
+	car->setTimeInSim(car->getTimeInSim()+timeStep);
+	if( speed < 1 )
+		car->setWaitTime(car->getWaitTime()+timeStep);
+}
+void JPSimulationEngine::processLane(JPLane* lane, int direction, double timeStep)
 {
 	//todo write process lane
 	double prevSpeed = -1;
-	double prevLeng, prevPos, prevAccel;
-	double leng, pos, speed, accel, dspeed;
+	double prevPos = 0;
+	double leng, pos, speed, carAccel, lightAccel, accel, dspeed;
 	SFCar *car;
-	while (NULL != getNextCar(lane, direction, leng, pos, speed, dspeed))
-	{
 
+	//cycle through the entire lane
+	lane->resetToFirstCar();
+	while (1)
+	{
+		car = getNextCar(lane, direction, leng, pos, speed, dspeed);
+		if( NULL == car)
+			break;
+
+		carAccel = getPrevCarDecel(prevSpeed, prevPos,speed, dspeed, pos, timeStep);
+		lightAccel = 1000000; //placeholder
+		accel = std::min(carAccel, lightAccel);
+
+		//turning? = want to turn + inside intersection bounds
+
+		//compute new position
+		this->updateCar(car, direction, speed, pos, accel, timeStep);
+		prevPos = pos - leng; //make it the back of the previous car
+		prevSpeed = speed;
 	}
 }
 
@@ -139,14 +239,22 @@ void JPSimulationEngine::init()
 	_initialized = true; //prevent infinite recursion
 
 	//initialize car creation and yellow times
+	//get local copies of lane counts and turnOpts to minimize information requests
+	//get intersection bounds
 	int dir, ln;
 	for(dir = 0; dir < 4; dir++)
 	{
 		_nextCreationTime[dir] =  _trafficModel->getNextTiming(dir);
+		_laneCounts[dir] = _intersection->getLaneCount(dir);
+		_intersectionBounds[dir] = _intersection->getLaneOffsetInFeet( (dir+1)  % 4);
 		for(ln = 0; ln < _laneCounts[dir]; ln++)
+		{
 			_yellowTime[dir][ln] = -1;
+			_turnOpts[dir][ln] = (_intersection->getLane(dir, ln))->getTurnOptions();
+		}
 	}
 
+	//adjust init
 	if( -1 == _initTime  )
 	{
 		//todo default to two cycles of the light
@@ -176,7 +284,7 @@ void JPSimulationEngine::init()
 /**
  * Add cars to the simulation and schedule the next arrival
  */
-void JPSimulationEngine::addCars(int direction, int ln, JPLane lane, double timeStep)
+void JPSimulationEngine::addCars(int direction, double timeStep)
 {
 	double effTime = _time + timeStep;
 
@@ -184,9 +292,14 @@ void JPSimulationEngine::addCars(int direction, int ln, JPLane lane, double time
 	if(_nextCreationTime[direction] < 0)
 		return;
 
-	while(effTime < _nextCreationTime[direction])
+	int ln;
+//printf("efft: %f\t nct:%f\n", effTime, _nextCreationTime[direction]);
+	SFCar *car;
+	while(effTime > _nextCreationTime[direction])
 	{
-		lane.addCarAtEnd( makeCar(direction, ln));
+
+		car = makeCar(direction, ln);
+		_intersection->getLane(direction, ln)->addCarAtEnd(car);
 		_nextCreationTime[direction] += _trafficModel->getNextTiming(direction);
 	}
 }
@@ -196,9 +309,17 @@ void JPSimulationEngine::addCars(int direction, int ln, JPLane lane, double time
  *
  * Sets the location, turn desire, and orientation of the car
  */
-SFCar *JPSimulationEngine::makeCar(int direction, int lane)
+SFCar *JPSimulationEngine::makeCar(int direction, int &lane)
 {
 	double theta = 0, x = 0, y = 0;
+	SFCar *car = new SFCar();
+
+	//determine direction and lane
+	int turn = _trafficModel->getNextTurnDirection(direction);
+	car->setTurnDirection(turn);
+	lane = determineLane(car, direction);
+
+	//determine x, y, and theta at starting point
 	switch(direction)
 	{
 		case JPIntersection::NORTHBOUND:
@@ -208,8 +329,8 @@ SFCar *JPSimulationEngine::makeCar(int direction, int lane)
 			break;
 
 		case JPIntersection::EASTBOUND:
-			x =  _intersection->getTrackedLaneLength(direction);
-			y = (_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
+			x =   - _intersection->getTrackedLaneLength(direction);
+			y = - (_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
 			theta = 90;
 			break;
 
@@ -220,34 +341,80 @@ SFCar *JPSimulationEngine::makeCar(int direction, int lane)
 			break;
 
 		case JPIntersection::WESTBOUND:
-			x = - _intersection->getTrackedLaneLength(direction);
-			y =-(_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
+			x =  _intersection->getTrackedLaneLength(direction);
+			y = (_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
 			theta = 270;
 			break;
 	}
-
-	SFCar *car = new SFCar();
-	car->setTheta(theta);
-	car->setTimeInSim(0);
-	car->setSpeed(_intersection->getSpeedLimitsInFPS(direction));
-	car->setTurnDirection(_trafficModel->getNextTurnDirection(direction));
-	car->setWaitTime(0);
 	car->setX(x);
 	car->setY(y);
+	car->setTheta(theta);
+
+	//initialize other parameters
+	car->setTimeInSim(0);
+	car->setSpeed(_intersection->getSpeedLimitsInFPS(direction));
+	car->setWaitTime(0);
 
 	pushAdd(car, 0);
 
 	return car;
 }
 
+/**
+ * \brief Determine which lane to put the car in.
+ */
+int JPSimulationEngine::determineLane(SFCar* car, int direction)
+{
+	//Valid lanes will be consecutive
+	int numValid = 0;
+	int startValid = -1;
+	int desire;
+
+	//get direction to match against
+	switch(car->getTurnDirection())
+	{
+		case SFCar::DESIRE_LEFT: desire = JPLane::LEFT; break;
+		case SFCar::DESIRE_RIGHT: desire = JPLane::RIGHT; break;
+		default:  desire = JPLane::STRAIGHT; break;
+	}
+
+	//get a count and starting point of valid lanes
+	int ln;
+	for(ln = 0; ln < _laneCounts[direction]; ln++)
+	{
+		if( (_turnOpts[direction][ln] & desire) == desire)
+		{
+			numValid++;
+			if(-1 == startValid)
+				startValid = ln;
+		}
+	}
+
+	//could have done a balanced distribution instead :/
+	//pick one
+	if(0 == numValid) //if TM allows a turn that is not available modulo will crash on 0 (just like dividing)
+		return 0;
+	if(1 == numValid)
+		return startValid;
+	else
+		return (rand() % numValid) + startValid;
+}
+
+/**
+ * \brief Retrieve the next car from the lane, and set a few variables.
+ */
 SFCar* JPSimulationEngine::getNextCar(JPLane* lane, int dir, double& leng, double& pos,
 	double& speed, double& dspeed)
 {
 	SFCar *car = lane->getNextCar();;
+
+	//If last car exit.
+	if(NULL == car)
+		return NULL;
 	leng = car->getLength();
 	speed = car->getSpeed();
-	dspeed = car->getDesiredSpeed();//assuming speed limit +/-
-	dspeed = 0; //remove on merge
+	dspeed = car->getDesiredSpeed() * 5280 /3600;//assuming speed limit +/-
+	//dspeed = 0; //remove on merge
 	dspeed += _intersection->getSpeedLimitsInFPS(dir);
 
 	double x = car->getX();
@@ -260,6 +427,6 @@ SFCar* JPSimulationEngine::getNextCar(JPLane* lane, int dir, double& leng, doubl
 		case JPIntersection::EASTBOUND: pos = x;   break;
 		case JPIntersection::WESTBOUND: pos = -x;  break;
 	}
-
 	return car;
 }
+

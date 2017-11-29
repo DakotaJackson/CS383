@@ -84,6 +84,10 @@ public:
 	double getStepTime() const;
 	/** \brief set the calculation interval (step time)*/
 	void setStepTime(double stepTime);
+	/** \brief Return the internal elapsed time (seconds) in the simulation */
+	double getTime() const { return _time;}
+
+	const JPTrafficModel* getTrafficModel() const { return _trafficModel;}
 
 	//double* getThroughput(int direction, int &laneCount);
 	//getWhateverElseWeTracked()
@@ -114,6 +118,8 @@ private:
 	//long _throughput[4][MAX_LANES_MACRO];
 	double _nextCreationTime[4];
 	double _yellowTime[4][MAX_LANES_MACRO];
+	int _turnOpts[4][MAX_LANES_MACRO]; //local copy
+	double _intersectionBounds[4];
 
 	//private members for singleton control
 	static JPSimulationEngine *_unique;
@@ -130,11 +136,15 @@ private:
 
 	//returns position
 	//double translatePosition(int direction, int lnNum,
-	void processLane(JPLane *lane, int direction);
-	void addCars(int direction, int ln, JPLane lane, double timeStep);
+	double getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
+			const double dSpeed, const double pos, const double timeStep) const;
+	void updateCar(SFCar *car,const int dir, double &speed,double &pos,const double accel, const double timeStep);
+	void processLane(JPLane *lane, int direction, double stepTime);
+	void addCars(int direction, double timeStep);
 	void checkPrereqs();
 	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
-	SFCar *makeCar(int direction, int lane);
+	SFCar *makeCar(int direction, int &lane);
+	int determineLane(SFCar *car, int direction);
 
 };
 /** @} */

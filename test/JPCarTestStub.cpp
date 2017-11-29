@@ -18,12 +18,22 @@ JPCarTestStub::~JPCarTestStub()
 	// TODO Auto-generated destructor stub
 }
 
-double JPCarTestStub::getDesiredSpeed()
+double JPCarTestStub::getDesiredSpeed() const
 {
-	return 0.0;
+	return _dspeed;
 }
 
-double JPCarTestStub::getLength()
+double JPCarTestStub::getLength() const
 {
-	return 15.0;
+	return _leng;
+}
+
+JPCarTestStub::JPCarTestStub(double leng, double X, double Y, double speed,
+		double dspeed)
+{
+	this->setSpeed(speed);
+	this->setX(X);
+	this->setY(Y);
+	_dspeed = dspeed;
+	_leng = leng;
 }

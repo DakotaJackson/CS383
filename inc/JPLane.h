@@ -134,10 +134,9 @@ public:
 	virtual ~JPLane();
 	bool isEmpty() const;
 	int getSize() const;
-	//SFCar *removeFirst() throw (std::runtime_error);
-	void addLast(SFCar *car);
-
-
+	int getLeftTarget() const;
+	int getRightTarget() const;
+	int getTurnOptions() const;
 
 private:
 	int _turnOptions;

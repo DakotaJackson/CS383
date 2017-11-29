@@ -59,6 +59,10 @@ namespace consts
 	 */
 	inline bool deq(double d1, double d2)
 	{
+		//prevent spurious failures when one is exactly 0 and the other is not
+		if( std::abs(d1) < 0.00000001 && std::abs(d2) < 0.00000001 )
+			return true;
+
 		double avg = (d1+d2)/2;
 		double dif = std::abs(d1-d2);
 		if( dif/avg < 0.00001)
