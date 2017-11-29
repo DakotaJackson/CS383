@@ -1,16 +1,39 @@
 #ifndef SRC_DJTRAFFICLIGHT_MANAGER_H_
 #define SRC_DJTRAFFICLIGHT_MANAGER_H_
 
+typedef enum {
+
+}
 class DJTrafficLightManager
 {
 public:
+    // all possibilities of a state for a light
+    #define RED = 1;
+    #define YELLOW = 2;
+    #define GREEN = 4;
+    #define LEFT_GREEN = 8;
+    #define BOTH_GREEN = 12;
+    #define LEFT_BLINK_YELLOW = 16;
+    // all possibilities of a type of light
+    #define NORMAL_LIGHT = 1;
+    #define LEFT_TURN_ONLY_LIGHT = 2;
+    #define LEFT_AND_NORMAL_LIGHT = 3;
+    // set default timings of lights (In seconds)
+    #define DEFAULT_CYCLE_TIME = 60; // 1 min
+    #define DEFAULT_RED_TIME = 29;
+    #define DEFAULT_YELLOW_TIME = 2; 
+    #define DEFAULT_GREEN_TIME = 29; 
+    #define DEFAULT_LEFT_GREEN_TIME = 15; // .5 second under half total cycle of normal green/yellow 
+    #define DEFAULT_LEFT_BLINK_YELLOW_TIME = 16; // .5 second over half total cycle of normal green/yellow
+
+ 
     DJTrafficLightManager(int laneNum, int dirNum);
 
-    void initAllLights(int numLanes);
+    void initAllLights(int numLanes, int direction);
     // take total number of lines and find a way to 
     // map them on a per-lane/direction basis, along with
     // initializing them with proper values, user config-able
-    void initStateTable(int numLanes);
+    void initStateTable(int numLanes, int direction);
     // initializes the state table for the lights to be used
     // to calculate states of individual traffic lights.
     // made with regards to user input from initAllLights
@@ -48,6 +71,8 @@ private:
     int state;
     int duration;
     double stateTime;
+    int lightArray[4][6];
+    int masterStateTable[4][6];     
 };
 
 #endif SRC_DJTRAFFICLIGHT_MANAGER_H_

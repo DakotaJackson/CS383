@@ -18,17 +18,7 @@ mingw32-make test
 
 ## Some notes from dj (don't think we can put our names?)
 
-- Milestone 1 (60%) due Wednesday, October 25th
-
-- Just copy/paste from the website so we have visibility of 6 deliverables
-1. Overall (Group mark)
-    Directory structure as defined in class. 1%
-    make Overall code compiles with all features included (even though they are empty) and make test gives a complete report of which test cases fail 1%
-2. Class diagram for your feature (Individual Mark) 3%
-3. Sequence diagram for your feature (Individual Mark) 3%
-4. Public view (header files) for your feature. (Private view can just be message stubs) (Individual Mark) 2%
-5. Complete test plan for all functions in your feature. Most test cases should fail since there is no code yet. (Individual Mark) 3%
-6. Gantt time-line with time estimates for the remainder of your feature. 2%
+- Milestone 1 (90%) due Week of November 30th
 
 ## Class / Module Responsibilities
 This will be a bit redundant with the docs, but I thought it would be helpful in the meantime.
