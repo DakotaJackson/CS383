@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>358</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="okButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>470</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>342</width>
+     <height>446</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="7" column="3">
+     <widget class="QCheckBox" name="eLane5_l">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QCheckBox" name="sLane4_l">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QCheckBox" name="sLane3_l">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QCheckBox" name="nLane2_l">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QCheckBox" name="sLane2_l">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="4">
+     <widget class="QCheckBox" name="wLane3_l">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="2">
+     <widget class="QCheckBox" name="sLane2_r">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="4">
+     <widget class="QCheckBox" name="wLane5_l">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="3">
+     <widget class="QCheckBox" name="eLane2_l">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QCheckBox" name="nLane3_l">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QCheckBox" name="nLane4_l">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="turnOptions_2">
+      <property name="text">
+       <string>Turn Option R</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="4">
+     <widget class="QCheckBox" name="wLane1_r">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="3">
+     <widget class="QCheckBox" name="eLane2_r">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="3">
+     <widget class="QCheckBox" name="eLane3_l">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QCheckBox" name="nLane1_r">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="3">
+     <widget class="QCheckBox" name="eLane1_r">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="2">
+     <widget class="QCheckBox" name="sLane1_r">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="4">
+     <widget class="QCheckBox" name="wLane4_l">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="4">
+     <widget class="QCheckBox" name="wLane1_l">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="2">
+     <widget class="QCheckBox" name="sLane5_l">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="3">
+     <widget class="QCheckBox" name="eLane4_l">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QCheckBox" name="nLane5_l">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="4">
+     <widget class="QCheckBox" name="wLane2_r">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="3">
+     <widget class="QCheckBox" name="eLane4_r">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="18" column="1">
+     <widget class="QSpinBox" name="cph"/>
+    </item>
+    <item row="18" column="0">
+     <widget class="QLabel" name="carsPerHour">
+      <property name="text">
+       <string>Cars per hour</string>
+      </property>
+     </widget>
+    </item>
+    <item row="17" column="2">
+     <widget class="QSpinBox" name="ewSpeedLim"/>
+    </item>
+    <item row="17" column="1">
+     <widget class="QSpinBox" name="nsSpeedLim"/>
+    </item>
+    <item row="16" column="1" colspan="2">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>    N / S           E / W</string>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="0">
+     <widget class="QLabel" name="speedLimit">
+      <property name="text">
+       <string>Speed Limit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="4">
+     <widget class="QSpinBox" name="nTurnProb_w">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="3">
+     <widget class="QSpinBox" name="nTurnProb_e">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="2">
+     <widget class="QSpinBox" name="sTurnProb_s">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="1">
+     <widget class="QSpinBox" name="nTurnProb_s">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0">
+     <widget class="QLabel" name="profOfTurn_s">
+      <property name="text">
+       <string>Probability of turn S</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="4">
+     <widget class="QSpinBox" name="wTurnProb_r">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="3">
+     <widget class="QSpinBox" name="eTurnProb_r">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="2">
+     <widget class="QSpinBox" name="sTurnProb_r">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
+     <widget class="QSpinBox" name="nTurnProb_r">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0">
+     <widget class="QLabel" name="probOfTurn_r">
+      <property name="text">
+       <string>Probability of turn R</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="4">
+     <widget class="QSpinBox" name="wTurnProb_l">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="3">
+     <widget class="QSpinBox" name="eTurnProb_l">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="2">
+     <widget class="QSpinBox" name="sTurnProb_l">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QSpinBox" name="nTurnProb_l">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
+     <widget class="QLabel" name="probOfTurn_l">
+      <property name="text">
+       <string>Probability of turn L</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="4">
+     <widget class="QCheckBox" name="wLane5_r">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="3">
+     <widget class="QCheckBox" name="eLane5_r">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="2">
+     <widget class="QCheckBox" name="sLane5_r">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QCheckBox" name="nLane5_r">
+      <property name="text">
+       <string>Lane 5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="4">
+     <widget class="QCheckBox" name="wLane4_r">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="2">
+     <widget class="QCheckBox" name="sLane4_r">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="4">
+     <widget class="QCheckBox" name="wLane2_l">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QCheckBox" name="nLane3_r">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="2">
+     <widget class="QCheckBox" name="sLane3_r">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="3">
+     <widget class="QCheckBox" name="eLane3_r">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QCheckBox" name="nLane4_r">
+      <property name="text">
+       <string>Lane 4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="4">
+     <widget class="QCheckBox" name="wLane3_r">
+      <property name="text">
+       <string>Lane 3</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QCheckBox" name="nLane2_r">
+      <property name="text">
+       <string>Lane 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="3">
+     <widget class="QCheckBox" name="eLane1_l">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QCheckBox" name="sLane1_l">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QSpinBox" name="nLanes">
+      <property name="maximum">
+       <number>6</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QDoubleSpinBox" name="nOffset">
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <double>2.500000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.500000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QSpinBox" name="eLanes">
+      <property name="maximum">
+       <number>6</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="4">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>      N                  S                   E                 W</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QCheckBox" name="nLane1_l">
+      <property name="text">
+       <string>Lane 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="numOfLanes">
+      <property name="text">
+       <string>Number of lanes</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="4">
+     <widget class="QSpinBox" name="wLanes">
+      <property name="maximum">
+       <number>6</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="turnOptions">
+      <property name="text">
+       <string>Turn Option L</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="laneOffset">
+      <property name="text">
+       <string>Lane Offset</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QDoubleSpinBox" name="sOffset">
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <double>2.500000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.500000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="4">
+     <widget class="QDoubleSpinBox" name="wOffset">
+      <property name="maximum">
+       <double>2.500000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.500000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QSpinBox" name="sLanes">
+      <property name="maximum">
+       <number>6</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QDoubleSpinBox" name="eOffset">
+      <property name="maximum">
+       <double>2.500000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.500000000000000</double>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>okButton</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>okButton</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

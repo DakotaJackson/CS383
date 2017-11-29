@@ -8,7 +8,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QImage>
-
+#include <JJInputui.h>
 
 
 namespace Ui {
@@ -25,29 +25,34 @@ public:
     void initializeRoad(int n, int s, int e, int w);
     void step();
     static const int maxCarImages = 5;
+    static const int maxLightImages = 3;
 
 protected:
     void paintEvent(QPaintEvent *e);
-    void resizeEvent(QResizeEvent *e);
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     void initCars();
-    void drawRoad(QPainter *qp);
     void drawCar(QPainter *qp, int x, int y, int imgIndex, int angle);
     void drawCars(QPainter *qp);
+
+    void initLights();
+    void drawLight(QPainter *qp, int x, int y, int imgIndex, int angle);
     void drawLights(QPainter *qp);
+
+    void drawRoad(QPainter *qp);
     void drawText(QPainter *qp);
+
     Ui::JJDisplayOutput *ui;
-    
-    //placeholder for cars
-    int m_cars[2][4]; //for now 2/4
-    
+
+    int m_cars[4][4];
+    int m_lights[3][3];
     QImage carImage[maxCarImages];
-    QImage *redCar;
-    QImage *lightImage;
+    QImage lightImage[maxLightImages];
     QImage *textImage;
 
-    //placeholder for lanes
     int m_northLane;
     int m_southLane;
     int m_westLane;
@@ -58,9 +63,6 @@ private:
 
     const int m_lineWidth = 3;
     const int m_lineLength = 10;
-
-
-
 };
 
 #endif // JJDISPLAYOUTPUT_H
