@@ -130,9 +130,11 @@ private:
 
 	//returns position
 	//double translatePosition(int direction, int lnNum,
-	void processLane(JPLane *lane);
-	void addCars(int direction, JPLane lane, double timeStep);
+	void processLane(JPLane *lane, int direction);
+	void addCars(int direction, int ln, JPLane lane, double timeStep);
 	void checkPrereqs();
+	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
+	SFCar *makeCar(int direction, int lane);
 
 };
 /** @} */

@@ -107,9 +107,14 @@ public:
 	static const int LANE_WIDTH = 10;
 
 	/*
-	 *  \brief The maximum tracked length of
+	 *  \brief The maximum tracked length of of a lane in feet.
 	 */
 	static const int MAX_LANE_LENG = 2 * 5280;
+
+	/*
+	 *  \brief The minimum tracked length of of a lane in feet.
+	 */
+	static const int MIN_LANE_LENG = 100;
 
 		/**
 		 * \brief The north position.
@@ -184,7 +189,9 @@ public:
 	void setLaneOffset(int direction, double offset);
 	/** \brief Set the distance (in feet) that simulation tracks cars before the center of the intersection */
 	void setTrackedLaneLengths(double north, double south, double east, double west);
+	/** \brief Set the distance (in feet) that simulation tracks cars before the center of the intersection */
 	void setTrackedLaneLength(int direction, double distance);
+	/** \brief Set the distance (in feet) that simulation tracks cars after the center of the intersection */
 	void setTrackedExitLengths(double northSouth, double eastWest);
 	/** \brief Set speed limits in miles per hour */
 	void setSpeedLimits(double northSouth, double eastWest);
@@ -274,6 +281,9 @@ private:
 
 	bool _finalized;
 	JPLane *_lanes[4][MAX_LANES_MACRO];
+	void addLaneBasicChecks(int direction, int position);
+	void addLaneInterferenceChecks(int,int,int,int,int);
+	void setTrackedExitLaneLength(int direction, double distance);
 
 };
 

@@ -137,12 +137,17 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a8fdeb259aea98c9dfa9f80e9f4aa51ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d17b49aa08b70449deb97dc36580cfa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a5d17b49aa08b70449deb97dc36580cfa">intersectionDeceleration</a> (double pos, double speed, double pcPos, double pcSpeed, <a class="el" href="classSFCar.html">SFCar</a> *car)</td></tr>
 <tr class="separator:a5d17b49aa08b70449deb97dc36580cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf2051980fd967cfa21845121f844334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#abf2051980fd967cfa21845121f844334">processLane</a> (<a class="el" href="classJPLane.html">JPLane</a> *lane)</td></tr>
-<tr class="separator:abf2051980fd967cfa21845121f844334"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a160663539a2ed201fce2f7beedb80051"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a160663539a2ed201fce2f7beedb80051">addCars</a> (int direction, <a class="el" href="classJPLane.html">JPLane</a> lane, double timeStep)</td></tr>
-<tr class="separator:a160663539a2ed201fce2f7beedb80051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a495dc0af1e0757e3d09c814e77a8710b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a495dc0af1e0757e3d09c814e77a8710b">processLane</a> (<a class="el" href="classJPLane.html">JPLane</a> *lane, int direction)</td></tr>
+<tr class="separator:a495dc0af1e0757e3d09c814e77a8710b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2607786d6eba309bfb572b4416d5115e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a2607786d6eba309bfb572b4416d5115e">addCars</a> (int direction, int ln, <a class="el" href="classJPLane.html">JPLane</a> lane, double timeStep)</td></tr>
+<tr class="separator:a2607786d6eba309bfb572b4416d5115e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ad2e15269ecee7a8a9bade426f8e71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a16ad2e15269ecee7a8a9bade426f8e71">checkPrereqs</a> ()</td></tr>
 <tr class="separator:a16ad2e15269ecee7a8a9bade426f8e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24f82bea49d23e8f815b7b623fbfeb5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a24f82bea49d23e8f815b7b623fbfeb5e">getNextCar</a> (<a class="el" href="classJPLane.html">JPLane</a> *lane, int dir, double &amp;leng, double &amp;pos, double &amp;speed, double &amp;dspeed)</td></tr>
+<tr class="separator:a24f82bea49d23e8f815b7b623fbfeb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc1d20396cae2efeddf5ab2c55ac5527"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#afc1d20396cae2efeddf5ab2c55ac5527">makeCar</a> (int direction, int lane)</td></tr>
+<tr class="memdesc:afc1d20396cae2efeddf5ab2c55ac5527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate and initialize car.  <a href="#afc1d20396cae2efeddf5ab2c55ac5527">More...</a><br /></td></tr>
+<tr class="separator:afc1d20396cae2efeddf5ab2c55ac5527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classJPObservableSimulation"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classJPObservableSimulation')"><img src="closed.png" alt="-"/>&#160;Private Member Functions inherited from <a class="el" href="classJPObservableSimulation.html">JPObservableSimulation</a></td></tr>
 <tr class="memitem:af2238512dcf99fbd99c127ecb0caa7d3 inherit pub_methods_classJPObservableSimulation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPObservableSimulation.html#af2238512dcf99fbd99c127ecb0caa7d3">JPObservableSimulation</a> ()</td></tr>
 <tr class="separator:af2238512dcf99fbd99c127ecb0caa7d3 inherit pub_methods_classJPObservableSimulation"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -293,8 +298,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a160663539a2ed201fce2f7beedb80051"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a160663539a2ed201fce2f7beedb80051">&#9670;&nbsp;</a></span>addCars()</h2>
+<a id="a2607786d6eba309bfb572b4416d5115e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2607786d6eba309bfb572b4416d5115e">&#9670;&nbsp;</a></span>addCars()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,6 +312,12 @@ Friends</h2></td></tr>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ln</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -417,6 +428,66 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a24f82bea49d23e8f815b7b623fbfeb5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24f82bea49d23e8f815b7b623fbfeb5e">&#9670;&nbsp;</a></span>getNextCar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSFCar.html">SFCar</a> * JPSimulationEngine::getNextCar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classJPLane.html">JPLane</a> *&#160;</td>
+          <td class="paramname"><em>lane</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>leng</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dspeed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab946c28d43ce0ec2d56b0c122d19af6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab946c28d43ce0ec2d56b0c122d19af6c">&#9670;&nbsp;</a></span>getStepTime()</h2>
 
@@ -491,8 +562,47 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="abf2051980fd967cfa21845121f844334"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf2051980fd967cfa21845121f844334">&#9670;&nbsp;</a></span>processLane()</h2>
+<a id="afc1d20396cae2efeddf5ab2c55ac5527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc1d20396cae2efeddf5ab2c55ac5527">&#9670;&nbsp;</a></span>makeCar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSFCar.html">SFCar</a> * JPSimulationEngine::makeCar </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lane</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate and initialize car. </p>
+<p>Sets the location, turn desire, and orientation of the car </p>
+
+</div>
+</div>
+<a id="a495dc0af1e0757e3d09c814e77a8710b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a495dc0af1e0757e3d09c814e77a8710b">&#9670;&nbsp;</a></span>processLane()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -504,8 +614,18 @@ Friends</h2></td></tr>
           <td class="memname">void JPSimulationEngine::processLane </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classJPLane.html">JPLane</a> *&#160;</td>
-          <td class="paramname"><em>lane</em></td><td>)</td>
+          <td class="paramname"><em>lane</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -995,11 +1115,9 @@ Friends</h2></td></tr>
 <li>src/james/<a class="el" href="JPSimulationEngine_8cpp.html">JPSimulationEngine.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
+<!-- custome footer -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 28 2017 06:27:26 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
-</body>
-</html>

@@ -28,23 +28,18 @@ JPSimulationEngine::JPSimulationEngine()
 	_light = NULL;
 }
 
-JPSimulationEngine::~JPSimulationEngine()
-{
-	// TODO Auto-generated destructor stub
-}
-/*
-//Control functions should really be in their own class
-void JPSimulationEngine::start()
-{
-}
-void JPSimulationEngine::pause()
-{
-}
-void JPSimulationEngine::terminate()
-{
-}
- */
+JPSimulationEngine::~JPSimulationEngine(){ end(); }
 
+/**
+ * \brief Advance the state of the simulation by the preset step time.
+ *
+ * This function causes the simulation engine to perform the calculations
+ * and modification necessary to advance the simulation. For example if step()
+ * is called, and the preset step time all is 0.1 seconds cars in the simulation
+ * will be moved to their positions 0.1
+ * seconds from now. It also advances the simulation's internal clock by 0.1 seconds.
+ *
+ */
 void JPSimulationEngine::step(){ step(_stepTime); }
 
 /**
@@ -53,7 +48,7 @@ void JPSimulationEngine::step(){ step(_stepTime); }
  * This function causes the simulation engine to perform the calculations
  * and modification necessary to advance the simulation. For example if step(0.1)
  * is called, all cars in the simulation will be moved to their positions 0.1
- * seconds from now. It also advances the simulation's internal clock.
+ * seconds from now. It also advances the simulation's internal clock by 0.1 seconds.
  *
  * \param sec The number of seconds to advance the simulation.
  */
@@ -65,7 +60,7 @@ void JPSimulationEngine::step(double sec)
 	int dir, laneNum;
 	for(dir = 0; dir < 4; dir++)
 		for(laneNum = 0; laneNum < _laneCounts[dir]; laneNum++)
-			processLane(_intersection->getLane(dir,laneNum));
+			processLane(_intersection->getLane(dir,laneNum), dir);
 	_time += sec;
 }
 
@@ -87,10 +82,17 @@ void JPSimulationEngine::setIntersection(JPIntersection* intersection){ _interse
 void JPSimulationEngine::setStepInterval(double secs){ _stepTime = secs; }
 void JPSimulationEngine::setInitTime(double secs) { _initTime = secs; }
 
-void JPSimulationEngine::processLane(JPLane* lane)
+void JPSimulationEngine::processLane(JPLane* lane, int direction)
 {
 	//todo write process lane
 	double prevSpeed = -1;
+	double prevLeng, prevPos, prevAccel;
+	double leng, pos, speed, accel, dspeed;
+	SFCar *car;
+	while (NULL != getNextCar(lane, direction, leng, pos, speed, dspeed))
+	{
+
+	}
 }
 
  JPSimulationEngine* JPSimulationEngine::getInstance()
@@ -101,7 +103,7 @@ void JPSimulationEngine::processLane(JPLane* lane)
 	return _unique;
 }
 
-
+//private function used for testing
 void JPSimulationEngine::destory()
 {
 	if(_unique)
@@ -128,6 +130,7 @@ void JPSimulationEngine::checkPrereqs()
 	if(NULL == _trafficModel )
 		throw JPMissingParameterException(JPMissingParameterException::details::TRAFFIC_MODEL);
 	_intersection->finalize();
+
 	//todo setup _iGrid
 }
 void JPSimulationEngine::init()
@@ -173,7 +176,7 @@ void JPSimulationEngine::init()
 /**
  * Add cars to the simulation and schedule the next arrival
  */
-void JPSimulationEngine::addCars(int direction, JPLane lane, double timeStep)
+void JPSimulationEngine::addCars(int direction, int ln, JPLane lane, double timeStep)
 {
 	double effTime = _time + timeStep;
 
@@ -183,9 +186,80 @@ void JPSimulationEngine::addCars(int direction, JPLane lane, double timeStep)
 
 	while(effTime < _nextCreationTime[direction])
 	{
-		//todo new Car(_trafficModel->getNextTurnDirection(direction))
-		//todo push car update
+		lane.addCarAtEnd( makeCar(direction, ln));
 		_nextCreationTime[direction] += _trafficModel->getNextTiming(direction);
 	}
+}
 
+/**
+ * \brief Generate and initialize car.
+ *
+ * Sets the location, turn desire, and orientation of the car
+ */
+SFCar *JPSimulationEngine::makeCar(int direction, int lane)
+{
+	double theta = 0, x = 0, y = 0;
+	switch(direction)
+	{
+		case JPIntersection::NORTHBOUND:
+			x = (_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
+			y = - _intersection->getTrackedLaneLength(direction);
+			theta = 0;
+			break;
+
+		case JPIntersection::EASTBOUND:
+			x =  _intersection->getTrackedLaneLength(direction);
+			y = (_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
+			theta = 90;
+			break;
+
+		case JPIntersection::SOUTHBOUND:
+			x =-(_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
+			y =  _intersection->getTrackedLaneLength(direction);
+			theta = 180;
+			break;
+
+		case JPIntersection::WESTBOUND:
+			x = - _intersection->getTrackedLaneLength(direction);
+			y =-(_intersection->getLaneOffset(direction) - lane - 0.5 ) * JPIntersection::LANE_WIDTH;
+			theta = 270;
+			break;
+	}
+
+	SFCar *car = new SFCar();
+	car->setTheta(theta);
+	car->setTimeInSim(0);
+	car->setSpeed(_intersection->getSpeedLimitsInFPS(direction));
+	car->setTurnDirection(_trafficModel->getNextTurnDirection(direction));
+	car->setWaitTime(0);
+	car->setX(x);
+	car->setY(y);
+
+	pushAdd(car, 0);
+
+	return car;
+}
+
+SFCar* JPSimulationEngine::getNextCar(JPLane* lane, int dir, double& leng, double& pos,
+	double& speed, double& dspeed)
+{
+	SFCar *car = lane->getNextCar();;
+	leng = car->getLength();
+	speed = car->getSpeed();
+	dspeed = car->getDesiredSpeed();//assuming speed limit +/-
+	dspeed = 0; //remove on merge
+	dspeed += _intersection->getSpeedLimitsInFPS(dir);
+
+	double x = car->getX();
+	double y = car->getY();
+
+	switch(dir)
+	{
+		case JPIntersection::SOUTHBOUND: pos = -y; break;
+		case JPIntersection::NORTHBOUND: pos = y;  break;
+		case JPIntersection::EASTBOUND: pos = x;   break;
+		case JPIntersection::WESTBOUND: pos = -x;  break;
+	}
+
+	return car;
 }

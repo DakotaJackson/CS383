@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['west',['WEST',['../classJPIntersection.html#a11519481dc35d5ef11c9fd94f40cff6b',1,'JPIntersection']]],
-  ['westbound',['WESTBOUND',['../classJPIntersection.html#a9845edf67dff671235332e20c29db605',1,'JPIntersection']]]
+  ['ui',['ui',['../classJJDisplayOutput.html#a55b806d634546c415411d69f79de8810',1,'JJDisplayOutput']]],
+  ['uniform',['uniform',['../classJPTrafficModel.html#adc1c037cdde0a1c9106d2be290af3144',1,'JPTrafficModel']]]
 ];

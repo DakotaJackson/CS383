@@ -38,6 +38,7 @@ int main()
 	ret = consts::testOuptut("Intersection Grid: 1x1 Grid Test", g1x1Test() );
 	ret = consts::testOuptut("Intersection Grid: 2x2 Grid Test", g2x2Test() );
 	ret = consts::testOuptut("Intersection Grid: 3x3 Grid Test", g3x3Test() );
+/*
 	ret = consts::testOuptut("Intersection Grid: 4x4 Grid Test", g4x4Test() );
 	ret = consts::testOuptut("Intersection Grid: 5x5 Grid Test", g5x5Test() );
 	ret = consts::testOuptut("Intersection Grid: 6x6 Grid Test", g6x6Test() );
@@ -56,7 +57,7 @@ int main()
 	ret = consts::testOuptut("Intersection Grid: Acceleration Test", accelerationTest() );
 	ret = consts::testOuptut("Intersection Grid: Deceleration Test", decelerationTest() );
 	ret = consts::testOuptut("Intersection Grid: Yield Test", yieldTest());
-
+*/
 	if(175 == ret) printf("I still don't care!\n");
 	return 0;
 }

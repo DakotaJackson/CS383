@@ -20,6 +20,7 @@ var searchData=
   ['settheta',['setTheta',['../classSFCar.html#ae08e1f2a052cf9b602e9a7c9414a0e71',1,'SFCar']]],
   ['settimeinsim',['setTimeInSim',['../classSFCar.html#a162b2e9074fd20f2bc17916391e2bf7f',1,'SFCar']]],
   ['settimescale',['setTimeScale',['../classJPSimulationControler.html#a850aa4bc707cdc0098fcfdc05f52d666',1,'JPSimulationControler']]],
+  ['settrackedexitlanelength',['setTrackedExitLaneLength',['../classJPIntersection.html#a25f693cdd23ab0a41dccbd02a91af756',1,'JPIntersection']]],
   ['settrackedexitlengths',['setTrackedExitLengths',['../classJPIntersection.html#ade327b46cf50f9a2345d3da0a9b76e7a',1,'JPIntersection']]],
   ['settrackedlanelength',['setTrackedLaneLength',['../classJPIntersection.html#a54f6b30c1fc254ee2a2e3c7f4ddba77b',1,'JPIntersection']]],
   ['settrackedlanelengths',['setTrackedLaneLengths',['../classJPIntersection.html#ac77eeba4a1e1947edb6f8c6af96387f7',1,'JPIntersection']]],

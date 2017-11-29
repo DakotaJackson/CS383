@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['size',['size',['../classLinkedList.html#a18f1a30371a80bc8626b0c7762517d0b',1,'LinkedList']]],
-  ['south',['SOUTH',['../classJPIntersection.html#ae2eb139dc5e0db008055878bdcbebbe2',1,'JPIntersection']]],
-  ['southbound',['SOUTHBOUND',['../classJPIntersection.html#aaa3332ce5292ad029ef3ed94e3b03bc8',1,'JPIntersection']]],
-  ['state',['state',['../classDJTrafficLightManager.html#af69f2d64d755f8f4e81973137f5074c2',1,'DJTrafficLightManager']]],
-  ['statetime',['stateTime',['../classDJTrafficLightManager.html#ac1e2474fdabd7d00bdec6e5700814483',1,'DJTrafficLightManager']]],
-  ['straight',['STRAIGHT',['../classJPLane.html#a2d4e583ceddd0d61ceff6c53a4fcc8c0',1,'JPLane']]]
+  ['red',['RED',['../namespaceconsts.html#a79ca838cde02d7bdbcab3bad1859fdb6',1,'consts']]],
+  ['redcar',['redCar',['../classJJDisplayOutput.html#a63adb4d6a033edd3511f7ef81eec6499',1,'JJDisplayOutput']]],
+  ['right',['RIGHT',['../classJPLane.html#a25395b410dc29c206fa51a61178d54f1',1,'JPLane']]]
 ];

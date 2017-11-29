@@ -158,6 +158,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Advance the simulation by preset time. </p>
+<p>Advance the state of the simulation by the preset step time.</p>
+<p>This function causes the simulation engine to perform the calculations and modification necessary to advance the simulation. For example if <a class="el" href="group__ENG.html#ga070c6d3466cec13bd3e9bb2217978cc3" title="Advance the simulation by preset time. ">step()</a> is called, and the preset step time all is 0.1 seconds cars in the simulation will be moved to their positions 0.1 seconds from now. It also advances the simulation's internal clock by 0.1 seconds. </p>
 
 </div>
 </div>
@@ -179,7 +181,7 @@ Functions</h2></td></tr>
 
 <p>Advance the simulation by sec seconds. </p>
 <p>Advance the state of the simulation by sec seconds.</p>
-<p>This function causes the simulation engine to perform the calculations and modification necessary to advance the simulation. For example if step(0.1) is called, all cars in the simulation will be moved to their positions 0.1 seconds from now. It also advances the simulation's internal clock.</p>
+<p>This function causes the simulation engine to perform the calculations and modification necessary to advance the simulation. For example if step(0.1) is called, all cars in the simulation will be moved to their positions 0.1 seconds from now. It also advances the simulation's internal clock by 0.1 seconds.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sec</td><td>The number of seconds to advance the simulation. </td></tr>
@@ -190,11 +192,9 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
+<!-- custome footer -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 28 2017 06:27:19 for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
+Generated for Traffic Simulator by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
-</body>
-</html>

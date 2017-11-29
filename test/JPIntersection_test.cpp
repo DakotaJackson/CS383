@@ -17,7 +17,7 @@ int directionOppositeCheck();
 int directionAndBoundOppositeCheck();
 
 //error checks
-int addingAfterFinalizedCheck();
+int addingConfigOrderCheck();
 int laneCollidesWithOncomingLaneCheck();
 int twoLanesTurningToOneCheck();
 int laneOffsetCheck();
@@ -73,9 +73,8 @@ int main()
 				directionOutOfBoundsCheck() );
 
 	ret = consts::testOuptut(
-				"JPIntersection: Adding After Finalized Error",
-				addingAfterFinalizedCheck() );
-
+				"JPIntersection: Configuration Order Errors",
+				addingConfigOrderCheck() );
 	//this method verifies that lanes are correctly added and retrieved
 	ret = consts::testOuptut(
 				"JPIntersection: Adding Lanes Test",
@@ -84,8 +83,8 @@ int main()
 	ret = consts::testOuptut(
 				"JPIntersection: Getters and Setters Test",
 				gettersAndSettersTest() );
-printf("%d\n",ret);
 
+	//	printf("%d\n", ret);
 	/*blank
 	ret = consts::testOuptut(
 			"JPSimulationEngine: ",
@@ -198,18 +197,80 @@ int directionAndBoundOppositeCheck()
  * constant in the set, then that constant is added to the field.
  */
 
-int addingAfterFinalizedCheck()
+int addingConfigOrderCheck()
 {
+	JPIntersection *inter = new JPIntersection();
+	//add lanes early
 	try
 	{
-		//bad news if you made it here
-		return -1;
+		inter->addLane(JPIntersection::NORTH,0,JPLane::STRAIGHT,0,0);
+		printf("Made it here77\n");
+		return 1;
 	}
-	catch(JPEXCEPTION_REPLACE_ME & e)
+	catch(JPConfigurationOrderException &e)
 	{
-		//some checks on output
-		return 0;
+		if(e.getDetail() != JPConfigurationOrderException::CONFIG_LANES_BEFORE_OFFSET)
+			return 2;
 	}
+
+	//set offset after lanes have been added
+	inter->setLaneOffsets(1,1,1,1);
+	inter->addLane(JPIntersection::NORTH,0,JPLane::STRAIGHT,0,0);
+	try
+	{
+		inter->setLaneOffset(0,1);
+		return 3;
+	}
+	catch(JPConfigurationOrderException &e)
+	{
+		if(e.getDetail() != JPConfigurationOrderException::CONFIG_OFFSET_AFTER_LANES)
+			return 4;
+	}
+	try
+	{
+		inter->setLaneOffsets(1,1,1,1);
+		return 5;
+	}
+	catch(JPConfigurationOrderException &e)
+	{
+		if(e.getDetail() != JPConfigurationOrderException::CONFIG_OFFSET_AFTER_LANES)
+			return 6;
+	}
+
+	//test for finalizing with missing lanes
+	inter->addLane(JPIntersection::NORTH,1,JPLane::STRAIGHT,0,0);
+	inter->addLane(JPIntersection::SOUTH,1,JPLane::STRAIGHT,0,0); //missing lane 0
+	inter->addLane(JPIntersection::EAST,0,JPLane::STRAIGHT,0,0);
+	inter->addLane(JPIntersection::EAST,1,JPLane::STRAIGHT,0,0);
+	inter->addLane(JPIntersection::WEST,0,JPLane::STRAIGHT,0,0);
+	inter->addLane(JPIntersection::WEST,1,JPLane::STRAIGHT,0,0);
+	try
+	{
+		inter->finalize();
+		return 7;
+	}
+	catch(JPConfigurationOrderException &e)
+	{
+		if(e.getDetail() != JPConfigurationOrderException::FINALIZE_MISSING_LANES)
+			return 8;
+	}
+
+	//test changes after finalized
+	inter->addLane(JPIntersection::SOUTH,0,JPLane::STRAIGHT,0,0); //add the missing lane
+	inter->finalize();
+	try
+	{
+		inter->addLane(JPIntersection::SOUTH,0,JPLane::STRAIGHT,0,0); //add the missing lane
+		return 9;
+	}
+	catch(JPConfigurationOrderException &e)
+	{
+		if(e.getDetail() != JPConfigurationOrderException::CONFIG_FINALIZED)
+			return 10;
+	}
+
+	delete inter;
+	return 0;
 }
 
 
@@ -244,17 +305,62 @@ int twoLanesTurningToOneCheck()
 
 inline int laneOffsetCheck()
 {
-	try
+	JPIntersection inter;
+	int dir;
+
+	//test the direction specific function
+	for(dir = 0; dir < 4; dir++)
 	{
-		//bad news if you made it here
-		return -1;
-	}
-	catch(JPEXCEPTION_REPLACE_ME & e)
-	{
-		//some checks on output
-		return 0;
+		try
+		{
+			inter.setLaneOffset(dir, 0.999);
+			return dir;
+		}
+		catch(JPLaneOffsetException &e){}
 	}
 
+	//test each direction in the all directions function
+	dir++;
+	try
+	{
+		inter.setLaneOffsets(0.999,1,1,1);
+		return dir;
+	}
+	catch(JPLaneOffsetException &e){}
+	dir++;
+	try
+	{
+		inter.setLaneOffsets(1,0.999,1,1);
+		return dir;
+	}
+	catch(JPLaneOffsetException &e){}
+	dir++;
+	try
+	{
+		inter.setLaneOffsets(1,1,0.999,1);
+		return dir;
+	}
+	catch(JPLaneOffsetException &e){}
+	dir++;
+	try
+	{
+		inter.setLaneOffsets(1,1,1,0.999);
+		return dir;
+	}
+	catch(JPLaneOffsetException &e){}
+
+	//make sure all >=1 does not cause an error
+	dir++;
+	try
+	{
+		inter.setLaneOffsets(1,1,1,1);
+	}
+	catch(JPLaneOffsetException &e)
+	{
+		return dir;
+	}
+
+	return 0;
 }
 
 inline int turningLaneCrossingStraightLaneCheck()
@@ -274,30 +380,375 @@ inline int turningLaneCrossingStraightLaneCheck()
 
 inline int laneNumberOutOfBoundsCheck()
 {
+	JPIntersection inter;
+	inter.setLaneOffsets(2,2,2,2);
+
+	//try adding a lane that's exceeds max lanes
 	try
 	{
-		//bad news if you made it here
-		return -1;
+		inter.addLane(JPIntersection::NORTH,JPIntersection::MAX_LANES, JPLane::STRAIGHT, 0, 0);
+		return 1;
 	}
-	catch(JPEXCEPTION_REPLACE_ME & e)
+	catch(JPLaneNumberOutOfBoundsException &e){}
+
+	//try adding a lane less than 0
+	try
 	{
-		//some checks on output
-		return 0;
+		inter.addLane(JPIntersection::NORTH,-1, JPLane::STRAIGHT, 0, 0);
+		return 2;
 	}
+	catch(JPLaneNumberOutOfBoundsException &e){}
+
+	//fill up the intersection
+	inter.addLane(JPIntersection::NORTH,0, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::NORTH,1, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::SOUTH,0, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::SOUTH,1, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::EAST,0, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::EAST,1, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::WEST,0, JPLane::STRAIGHT, 0, 0);
+	inter.addLane(JPIntersection::WEST,1, JPLane::STRAIGHT, 0, 0);
+	inter.finalize();
+
+	//try getting a lane above what was added
+	try
+	{
+		inter.getLane(JPIntersection::NORTH, 2);
+		return 3;
+	}
+	catch(JPLaneNumberOutOfBoundsException &e){}
+
+	//try getting a lane less than 0
+	try
+	{
+		inter.getLane(JPIntersection::NORTH, -1);
+		return 4;
+	}
+	catch(JPLaneNumberOutOfBoundsException &e){}
+
+	return 0;
 }
 
-inline int directionOutOfBoundsCheck()
+/**
+ * \brief Direction out of bounds check subfunction.
+ *
+ * This function verifies the direction out of bounds exception for an individual function passed via a function pointer.
+ * \param ret An error code accumulator. This value is automatically incremented to ease tracking down failures.
+ * \param jpi The instance of JPIntersection that this will be run on.
+ * \param pt2func Function pointer for the particular function.
+ */
+//the original, different name for copy docs, accepts one int, returns double
+int doobPtrCheckBase(int &ret, JPIntersection &jpi, double  (JPIntersection::*pt2func)(int))
+ {
+	 //attempt with direction of -1
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(-1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //attempt with direction of 4
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(4);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //make sure all 4 directions work
+	 int dir;
+	 for(dir = 0; dir < 4; dir++)
+	 {
+		 try
+		 {
+			 ret++;
+			 (jpi.*pt2func)(dir);
+		 }
+		 catch(JPDirectionOutOfBoundsException &e)
+		 {
+			 return ret;
+		 }
+	 }
+	 return 0;
+ }
+
+/**
+ *
+ * \copydoc doobPtrCheckBase()
+ * \param p1 The double paramer that should be passed to the function.
+ */
+//accepts double, returns void (used twice)
+int doobPtrCheck(int &ret, JPIntersection &jpi, void  (JPIntersection::*pt2func)(int,double), double p1)
+ {
+	 //attempt with direction of -1
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(-1,p1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //attempt with direction of 4
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(4,p1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //make sure all 4 directions work
+	 int dir;
+	 for(dir = 0; dir < 4; dir++)
+	 {
+		 try
+		 {
+			 ret++;
+			 (jpi.*pt2func)(dir, p1);
+		 }
+		 catch(JPDirectionOutOfBoundsException &e)
+		 {
+			 return ret;
+		 }
+	 }
+	 return 0;
+ }
+
+/**
+ *
+ * \copydoc doobPtrCheckBase()
+ * \param p1 The double paramer that should be passed to the function.
+ */
+int doobPtrCheck(int &ret, JPIntersection &jpi, JPLane*  (JPIntersection::*pt2func)(int,int), int p1)
+ {
+	 //attempt with direction of -1
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(-1,p1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //attempt with direction of 4
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(4,p1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //make sure all 4 directions work
+	 int dir;
+	 for(dir = 0; dir < 4; dir++)
+	 {
+		 try
+		 {
+			 ret++;
+			 (jpi.*pt2func)(dir, p1);
+		 }
+		 catch(JPDirectionOutOfBoundsException &e)
+		 {
+			 return ret;
+		 }
+	 }
+	 return 0;
+ }
+
+/**
+ *
+ * \copydoc doobPtrCheckBase()
+ */
+int doobPtrCheck(int &ret, JPIntersection &jpi, int  (JPIntersection::*pt2func)(int) )
+ {
+	 //attempt with direction of -1
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(-1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //attempt with direction of 4
+	 try
+	 {
+		 ret++;
+		 (jpi.*pt2func)(4);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //make sure all 4 directions work
+	 int dir;
+	 for(dir = 0; dir < 4; dir++)
+	 {
+		 try
+		 {
+			 ret++;
+			 (jpi.*pt2func)(dir);
+		 }
+		 catch(JPDirectionOutOfBoundsException &e)
+		 {
+			 return ret;
+		 }
+	 }
+	 return 0;
+ }
+
+/**
+ * \brief Direction out of bounds check subfunction.
+ *
+ * This function verifies the direction out of bounds exception for an individual function passed via a function pointer.
+ * \param ret An error code accumulator. This value is automatically incremented to ease tracking down failures.
+ * \param pt2func Function pointer for the particular function.
+ */
+//static function accepts int, returns void. It get's is own doc since it doesn't need an instance
+int doobPtrCheck(int &ret, void (*pt2func)(int) )
+ {
+	 //attempt with direction of -1
+	 try
+	 {
+		 ret++;
+		 (*pt2func)(-1);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //attempt with direction of 4
+	 try
+	 {
+		 ret++;
+		 (*pt2func)(4);
+		 return ret;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //make sure all 4 directions work
+	 int dir;
+	 for(dir = 0; dir < 4; dir++)
+	 {
+		 try
+		 {
+			 ret++;
+			 (*pt2func)(dir);
+		 }
+		 catch(JPDirectionOutOfBoundsException &e)
+		 {
+			 return ret;
+		 }
+	 }
+	 return 0;
+ }
+/**
+  * \brief Check each function that accepts a direction to ensure the direction out of bounds is received when and only when it should be.
+  *
+  * This function calls a group of sub functions each of which accept a pointer to the function they are
+  * validating. They also accept an accumulator
+  * r for quickly locating the source of failure, the intersection instance, and lastly any parameters that
+  * will need to be passed to the function.
+  */
+int directionOutOfBoundsCheck()
 {
-	try
-	{
-		//bad news if you made it here
-		return -1;
-	}
-	catch(JPEXCEPTION_REPLACE_ME & e)
-	{
-		//some checks on output
-		return 0;
-	}
+	/*
+	//int, double:void
+	 * setLaneOffset -
+	 * setTrackedLaneLength -
+
+	 * //int, int
+	 * getLane -
+	 *
+	 * /int
+	 * validateDirection :void -
+	 * getLaneCount:int -
+	 *
+	 * getLaneOffset:double -
+	 * getLaneOffsetInFeet -
+	 * getSpeedLimits -
+	 * getSpeedLimitsInFPS -
+	 * getTrackedExitLength -
+	 *
+	 * individual
+	 * addLane
+	 */
+	JPIntersection inter;
+	int r = 0; //error return code
+
+	if( doobPtrCheck(r, &JPIntersection::validateDirection) )
+		return r; //1-6
+
+	if( doobPtrCheck(r, inter, &JPIntersection::setLaneOffset, 1.0) )
+		return r;//12
+
+	if( doobPtrCheck(r, inter, &JPIntersection::setTrackedLaneLength, 150.0) )
+		return r; //18
+
+	if( doobPtrCheckBase(r, inter, &JPIntersection::getLaneOffset) )
+		return r; //24
+
+	if( doobPtrCheckBase(r, inter, &JPIntersection::getLaneOffsetInFeet) )
+		return r;
+
+	if( doobPtrCheckBase(r, inter, &JPIntersection::getSpeedLimits) )
+		return r;
+
+	if( doobPtrCheckBase(r, inter, &JPIntersection::getSpeedLimitsInFPS) )
+		return r;
+
+	if( doobPtrCheckBase(r, inter, &JPIntersection::getTrackedExitLength) )
+		return r;
+
+	if( doobPtrCheck(r, inter, &JPIntersection::getLaneCount) )
+		return r;
+
+	//make sure there are actually lanes defined to return (otherwise get LaneNumberOutofBoundsException)
+	inter.addLane(JPIntersection::NORTH, 0, JPLane::STRAIGHT, 0,0); //adding to accommodate getlane
+	inter.addLane(JPIntersection::SOUTH, 0, JPLane::STRAIGHT, 0,0); //adding to accommodate getlane
+	inter.addLane(JPIntersection::EAST, 0, JPLane::STRAIGHT, 0,0); //adding to accommodate getlane
+	inter.addLane(JPIntersection::WEST, 0, JPLane::STRAIGHT, 0,0); //adding to accommodate getlane
+	if( doobPtrCheck(r, inter, &JPIntersection::getLane, 0) )
+		return r;
+
+	//last but not least, addLane. It's ugly so why bother with pointers.
+	 //attempt with direction of -1
+	 try
+	 {
+		 r++;
+		 inter.addLane(-1,JPIntersection::NORTH, JPLane::STRAIGHT, 0,0);
+		 return r;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //attempt with direction of 4
+	 try
+	 {
+		 r++;
+		 inter.addLane(4,JPIntersection::NORTH, JPLane::STRAIGHT, 0,0);
+		 return r;
+	 }
+	 catch(JPDirectionOutOfBoundsException &e) {}
+
+	 //make sure all 4 directions work
+	 int dir;
+	 for(dir = 0; dir < 4; dir++)
+	 {
+		 try
+		 {
+			 r++;
+			 inter.addLane(dir,JPIntersection::NORTH, JPLane::STRAIGHT, 0,0);
+		 }
+		 catch(JPDirectionOutOfBoundsException &e)
+		 {
+			 return r;
+		 }
+	 }
+
+	 return 0;
 }
 
 inline int addingAfterFinalized()
@@ -423,10 +874,10 @@ inline int gettersAndSettersTest()
 	if(325 != inter.getTrackedLaneLength(JPIntersection::WEST) ) return 20;
 
 	//lane length min and max
-	inter.setTrackedLaneLength(JPIntersection::NORTH, 149);
+	inter.setTrackedLaneLength(JPIntersection::NORTH, JPIntersection::MIN_LANE_LENG - 0.1);
 	inter.setTrackedLaneLength(JPIntersection::SOUTH, 1 + JPIntersection::MAX_LANE_LENG);
-	if(149 == inter.getTrackedLaneLength(JPIntersection::NORTH) ) return 21;
-	if(1 + JPIntersection::MAX_LANE_LENG == inter.getTrackedLaneLength(JPIntersection::SOUTH) ) return 22;
+	if(JPIntersection::MIN_LANE_LENG > inter.getTrackedLaneLength(JPIntersection::NORTH) ) return 21;
+	if(JPIntersection::MAX_LANE_LENG < inter.getTrackedLaneLength(JPIntersection::SOUTH) ) return 22;
 
 	//speed limits defaults, then sets, then FPS
 	if(35 != inter.getSpeedLimits(JPIntersection::NORTH)) return 23;

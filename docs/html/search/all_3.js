@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['carcount',['carCount',['../classSETestClass.html#ad304c33b49ac3ac2e31bfdacdf7c327f',1,'SETestClass']]],
   ['carimage',['carImage',['../classJJDisplayOutput.html#afb54593af5958faecbdbf824d9b93d2c',1,'JJDisplayOutput']]],
   ['cases',['Cases',['../classJPLightTestStub.html#a14e301e59312f28c36097145f2815722',1,'JPLightTestStub']]],
   ['changestatesuccesscheck',['changeStateSuccessCheck',['../DJTrafficLightManager__test_8cpp.html#ab9e5a6a17e2b3448c9cec33e5ebc1451',1,'DJTrafficLightManager_test.cpp']]],

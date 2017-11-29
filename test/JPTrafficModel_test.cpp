@@ -154,10 +154,10 @@ int timingCheck(double sumTime[4], double times[4][ITERATIONS] )
 	double stdDev[4];
 
 	//for clarity and brevity
-	int NORTH = JPIntersection::NORTH;
-	int SOUTH = JPIntersection::SOUTH;
-	int EAST = JPIntersection::EAST;
-	int WEST = JPIntersection::WEST;
+	const int NORTH = JPIntersection::NORTH;
+	const int SOUTH = JPIntersection::SOUTH;
+	const int EAST = JPIntersection::EAST;
+	const int WEST = JPIntersection::WEST;
 
 	//verify average output times
 	//N 0, S 10, E 100, W 1000
@@ -192,10 +192,10 @@ int directionDistributionCheck(int dCtr[4][3])
 	int errField = 0;
 
 	//for clarity and brevity
-	int NORTH = JPIntersection::NORTH;
-	int SOUTH = JPIntersection::SOUTH;
-	int EAST = JPIntersection::EAST;
-	int WEST = JPIntersection::WEST;
+	const int NORTH = JPIntersection::NORTH;
+	const int SOUTH = JPIntersection::SOUTH;
+	const int EAST = JPIntersection::EAST;
+	const int WEST = JPIntersection::WEST;
 
 	//compute percentages for north
 	double lperc = 15. / (15 + 60 + 25);
@@ -269,11 +269,11 @@ int distributionTests()
 			//check destination and increment appropriately
 			dest = tm.getNextTurnDirection(dir);
 			//todo check against actual direction from SFCar
-			if(1 == dest) //left
+			if(SFCar::DESIRE_LEFT == dest) //left
 				dircounter[dir][0]++;
-			else if(2 == dest) //right
+			else if(SFCar::DESIRE_RIGHT == dest) //right
 				dircounter[dir][1]++;
-			else if(3 == dest) //straight
+			else if(SFCar::DESIRE_STRAIGHT == dest) //straight
 				dircounter[dir][2]++;
 		}
 	}
