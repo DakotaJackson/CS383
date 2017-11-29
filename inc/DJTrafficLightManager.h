@@ -1,30 +1,29 @@
 #ifndef SRC_DJTRAFFICLIGHT_MANAGER_H_
 #define SRC_DJTRAFFICLIGHT_MANAGER_H_
 
-typedef enum {
-
-}
 class DJTrafficLightManager
 {
 public:
-    // all possibilities of a state for a light
-    #define RED = 1;
-    #define YELLOW = 2;
-    #define GREEN = 4;
-    #define LEFT_GREEN = 8;
-    #define BOTH_GREEN = 12;
-    #define LEFT_BLINK_YELLOW = 16;
-    // all possibilities of a type of light
-    #define NORMAL_LIGHT = 1;
-    #define LEFT_TURN_ONLY_LIGHT = 2;
-    #define LEFT_AND_NORMAL_LIGHT = 3;
+    // all possibilities of a state for a light (using jpconstants.h)
+    //#define RED = 1;
+    // #define YELLOW = 2;
+    // #define GREEN = 4;
+    // #define LEFT_GREEN = 8;
+    // ?#define BOTH_GREEN = 12;
+    // #define LEFT_BLINK_YELLOW = 16; == LEFT_YIELD
+    // all possibilities of a type of light(NOT NEEDED, WILL DELETE LATER)
+    //#define NORMAL_LIGHT = 1;
+    //#define LEFT_TURN_ONLY_LIGHT = 2;
+    //#define LEFT_AND_NORMAL_LIGHT = 3;
+
+
     // set default timings of lights (In seconds)
     #define DEFAULT_CYCLE_TIME = 60; // 1 min
     #define DEFAULT_RED_TIME = 29;
     #define DEFAULT_YELLOW_TIME = 2; 
     #define DEFAULT_GREEN_TIME = 29; 
     #define DEFAULT_LEFT_GREEN_TIME = 15; // .5 second under half total cycle of normal green/yellow 
-    #define DEFAULT_LEFT_BLINK_YELLOW_TIME = 16; // .5 second over half total cycle of normal green/yellow
+    #define DEFAULT_LEFT_BLINK_YELLOW_TIME = 16; // .5 second over half total cycle of normal green/yellow (Dir+/-2 GREEN AFTER THIS)
 
  
     DJTrafficLightManager(int laneNum, int dirNum);

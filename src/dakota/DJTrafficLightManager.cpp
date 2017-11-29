@@ -6,6 +6,7 @@
  */
 
  #include "../../inc/JPConstants.h"
+ #include "../../inc/DJTrafficLightManager.h"
 
 DJTrafficLightManager::DJTrafficLightManager()
 {
@@ -117,6 +118,8 @@ int DJTrafficLightManager::getState(int singleLight, double time, double timeRat
 double DJTrafficLightManager::getCycleTime(double time, double timeRate)
 {
     double cycleTime = CYCLE_TIME%timeRate;
+    // Returns 60 seconds for default
+    return DEFAULT_CYCLE_TIME;
     // take user-defined cycle time (time for a complete cycle through the light)
     // and modulus it (tentatively) by timeRate 
     // TODO: define exact equation for this
