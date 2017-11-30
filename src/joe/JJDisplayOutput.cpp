@@ -1,8 +1,8 @@
 #include "JJDisplayOutput.h"
 #include "ui_JJDisplayOutput.h"
 
-#include "JPIntersection.h"
-#include "JPLane.h"
+//#include "JPIntersection.h"
+//#include "JPLane.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -101,6 +101,27 @@ void JJDisplayOutput::initCars(){
 
 void JJDisplayOutput::drawCars(QPainter *qp){
 
+    // in JPIntersection
+    JPLane *testLane = something.getLane();
+    int laneCount = something.getLaneCount(direction);
+
+    // in JPLane
+    /* int size = something.getSize();
+     * SFCar *testCar = something.getNextCar();
+     */
+
+    // in SFCar
+    /* int carX = something.getX();
+     * int carY = something.getY();
+     * int angle = something.getTheta();
+     *
+     *
+     * for(int i = 0; i < size; i++)
+     * {
+     *       drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
+     *
+     */
+
     for(int i=0; i< 4; i++)
     {
         drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
@@ -130,8 +151,9 @@ void JJDisplayOutput::drawCar(QPainter *qp, int x, int y, int imgIndex, int angl
 void JJDisplayOutput::initLights()
 {
     lightImage[0].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\lightRed.png");
-    lightImage[1].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\lightGreen.png");
-    lightImage[2].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\lightYellow.png");
+    lightImage[1].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\lightYellow.png");
+    lightImage[2].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\lightGreen.png");
+
 
     m_lights[0][0]=180;
     m_lights[0][1]=200;
@@ -158,9 +180,19 @@ void JJDisplayOutput::initLights()
 
 void JJDisplayOutput::drawLights(QPainter *qp)
 {
+
     for(int i=0; i < 1; i++)
     {
-         drawLight(qp, m_lights[i][0],  m_lights[i][1],  m_lights[i][2], m_lights[i][3]);
+        /*int testState = something.getState(i?,??,??);
+        testState = testState - 1;
+        if(testState == 4)
+        {
+                testState = testState - 2;
+        }
+        drawLight(qp, m_lights[i][0],  m_lights[i][1],  m_lights[i][testState], m_lights[i][3]);
+        */
+        drawLight(qp, m_lights[i][0],  m_lights[i][1],  m_lights[i][2], m_lights[i][3]);
+
     }
 }
 
@@ -184,22 +216,9 @@ void JJDisplayOutput::drawLight(QPainter *qp, int x, int y, int imgIndex, int an
     qp->resetTransform();
 
 /*
-    int m_northLane = 1;
-    int m_southLane = 2;
-    int m_westLane = 3;
-    int m_eastLane = 4;
-
-    int m_laneWidth = 50;
-    int m_laneLength = 200;
-
     int roadWidthNS = ((m_northLane + m_southLane) * m_laneWidth);
     int roadWidthEW = ((m_westLane + m_eastLane) * m_laneWidth);
 
-    qp->setPen(QColor("#111111"));
-    qp->setBrush(QBrush("#111111"));
-    //if(int state == 0){
-    //    qp->draw
-    //}
     //NS Top
     qp->drawRect(m_laneLength, m_laneLength - (m_laneWidth / 2),                       m_laneWidth, 25);
     //NS Bot
@@ -312,7 +331,6 @@ void JJDisplayOutput::drawText(QPainter *qp)
 void JJDisplayOutput::step()
 {
     m_cars[0][0]++;
-    m_lights[0][3]++;
     update();
 }
 
