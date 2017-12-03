@@ -117,7 +117,7 @@ private:
 	bool _updating;
 	//long _throughput[4][MAX_LANES_MACRO];
 	double _nextCreationTime[4];
-	double _yellowTime[4][MAX_LANES_MACRO];
+	double _yellowTime[4][MAX_LANES_MACRO][2]; //0 = R/S, 1 L
 	int _turnOpts[4][MAX_LANES_MACRO]; //local copy
 	double _intersectionBounds[4];
 
@@ -139,12 +139,19 @@ private:
 	double getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
 			const double dSpeed, const double pos, const double timeStep) const;
 	void updateCar(SFCar *car,const int dir, double &speed,double &pos,const double accel, const double timeStep);
-	void processLane(JPLane *lane, int direction, double stepTime);
+	void processLane(int ln, int direction, double stepTime);
 	void addCars(int direction, double timeStep);
 	void checkPrereqs();
 	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
 	SFCar *makeCar(int direction, int &lane);
-	int determineLane(SFCar *car, int direction);
+	int determineLane(SFCar *car, int direction) const;
+	void dispose(SFCar *car, JPLane *lane);
+	double getIntersectionDecel(SFCar *car,const int dir, const int ln, const double pos,
+			const double speed) const;
+	int determineLightEffect(SFCar *car, const int dir, const int ln) const;
+	void updateYellowTimes(const double stepTime);
+	enum lightEffect {GO, CAUTION, YIELD, STOP };
+
 
 };
 /** @} */

@@ -9,13 +9,12 @@
 
 JPCarTestStub::JPCarTestStub()
 {
-	// TODO Auto-generated constructor stub
-
+	_dspeed = 0;
+	_leng = 15;
 }
 
 JPCarTestStub::~JPCarTestStub()
 {
-	// TODO Auto-generated destructor stub
 }
 
 double JPCarTestStub::getDesiredSpeed() const

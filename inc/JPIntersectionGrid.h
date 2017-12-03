@@ -19,34 +19,44 @@
  */
 class JPIntersectionGrid {
 public:
-	JPIntersectionGrid();
+	JPIntersectionGrid(JPIntersection *inter);
 	virtual ~JPIntersectionGrid();
 
 	/**
-	 * \brief check the intersection and return required (de/ac)celeration
+	 * \brief Check the intersection and return whether it is clear.
 	 *
-	 * \return 0 if the intersection is clear
-	 * 	a positive value of required deceleration if the car must slow down
-	 * 	a negative value of the maximum allowable acceleration if the car can speed up but the lane is not entirely clear
+	 * \return true if there is a clear travel path, false otherwise.
 	 */
-	double checkPath(int direction, int lane, SFCar &car);
-	double checkYield(int direction, int lane, SFCar &car);
-	void setup(JPIntersection inters);
-	void clearRow(int direction, int lane); //reset row at the beginning of processing a new lane
-	void addCar(int direction, int lane, SFCar &car);
+	bool checkPath(const int direction, const int lane) const;
+	bool checkYield(const int direction, const int lane, SFCar *car, const double speed, const double distance) const;
+	void setFirstCar(const int direction, const int lane, SFCar *car);
 
 private:
-	SFCar *_NorthSouthGrid[MAX_LANES_MACRO][MAX_LANES_MACRO][2];
-	SFCar *_EastWestGrid[MAX_LANES_MACRO][MAX_LANES_MACRO][2];
 	SFCar *_firstCars[4][MAX_LANES_MACRO];
 	double _offsets[4];
+	double _bounds[4];
 	int _numLanes[4];
+	JPIntersection *_inter;
+
+	bool obstructedAboveX(const double x) const;
+	bool obstructedBelowX(const double x) const;
+	bool obstructedAboveY(const double x) const;
+	bool obstructedBelowY(const double x) const;
+
+	//shorthand constants
+	const int NORTH = JPIntersection::NORTH;
+	const int SOUTH = JPIntersection::SOUTH;
+	const int EAST = JPIntersection::EAST;
+	const int WEST= JPIntersection::WEST;
+	const double LANE_WIDTH = JPIntersection::LANE_WIDTH;
 
 	//reference tables
-	int _beginX[4];
+	/*
+	 int _beginX[4];
 	int _beginY[4];
 	const int _incX[4] = {-1,1,-1,1}; //not set accurately
 	const int _incY[4] = {-1,1,-1,1}; //not set accurately
+	*/
 };
 /** @} */
 #endif /* SRC_JAMES_JPINTERSECTIONGRID_H_ */
