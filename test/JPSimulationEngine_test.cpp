@@ -11,7 +11,11 @@
 #include "../inc/JPUpdatableInterface.h"
 #include <stdio.h>
 #include <string.h>
+
+//# define NIX_IS_HERE
+#ifndef NIX_IS_HERE
 #include <windows.h> /* sleep for demo */
+#endif
 
 
 /* now they are member functions
@@ -64,8 +68,8 @@ private:
 		else if( SFCar::DESIRE_LEFT == turn )
 			trn = 'L';
 
-		printf("X:%3.2f Y:%3.2f Th: %2.0f %c Sp:%2.1f St:%3.1f Wt:%3.1f \n",
-				x, y, theta, trn, speed, insim, wait);
+		printf("X:%3.2f Y:%3.2f Th: %2.0f %c Sp:%2.1f St:%3.1f Wt:%3.1f ptr:%d\n",
+				x, y, theta, trn, speed, insim, wait, car);
 	}
 
 	void makeCarValidation(SFCar *car, double x[4][3], double y[4][3], double theta[4])
@@ -445,14 +449,258 @@ private:
 
 	int matchPaceTest()
 	{
-		//JPSimulationEngine *eng = getSetup(1);
+		JPSimulationEngine *eng;
+		eng = getSetup(2);
+		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::Cases::GREEN_EW));
+		eng->init();
+		bool matchSpeed = false;
+		double t, pos, stepTime = 0.1;
+		double bound = - 2 * JPIntersection::LANE_WIDTH;
+
+		//position car 5 seconds from light with expected stop time of 10 seconds
+		JPLane *lane = inter->getLane(3,0);
+
+		//lead car
+		SFCar *lcar = new SFCar(); //lead
+		lcar->setX(-10000); //2 miles-ish
+		lcar->setY(-15);
+		lcar->setTimeInSim(0);
+		lcar->setSpeed(30);
+		lcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lane->addCarAtEnd(lcar);	
+
+		//behind car
+		SFCar *bcar = new SFCar(); //back
+		bcar->setX(-10060); //45 ft (4 seconds) behind 
+		bcar->setY(-15);
+		bcar->setTimeInSim(0);
+		bcar->setSpeed(40);
+		bcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lane->addCarAtEnd(bcar);	
+
+		//iterate to the upper bound of 11 seconds.
+		for(t = 0; t < 30; t += stepTime)
+		{
+			eng->step(stepTime);
+			//printCar(lcar);
+			//printCar(bcar);
+			//no change before 3 seconds
+			if(t <= 3 && bcar->getSpeed() < 39.999)
+					return 1; //slowed down too quickly
+		}
+		
+		if(! matchSpeed)
+			return 2; //it didn't slow down fast enough
 
 		return -1;
 	}
 
 	int redLightStopTest()
 	{
-		return -1;
+		JPSimulationEngine *eng;
+		eng = getSetup(2);
+		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::Cases::GREEN_NS));
+		eng->init();
+		bool stopSpeed = false;
+		double t, pos, stepTime = 0.1;
+		double bound = - 2 * JPIntersection::LANE_WIDTH;
+
+		//position car 5 seconds from light with expected stop time of 10 seconds
+		JPLane *lane = inter->getLane(3,0);
+		SFCar *car = new SFCar();
+		car->setX(-280);
+		car->setY(-15);
+		car->setTimeInSim(0);
+		car->setSpeed(51.3);
+		car->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lane->addCarAtEnd(car);	
+		
+		//iterate to the upper bound of 11 seconds.
+		for(t = 0; t < 11; t += stepTime)
+		{
+			eng->step(stepTime);
+			//printCar(car);
+			if(car->getSpeed() < 0.0001)
+			{
+				if( t < 9)
+					return 1; //slowed down too quickly
+				
+				stopSpeed = true; //flag that the car did stop
+				break;
+			}
+		}
+		
+		if(! stopSpeed)
+			return 2; //it didn't slow down fast enough
+
+		pos = car->getX();
+		if(pos < bound - 1 || pos > bound)
+			return 3; //it did not stop at the right position
+		
+		//test 2 start an extra 5 seconds out
+		stopSpeed = false;
+		car->setX(-537);
+		car->setSpeed(51.3);
+		car->setTimeInSim(0);
+		
+		//iterate to the upper bound of 16 seconds.
+		for(t = 0; t < 16; t += stepTime)
+		{
+			eng->step(stepTime);
+			//printCar(car);
+			if(car->getSpeed() < 0.0001)
+			{
+				if( t < 14)
+					return 4; //slowed down too quickly
+				
+				stopSpeed = true; //flag that the car did stop
+				break;
+			}
+		}
+		
+		if(! stopSpeed)
+			return 5; //it didn't slow down fast enough
+		
+		pos = car->getX();
+		if(pos < bound - 1 || pos > bound)
+			return 6; //it did not stop at the right position
+
+		//test 6 (past 0.5)
+		stopSpeed = false;
+		car->setX(-20.45);
+		car->setSpeed(10.);
+		car->setTimeInSim(0);
+		
+		//iterate to the upper bound of 16 seconds.
+		for(t = 0; t < 16; t += stepTime)
+		{
+			eng->step(stepTime);
+			printCar(car);
+			if(car->getSpeed() < 0.0001)
+			{
+				stopSpeed = true; //flag that the car did stop
+				break;
+			}
+		}
+		
+		if(! stopSpeed)
+			return 16; //it didn't slow down fast enough
+		
+		pos = car->getX();
+		if(pos < bound - 1 || pos > bound)
+			return 17; //it did not stop at the right position
+
+		lane->removeFirstCar(); //cleanup
+
+		//repeat with WEST
+		bound = -bound;
+		stopSpeed = false;
+		car->setX(280);
+		car->setY(15);
+		car->setSpeed(51.3);
+		car->setTimeInSim(0);
+		lane = inter->getLane(1,0);
+		lane->addCarAtEnd(car);	
+
+		//iterate to the upper bound of 17 seconds.
+		for(t = 0; t < 11; t += stepTime)
+		{
+			eng->step(stepTime);
+			//printCar(car);
+			if(car->getSpeed() < 0.0001)
+			{
+				if( t < 9)
+					return 7; //slowed down too quickly
+				
+				stopSpeed = true; //flag that the car did stop
+				break;
+			}
+		}
+		
+		if(! stopSpeed)
+			return 8; //it didn't slow down fast enough
+		
+		pos = car->getX();
+		if(pos < bound || pos > bound + 1)
+			return 9; //it did not stop at the right position
+		
+		lane->removeFirstCar(); //cleanup
+
+		//new intersection for NORTH and SOUTH
+ 		eng = getSetup(2);
+		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::Cases::GREEN_NS));
+		eng->init();
+
+		//SOUTH
+		bound = -bound; //make negative
+		stopSpeed = false;
+		car->setY(-280);
+		car->setX(-15);
+		car->setSpeed(51.3);
+		car->setTimeInSim(0);
+		lane = inter->getLane(2,0);
+		lane->addCarAtEnd(car);	
+
+		//iterate to the upper bound of 17 seconds.
+		for(t = 0; t < 11; t += stepTime)
+		{
+			eng->step(stepTime);
+			//printCar(car);
+			if(car->getSpeed() < 0.0001)
+			{
+				if( t < 9)
+					return 10; //slowed down too quickly
+				
+				stopSpeed = true; //flag that the car did stop
+				break;
+			}
+		}
+		
+		if(! stopSpeed)
+			return 11; //it didn't slow down fast enough
+		
+		pos = car->getY();
+		if(pos < bound - 1 || pos > bound)
+			return 12; //it did not stop at the right position
+		
+		lane->removeFirstCar(); //cleanup
+
+		//NORTH
+		bound = -bound; //make positive
+		stopSpeed = false;
+		car->setY(280);
+		car->setX(15);
+		car->setSpeed(51.3);
+		car->setTimeInSim(0);
+		lane = inter->getLane(0,0);
+		lane->addCarAtEnd(car);	
+
+		//iterate to the upper bound of 17 seconds.
+		for(t = 0; t < 11; t += stepTime)
+		{
+			eng->step(stepTime);
+			//printCar(car);
+			if(car->getSpeed() < 0.0001)
+			{
+				if( t < 9)
+					return 13; //slowed down too quickly
+				
+				stopSpeed = true; //flag that the car did stop
+				break;
+			}
+		}
+		
+		if(! stopSpeed)
+			return 14; //it didn't slow down fast enough
+		
+		pos = car->getY();
+		if(pos < bound || pos > bound + 1)
+			return 15; //it did not stop at the right position
+		
+		lane->removeFirstCar(); //cleanup
+
+		//todo repeat for starting less than 0.5
+		return 0;
 	}
 
 	int determineLaneTest()
@@ -830,9 +1078,8 @@ public:
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Previous Car Deceleration Test",
 				prevCarDecelTest() );
-printf("Ret: %d\n", ret);
 		ret = consts::testOuptut(
-				"JPSimulationEngine: ",
+				"JPSimulationEngine: Match Pace Test",
 				matchPaceTest() );
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
@@ -844,8 +1091,9 @@ printf("Ret: %d\n", ret);
 				"JPSimulationEngine: ",
 				leftTurnBlinkYellowTest() );
 		ret = consts::testOuptut(
-				"JPSimulationEngine: ",
+				"JPSimulationEngine: Red Light Stop Test",
 				redLightStopTest() );
+printf("Ret: %d\n", ret);
 		return ret;
 	}
 
@@ -885,7 +1133,9 @@ printf("Ret: %d\n", ret);
 		for(cycles = 0; 1; cycles++)
 		{
 			eng->step(0.1);
+#ifndef NIX_IS_HERE
 			Sleep(100);
+#endif
 			if(cycles % 10 == 0) //print every 1 seconds
 			{
 				printf("Time: %f\n", JPSimulationEngine::getInstance()->getTime());

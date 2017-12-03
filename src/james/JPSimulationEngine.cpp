@@ -139,6 +139,11 @@ double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPo
 		dX = pPos - pos - 5; //maintain 5 feet between cars
 //printf("pnext: %f, next %f\n", pnext, next);
 
+		//prevent error on stacking
+		//if less than 5ft from the next car go immediately to zero
+		if(dX < 0 && speed > 0)
+			return - speed / timeStep;
+
 		//this gives either the required deceleration (-) to not come within 5 feet
 		//of the car in front or the allowable acceleration (+) to do the same
 		reqdDecl =  movingTargetDecel(speed, pSpeed, dX, time);
@@ -200,9 +205,16 @@ void JPSimulationEngine::updateCar(SFCar *car, int dir, double &speed,double &po
 }
 void JPSimulationEngine::dispose(SFCar *car, JPLane *lane)
 {
-	lane->removeFirstCar();
+	SFCar *remcar;
+	remcar = lane->removeFirstCar();
 	this->pushRemove(car, 0);
-	delete car;
+	if( remcar != car)
+	{
+		fprintf(stderr, "Car removal error!\n");
+		fprintf(stderr, "Car: %d\t remcar: %d\n", car, remcar);
+	}
+	else
+		delete car;
 }
 
 int JPSimulationEngine::determineLightEffect(SFCar *car, const int dir, const int ln) const
@@ -231,7 +243,7 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 {
 	double next, action, accel1, accel2, dist, stepDist;
 	double lookAhead = 5.0;
-	double lPos = _intersectionBounds[dir]; //position of the light
+	double lPos = - std::abs(_intersectionBounds[dir]); //position of the light
 	//default slow down rate is the car's normal acceleration rate
 	double accelDef = this->acceleration; //may replace with car function
 	double time;
@@ -404,6 +416,12 @@ void JPSimulationEngine::init()
 			_yellowTime[dir][ln][1] = -1;
 			_turnOpts[dir][ln] = (_intersection->getLane(dir, ln))->getTurnOptions();
 		}
+
+		//negate south and west
+		int SOUTH = JPIntersection::SOUTH;
+		int WEST = JPIntersection::WEST;
+		_intersectionBounds[SOUTH] = - _intersectionBounds[SOUTH];
+		_intersectionBounds[WEST] = - _intersectionBounds[WEST];
 	}
 
 	//adjust init

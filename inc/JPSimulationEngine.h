@@ -152,6 +152,10 @@ private:
 	void updateYellowTimes(const double stepTime);
 	enum lightEffect {GO, CAUTION, YIELD, STOP };
 
+	const int NORTH = JPIntersection::NORTH;
+	const int SOUTH = JPIntersection::SOUTH;
+	const int EAST = JPIntersection::EAST;
+	const int WEST = JPIntersection::WEST;
 
 };
 /** @} */
