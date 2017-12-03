@@ -1,155 +1,225 @@
-/*
- * DJTrafficLightManager.cpp
- *
- *  Created on: Oct 21, 2017
- *      Author: dakota
- */
+#include "DJTrafficLightManager.h"
+#include "JPConstants.h"
+#include <stdio.h>
+using namespace std;
 
- #include "../../inc/JPConstants.h"
- #include "../../inc/DJTrafficLightManager.h"
+// USING STATE PATTERN (without classes, but same idea)
+DJTrafficLightManager* DJTrafficLightManager::tLightManager = NULL;
 
 DJTrafficLightManager::DJTrafficLightManager()
 {
-    _state = 0;
-    // 4 = total possible directions, 6 = max number lanes
-    // directions: north = 0, east = 1, south = 2, west = 3
-    _lightArray = [4][6];
-    _masterStateTable = [4][6];
-    // include way to get total number of lights, rate of time,
-    // state and manage/update from there. May use 2D array for light sorting?
+    // TODO: Depreciate single light array and use _dirAndLaneLightArray w/lightPos at 2dlight coords 
+    // STATIC BINDING EXAMPLES
+    _singleLightArray[24];
+    _masterStateTimingTable[10];
+    _masterStateTable[24][10];
+    _dirAndLaneLightArray[4][6];
+    _useDefaults = true;
+    _cycleTime = 60.0;
+    _timeRate = 1.0;
 }
 
-void DJTrafficLightManager::initAllLights(int numLanes, int direction)
-{   
-    // (MAY NEED TO DEFINE THIS WITH USER SPEC VAR)
-    // make complete 4x6 map to populate state table on and compare with
-    for(int i=0;i<6;i++) {
-        // 0 is always left lane, no matter direction
-        if (i==0 || i==1){
-            // with 4+ lanes, 2 left turns will be needed (normal and only left)
-            if (numLanes > 4 && i==1) {
-                lightArray[direction][i] = LEFT_AND_NORMAL_LIGHT; 
-            } else {
-                lightArray[direction][i] = LEFT_TURN_ONLY_LIGHT;
-            }
-        }
-        // otherwise light is normal and populated in map
-        else if (i<numLanes){
-            lightArray[direction][i] = NORMAL_LIGHT;
-        }
-        // if no light is there, populate map with a 0
-        else if (i>=numLanes){
-            lightArray[direction][i] = 0;
-        }
-    }
-    // take total number of lines and find a way to 
-    // map them on a per-lane/direction basis, along with
-    // initializing them with proper values, user config-able
-    
-    //TODO: alter how this is called later on
-    initStateTable(lightArray);
-}
-
-void DJTrafficLightManager::initStateTable(int lightArray[][])
+DJTrafficLightManager* DJTrafficLightManager::GetInstance()
 {
-    //int masterStateTable [4][6];
-    // incrementing through 2D map generated in initAllLights function
-    double time = 0;
-    double timeRate = 1; 
-    for(int i=0;i<4;i++) {
-        for(int j=0;j<6;j++) {
-            if(lightArray[i][j] != 0) {
-                // north and south only to green straight (with no left turn)
-                if (i == 0 || i == 2) {
-                    if (lightArray[i][j] == NORMAL_LIGHT) {
-                        masterStateTable[i][j] = GREEN;
-                    } else {
-                        masterStateTable[i][j] = RED;
-                    }
-                }
-                // set all other directions/lights to red (if set up)
-                masterStateTable[i][j] = RED;
-            } else {
-                masterStateTable[i][j] = 0;
-            }
-        }
+    // ensure only single instance of the traffic light manager 
+    if (tLightManager == NULL) {
+        tLightManager = new DJTrafficLightManager();
     }
-    // initializes the state table for the lights to be used
-    // to calculate states of individual traffic lights.
-    // made with regards to user input from initAllLights
+    return tLightManager;
 }
 
-int DJTrafficLightManager::getSingleLight(int direction, int lane)
-{   
-    // light pos is the number (counting from top left to bottom right)
-    int lightPos=0;
-    for(int i=0;i<4;i++) {
-        for(int j=0;j<6;j++) {
-            if(i == direction && j == lane){ 
-                return lightPos;
+void DJTrafficLightManager::InitManager(int lanes[4][6], int stateTable[9][6], double cycleTime, double timeRate) {
+    // if default is checked in ui, first position in 2d array will be -1
+    if (lanes[0][0] != -1) {
+            _useDefaults = false;
+            _cycleTime = cycleTime;
+            _timeRate = timeRate;
+    } else {
+            for(int v=0;v<4;v++) {
+                for(int b=0;b<6;b++) {
+                    // ensures that doubleLightArray can be accessed in other functions and persists
+                    _dirAndLaneLightArray[v][b] = lanes[v][b];
+                }
+            }
+    } // END 2D LIGHT ARRAY POPULATION
+
+    if (_useDefaults) {
+        _cycleTime = 60.0; // ensure cycle time is properly set at default
+        _timeRate = 1.0; // ensure sim time is properly set at default
+        // hardcode state times for default states (into default table)
+        int defaultTempMasterStateTimingTable[10] = {14,14,2,14,14,2,-1,-1,-1,-1};
+        // only 8 lanes in default, set up in singleLightArray
+        for(int i=0;i<24;i++) {
+            if (i<8) {
+                _singleLightArray[i] = 0; // Means something there, not init yet
             } else {
+                _singleLightArray[i] = -1; // Means nothing there (only 8 lanes default)
+            }
+            if (i<10) {
+                // default table copied into table used for rest of module
+                _masterStateTimingTable[i] = defaultTempMasterStateTimingTable[i];
+            }
+        }
+        // hard code default 2D light array (0 = not there, 1 = light present)
+        int defaultTempdirAndLaneLightArray[4][6] = {
+            {1,1,0,0,0,0},  // N(SB)
+            {1,1,0,0,0,0},  // E(WB)
+            {1,1,0,0,0,0},  // S(NB)
+            {1,1,0,0,0,0}}; // W(EB)
+            
+        // use for loop to set all states
+        // to save space, will hard code with ints.
+        // RED=1,YELLOW=2,GREEN=4,LEFT_GREEN=8,LEFT_YIELD=16,LEFT_CAUTION=32
+        int defaultTempStateTable[8][6] = {
+            {4,4,2,1,1,1}, // N Right(SB)
+            {16,1,1,1,1,1}, // N Left(SB)
+            {1,1,1,4,4,2}, // E Right(WB)
+            {1,1,1,16,1,1}, // E Left(WB)
+            {4,4,2,1,1,1}, //S Right(NB) 
+            {1,16,1,1,1,1}, // S Left(NB)
+            {1,1,1,4,4,2}, // SW Right(EB)
+            {1,1,1,1,16,1}}; // SW Left(EB)
+
+        for(int x=0;x<24;x++) {
+            for(int y=0;y<10;y++) {
+                // only want values defined for default
+                if(x<8 && y<6) {
+                    if(y==0 && x==0) {
+                        //initialize positions at first state
+                        _singleLightArray[0] = consts::GREEN; //N Right(SB)
+                        _singleLightArray[1] = consts::LEFT_YIELD; //N Left(SB)
+                        _singleLightArray[2] = consts::RED; //E Right(WB)
+                        _singleLightArray[3] = consts::RED; //E Left(WB)
+                        _singleLightArray[4] = consts::GREEN; //S Right(NB) 
+                        _singleLightArray[5] = consts::RED; //S Left(NB)
+                        _singleLightArray[6] = consts::RED; //W Right(EB)
+                        _singleLightArray[7] = consts::RED; //W Left(EB)
+                    }
+                    // set the master table to default as defined above
+                    _masterStateTable[x][y] = defaultTempStateTable[x][y];
+                } else {
+                    // otherwise nothing is there 
+                    _masterStateTable[x][y] = -1;
+                }
+                if(x<4 && y<6) {
+                    // copy over default array to normal array in use everywhere
+                    _dirAndLaneLightArray[x][y] = defaultTempdirAndLaneLightArray[x][y];
+                }
+            }
+        } // end of initializing tables for default set up
+    } else {
+        printf("Using user defined state table");
+        _cycleTime = getCycleTime();
+
+        for(int r=0;r<25;r++) {
+            for(int c=0;c<10;c++) {
+                if(r==0) {
+                    // TODO: REMOVE AFTER TESTING
+                    if(c<6) {
+                        _masterStateTimingTable[c] = stateTable[r][c];
+                    } else {
+                        _masterStateTimingTable[c] = -1;
+                    }
+                } else { // END STATE TABLE TIMING POPULATION
+                    // TODO: REMOVE AFTER TESTING
+                    if(c<6) {
+                        _masterStateTable[r-1][c] = stateTable[r][c];
+                    } else {
+                        _masterStateTable[r-1][c] = -1; 
+                    }
+                } // END STATE TABLE POPULATION
+            } // end of using 2D STATE TABLE population methods
+        }
+
+        int lightPos = 0;
+        for(int rr=0;rr<4;rr++) {
+            for(int cc=0;cc<6;cc++) {
+                if(_dirAndLaneLightArray[rr][cc] != -1 && _dirAndLaneLightArray[rr][cc] != 0) { // get initial state
+                    _singleLightArray[lightPos] = _masterStateTable[lightPos][0];
+                } else {
+                    _singleLightArray[lightPos] = -1; // nothing there
+                }
+                lightPos++;
+            }
+        } // end of using 2D SINGLE LIGHT ARRAY population methods 
+    } // END OF NON-DEFAULT POPULATION
+}
+
+int DJTrafficLightManager::getState(double time, int direction, int lane) {
+    double relativeTime = fmod(time, _cycleTime);
+    int lightPos = 0;
+    int cumulativeTime = 0;
+    // t will be the current state num
+    for(int t=0;t<10;t++) {
+        cumulativeTime = cumulativeTime + _masterStateTimingTable[t];
+        if(_masterStateTimingTable[t] != -1) {
+            if(relativeTime < cumulativeTime) {
+                // found state (keeps adding incriments until it falls in place)
+                // same for both default and user defined case
+                lightPos = getSingleLightPosition(direction, lane);
+                // update state of light in single array to new position, then return state it was set to
+                _singleLightArray[lightPos] = _masterStateTable[lightPos][t];
+                return(_singleLightArray[lightPos]);
+            }
+        } else {
+            // error in finding the state
+            return -1;
+        }
+    }
+    // shouldn't ever make it here. Return an error 
+    return -1;
+}
+
+int DJTrafficLightManager::getSingleLightPosition(int direction, int lane) {
+    if(_useDefaults) {
+        // use hard-coded responses for default, as they will always be known
+        if(direction==0) {
+            if(lane==0) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+        if(direction==1){
+             if(lane==0) {
+                return 2;
+            } else {
+                return 3;
+            }
+        }
+        if(direction==2){
+             if(lane==0) {
+                return 4;
+            } else {
+                return 5;
+            }
+        }
+        if(direction==3){
+             if(lane==0) {
+                return 6;
+            } else {
+                return 7;
+            }
+        }
+    } else {
+        // non default. light position will be associated with the number in the 2D light array
+        //  counting from top left to bottom right.
+        int lightPos = 0;
+        for(int q=0;q<4;q++) {
+            for(int w=0;w<6;w++) {
+                if(q==direction && w==lane) {
+                    return lightPos;
+                }
                 lightPos++;
             }
         }
     }
-    // get the specific light located at the position
-    // given by both direction and lane
-    // return light;
-    // TODO: change from void function to different type w/lights(int per light?)
+    // shouldn't ever get here, return -1 (error)
     return -1;
 }
 
-int DJTrafficLightManager::getState(int singleLight, double time, double timeRate)
-{
-    if (singleLight == -1) {
-        //ERRRORRR
-    } else {
-        double cycleTime = getCycleTime(time, timeRate);
-    }
-
-    // takes the given light and finds its state given the
-    // time and timeRate, using a calculation
-    // return state (bitfield combo for given light)
-    // light constants in JPConstants.h
-    // TODO: define exact equation for this
-    return 0;
-}
-
-double DJTrafficLightManager::getCycleTime(double time, double timeRate)
-{
-    double cycleTime = CYCLE_TIME%timeRate;
-    // Returns 60 seconds for default
-    return DEFAULT_CYCLE_TIME;
-    // take user-defined cycle time (time for a complete cycle through the light)
-    // and modulus it (tentatively) by timeRate 
-    // TODO: define exact equation for this
-    // return cycleTime(double)
-    return 0.0;
-}
-
-int DJTrafficLightManager::manageState(int singleLight, double time, double timeRate)
-{
-    // keeps track of and updates each light
-    // does not return anything, but is vital to
-    // manage the states and ensure no lights have
-    // incorrect states, will return errCode of 0=good or 1-4=bad.
-}
-
-void DJTrafficLightManager::recoverFromBadState(int errCode)
-{
-    // takes in the error code from a bad state,
-    // will update state as needed to reflect a good change
-    // based on conditions externally set
-}
-
-// FOR TESTING
-void DJTrafficLightManager::setState(int singleLight, int tState)
-{
-    // for testing, allows a light state to be set to anything
-    // useful when testing manageState function, will do nothing
-    // until that is set up
-}
-DJTrafficLightManager::~DJTrafficLightManager()
-{
-    // handle destructor
+double DJTrafficLightManager::getCycleTime() {
+    printf("Using user defined cycle time");
+    _cycleTime = _cycleTime * _timeRate;
+    return _cycleTime;
 }
