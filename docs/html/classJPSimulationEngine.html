@@ -62,6 +62,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
@@ -123,11 +124,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afd5858a48ae78acb19ab54934ce60ed7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#afd5858a48ae78acb19ab54934ce60ed7">setStepTime</a> (double stepTime)</td></tr>
 <tr class="memdesc:afd5858a48ae78acb19ab54934ce60ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the calculation interval (step time)  <a href="#afd5858a48ae78acb19ab54934ce60ed7">More...</a><br /></td></tr>
 <tr class="separator:afd5858a48ae78acb19ab54934ce60ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ae7a11c97e240d3a5814a4edc59b65e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a2ae7a11c97e240d3a5814a4edc59b65e">getTime</a> () const</td></tr>
+<tr class="memdesc:a2ae7a11c97e240d3a5814a4edc59b65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the internal elapsed time (seconds) in the simulation.  <a href="#a2ae7a11c97e240d3a5814a4edc59b65e">More...</a><br /></td></tr>
+<tr class="separator:a2ae7a11c97e240d3a5814a4edc59b65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174f8b5b2bc8e6b01d1a8b0cca329ee9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classJPTrafficModel.html">JPTrafficModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a174f8b5b2bc8e6b01d1a8b0cca329ee9">getTrafficModel</a> () const</td></tr>
+<tr class="separator:a174f8b5b2bc8e6b01d1a8b0cca329ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab661815aa4e72acd1f2687866e2dc827"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classJPSimulationEngine.html">JPSimulationEngine</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#ab661815aa4e72acd1f2687866e2dc827">getInstance</a> ()</td></tr>
 <tr class="separator:ab661815aa4e72acd1f2687866e2dc827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a3d5678a32bea957228aece84c5ddd57a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a3d5678a32bea957228aece84c5ddd57a">lightEffect</a> { <a class="el" href="classJPSimulationEngine.html#a3d5678a32bea957228aece84c5ddd57aa0c1b02aff8d149384abdde1013d6836f">GO</a>, 
+<a class="el" href="classJPSimulationEngine.html#a3d5678a32bea957228aece84c5ddd57aa149780268837013e49d0bd47f7335577">CAUTION</a>, 
+<a class="el" href="classJPSimulationEngine.html#a3d5678a32bea957228aece84c5ddd57aae622cc65143e13bb7256c4b175e5029e">YIELD</a>, 
+<a class="el" href="classJPSimulationEngine.html#a3d5678a32bea957228aece84c5ddd57aadfbd8c0850805c5a519bcc8b8990d87a">STOP</a>
+ }</td></tr>
+<tr class="separator:a3d5678a32bea957228aece84c5ddd57a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -137,17 +152,33 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a8fdeb259aea98c9dfa9f80e9f4aa51ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d17b49aa08b70449deb97dc36580cfa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a5d17b49aa08b70449deb97dc36580cfa">intersectionDeceleration</a> (double pos, double speed, double pcPos, double pcSpeed, <a class="el" href="classSFCar.html">SFCar</a> *car)</td></tr>
 <tr class="separator:a5d17b49aa08b70449deb97dc36580cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a495dc0af1e0757e3d09c814e77a8710b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a495dc0af1e0757e3d09c814e77a8710b">processLane</a> (<a class="el" href="classJPLane.html">JPLane</a> *lane, int direction)</td></tr>
-<tr class="separator:a495dc0af1e0757e3d09c814e77a8710b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2607786d6eba309bfb572b4416d5115e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a2607786d6eba309bfb572b4416d5115e">addCars</a> (int direction, int ln, <a class="el" href="classJPLane.html">JPLane</a> lane, double timeStep)</td></tr>
-<tr class="separator:a2607786d6eba309bfb572b4416d5115e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa591c08e18b71246ab7b83e0d1810db9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#aa591c08e18b71246ab7b83e0d1810db9">getPrevCarDecel</a> (const double pSpeed, const double pPos, const double speed, const double dSpeed, const double pos, const double timeStep) const</td></tr>
+<tr class="separator:aa591c08e18b71246ab7b83e0d1810db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d2bbc6ee62990b1daff26537bd5deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a69d2bbc6ee62990b1daff26537bd5deb">updateCar</a> (<a class="el" href="classSFCar.html">SFCar</a> *car, const int dir, double &amp;speed, double &amp;pos, const double accel, const double timeStep)</td></tr>
+<tr class="separator:a69d2bbc6ee62990b1daff26537bd5deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d7bb55e1d92bf26955dbd889edad5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a18d7bb55e1d92bf26955dbd889edad5e">processLane</a> (int ln, int direction, double stepTime)</td></tr>
+<tr class="separator:a18d7bb55e1d92bf26955dbd889edad5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a77e165eca9e078aa9c49399ba45229"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a8a77e165eca9e078aa9c49399ba45229">addCars</a> (int direction, double timeStep)</td></tr>
+<tr class="separator:a8a77e165eca9e078aa9c49399ba45229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ad2e15269ecee7a8a9bade426f8e71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a16ad2e15269ecee7a8a9bade426f8e71">checkPrereqs</a> ()</td></tr>
 <tr class="separator:a16ad2e15269ecee7a8a9bade426f8e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24f82bea49d23e8f815b7b623fbfeb5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a24f82bea49d23e8f815b7b623fbfeb5e">getNextCar</a> (<a class="el" href="classJPLane.html">JPLane</a> *lane, int dir, double &amp;leng, double &amp;pos, double &amp;speed, double &amp;dspeed)</td></tr>
+<tr class="memdesc:a24f82bea49d23e8f815b7b623fbfeb5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the next car from the lane, and set a few variables.  <a href="#a24f82bea49d23e8f815b7b623fbfeb5e">More...</a><br /></td></tr>
 <tr class="separator:a24f82bea49d23e8f815b7b623fbfeb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc1d20396cae2efeddf5ab2c55ac5527"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#afc1d20396cae2efeddf5ab2c55ac5527">makeCar</a> (int direction, int lane)</td></tr>
-<tr class="memdesc:afc1d20396cae2efeddf5ab2c55ac5527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate and initialize car.  <a href="#afc1d20396cae2efeddf5ab2c55ac5527">More...</a><br /></td></tr>
-<tr class="separator:afc1d20396cae2efeddf5ab2c55ac5527"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af775642ab880ceef0656d64a8c300834"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#af775642ab880ceef0656d64a8c300834">makeCar</a> (int direction, int &amp;lane)</td></tr>
+<tr class="memdesc:af775642ab880ceef0656d64a8c300834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate and initialize car.  <a href="#af775642ab880ceef0656d64a8c300834">More...</a><br /></td></tr>
+<tr class="separator:af775642ab880ceef0656d64a8c300834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2c10825433b72f449a055e665a7ebb1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#ae2c10825433b72f449a055e665a7ebb1">determineLane</a> (<a class="el" href="classSFCar.html">SFCar</a> *car, int direction) const</td></tr>
+<tr class="memdesc:ae2c10825433b72f449a055e665a7ebb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine which lane to put the car in.  <a href="#ae2c10825433b72f449a055e665a7ebb1">More...</a><br /></td></tr>
+<tr class="separator:ae2c10825433b72f449a055e665a7ebb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a1978884306e071b45314f760798ed2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a8a1978884306e071b45314f760798ed2">dispose</a> (<a class="el" href="classSFCar.html">SFCar</a> *car, <a class="el" href="classJPLane.html">JPLane</a> *lane)</td></tr>
+<tr class="separator:a8a1978884306e071b45314f760798ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e826ddc7db1d0e718f107754604ffd3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a9e826ddc7db1d0e718f107754604ffd3">getIntersectionDecel</a> (<a class="el" href="classSFCar.html">SFCar</a> *car, const int dir, const int ln, const double pos, const double speed) const</td></tr>
+<tr class="separator:a9e826ddc7db1d0e718f107754604ffd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2214d0f9cc0757d407e0e9ece3bc574c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a2214d0f9cc0757d407e0e9ece3bc574c">determineLightEffect</a> (<a class="el" href="classSFCar.html">SFCar</a> *car, const int dir, const int ln) const</td></tr>
+<tr class="separator:a2214d0f9cc0757d407e0e9ece3bc574c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14fcd98c42f29335fd83ac282f201ef5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a14fcd98c42f29335fd83ac282f201ef5">updateYellowTimes</a> (const double stepTime)</td></tr>
+<tr class="separator:a14fcd98c42f29335fd83ac282f201ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classJPObservableSimulation"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classJPObservableSimulation')"><img src="closed.png" alt="-"/>&#160;Private Member Functions inherited from <a class="el" href="classJPObservableSimulation.html">JPObservableSimulation</a></td></tr>
 <tr class="memitem:af2238512dcf99fbd99c127ecb0caa7d3 inherit pub_methods_classJPObservableSimulation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPObservableSimulation.html#af2238512dcf99fbd99c127ecb0caa7d3">JPObservableSimulation</a> ()</td></tr>
 <tr class="separator:af2238512dcf99fbd99c127ecb0caa7d3 inherit pub_methods_classJPObservableSimulation"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,8 +236,20 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ad3cb7158cfc5df38696644504c53c86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3231272b16c0d1bac8ab1f6bfaae5f9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#ae3231272b16c0d1bac8ab1f6bfaae5f9">_nextCreationTime</a> [4]</td></tr>
 <tr class="separator:ae3231272b16c0d1bac8ab1f6bfaae5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87ba66c67e71b46ab23e616f6d5eeeda"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a87ba66c67e71b46ab23e616f6d5eeeda">_yellowTime</a> [4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>]</td></tr>
-<tr class="separator:a87ba66c67e71b46ab23e616f6d5eeeda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf6dd595813fae58084d6e0defd8ba55"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#adf6dd595813fae58084d6e0defd8ba55">_yellowTime</a> [4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][2]</td></tr>
+<tr class="separator:adf6dd595813fae58084d6e0defd8ba55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3f9715b91cfe614bb84897af181f6e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#af3f9715b91cfe614bb84897af181f6e8">_turnOpts</a> [4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>]</td></tr>
+<tr class="separator:af3f9715b91cfe614bb84897af181f6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e6b1d46035427afa15bfe0a4cddc04"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a98e6b1d46035427afa15bfe0a4cddc04">_intersectionBounds</a> [4]</td></tr>
+<tr class="separator:a98e6b1d46035427afa15bfe0a4cddc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ad0ea33c25bd68b98dc654760e1fac"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a17ad0ea33c25bd68b98dc654760e1fac">NORTH</a> = JPIntersection::NORTH</td></tr>
+<tr class="separator:a17ad0ea33c25bd68b98dc654760e1fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a251eca70bd5df980aa2df1609b339981"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a251eca70bd5df980aa2df1609b339981">SOUTH</a> = JPIntersection::SOUTH</td></tr>
+<tr class="separator:a251eca70bd5df980aa2df1609b339981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a254d2caede742ba12e1cb6e03da8464c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a254d2caede742ba12e1cb6e03da8464c">EAST</a> = JPIntersection::EAST</td></tr>
+<tr class="separator:a254d2caede742ba12e1cb6e03da8464c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a994fb0d0f3ba8bd2be0937110226e117"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPSimulationEngine.html#a994fb0d0f3ba8bd2be0937110226e117">WEST</a> = JPIntersection::WEST</td></tr>
+<tr class="separator:a994fb0d0f3ba8bd2be0937110226e117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -220,7 +263,36 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The main computational engine for the simulation. </p>
-<p>This class is responsible for advancing the state of the simulation. It does this primarily by using one of the two step functions. While not necesary, it is recomend to run init seperately. Usage </p><div class="fragment"><div class="line"> <span class="comment">//setup</span></div><div class="line"><a class="code" href="classJPSimulationEngine.html">JPSimulationEngine</a> *engine = <span class="keyword">new</span> <a class="code" href="classJPSimulationEngine.html#ad6a75aa716f039fe2e3c35dd349ad4bf">JPSimulationEngine</a>();</div><div class="line">engine-&gt;<a class="code" href="classJPSimulationEngine.html#a1bb7c6daa7feb57b98a426085cf9e1be">setTrafficModel</a>(model);</div><div class="line">engine-&gt;<a class="code" href="classJPSimulationEngine.html#a8e35b1399f06ce425f0fce9b27f7c906">setIntersection</a>(intersection);</div><div class="line">engine-&gt;<a class="code" href="classJPSimulationEngine.html#ab0333b3f19f9d07d3fdcb4beb69245ff">setTrafficLight</a>(light);</div><div class="line">engine-&gt;<a class="code" href="group__ENG.html#ga7f053f1df3474d9d057853bfefe7ff0e">init</a>();</div><div class="line"></div><div class="line"><span class="comment">//running the simulation</span></div><div class="line"><span class="keywordflow">while</span>(<span class="keyword">true</span> == stillWantToRun)</div><div class="line">{</div><div class="line">    engine-&gt;<a class="code" href="group__ENG.html#ga070c6d3466cec13bd3e9bb2217978cc3">step</a>(0.1);</div><div class="line">    <span class="comment">//do something such as draw the cars</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p>This class is responsible for advancing the state of the simulation. It does this primarily by using one of the two step functions. While not necesary, it is recomend to run init seperately. Usage </p><div class="fragment"><div class="line"> <span class="comment">//setup</span></div><div class="line"><a class="code" href="classJPSimulationEngine.html">JPSimulationEngine</a> *engine = <span class="keyword">new</span> <a class="code" href="classJPSimulationEngine.html#ad6a75aa716f039fe2e3c35dd349ad4bf">JPSimulationEngine</a>();</div><div class="line">engine-&gt;<a class="code" href="classJPSimulationEngine.html#a1bb7c6daa7feb57b98a426085cf9e1be">setTrafficModel</a>(model);</div><div class="line">engine-&gt;<a class="code" href="classJPSimulationEngine.html#a8e35b1399f06ce425f0fce9b27f7c906">setIntersection</a>(intersection);</div><div class="line">engine-&gt;<a class="code" href="classJPSimulationEngine.html#ab0333b3f19f9d07d3fdcb4beb69245ff">setTrafficLight</a>(light);</div><div class="line">engine-&gt;<a class="code" href="group__ENG.html#ga7f053f1df3474d9d057853bfefe7ff0e">init</a>();</div><div class="line"></div><div class="line"><span class="comment">//running the simulation</span></div><div class="line"><span class="keywordflow">while</span>(<span class="keyword">true</span> == stillWantToRun)</div><div class="line">{</div><div class="line">    engine-&gt;<a class="code" href="group__ENG.html#ga070c6d3466cec13bd3e9bb2217978cc3">step</a>(0.1);</div><div class="line">    <span class="comment">//do something such as draw the cars</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a3d5678a32bea957228aece84c5ddd57a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d5678a32bea957228aece84c5ddd57a">&#9670;&nbsp;</a></span>lightEffect</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classJPSimulationEngine.html#a3d5678a32bea957228aece84c5ddd57a">JPSimulationEngine::lightEffect</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3d5678a32bea957228aece84c5ddd57aa0c1b02aff8d149384abdde1013d6836f"></a>GO&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3d5678a32bea957228aece84c5ddd57aa149780268837013e49d0bd47f7335577"></a>CAUTION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3d5678a32bea957228aece84c5ddd57aae622cc65143e13bb7256c4b175e5029e"></a>YIELD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3d5678a32bea957228aece84c5ddd57aadfbd8c0850805c5a519bcc8b8990d87a"></a>STOP&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a022d14f1debb5610894c5560a8927cf9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a022d14f1debb5610894c5560a8927cf9">&#9670;&nbsp;</a></span>~JPSimulationEngine()</h2>
 
@@ -298,8 +370,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2607786d6eba309bfb572b4416d5115e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2607786d6eba309bfb572b4416d5115e">&#9670;&nbsp;</a></span>addCars()</h2>
+<a id="a8a77e165eca9e078aa9c49399ba45229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a77e165eca9e078aa9c49399ba45229">&#9670;&nbsp;</a></span>addCars()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -312,18 +384,6 @@ Friends</h2></td></tr>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ln</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classJPLane.html">JPLane</a>&#160;</td>
-          <td class="paramname"><em>lane</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -403,6 +463,122 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="ae2c10825433b72f449a055e665a7ebb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2c10825433b72f449a055e665a7ebb1">&#9670;&nbsp;</a></span>determineLane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int JPSimulationEngine::determineLane </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determine which lane to put the car in. </p>
+
+</div>
+</div>
+<a id="a2214d0f9cc0757d407e0e9ece3bc574c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2214d0f9cc0757d407e0e9ece3bc574c">&#9670;&nbsp;</a></span>determineLightEffect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int JPSimulationEngine::determineLightEffect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a1978884306e071b45314f760798ed2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a1978884306e071b45314f760798ed2">&#9670;&nbsp;</a></span>dispose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JPSimulationEngine::dispose </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classJPLane.html">JPLane</a> *&#160;</td>
+          <td class="paramname"><em>lane</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab661815aa4e72acd1f2687866e2dc827"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab661815aa4e72acd1f2687866e2dc827">&#9670;&nbsp;</a></span>getInstance()</h2>
 
@@ -422,6 +598,60 @@ Friends</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e826ddc7db1d0e718f107754604ffd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e826ddc7db1d0e718f107754604ffd3">&#9670;&nbsp;</a></span>getIntersectionDecel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JPSimulationEngine::getIntersectionDecel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ln</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>speed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -486,6 +716,69 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Retrieve the next car from the lane, and set a few variables. </p>
+
+</div>
+</div>
+<a id="aa591c08e18b71246ab7b83e0d1810db9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa591c08e18b71246ab7b83e0d1810db9">&#9670;&nbsp;</a></span>getPrevCarDecel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JPSimulationEngine::getPrevCarDecel </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>pSpeed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>pPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>dSpeed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determine the ammount of deceleration required or acceleration possible without coming within 5 feet of the next car. </p>
+
 </div>
 </div>
 <a id="ab946c28d43ce0ec2d56b0c122d19af6c"></a>
@@ -505,6 +798,58 @@ Friends</h2></td></tr>
 
 <p>get the calculation interval (step time) </p>
 <p>The step time is how far the simulation advances in each step. For example with a step time of 0.1 calling the step function would move all of the cars to where they would be 0.1 seconds from now and advance the simulation's internal clock by 0.1 seconds. </p>
+
+</div>
+</div>
+<a id="a2ae7a11c97e240d3a5814a4edc59b65e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ae7a11c97e240d3a5814a4edc59b65e">&#9670;&nbsp;</a></span>getTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JPSimulationEngine::getTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the internal elapsed time (seconds) in the simulation. </p>
+
+</div>
+</div>
+<a id="a174f8b5b2bc8e6b01d1a8b0cca329ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a174f8b5b2bc8e6b01d1a8b0cca329ee9">&#9670;&nbsp;</a></span>getTrafficModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classJPTrafficModel.html">JPTrafficModel</a>* JPSimulationEngine::getTrafficModel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -562,8 +907,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="afc1d20396cae2efeddf5ab2c55ac5527"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc1d20396cae2efeddf5ab2c55ac5527">&#9670;&nbsp;</a></span>makeCar()</h2>
+<a id="af775642ab880ceef0656d64a8c300834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af775642ab880ceef0656d64a8c300834">&#9670;&nbsp;</a></span>makeCar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -580,7 +925,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">int &amp;&#160;</td>
           <td class="paramname"><em>lane</em>&#160;</td>
         </tr>
         <tr>
@@ -601,8 +946,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a495dc0af1e0757e3d09c814e77a8710b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a495dc0af1e0757e3d09c814e77a8710b">&#9670;&nbsp;</a></span>processLane()</h2>
+<a id="a18d7bb55e1d92bf26955dbd889edad5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18d7bb55e1d92bf26955dbd889edad5e">&#9670;&nbsp;</a></span>processLane()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -613,14 +958,20 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">void JPSimulationEngine::processLane </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classJPLane.html">JPLane</a> *&#160;</td>
-          <td class="paramname"><em>lane</em>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ln</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>direction</em>&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>stepTime</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -756,6 +1107,92 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a69d2bbc6ee62990b1daff26537bd5deb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d2bbc6ee62990b1daff26537bd5deb">&#9670;&nbsp;</a></span>updateCar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JPSimulationEngine::updateCar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>accel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14fcd98c42f29335fd83ac282f201ef5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14fcd98c42f29335fd83ac282f201ef5">&#9670;&nbsp;</a></span>updateYellowTimes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JPSimulationEngine::updateYellowTimes </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>stepTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
 <a id="aee2e3513951f423022e4bba388b76ccd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aee2e3513951f423022e4bba388b76ccd">&#9670;&nbsp;</a></span>SETestClass</h2>
@@ -857,6 +1294,28 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classJPIntersection.html">JPIntersection</a>* JPSimulationEngine::_intersection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98e6b1d46035427afa15bfe0a4cddc04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e6b1d46035427afa15bfe0a4cddc04">&#9670;&nbsp;</a></span>_intersectionBounds</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double JPSimulationEngine::_intersectionBounds[4]</td>
         </tr>
       </table>
   </td>
@@ -1000,6 +1459,28 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="af3f9715b91cfe614bb84897af181f6e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3f9715b91cfe614bb84897af181f6e8">&#9670;&nbsp;</a></span>_turnOpts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int JPSimulationEngine::_turnOpts[4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a54c63d222843e2ca44ef2ed3173afe08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54c63d222843e2ca44ef2ed3173afe08">&#9670;&nbsp;</a></span>_unique</h2>
 
@@ -1044,8 +1525,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a87ba66c67e71b46ab23e616f6d5eeeda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87ba66c67e71b46ab23e616f6d5eeeda">&#9670;&nbsp;</a></span>_yellowTime</h2>
+<a id="adf6dd595813fae58084d6e0defd8ba55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf6dd595813fae58084d6e0defd8ba55">&#9670;&nbsp;</a></span>_yellowTime</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1054,7 +1535,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double JPSimulationEngine::_yellowTime[4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>]</td>
+          <td class="memname">double JPSimulationEngine::_yellowTime[4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][2]</td>
         </tr>
       </table>
   </td>
@@ -1088,6 +1569,72 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a254d2caede742ba12e1cb6e03da8464c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a254d2caede742ba12e1cb6e03da8464c">&#9670;&nbsp;</a></span>EAST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPSimulationEngine::EAST = JPIntersection::EAST</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17ad0ea33c25bd68b98dc654760e1fac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17ad0ea33c25bd68b98dc654760e1fac">&#9670;&nbsp;</a></span>NORTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPSimulationEngine::NORTH = JPIntersection::NORTH</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a251eca70bd5df980aa2df1609b339981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a251eca70bd5df980aa2df1609b339981">&#9670;&nbsp;</a></span>SOUTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPSimulationEngine::SOUTH = JPIntersection::SOUTH</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4c8bec2b6224f2c380c12e1185706e62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4c8bec2b6224f2c380c12e1185706e62">&#9670;&nbsp;</a></span>turnSpeed</h2>
 
@@ -1110,9 +1657,31 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a994fb0d0f3ba8bd2be0937110226e117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a994fb0d0f3ba8bd2be0937110226e117">&#9670;&nbsp;</a></span>WEST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPSimulationEngine::WEST = JPIntersection::WEST</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>inc/<a class="el" href="JPSimulationEngine_8h_source.html">JPSimulationEngine.h</a></li>
-<li>src/james/<a class="el" href="JPSimulationEngine_8cpp.html">JPSimulationEngine.cpp</a></li>
+<li><a class="el" href="JPSimulationEngine_8cpp.html">JPSimulationEngine.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- custome footer -->

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gadget',['Gadget',['../classGadget.html',1,'']]],
-  ['gizmo',['Gizmo',['../classGizmo.html',1,'']]]
+  ['car',['Car',['../classCar.html',1,'']]],
+  ['carbuilder',['CarBuilder',['../classCarBuilder.html',1,'']]]
 ];

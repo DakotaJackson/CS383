@@ -61,6 +61,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classJPIntersectionGrid-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -75,48 +76,57 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab6f643d2ea5e94960c5aed0cfa6ad3c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ab6f643d2ea5e94960c5aed0cfa6ad3c2">JPIntersectionGrid</a> ()</td></tr>
-<tr class="separator:ab6f643d2ea5e94960c5aed0cfa6ad3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee06899d781a94119192a54a3de42ab4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#aee06899d781a94119192a54a3de42ab4">JPIntersectionGrid</a> (<a class="el" href="classJPIntersection.html">JPIntersection</a> *inter)</td></tr>
+<tr class="separator:aee06899d781a94119192a54a3de42ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4a7100e2bf1ec5b2e544d3dbd3c2b70"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ab4a7100e2bf1ec5b2e544d3dbd3c2b70">~JPIntersectionGrid</a> ()</td></tr>
 <tr class="separator:ab4a7100e2bf1ec5b2e544d3dbd3c2b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadc17c1458374d634fb8078904cfe9af"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#aadc17c1458374d634fb8078904cfe9af">checkPath</a> (int direction, int lane, <a class="el" href="classSFCar.html">SFCar</a> &amp;car)</td></tr>
-<tr class="memdesc:aadc17c1458374d634fb8078904cfe9af"><td class="mdescLeft">&#160;</td><td class="mdescRight">check the intersection and return required (de/ac)celeration  <a href="#aadc17c1458374d634fb8078904cfe9af">More...</a><br /></td></tr>
-<tr class="separator:aadc17c1458374d634fb8078904cfe9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41dbac01b74d57a87d33845267672a45"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a41dbac01b74d57a87d33845267672a45">checkYield</a> (int direction, int lane, <a class="el" href="classSFCar.html">SFCar</a> &amp;car)</td></tr>
-<tr class="separator:a41dbac01b74d57a87d33845267672a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6660c3e2a5d85a06549d46ce546db818"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a6660c3e2a5d85a06549d46ce546db818">setup</a> (<a class="el" href="classJPIntersection.html">JPIntersection</a> inters)</td></tr>
-<tr class="separator:a6660c3e2a5d85a06549d46ce546db818"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a843fc0472274f15dbb4e25750340b4e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a843fc0472274f15dbb4e25750340b4e3">clearRow</a> (int direction, int lane)</td></tr>
-<tr class="separator:a843fc0472274f15dbb4e25750340b4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc087e8595754cd63bb1777f6e1ad2c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#acc087e8595754cd63bb1777f6e1ad2c1">addCar</a> (int direction, int lane, <a class="el" href="classSFCar.html">SFCar</a> &amp;car)</td></tr>
-<tr class="separator:acc087e8595754cd63bb1777f6e1ad2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf6dc337986e06373b93507228c0a5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#abdf6dc337986e06373b93507228c0a5c">checkPath</a> (const int direction, const int lane) const</td></tr>
+<tr class="memdesc:abdf6dc337986e06373b93507228c0a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the intersection and return whether it is clear.  <a href="#abdf6dc337986e06373b93507228c0a5c">More...</a><br /></td></tr>
+<tr class="separator:abdf6dc337986e06373b93507228c0a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1d35ee885b1b08624cd5d6c8b64b11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#afb1d35ee885b1b08624cd5d6c8b64b11">checkYield</a> (const int direction, const int lane, <a class="el" href="classSFCar.html">SFCar</a> *car, const double speed, const double distance) const</td></tr>
+<tr class="separator:afb1d35ee885b1b08624cd5d6c8b64b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cda08084d96846af01ac011dfe7dcb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a1cda08084d96846af01ac011dfe7dcb1">setFirstCar</a> (const int direction, const int lane, <a class="el" href="classSFCar.html">SFCar</a> *car)</td></tr>
+<tr class="separator:a1cda08084d96846af01ac011dfe7dcb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae233eba5c071b22b528f30de822c4b70"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ae233eba5c071b22b528f30de822c4b70">obstructedAboveX</a> (const double x) const</td></tr>
+<tr class="separator:ae233eba5c071b22b528f30de822c4b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0219ee33802926eddd87c96a7d4bd90"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ad0219ee33802926eddd87c96a7d4bd90">obstructedBelowX</a> (const double x) const</td></tr>
+<tr class="separator:ad0219ee33802926eddd87c96a7d4bd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8fd5ee4c7cbc1b6ac867fc9268845d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ac8fd5ee4c7cbc1b6ac867fc9268845d1">obstructedAboveY</a> (const double x) const</td></tr>
+<tr class="separator:ac8fd5ee4c7cbc1b6ac867fc9268845d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2832a965faf7e6b5709878f28f6659e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ac2832a965faf7e6b5709878f28f6659e">obstructedBelowY</a> (const double x) const</td></tr>
+<tr class="separator:ac2832a965faf7e6b5709878f28f6659e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ad879001c73929aa8e933e34f7579033c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#ad879001c73929aa8e933e34f7579033c">_NorthSouthGrid</a> [<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][2]</td></tr>
-<tr class="separator:ad879001c73929aa8e933e34f7579033c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dc0c5f60674a5ad237059aaf6ebf46f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a6dc0c5f60674a5ad237059aaf6ebf46f">_EastWestGrid</a> [<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][2]</td></tr>
-<tr class="separator:a6dc0c5f60674a5ad237059aaf6ebf46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ff6e2044287aa695eb209186fa6d489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a0ff6e2044287aa695eb209186fa6d489">_firstCars</a> [4][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>]</td></tr>
 <tr class="separator:a0ff6e2044287aa695eb209186fa6d489"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdec07cfe83975e534746925c70d4ab9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#abdec07cfe83975e534746925c70d4ab9">_offsets</a> [4]</td></tr>
 <tr class="separator:abdec07cfe83975e534746925c70d4ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47daf0b0f888d4be8bf93e5f927d7e2e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a47daf0b0f888d4be8bf93e5f927d7e2e">_bounds</a> [4]</td></tr>
+<tr class="separator:a47daf0b0f888d4be8bf93e5f927d7e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6f596697e0c576901e37e74c220f980"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#aa6f596697e0c576901e37e74c220f980">_numLanes</a> [4]</td></tr>
 <tr class="separator:aa6f596697e0c576901e37e74c220f980"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a196b9057d0d0cc8b01d1837556f29eef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a196b9057d0d0cc8b01d1837556f29eef">_beginX</a> [4]</td></tr>
-<tr class="separator:a196b9057d0d0cc8b01d1837556f29eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ba0f5af1fc8f7403be68d1ff823c2b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a5ba0f5af1fc8f7403be68d1ff823c2b7">_beginY</a> [4]</td></tr>
-<tr class="separator:a5ba0f5af1fc8f7403be68d1ff823c2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84f934c8e16cb8020cfe8c25bcf1bb05"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a84f934c8e16cb8020cfe8c25bcf1bb05">_incX</a> [4] = {-1,1,-1,1}</td></tr>
-<tr class="separator:a84f934c8e16cb8020cfe8c25bcf1bb05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47c5af5807ba8645645edb81615d63a4"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a47c5af5807ba8645645edb81615d63a4">_incY</a> [4] = {-1,1,-1,1}</td></tr>
-<tr class="separator:a47c5af5807ba8645645edb81615d63a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a8a1fcd42b09154983ba8969af50625"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classJPIntersection.html">JPIntersection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a1a8a1fcd42b09154983ba8969af50625">_inter</a></td></tr>
+<tr class="separator:a1a8a1fcd42b09154983ba8969af50625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacf8da5a8a4e1ab8873aef91b083cb2d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#aacf8da5a8a4e1ab8873aef91b083cb2d">NORTH</a> = JPIntersection::NORTH</td></tr>
+<tr class="separator:aacf8da5a8a4e1ab8873aef91b083cb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21fb07f34797c9c5eb0d0fa44c6cd081"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a21fb07f34797c9c5eb0d0fa44c6cd081">SOUTH</a> = JPIntersection::SOUTH</td></tr>
+<tr class="separator:a21fb07f34797c9c5eb0d0fa44c6cd081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca921fa67da190d07731b3ce1d7ece9d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#aca921fa67da190d07731b3ce1d7ece9d">EAST</a> = JPIntersection::EAST</td></tr>
+<tr class="separator:aca921fa67da190d07731b3ce1d7ece9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78e43e8e1ee504a30801780c919d12f7"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a78e43e8e1ee504a30801780c919d12f7">WEST</a> = JPIntersection::WEST</td></tr>
+<tr class="separator:a78e43e8e1ee504a30801780c919d12f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204cdc8504108056a06ebb0109a672c0"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPIntersectionGrid.html#a204cdc8504108056a06ebb0109a672c0">LANE_WIDTH</a> = JPIntersection::LANE_WIDTH</td></tr>
+<tr class="separator:a204cdc8504108056a06ebb0109a672c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A grid representation of the inside of the intersection used for determining cross-directional interference. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab6f643d2ea5e94960c5aed0cfa6ad3c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6f643d2ea5e94960c5aed0cfa6ad3c2">&#9670;&nbsp;</a></span>JPIntersectionGrid()</h2>
+<a id="aee06899d781a94119192a54a3de42ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee06899d781a94119192a54a3de42ab4">&#9670;&nbsp;</a></span>JPIntersectionGrid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -124,7 +134,8 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">JPIntersectionGrid::JPIntersectionGrid </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classJPIntersection.html">JPIntersection</a> *&#160;</td>
+          <td class="paramname"><em>inter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -158,151 +169,215 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acc087e8595754cd63bb1777f6e1ad2c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc087e8595754cd63bb1777f6e1ad2c1">&#9670;&nbsp;</a></span>addCar()</h2>
+<a id="abdf6dc337986e06373b93507228c0a5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdf6dc337986e06373b93507228c0a5c">&#9670;&nbsp;</a></span>checkPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void JPIntersectionGrid::addCar </td>
+          <td class="memname">bool JPIntersectionGrid::checkPath </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>direction</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lane</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> &amp;&#160;</td>
-          <td class="paramname"><em>car</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aadc17c1458374d634fb8078904cfe9af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadc17c1458374d634fb8078904cfe9af">&#9670;&nbsp;</a></span>checkPath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double JPIntersectionGrid::checkPath </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lane</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> &amp;&#160;</td>
-          <td class="paramname"><em>car</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>check the intersection and return required (de/ac)celeration </p>
-<dl class="section return"><dt>Returns</dt><dd>0 if the intersection is clear a positive value of required deceleration if the car must slow down a negative value of the maximum allowable acceleration if the car can speed up but the lane is not entirely clear </dd></dl>
-
-</div>
-</div>
-<a id="a41dbac01b74d57a87d33845267672a45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41dbac01b74d57a87d33845267672a45">&#9670;&nbsp;</a></span>checkYield()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double JPIntersectionGrid::checkYield </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lane</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> &amp;&#160;</td>
-          <td class="paramname"><em>car</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a843fc0472274f15dbb4e25750340b4e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a843fc0472274f15dbb4e25750340b4e3">&#9670;&nbsp;</a></span>clearRow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JPIntersectionGrid::clearRow </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>lane</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check the intersection and return whether it is clear. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if there is a clear travel path, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="afb1d35ee885b1b08624cd5d6c8b64b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1d35ee885b1b08624cd5d6c8b64b11">&#9670;&nbsp;</a></span>checkYield()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool JPIntersectionGrid::checkYield </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>lane</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>distance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a6660c3e2a5d85a06549d46ce546db818"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6660c3e2a5d85a06549d46ce546db818">&#9670;&nbsp;</a></span>setup()</h2>
+<a id="ae233eba5c071b22b528f30de822c4b70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae233eba5c071b22b528f30de822c4b70">&#9670;&nbsp;</a></span>obstructedAboveX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool JPIntersectionGrid::obstructedAboveX </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8fd5ee4c7cbc1b6ac867fc9268845d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8fd5ee4c7cbc1b6ac867fc9268845d1">&#9670;&nbsp;</a></span>obstructedAboveY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool JPIntersectionGrid::obstructedAboveY </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0219ee33802926eddd87c96a7d4bd90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0219ee33802926eddd87c96a7d4bd90">&#9670;&nbsp;</a></span>obstructedBelowX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool JPIntersectionGrid::obstructedBelowX </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2832a965faf7e6b5709878f28f6659e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2832a965faf7e6b5709878f28f6659e">&#9670;&nbsp;</a></span>obstructedBelowY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool JPIntersectionGrid::obstructedBelowY </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1cda08084d96846af01ac011dfe7dcb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cda08084d96846af01ac011dfe7dcb1">&#9670;&nbsp;</a></span>setFirstCar()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void JPIntersectionGrid::setup </td>
+          <td class="memname">void JPIntersectionGrid::setFirstCar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classJPIntersection.html">JPIntersection</a>&#160;</td>
-          <td class="paramname"><em>inters</em></td><td>)</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>lane</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td>
+          <td class="paramname"><em>car</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -310,8 +385,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a196b9057d0d0cc8b01d1837556f29eef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a196b9057d0d0cc8b01d1837556f29eef">&#9670;&nbsp;</a></span>_beginX</h2>
+<a id="a47daf0b0f888d4be8bf93e5f927d7e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47daf0b0f888d4be8bf93e5f927d7e2e">&#9670;&nbsp;</a></span>_bounds</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,51 +395,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int JPIntersectionGrid::_beginX[4]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5ba0f5af1fc8f7403be68d1ff823c2b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ba0f5af1fc8f7403be68d1ff823c2b7">&#9670;&nbsp;</a></span>_beginY</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int JPIntersectionGrid::_beginY[4]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6dc0c5f60674a5ad237059aaf6ebf46f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dc0c5f60674a5ad237059aaf6ebf46f">&#9670;&nbsp;</a></span>_EastWestGrid</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSFCar.html">SFCar</a>* JPIntersectionGrid::_EastWestGrid[<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][2]</td>
+          <td class="memname">double JPIntersectionGrid::_bounds[4]</td>
         </tr>
       </table>
   </td>
@@ -398,8 +429,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a84f934c8e16cb8020cfe8c25bcf1bb05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84f934c8e16cb8020cfe8c25bcf1bb05">&#9670;&nbsp;</a></span>_incX</h2>
+<a id="a1a8a1fcd42b09154983ba8969af50625"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a8a1fcd42b09154983ba8969af50625">&#9670;&nbsp;</a></span>_inter</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -408,51 +439,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int JPIntersectionGrid::_incX[4] = {-1,1,-1,1}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a47c5af5807ba8645645edb81615d63a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47c5af5807ba8645645edb81615d63a4">&#9670;&nbsp;</a></span>_incY</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int JPIntersectionGrid::_incY[4] = {-1,1,-1,1}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad879001c73929aa8e933e34f7579033c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad879001c73929aa8e933e34f7579033c">&#9670;&nbsp;</a></span>_NorthSouthGrid</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSFCar.html">SFCar</a>* JPIntersectionGrid::_NorthSouthGrid[<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][<a class="el" href="JPIntersection_8h.html#a865fae065234691647e726a77915bb28">MAX_LANES_MACRO</a>][2]</td>
+          <td class="memname"><a class="el" href="classJPIntersection.html">JPIntersection</a>* JPIntersectionGrid::_inter</td>
         </tr>
       </table>
   </td>
@@ -497,6 +484,116 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">double JPIntersectionGrid::_offsets[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca921fa67da190d07731b3ce1d7ece9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca921fa67da190d07731b3ce1d7ece9d">&#9670;&nbsp;</a></span>EAST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPIntersectionGrid::EAST = JPIntersection::EAST</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a204cdc8504108056a06ebb0109a672c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a204cdc8504108056a06ebb0109a672c0">&#9670;&nbsp;</a></span>LANE_WIDTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double JPIntersectionGrid::LANE_WIDTH = JPIntersection::LANE_WIDTH</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacf8da5a8a4e1ab8873aef91b083cb2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacf8da5a8a4e1ab8873aef91b083cb2d">&#9670;&nbsp;</a></span>NORTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPIntersectionGrid::NORTH = JPIntersection::NORTH</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21fb07f34797c9c5eb0d0fa44c6cd081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21fb07f34797c9c5eb0d0fa44c6cd081">&#9670;&nbsp;</a></span>SOUTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPIntersectionGrid::SOUTH = JPIntersection::SOUTH</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78e43e8e1ee504a30801780c919d12f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78e43e8e1ee504a30801780c919d12f7">&#9670;&nbsp;</a></span>WEST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int JPIntersectionGrid::WEST = JPIntersection::WEST</td>
         </tr>
       </table>
   </td>

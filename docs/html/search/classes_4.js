@@ -1,28 +1,5 @@
 var searchData=
 [
-  ['jjalltest',['JJallTest',['../classJJallTest.html',1,'']]],
-  ['jjdisplayoutput',['JJDisplayOutput',['../classJJDisplayOutput.html',1,'']]],
-  ['jpcarteststub',['JPCarTestStub',['../classJPCarTestStub.html',1,'']]],
-  ['jpconfigurationorderexception',['JPConfigurationOrderException',['../classJPConfigurationOrderException.html',1,'']]],
-  ['jpdirectionoutofboundsexception',['JPDirectionOutOfBoundsException',['../classJPDirectionOutOfBoundsException.html',1,'']]],
-  ['jpintersection',['JPIntersection',['../classJPIntersection.html',1,'']]],
-  ['jpintersectionexception',['JPIntersectionException',['../classJPIntersectionException.html',1,'']]],
-  ['jpintersectiongrid',['JPIntersectionGrid',['../classJPIntersectionGrid.html',1,'']]],
-  ['jplane',['JPLane',['../classJPLane.html',1,'']]],
-  ['jplanecollideswithoncominglaneexception',['JPLaneCollidesWithOncomingLaneException',['../classJPLaneCollidesWithOncomingLaneException.html',1,'']]],
-  ['jplanenumberoutofboundsexception',['JPLaneNumberOutOfBoundsException',['../classJPLaneNumberOutOfBoundsException.html',1,'']]],
-  ['jplaneoffsetexception',['JPLaneOffsetException',['../classJPLaneOffsetException.html',1,'']]],
-  ['jplightteststub',['JPLightTestStub',['../classJPLightTestStub.html',1,'']]],
-  ['jpmalformedintersectionexception',['JPMalformedIntersectionException',['../classJPMalformedIntersectionException.html',1,'']]],
-  ['jpmissingparameterexception',['JPMissingParameterException',['../classJPMissingParameterException.html',1,'']]],
-  ['jpobservablesimulation',['JPObservableSimulation',['../classJPObservableSimulation.html',1,'']]],
-  ['jpprobabilitylessthanzeroexception',['JPProbabilityLessThanZeroException',['../classJPProbabilityLessThanZeroException.html',1,'']]],
-  ['jpratelessthanzeroexception',['JPRateLessThanZeroException',['../classJPRateLessThanZeroException.html',1,'']]],
-  ['jpsimulationcontroler',['JPSimulationControler',['../classJPSimulationControler.html',1,'']]],
-  ['jpsimulationengine',['JPSimulationEngine',['../classJPSimulationEngine.html',1,'']]],
-  ['jptrafficmodel',['JPTrafficModel',['../classJPTrafficModel.html',1,'']]],
-  ['jptrafficmodelexception',['JPTrafficModelException',['../classJPTrafficModelException.html',1,'']]],
-  ['jpturninglanecrossingstraightlaneexception',['JPTurningLaneCrossingStraightLaneException',['../classJPTurningLaneCrossingStraightLaneException.html',1,'']]],
-  ['jptwolanestooneexception',['JPTwoLanesToOneException',['../classJPTwoLanesToOneException.html',1,'']]],
-  ['jpupdatableinterface',['JPUpdatableInterface',['../classJPUpdatableInterface.html',1,'']]]
+  ['gadget',['Gadget',['../classGadget.html',1,'']]],
+  ['gizmo',['Gizmo',['../classGizmo.html',1,'']]]
 ];

@@ -74,10 +74,10 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a70d75e047bf73e4f5104ef3e03eb810c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#a70d75e047bf73e4f5104ef3e03eb810c">DJTrafficLightManager</a> (int laneNum, int dirNum)</td></tr>
 <tr class="separator:a70d75e047bf73e4f5104ef3e03eb810c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43e34c9aa7f1085003bf54643d507a47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#a43e34c9aa7f1085003bf54643d507a47">initAllLights</a> (int numLanes)</td></tr>
-<tr class="separator:a43e34c9aa7f1085003bf54643d507a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64cff78fe5e4bd45420b609b9140f75a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#a64cff78fe5e4bd45420b609b9140f75a">initStateTable</a> (int numLanes)</td></tr>
-<tr class="separator:a64cff78fe5e4bd45420b609b9140f75a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a3ea0e77c8a5c18ae95ce45c443405b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#a2a3ea0e77c8a5c18ae95ce45c443405b">initAllLights</a> (int numLanes, int direction)</td></tr>
+<tr class="separator:a2a3ea0e77c8a5c18ae95ce45c443405b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa074abf2c11004c282e6c81f03953d78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#aa074abf2c11004c282e6c81f03953d78">initStateTable</a> (int numLanes, int direction)</td></tr>
+<tr class="separator:aa074abf2c11004c282e6c81f03953d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c4513f6bfd1467ce19de455802d624"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#a79c4513f6bfd1467ce19de455802d624">getSingleLight</a> (int direction, int lane, double time)</td></tr>
 <tr class="separator:a79c4513f6bfd1467ce19de455802d624"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cc7b1e45dc662a3dedef284363fb71e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#a3cc7b1e45dc662a3dedef284363fb71e">getState</a> (int singleLight, double time, double timeRate)</td></tr>
@@ -99,6 +99,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ae2efeb4851cd48506d18cf01adcf3e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1e2474fdabd7d00bdec6e5700814483"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#ac1e2474fdabd7d00bdec6e5700814483">stateTime</a></td></tr>
 <tr class="separator:ac1e2474fdabd7d00bdec6e5700814483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae51b04152faa8b29209dcf0df0a61cab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#ae51b04152faa8b29209dcf0df0a61cab">lightArray</a> [4][6]</td></tr>
+<tr class="separator:ae51b04152faa8b29209dcf0df0a61cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9ce30a115aa71f4ead944b3f56409ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDJTrafficLightManager.html#ae9ce30a115aa71f4ead944b3f56409ee">masterStateTable</a> [4][6]</td></tr>
+<tr class="separator:ae9ce30a115aa71f4ead944b3f56409ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a70d75e047bf73e4f5104ef3e03eb810c"></a>
@@ -226,8 +230,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a43e34c9aa7f1085003bf54643d507a47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43e34c9aa7f1085003bf54643d507a47">&#9670;&nbsp;</a></span>initAllLights()</h2>
+<a id="a2a3ea0e77c8a5c18ae95ce45c443405b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a3ea0e77c8a5c18ae95ce45c443405b">&#9670;&nbsp;</a></span>initAllLights()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,16 +240,26 @@ Private Attributes</h2></td></tr>
           <td class="memname">void DJTrafficLightManager::initAllLights </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numLanes</em></td><td>)</td>
+          <td class="paramname"><em>numLanes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a64cff78fe5e4bd45420b609b9140f75a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64cff78fe5e4bd45420b609b9140f75a">&#9670;&nbsp;</a></span>initStateTable()</h2>
+<a id="aa074abf2c11004c282e6c81f03953d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa074abf2c11004c282e6c81f03953d78">&#9670;&nbsp;</a></span>initStateTable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,8 +268,18 @@ Private Attributes</h2></td></tr>
           <td class="memname">void DJTrafficLightManager::initStateTable </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numLanes</em></td><td>)</td>
+          <td class="paramname"><em>numLanes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -354,6 +378,50 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int DJTrafficLightManager::duration</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae51b04152faa8b29209dcf0df0a61cab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae51b04152faa8b29209dcf0df0a61cab">&#9670;&nbsp;</a></span>lightArray</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int DJTrafficLightManager::lightArray[4][6]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9ce30a115aa71f4ead944b3f56409ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9ce30a115aa71f4ead944b3f56409ee">&#9670;&nbsp;</a></span>masterStateTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int DJTrafficLightManager::masterStateTable[4][6]</td>
         </tr>
       </table>
   </td>

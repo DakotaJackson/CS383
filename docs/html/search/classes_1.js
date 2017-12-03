@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['djtrafficlightmanager',['DJTrafficLightManager',['../classDJTrafficLightManager.html',1,'']]]
+  ['bus',['Bus',['../classBus.html',1,'']]]
 ];

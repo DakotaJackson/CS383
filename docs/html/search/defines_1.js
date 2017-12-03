@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jpexception_5freplace_5fme',['JPEXCEPTION_REPLACE_ME',['../JPIntersection__test_8cpp.html#a09349247b1a30104d4e138881df2eab4',1,'JPIntersection_test.cpp']]]
+  ['iterations',['ITERATIONS',['../JPTrafficModel__test_8cpp.html#aa9cc087d076e4fa101f8794a947bd01a',1,'JPTrafficModel_test.cpp']]]
 ];

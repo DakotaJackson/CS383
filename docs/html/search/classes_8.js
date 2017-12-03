@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['removeobservertest',['RemoveObserverTest',['../classRemoveObserverTest.html',1,'']]]
+  ['minivan',['Minivan',['../classMinivan.html',1,'']]]
 ];
