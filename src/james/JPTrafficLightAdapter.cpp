@@ -10,7 +10,7 @@
 
 JPTrafficLightAdapter::JPTrafficLightAdapter()
 {
-	//_dj = DJTrafficLightManager::GetInstance();
+	_dj = DJTrafficLightManager::GetInstance();
 	_jp = NULL;
 }
 
@@ -28,7 +28,6 @@ int JPTrafficLightAdapter::getState(const int dir, const int lane,
 {
 	if(_jp)
 		return _jp->getState(dir, lane, time);
-//can't compile Dakota's ccp due to wrong path to his header file. Omitting the following so it will link
-//	else
-//		return _dj->getState(time, dir, lane);
+	else
+		return _dj->getState(time, dir, lane);
 }

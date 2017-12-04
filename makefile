@@ -25,7 +25,7 @@
 
 LIBS = -lm
 CPP=g++ 
-CPPFLAGS = -g -Wall -pipe -O2 -std=c++11
+CPPFLAGS = -g -Wall -pipe -O2 -std=c++11 -Iinc/
 QTFLAGS = 
 QTINC =
 QTLIB = 
@@ -93,7 +93,7 @@ JPLightTestStub.o: test/JPLightTestStub.cpp test/JPLightTestStub.h #DJTrafficLig
 JPCarTestStub.o: test/JPCarTestStub.cpp test/JPCarTestStub.h SFCar.o 
 	$(CPP) $(CPPFLAGS) -c test/JPCarTestStub.cpp 
 
-JPTrafficLightAdapter.o: src/james/JPTrafficLightAdapter.cpp inc/JPTrafficLightAdapter.h JPLightTestStub.o SFCar.o #DJTrafficLightManager.o
+JPTrafficLightAdapter.o: src/james/JPTrafficLightAdapter.cpp inc/JPTrafficLightAdapter.h JPLightTestStub.o SFCar.o DJTrafficLightManager.o
 	$(CPP) $(CPPFLAGS) -c src/james/JPTrafficLightAdapter.cpp 
 
 #Lane
@@ -150,10 +150,8 @@ JPOtherException.o: src/james/JPOtherException.cpp inc/JPOtherException.h
 JPSimulationEngine.o: src/james/JPSimulationEngine.cpp inc/JPConstants.h inc/JPSimulationEngine.h SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o JPOtherException.o JPTrafficLightAdapter.o
 	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationEngine.cpp
 
-test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_test.cpp test/JPLightTestStub.cpp test/JPLightTestStub.h test/JPCarTestStub.cpp test/JPCarTestStub.h 
-	$(CPP) $(CPPFLAGS) -c test/JPCarTestStub.cpp
-	$(CPP) $(CPPFLAGS) -c test/JPLightTestStub.cpp
-	$(CPP) $(CPPFLAGS) SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o JPLightTestStub.o JPCarTestStub.o JPOtherException.o JPTrafficLightAdapter.o test/JPSimulationEngine_test.cpp  $(LIBS) -o test/JPSimulationEngine_test
+test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_test.cpp JPLightTestStub.o JPCarTestStub.o 
+	$(CPP) $(CPPFLAGS) SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o JPLightTestStub.o JPCarTestStub.o JPOtherException.o JPTrafficLightAdapter.o DJTrafficLightManager.o test/JPSimulationEngine_test.cpp  $(LIBS) -o test/JPSimulationEngine_test
 	
 JPSEtest: test/JPSimulationEngine_test.exe
 	test/JPSimulationEngine_test.exe
@@ -163,7 +161,7 @@ JPSimulationControler.o: src/james/JPSimulationControler.cpp inc/JPConstants.h i
 	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationControler.cpp
 
 test/JPSimulationControler_test.exe: JPSimulationControler.o test/JPSimulationControler_test.cpp JPLightTestStub.o
-	$(CPP) $(CPPFLAGS) JPSimulationControler.o SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o JPOtherException.o JPLightTestStub.o JPTrafficLightAdapter.o test/JPSimulationControler_test.cpp  $(LIBS) -o test/JPSimulationControler_test
+	$(CPP) $(CPPFLAGS) JPSimulationControler.o SFCar.o JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o JPOtherException.o JPLightTestStub.o JPTrafficLightAdapter.o DJTrafficLightManager.o test/JPSimulationControler_test.cpp  $(LIBS) -o test/JPSimulationControler_test
 	
 JPSCtest: test/JPSimulationControler_test.exe
 	test/JPSimulationControler_test.exe
