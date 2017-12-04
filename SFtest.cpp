@@ -1,255 +1,123 @@
-/*
- * SFCarGen.cpp
- *
- *  Created on: Nov 1, 2017
- *      Author: Sam
- */
-
 #include "SFCarGen.h"
-//#include <stdio.h>
-#include <cstdlib>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
-int rand();
+// This is the test
 
-Car::Car() {
-	// TODO Auto-generated constructor stub
-	_desiredSpeed = 0;//+/- or % speed limit?
-	_length = 15;
+void testOne();
+void testTwo();
+void testThree();
+void testFour();
 
-	// For Speed chosen randomly, 3 choices
-	_randSpeed = (1 + rand() % 3);
+int main()
+{
+    //testOne();
+    //testTwo();
+    //testThree();
+    testFour();
 
-	// For Car type chosen randomly, 4 choices
-	_randCar = (1 + rand() % 4);
-
-	// For Turn Direction chosen randomly, 3 choices
-	_randTurnDirection = (1 + rand() % 3);
-
-	_turnDirection = DESIRE_STRAIGHT;
-
+    return 0;
 }
 
-/*  Backup Desired Speed Function.
+/* This function tests the backup functions with speed limit input. */
+void testOne(){
+    double desiredSpeed = 0;
+    double length = 0;
+    int turnDirection = 0;
 
-    These two functions are just in case the Builder pattern
-    malfunctions in some way. These will not be used if carMethod
-    works properly. */
+    Car carOb;
+    carOb.setDesiredSpeed2(desiredSpeed);
+    carOb.getDesiredSpeed();
+    for (int i = 0; i<5; i++)
+    {
 
-double Car::getDesiredSpeed() const {
-	return _desiredSpeed;
-}
-
-void Car::setDesiredSpeed2(double desiredSpeed) {
-
-   	_randSpeed = (1 + rand() % 3);
-
-    if (_randSpeed == 1){
-        _desiredSpeed = 10;
-    }
-    else if (_randSpeed == 2){
-        _desiredSpeed = -10;
-    }
-    else if (_randSpeed == 3){
-        _desiredSpeed = 0;
-    }
-}
-/*  Backup Length Function.
-
-    These two functions are just in case the Builder pattern
-    malfunctions in some way. These will not be used if carMethod
-    works properly. */
-
-double Car::getLength() const {
-	return _length;
-}
-
-void Car::setLength2(double length) {
-    _randCar = (1 + rand() % 4);
-    if (_randCar == 1){
-        _length = 15;
-    }
-    else if (_randCar == 2){
-        _length = 16;
-    }
-    else if (_randCar == 3){
-        _length = 20;
-    }
-    else if (_randCar == 4){
-        _length = 40;
+        carOb.setDesiredSpeed2(desiredSpeed);
+        desiredSpeed = carOb.getDesiredSpeed();
+        cout << "Desired speed related to limit: " << carOb.getDesiredSpeed() << endl;
+        cout << "Please input speed limit: ";
+        carOb.setSpeed(desiredSpeed);
+        carOb.getSpeed();
+        cout << "Actual speed related to limit: " <<carOb.getSpeed() << endl;
+        carOb.setLength2(length);
+        carOb.getLength();
+        cout << "Car Length: " << carOb.getLength() << endl;
+        carOb.setTurnDirection(turnDirection);
+        carOb.getTurnDirection();
+        cout << "Turn Direction: (1-straight, 2-right, 4-left)" << carOb.getTurnDirection() << endl;
     }
 }
-/*  Speed Limit.
 
-    setSpeed is used to set the speed limit. In testing,
-    speed limit is provided
-    within this program module. */
+/* This function tests the backup functions without speed limit input. */
+void testTwo(){
+    double desiredSpeed = 0;
+    double length = 0;
+    int turnDirection = 0;
 
-double Car::getSpeed() const {
-	return _speed;
-}
-
-void Car::setSpeed(double desiredSpeed) {
-    Car car;
-    car.setDesiredSpeed2(desiredSpeed);
-    car.getDesiredSpeed();
-    double speed;
-    try {
-        cin >> speed;   //only in for testing?
-
-        if (speed < 0){
-            throw 1;
-        }
+    Car carOb;
+    carOb.setDesiredSpeed2(desiredSpeed);
+    carOb.getDesiredSpeed();
+    for (int i = 0; i<5; i++)
+    {
+        carOb.setDesiredSpeed2(desiredSpeed);
+        desiredSpeed = carOb.getDesiredSpeed();
+        cout << "Desired speed related to limit: " << carOb.getDesiredSpeed() << endl;
+        carOb.setLength2(length);
+        carOb.getLength();
+        cout << "Car Length: " << carOb.getLength() << endl;
+        carOb.setTurnDirection(turnDirection);
+        carOb.getTurnDirection();
+        cout << "Turn Direction: (1-straight, 2-right, 4-left)" << carOb.getTurnDirection() << endl;
     }
-    catch(int c) {
-        cout << "Speed Limit Cannot Be Negative. Try again.";
-        cin >> speed;
+}
+
+/* This function tests the Builder classes. */
+void testThree(){
+
+    for (int i = 0; i<5; i++){
+        Director dir;  // Creation of objects for each Builder class
+        SimpleCar sb;
+        Truck tb;
+        Minivan mvb;
+        Bus buss;
+
+        Car *scar = dir.createCar(&sb);  // Calls the director class and passes in information obtained in Car Builder Class
+        Car *truck = dir.createCar(&tb);  // Calls the director class and passes in information obtained in Truck Builder Class
+        Car *mvan = dir.createCar(&mvb);  // Calls the director class and passes in information obtained in Minivan Builder Class
+        Car *bus = dir.createCar(&buss);  // Calls the director class and passes in information obtained in Bus Builder Class
+
+        scar->show();  // Calls the show function and passes in information consolidated by director class
+        truck->show();
+        mvan->show();
+        bus->show();
+
+        delete scar;  // Deletes the objects
+        delete truck;
+        delete mvan;
+        delete bus;
     }
-	_speed = speed + desiredSpeed;
-}
-
-/* Theta.
-
-    Current angle of the car??? */
-
-double Car::getTheta() const {
-	return _theta;
-}
-
-void Car::setTheta(double theta) {
-	_theta = theta;
-}
-
-/*  Turn Direction Decision Randomizer.
-
-    Initializes a variable which chooses a random number.
-    Based on the number chosen, the vehicle will decide where
-    it wants to go on the road from 3 possible options.
-
-    TO DO (possible in future): U-turn */
-
-int Car::getTurnDirection() const {
-	return _turnDirection;
-}
-
-void Car::setTurnDirection(int turnDirection) {
-    _randTurnDirection = (1 + rand() % 3);
-    if (_randTurnDirection == 1){
-        turnDirection = DESIRE_STRAIGHT; //chose this randomly
-	}
-	else if (_randTurnDirection == 2){
-        turnDirection = DESIRE_RIGHT; //chose this randomly
-	}
-	else if (_randTurnDirection == 3){
-        turnDirection = DESIRE_LEFT; //chose this randomly
-	}
-	_turnDirection = turnDirection;
-}
-
-/*  Storage Variables.
-
-    Initializes variables x and y, which are used
-    to store the new coordinates of a car. These are
-    then called by the graphical UI, which updates the image to
-    its' new position on the road. */
-
-double Car::getX() const {
-	return _x;
-}
-
-void Car::setX(double x) {
-	_x = x;
-}
-
-double Car::getY() const {
-	return _y;
-}
-
-void Car::setY(double y) {
-	_y = y;
-}
-
-/*  Storage Variables.
-
-    Initializes a variable which stores the pointer for the
-    image in the graphical UI. Another function returns
-    the pointer. */
-
-void* Car::getImgPtr() const {
-	return _imgPtr;
-}
-
-void Car::setImgPtr(void* imgPtr) {
-	_imgPtr = imgPtr;
-}
-/*  Storage Variables.
-
-    Initializes a variable which stores time spent
-    in the simulator period. Then another function returns the
-    variable stored. */
-
-double Car::getTimeInSim() const {
-	return _timeInSim;
-}
-
-void Car::setTimeInSim(double timeInSim) {
-	_timeInSim = timeInSim;
-}
-/*  Storage Variables.
-
-    Initializes a variable which stores time spent
-    waiting at a light. Then another function returns the
-    variable stored. */
-
-double Car::getWaitTime() const {
-	return _waitTime;
-}
-
-void Car::setWaitTime(double waitTime) {
-	_waitTime = waitTime;
-}
-
-/* Randomizes the Car called. Uses the Builders in SFCarGen.h
-
-    Initializes a variable which creates a random number between
-    1 and 8. Only 4 car types currently exist, but by doubling
-    possible numbers the hopeful result is further variety in
-    random generation. */
-
-void Car::carMember() {
-        int _randCar;
-        _randCar = (1 + rand() % 8);
-
-        Director dir;
-        SimpleCar sb; //Car
-        Minivan mvb; //Minivan
-        Truck tb; //Truck
-        Bus buss; //Bus
-
-        if (_randCar == 1 | _randCar == 5){
-            Car *scar = dir.createCar(&sb); // calls the director class and passes desired vehicle type Car
-            scar->show();  // Passes information obtained into show
-            delete scar;
-            }
-
-        else if (_randCar == 2 | _randCar == 6){
-            Car *truck = dir.createCar(&tb); // calls the director class and passes desired vehicle type Truck
-            truck->show();  // Passes information obtained into show
-            delete truck;
-            }
-
-        else if (_randCar == 3 | _randCar == 7){
-            Car *mvan = dir.createCar(&mvb); // calls the director class and passes desired vehicle type Minivan
-            mvan->show();  // Passes information obtained into show
-            delete mvan;
-            }
-
-        else if (_randCar == 4 | _randCar == 8){
-            Car *bus = dir.createCar(&buss); // calls the director class and passes desired vehicle type Bus
-            bus->show();  // Passes information obtained into show
-            delete bus;
-            }
 
 }
+
+/* This function tests carMember function. */
+void testFour(){
+    Car member;
+
+    for (int i = 0; i<5; i++){  // Loop is used to ensure randomization.
+        member.carMember();
+    }
+
+}
+
+// Estimated: 6 hours meeting time
+// Actual: 4 hours meeting time
+//
+// Estimated: 12 hours research time
+// Actual: 10 hours
+//
+// Estimated Programming: 6 hours
+// Actual Programming: 10 hours
+//
+// Total Estimated: 24 hours
+// Total Actual: 24 hours
