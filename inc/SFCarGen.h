@@ -12,19 +12,28 @@
 #include <cstdlib>
 
 using namespace std;
+
 // These next classes are decorators for car selection
-class ICar
-{
+class Car{
+    string _car;
+    double _desiredSpeed;
+    double _length;
 public:
-//	virtual void Make() = 0;
-	virtual ~ICar() { }
-	ICar();
+    Car(string carType):_car{carType} {}
+    void setdesiredSpeed(double speed) { _desiredSpeed = speed; }
+    void setLength(double length)   { _length = length;   }
+    double getEngine()          { return _desiredSpeed; }
+    double getBody()            { return _length;   }
+
+    virtual ~Car() { }
+	Car();
+
 	virtual double getDesiredSpeed() const;
-	void setDesiredSpeed(double desiredSpeed);
+	void setDesiredSpeed2(double desiredSpeed);
 	virtual double getLength() const;
-	void setLength(double length);
+	void setLength2(double length);
 	double getSpeed() const;
-	void setSpeed(double speed);
+	void setSpeed(double desiredSpeed);
 	double getTheta() const;
 	void setTheta(double theta);
 	int getTurnDirection() const;
@@ -45,40 +54,26 @@ public:
 	static const int DESIRE_LEFT = 4;/** \brief The car wants to go left */
 
 
-private:
-    int _randTurnDirection;
-    int _randSpeed;
-    int _randCar;
-	int _turnDirection;
-	double _length;
-	double _x;
-	double _y;
-	double _theta;
-	double _speed;
-	double _desiredSpeed;
-	double _waitTime; //optional
-	double _timeInSim; //optional
-	void *_imgPtr; //optional, for Joe
-
-
-};
-
-class Car{
-    string _car;
-    double _desiredSpeed;
-    double _length;
-public:
-    Car(string carType):_car{carType} {}
-    void setdesiredSpeed(double speed) { _desiredSpeed = speed; }
-    void setLength(double length)   { _length = length;   }
-    double getEngine()          { return _desiredSpeed; }
-    double getBody()            { return _length;   }
-
     void show() {
     	cout << "Car Type: " <<_car << endl
     		 << "Desired Speed: " <<_desiredSpeed << endl
     		 << "Length: "<<_length << endl << endl;
     }
+
+
+private:
+    int _randTurnDirection;
+    int _randSpeed;
+    int _randCar;
+	int _turnDirection;
+	double _x;
+	double _y;
+	double _theta;
+	double _speed;
+	double _waitTime; //optional
+	double _timeInSim; //optional
+	void *_imgPtr; //optional, for Joe
+
 };
 
 // CarBuilder Abstract Class
@@ -191,4 +186,5 @@ public:
         return builder->getCar();
     }
 };
+
 #endif /* SRC_SFCARGEN_H_ */
