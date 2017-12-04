@@ -10,9 +10,11 @@
 #include <cstdlib>
 #include <iostream>
 
+using namespace std;
+
 int rand();
 
-ICar::ICar() {
+Car::Car() {
 	// TODO Auto-generated constructor stub
 	_desiredSpeed = 0;//+/- or % speed limit?
 	_length = 15;
@@ -30,109 +32,83 @@ ICar::ICar() {
 
 }
 
-double ICar::getDesiredSpeed() const {
+double Car::getDesiredSpeed() const {
 	return _desiredSpeed;
 }
 
-void ICar::setDesiredSpeed(double desiredSpeed) {
-    if (_randSpeed == 1){
-        ICar* pCar = new SimpleCar();
-//        pCar->Make();
+void Car::setDesiredSpeed2(double desiredSpeed) {
 
-        ICar* pSimpleCar = new SpeedyDriver(*pCar);
-  //      pSimpleCar->Make();
-//        Icar speedCar;
-//       desiredSpeed = speedCar.desiredSpeed();
-//        desiredSpeed = pSimpleCar->desiredSpeed();
+   	_randSpeed = (1 + rand() % 3);
+
+    if (_randSpeed == 1){
+        _desiredSpeed = 10;
     }
     else if (_randSpeed == 2){
-        ICar* pCar = new SimpleCar();
- //       pCar->Make();
-
-        ICar* pSimpleCar = new GrannieDriver(*pCar);
- //       pSimpleCar->Make();
-
-//       desiredSpeed = pSimpleCar->desiredSpeed();
+        _desiredSpeed = -10;
     }
     else if (_randSpeed == 3){
-        ICar* pCar = new SimpleCar();
-//        pCar->Make();
-
-        ICar* pSimpleCar = new AverageDriver(*pCar);
- //       pSimpleCar->Make();
-
-//        desiredSpeed = pSimpleCar->desiredSpeed();
+        _desiredSpeed = 0;
     }
-
-	_desiredSpeed = desiredSpeed;
 }
 
-double ICar::getLength() const {
+double Car::getLength() const {
 	return _length;
 }
 
-void ICar::setLength(double length) {
+void Car::setLength2(double length) {
+    _randCar = (1 + rand() % 4);
     if (_randCar == 1){
-        ICar* pCar = new SimpleCar();
-  //      pCar->Make();
-
-        ICar* pSimpleCar = new ShortLength(*pCar);
-  //      pSimpleCar->Make();
-
-//        length = pSimpleCar->length();
+        _length = 15;
     }
     else if (_randCar == 2){
-        ICar* pCar = new SimpleCar();
-   //     pCar->Make();
-
-        ICar* pSimpleCar = new MedLength(*pCar);
-   //     pSimpleCar->Make();
-
-//        length = pSimpleCar->length();
+        _length = 16;
     }
     else if (_randCar == 3){
-        ICar* pCar = new SimpleCar();
-    //    pCar->Make();
-
-        ICar* pSimpleCar = new LongLength(*pCar);
-     //   pSimpleCar->Make();
-
-//        length = pSimpleCar->length();
+        _length = 20;
     }
-    else if (_randCar == 3){
-        ICar* pCar = new SimpleCar();
-      //  pCar->Make();
-
-        ICar* pSimpleCar = new SuperLongLength(*pCar);
-       // pSimpleCar->Make();
-
- //       length = pSimpleCar->length();
+    else if (_randCar == 4){
+        _length = 40;
     }
-	_length = length;
 }
 
-double ICar::getSpeed() const {
+double Car::getSpeed() const {
 	return _speed;
 }
 
-void ICar::setSpeed(double speed) {
-	_speed = speed;
+void Car::setSpeed(double desiredSpeed) {
+    Car car;
+    car.setDesiredSpeed2(desiredSpeed);
+    car.getDesiredSpeed();
+    double speed;
+    try {
+        cin >> speed;   //only in for testing?
+
+        if (speed < 0){
+            throw 1;
+        }
+    }
+    catch(int c) {
+        cout << "Speed Limit Cannot Be Negative. Try again.";
+        cin >> speed;
+    }
+	_speed = speed + desiredSpeed;
 }
 
-//WHAT IS THETA? ASK JAMES
-//double SFCar::getTheta() const {
-//	return _theta;
-//}
 
-//void SFCar::setTheta(double theta) {
-//	_theta = theta;
-//}
+double Car::getTheta() const {
+	return _theta;
+}
 
-int ICar::getTurnDirection() const {
+void Car::setTheta(double theta) {
+	_theta = theta;
+}
+
+int Car::getTurnDirection() const {
 	return _turnDirection;
 }
 
-void ICar::setTurnDirection(int turnDirection) {
+void Car::setTurnDirection(int turnDirection) {
+    _randTurnDirection = (1 + rand() % 3);
     if (_randTurnDirection == 1){
         turnDirection = DESIRE_STRAIGHT; //chose this randomly
 	}
@@ -145,43 +121,43 @@ void ICar::setTurnDirection(int turnDirection) {
 	_turnDirection = turnDirection;
 }
 
-double ICar::getX() const {
+double Car::getX() const {
 	return _x;
 }
 
-void ICar::setX(double x) {
+void Car::setX(double x) {
 	_x = x;
 }
 
-double ICar::getY() const {
+double Car::getY() const {
 	return _y;
 }
 
-void ICar::setY(double y) {
+void Car::setY(double y) {
 	_y = y;
 }
 
-void* ICar::getImgPtr() const {
+void* Car::getImgPtr() const {
 	return _imgPtr;
 }
 
-void ICar::setImgPtr(void* imgPtr) {
+void Car::setImgPtr(void* imgPtr) {
 	_imgPtr = imgPtr;
 }
 
-double ICar::getTimeInSim() const {
+double Car::getTimeInSim() const {
 	return _timeInSim;
 }
 
-void ICar::setTimeInSim(double timeInSim) {
+void Car::setTimeInSim(double timeInSim) {
 	_timeInSim = timeInSim;
 }
 
-double ICar::getWaitTime() const {
+double Car::getWaitTime() const {
 	return _waitTime;
 }
 
-void ICar::setWaitTime(double waitTime) {
+void Car::setWaitTime(double waitTime) {
 	_waitTime = waitTime;
 }
 
