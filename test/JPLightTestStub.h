@@ -29,7 +29,7 @@ public:
 	int getTestCase() const;
 	void setTestCase(int testCase);
 	/** a placeholder function to ease catching all changes when integrating */
-	int getTheState(int direction, int lane, double time);
+	int getState(int direction, int lane, double time);
 
 private:
 	int _testCase;

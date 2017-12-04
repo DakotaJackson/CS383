@@ -28,7 +28,7 @@ JPSimulationEngine::JPSimulationEngine()
 	_intersection = NULL;
 	_iGrid = 0;
 	_trafficModel = NULL;
-	_light = NULL;
+	_light = new JPTrafficLightAdapter();
 
 	srand(time(NULL)); //seed RNG for lane selection
 }
@@ -83,19 +83,44 @@ void JPSimulationEngine::end()
 	//todo delete cars from the simulation and pushRemUppdate
 }
 
-void JPSimulationEngine::setTrafficLight(JPLightTestStub* light){ _light = light; }//todo swap on merge
+void JPSimulationEngine::setTrafficLight(JPLightTestStub* light)
+{
+	_light->setTestStub(light);
+}
+//todo swap on merge
 //void JPSimulationEngine::setTrafficLight(DJTrafficLightManager* light){ _light = light; }
 void JPSimulationEngine::setTrafficModel(JPTrafficModel* model){ _trafficModel = model; }
 void JPSimulationEngine::setIntersection(JPIntersection* intersection){ _intersection = intersection; }
 void JPSimulationEngine::setStepInterval(double secs){ _stepTime = secs; }
-void JPSimulationEngine::setInitTime(double secs) { _initTime = secs; }
 
 /**
- * \brief Calculate the required deceleration to no hit a moving target.
+ * If a value less than 0 is specified, it resets the initialization time to the default of two cycles of the light
  */
-double movingTargetDecel(const double V0, const double Vt, const double dX, double &time)
+void JPSimulationEngine::setInitTime(double secs)
 {
-	//todo make member
+	if(_initTime >= 0)
+		_initTime = secs;
+	else
+		_initTime = -1;
+}
+
+
+/**
+ * A forward car is traveling at Vt. The rear car is traveling at V0. There is a gap between the
+ * two of dX + desired final gap. This function computes the time and acceleration required to
+ * match speed while closing the desired ammount of the gap.
+ * While named deceleration, this function actually returns the acceleration. (i.e.) The value is negative
+ * for its intended usage.
+ *
+ * \param V0 The velocity of the rear car.
+ * \param Vt The velocity of the forward car.
+ * \param dX The distance over which the deceleration should occur
+ * \param time A destination for outputting the computed time.
+ *
+ * \return The acceleration that would be required for the rear car to match the pace of the forward car while closing the gap dX.
+ */
+double JPSimulationEngine::movingTargetDecel(const double V0, const double Vt, const double dX, double &time) const
+{
 	double a;
 	//eq1: Vt = a*t + V0
 	//eq2: t*Vt + dX = 0.5 * a * t^2  + V0*t
@@ -105,10 +130,7 @@ double movingTargetDecel(const double V0, const double Vt, const double dX, doub
 	return a;
 }
 
-/**
- * \breif Determine the ammount of deceleration required or acceleration possible without coming within
- * 5 feet of the next car.
- */
+/** \brief Determine the amount of deceleration required or acceleration possible without coming within 5 feet of the next car.*/
 double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
 		const double dSpeed, const double pos, const double timeStep) const
 {
@@ -136,30 +158,31 @@ double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPo
 		double pnext, next, reqdDecl, time, dX;
 		pnext = pPos + pSpeed * lookAhead; //where the car will
 		next = pos + speed * lookAhead; //where we will be
-		dX = pPos - pos - 5; //maintain 5 feet between cars
-//printf("pnext: %f, next %f\n", pnext, next);
-
-		//prevent error on stacking
-		//if less than 5ft from the next car go immediately to zero
-		if(dX < 0 && speed > 0)
-			return - speed / timeStep;
+		//maintain 5 feet between cars
+		//so target "decrease in gap" is 5 less than the current gap
+		dX = pPos - pos - 5.5;
 
 		//this gives either the required deceleration (-) to not come within 5 feet
 		//of the car in front or the allowable acceleration (+) to do the same
 		reqdDecl =  movingTargetDecel(speed, pSpeed, dX, time);
-		if( pnext < next && reqdDecl < 0) //we need to slow down
+		if( (pnext - 5.6) < next ) //we may need to slow down
 		{
-			//slow down at the car's normal acceleration rate or however fast we need to
-			accel = std::min(reqdDecl, -capableAccel);
+			if(reqdDecl < 0) //we do need to slow down
+			{
+				//slow down  however fast we need to
+				accel = reqdDecl;
 
-			//but don't slow down to less than the prevCar speed
-			if(speed + accel * timeStep < pSpeed)
-				accel = (pSpeed - speed)/timeStep;
+				//but don't slow down to less than the prevCar speed
+				if(speed + accel * timeStep < pSpeed)
+				{
+					accel = (pSpeed - speed)/timeStep;
+				}
+			}
 		}
-		else if( speed < dSpeed && reqdDecl > 0)
+		else if( speed < dSpeed)
 		{
 			//speed up as fast as we can
-			accel = std::min(reqdDecl, capableAccel);
+			accel = capableAccel;
 
 			//but don't exceed desired speed
 			if(speed + accel * timeStep > dSpeed)
@@ -168,7 +191,7 @@ double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPo
 
 		return accel;
 }
-void JPSimulationEngine::updateCar(SFCar *car, int dir, double &speed,double &pos,const double accel, const double timeStep)
+void JPSimulationEngine::updateCar(SFCar *car, int dir, double speed,double &pos,const double accel, const double timeStep)
 {
 	//calculate new position and speed
 	double dX, newSpeed, time;
@@ -219,7 +242,7 @@ void JPSimulationEngine::dispose(SFCar *car, JPLane *lane)
 
 int JPSimulationEngine::determineLightEffect(SFCar *car, const int dir, const int ln) const
 {
-	int state = _light->getTheState(dir,ln,_time);
+	int state = _light->getState(dir,ln,_time);
 	if( state == consts::GREEN)
 		return GO;
 	if (consts::YELLOW == state)
@@ -227,9 +250,20 @@ int JPSimulationEngine::determineLightEffect(SFCar *car, const int dir, const in
 	//if( consts::RED)
 		return STOP;
 }
-double staticTargetDecel(const double V0, const double dX, double &time)
+
+/**
+ * While named deceleration, this function actually returns the acceleration. (i.e.) The value is negative
+ * for its intended usage.
+ *
+ * \param V0 The initial velocity.
+ * \param dX The distance over which the deceleration should occur
+ * \param time A destination for outputing the computed time.
+ *
+ * \return The acceleration that would be required to decelerate from V0 to 0 over the given distance.
+ */
+double JPSimulationEngine::staticTargetDecel(const double V0, const double dX, double &time) const
 {
-	//todo make member
+
 	//eq1: 0=at+V0
 	//eq2: dX=0.5at^2+V0t
 	//solve by substitution
@@ -237,28 +271,70 @@ double staticTargetDecel(const double V0, const double dX, double &time)
 	return - V0/time;
 }
 
+/**
+ * While named deceleration, this function actually returns the acceleration. (i.e.) The value is negative
+ * for its intended usage.
+ *
+ * \param V0 The initial velocity.
+ * \param Vf The final velocity.
+ * \param dX The distance over which the deceleration should occur
+ * \param time A destination for outputing the computed time.
+ *
+ * \return The acceleration that would be required to achieve the change in velocity over the given distance.
+ */
+double JPSimulationEngine::staticTargetDecel(const double V0, const double Vf, const double dX, double &time) const
+{
+	//eq1: Vf=at+V0
+	//eq2: dX=0.5at^2+V0t
+	time = 2 * dX/(Vf + V0);
+	return (Vf - V0)/time;
+}
+
+/**
+ * This function is called when the light permits a car to go. It is used to adjust speed when
+ * turning.
+ * \param turnDir Turn direction \todo
+ * \param speed The current speed of the car.
+ * \param timeStep The size of the timeStep
+ * \return If in the middle of a turn, the lesser of the max acceleration and the acceleration
+ * required to achieve 25 FPS. If not in a turn, an arbitrarily high value.
+ */
+double JPSimulationEngine::computeGoAccel(const int turnDir, const double speed, const double timeStep) const
+{
+	if(SFCar::DESIRE_STRAIGHT == turnDir )
+		return 1000.0; //Arbitrarily high value
+	if(speed < 25.1 && speed > 24.9)
+		return 0.0; //stay the same speed
+
+	//accelerate
+	double stepAccel = (25 - speed)/timeStep; //prevent over-speed
+	return std::min(this->acceleration, stepAccel);
+}
 
 double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const int ln,
-		const double pos, const double speed) const
+		const double pos, const double speed, const double timeStep) const
 {
-	double next, action, accel1, accel2, dist, stepDist;
+	double next, action, accel1, dist;
 	double lookAhead = 5.0;
-	double lPos = - std::abs(_intersectionBounds[dir]); //position of the light
+	double intStart = - std::abs(_intersectionBounds[dir]); //position of the light
+	int intEnd = -intStart;
 	//default slow down rate is the car's normal acceleration rate
 	double accelDef = this->acceleration; //may replace with car function
 	double time;
+	int turn = car->getTurnDirection();
 
-	//are we more than 5 seconds away?
+	//are we more than 5 seconds away or already beyond?
 	next = pos + speed * lookAhead; //where we will be in 5 seconds
-	if( next < lPos)
+	if( next < intStart || pos > intEnd)
 		return 1000.0; //Return arbitrarily high value as there is no need to slow down
 
 	//if we already entered the intersection lightState doesn't matter
-	if(pos > lPos)
-		return 1000.0; //Return arbitrarily high value as there is no need to slow down
+	//but turns can still limit speed
+	if(pos > intStart)
+		return computeGoAccel(turn, speed, timeStep);
 
 	action = determineLightEffect(car, dir, ln);
-	dist = lPos - pos; // how far we can go
+	dist = intStart - pos; // how far we can go
 	if(CAUTION == action)
 	{
 		//caution actions are the same as either GO or STOP
@@ -292,7 +368,7 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 		if(blocked)
 			action = STOP;
 		else //if not blocked, then go
-			return 1000.0;
+			return computeGoAccel(turn, speed, timeStep);
 	}
 
 	if(STOP == action)
@@ -303,7 +379,7 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 
 		//be at 0 speed when 0.5 is reached if not already there.
 		if( dist < 0.5 )
-			accel1 = staticTargetDecel(speed,dist - 0.000001, time);
+			accel1 = staticTargetDecel(speed,dist - 0.000001, time); //fail safe
 		else
 			accel1 = staticTargetDecel(speed,dist - 0.5, time);
 		return accel1;
@@ -332,16 +408,17 @@ void JPSimulationEngine::processLane(int ln, int direction, double timeStep)
 			break;
 
 		carAccel = getPrevCarDecel(prevSpeed, prevPos,speed, dspeed, pos, timeStep);
-		lightAccel = getIntersectionDecel(car, direction, ln, pos, speed);
+		lightAccel = getIntersectionDecel(car, direction, ln, pos, speed, timeStep);
 		accel = std::min(carAccel, lightAccel);
 
 		//turning? = want to turn + inside intersection bounds
 
 		//compute new position
-		this->updateCar(car, direction, speed, pos, accel, timeStep);
+		double newPos = pos;
+		this->updateCar(car, direction, speed, newPos, accel, timeStep);
 
 		//see if this is the first car before the intersection
-		if( (! firstCarSet) && pos < - std::abs(_intersectionBounds[direction]))
+		if( (! firstCarSet) && newPos < - std::abs(_intersectionBounds[direction]))
 		{
 			firstCarSet = true;
 			_iGrid->setFirstCar(direction, ln, car);
@@ -354,6 +431,7 @@ void JPSimulationEngine::processLane(int ln, int direction, double timeStep)
 			dispose(car, lane);
 	}
 
+	//if we never set the first car before the intersection, it must not exist
 	if(! firstCarSet)
 		_iGrid->setFirstCar(direction, ln, NULL);
 }
@@ -382,20 +460,25 @@ void JPSimulationEngine::setStepTime(double stepTime) { _stepTime = stepTime; }
 double JPSimulationEngine::getStepTime() const { return _stepTime; }
 
 /**
- * \throw JPMissingParameterException if either the intersection, traffic light, traffic model are not set.
+ * \throw JPMissingParameterException if either the intersection, traffic model are not set.
  */
 void JPSimulationEngine::checkPrereqs()
 {
 	if(NULL == _intersection )
 		throw JPMissingParameterException(JPMissingParameterException::details::INTERSECTION);
-	if(NULL == _light )
-		throw JPMissingParameterException(JPMissingParameterException::details::TRAFFIC_LIGHT);
 	if(NULL == _trafficModel )
 		throw JPMissingParameterException(JPMissingParameterException::details::TRAFFIC_MODEL);
 	_intersection->finalize();
 
 	_iGrid = new JPIntersectionGrid(_intersection);
 }
+
+/**
+ * Checks prerequisite conditions (see \link checkPrereqs() \endlink ) and runs the simulation
+ * for initTime to populate the lanes. It then resets the clock to 0. Default init time is two cycles,
+ * but it can be set through \link  setInitTime() \endlink value will be rounded up to the nearest whole cylce
+ * \throw JPMissingParameterException if either the intersection, traffic light, traffic model are not set.
+ */
 void JPSimulationEngine::init()
 {
 	checkPrereqs();
@@ -571,10 +654,17 @@ int JPSimulationEngine::determineLane(SFCar* car, int direction) const
 }
 
 /**
- * \brief Retrieve the next car from the lane, and set a few variables.
+ *  \param lane The lane from which the next car is desired.
+ *  \param dir The direction of the lane. (Used for translating x/y into relative position.)
+ *  \param leng A target variable for the length of the car.
+ *  \param pos A target variable for the position of the car.
+ *  \param speed A target variable for the speed of the car
+ *  \param dSpeed A target variable for the desired speed of the car.
+ *
+ *  \return The next car in the lane. NULL if the lane is empty.
  */
 SFCar* JPSimulationEngine::getNextCar(JPLane* lane, int dir, double& leng, double& pos,
-	double& speed, double& dspeed)
+	double& speed, double& dSpeed)
 {
 	SFCar *car = lane->getNextCar();;
 
@@ -583,9 +673,12 @@ SFCar* JPSimulationEngine::getNextCar(JPLane* lane, int dir, double& leng, doubl
 		return NULL;
 	leng = car->getLength();
 	speed = car->getSpeed();
-	dspeed = car->getDesiredSpeed() * 5280 /3600;//assuming speed limit +/-
-	//dspeed = 0; //remove on merge
-	dspeed += _intersection->getSpeedLimitsInFPS(dir);
+	dSpeed = car->getDesiredSpeed() * 5280 /3600;//assuming speed limit +/-
+	dSpeed += _intersection->getSpeedLimitsInFPS(dir);
+
+	//set a minimum desired speed of 5 MPH as a fail safe
+	if(dSpeed < 5)
+		dSpeed = 5;
 
 	double x = car->getX();
 	double y = car->getY();
@@ -609,7 +702,7 @@ void JPSimulationEngine::updateYellowTimes(const double stepTime)
 	for(dir = 0; dir < 4; dir++)
 		for(ln = 0; ln < _laneCounts[dir]; ln++)
 		{
-			_light->getTheState(dir, ln, _time);
+			_light->getState(dir, ln, _time);
 			//todo incorporate light states
 			caution[0] = false;
 			caution[1] = false;

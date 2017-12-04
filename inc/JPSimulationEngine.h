@@ -16,8 +16,9 @@
 #include "../src/james/SFCar.h"
 #include "DJTrafficLightManager.h"
 #include "JPObservableSimulation.h"
-#include "../test/JPLightTestStub.h" //todo remove on merge
+#include "../test/JPLightTestStub.h"
 #include "JPOtherException.h"
+#include "JPTrafficLightAdapter.h"
 /**
  * \defgroup ENG Simulation Engine
  * @{
@@ -79,6 +80,7 @@ public:
 	void setStepInterval(double secs);
 	virtual ~JPSimulationEngine();
 
+	/** \brief Get the instance of the simulation engine */
 	static JPSimulationEngine* getInstance();
 	/** \brief get the calculation interval (step time)*/
 	double getStepTime() const;
@@ -87,6 +89,7 @@ public:
 	/** \brief Return the internal elapsed time (seconds) in the simulation */
 	double getTime() const { return _time;}
 
+	/** \brief Return the traffic model used in the simulation */
 	const JPTrafficModel* getTrafficModel() const { return _trafficModel;}
 
 	//double* getThroughput(int direction, int &laneCount);
@@ -99,24 +102,20 @@ private:
 	double _stepTime; //seconds default 0.1
 
 	//Internal Constants
-	const double turnSpeed = 20 * 5280/3600; //20 mph
-	const double acceleration = 5.0 * 5280/3600; //ft/s^2 from 5 mph/s
-	//const double reactionTime= 0.25; //probably not used
+	const double turnSpeed = 25; //Feet per second
+	const double acceleration = 5.0 * 5280/3600; //ft/s^2 from 5 mph/s default if car doesn't have a value
 
 	//internal simulation objects
-	//JPUpdatableInterface *_graphic;
 	JPIntersection *_intersection;
 	JPIntersectionGrid *_iGrid;
 	JPTrafficModel *_trafficModel;
-	//DJTrafficLightManager *_light; //todo swap on merge
-	JPLightTestStub *_light;
+	JPTrafficLightAdapter *_light;
 
 	//Running Variables
 	double _time;
 	bool _initialized;
 	bool _updating;
-	//long _throughput[4][MAX_LANES_MACRO];
-	double _nextCreationTime[4];
+	double _nextCreationTime[4]; //when will the next car be created
 	double _yellowTime[4][MAX_LANES_MACRO][2]; //0 = R/S, 1 L
 	int _turnOpts[4][MAX_LANES_MACRO]; //local copy
 	double _intersectionBounds[4];
@@ -134,24 +133,44 @@ private:
 	//previous car's speed/pos
 	//double carDeceleration(SFCar &car, double prevSpeed, double prevPos);
 
-	//returns position
-	//double translatePosition(int direction, int lnNum,
+
+	/** \brief Determine the amount of deceleration required or acceleration possible without coming within 5 feet of the next car.*/
 	double getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
 			const double dSpeed, const double pos, const double timeStep) const;
-	void updateCar(SFCar *car,const int dir, double &speed,double &pos,const double accel, const double timeStep);
+	void updateCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const double timeStep);
 	void processLane(int ln, int direction, double stepTime);
 	void addCars(int direction, double timeStep);
 	void checkPrereqs();
+	/** \brief Retrieve the next car from the lane, and set a few variables. */
 	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
 	SFCar *makeCar(int direction, int &lane);
 	int determineLane(SFCar *car, int direction) const;
 	void dispose(SFCar *car, JPLane *lane);
 	double getIntersectionDecel(SFCar *car,const int dir, const int ln, const double pos,
-			const double speed) const;
+			const double speed, const double timeStep) const;
+	/** \brief compute the command the light will give to the car */
 	int determineLightEffect(SFCar *car, const int dir, const int ln) const;
+	/** \brief Update tracking of how long each light has been yellow */
 	void updateYellowTimes(const double stepTime);
-	enum lightEffect {GO, CAUTION, YIELD, STOP };
 
+	/** \brief Calculate the time and deceleration to match pace between two cars while closing the gap. */
+	double movingTargetDecel(const double V0, const double Vt, const double dX, double &time) const;
+	/** \brief Calculate time and acceleration for deceleration from speed V0 to 0.  */
+	double staticTargetDecel(const double V0, const double dX, double &time) const;
+	/** \brief Calculate time and acceleration for deceleration from speed V0 to Vf.  */
+	double staticTargetDecel(const double V0, const double Vf, const double dX, double &time) const;
+	/** \brief Calculate the allowable acceleration based on a light effect of GO */
+	double computeGoAccel(const int turnDir, const double speed, const double timeStep) const;
+
+	/** \brief a list of possible effects (i.e. commands) that a light may have on a car */
+	enum lightEffect {
+		GO, ///The car may go. A basic green light.
+		CAUTION, /// The car should try to slow down if it is too far. A typical yellow light between green and red.
+		YIELD, ///The car must yield to traffic. This could be from a left yield signal or it could be returned for a car turning right at a red light.
+		STOP ///The car must stop. A red light in the context of going straight or turning left.
+	};
+
+	//local redeffs for brevity
 	const int NORTH = JPIntersection::NORTH;
 	const int SOUTH = JPIntersection::SOUTH;
 	const int EAST = JPIntersection::EAST;

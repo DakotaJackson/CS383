@@ -378,20 +378,6 @@ private:
 			eng->destory();
 		}
 
-		//without traffic light
-		eng = JPSimulationEngine::getInstance();
-		eng->setIntersection(inter);
-		//eng->setTrafficLight(tl);
-		eng->setTrafficModel(tm);
-		try{
-			eng->init(); //should throw exception
-			return 2;
-		}
-		catch(JPMissingParameterException &e)
-		{
-			eng->destory();
-		}
-
 		//without intersection
 		eng = JPSimulationEngine::getInstance();
 		//eng->setIntersection(inter);
@@ -446,53 +432,106 @@ private:
 		return -1;
 	}
 
-
 	int matchPaceTest()
 	{
 		JPSimulationEngine *eng;
 		eng = getSetup(2);
 		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::Cases::GREEN_EW));
 		eng->init();
-		bool matchSpeed = false;
-		double t, pos, stepTime = 0.1;
-		double bound = - 2 * JPIntersection::LANE_WIDTH;
+		double t, stepTime = 0.1;
 
 		//position car 5 seconds from light with expected stop time of 10 seconds
 		JPLane *lane = inter->getLane(3,0);
 
-		//lead car
-		SFCar *lcar = new SFCar(); //lead
-		lcar->setX(-10000); //2 miles-ish
-		lcar->setY(-15);
+		//lead car: pos = -10k, (d)speed 30 FPS
+		double thirty = 30.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
+		JPCarTestStub *lcar = new JPCarTestStub(15,-10000,-15, 30, thirty);
 		lcar->setTimeInSim(0);
-		lcar->setSpeed(30);
 		lcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(lcar);	
 
-		//behind car
-		SFCar *bcar = new SFCar(); //back
-		bcar->setX(-10060); //45 ft (4 seconds) behind 
-		bcar->setY(-15);
+		//Initial gap between front of lead car and front of back car is 90
+		//Front car is 15 feet, and a 5 (actual target is 5.5) foot gap is to be maintained when speed is matched
+		//This gives an effective gap of 70 ft.
+		//With a speed difference of 10 FPS and a lookahead of 5 seconds, speed should begin chaning
+		//when effective gap is 50 (i.e. approximately 2 seconds.
+		//2 second till speed change should begin
+		double fourty = 40.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
+		JPCarTestStub *bcar = new JPCarTestStub(15,-10090, -15, 40 , fourty);
 		bcar->setTimeInSim(0);
-		bcar->setSpeed(40);
 		bcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(bcar);	
 
 		//iterate to the upper bound of 11 seconds.
-		for(t = 0; t < 30; t += stepTime)
+		for(t = 0; t < 12.5; t += stepTime)
 		{
 			eng->step(stepTime);
 			//printCar(lcar);
 			//printCar(bcar);
-			//no change before 3 seconds
-			if(t <= 3 && bcar->getSpeed() < 39.999)
-					return 1; //slowed down too quickly
+			//no change before 2 seconds
+			if(t <= 1.5 && bcar->getSpeed() < 39.999)
+					return 1; //started slowing early
+
+			if(t <= 11 && bcar->getSpeed() < 30.001)
+					return 2; //finished slowing too early
 		}
 		
-		if(! matchSpeed)
-			return 2; //it didn't slow down fast enough
+		//verify speed is correct
+		double speed = bcar->getSpeed();
+		if(speed < 29.8 || speed > 30.2)
+			return 3; //speed not matched
 
-		return -1;
+		//check gap
+		double dX = lcar->getX() - bcar->getX();
+		dX -= 15; //account for length of lcar;
+		if(dX < 5 || dX > 6)
+			return 4; //gaps is wrong
+
+		return 0;
+	}
+
+	int rearCarAccelerationTest()
+	{
+		//Test 2 can behind car speed up to desired speed?
+		JPSimulationEngine *eng;
+		eng = getSetup(2);
+		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::Cases::GREEN_EW));
+		eng->init();
+		double t, stepTime = 0.1;
+
+		//position car 5 seconds from light with expected stop time of 10 seconds
+		JPLane *lane = inter->getLane(3,0);
+
+		//lead car: pos = -10k, (d)speed 30 FPS
+		double thirty = 30.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
+		JPCarTestStub *lcar = new JPCarTestStub(15,-10000,-15, 30, thirty);
+		lcar->setTimeInSim(0);
+		lcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lane->addCarAtEnd(lcar);
+
+		//rear car going 10, should speed up
+		// acceleration is 5 FPS/S so approximately 4 seconds
+		double fourty = 40.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
+		JPCarTestStub *bcar = new JPCarTestStub(15,-10190, -15, 10 , fourty);
+		bcar->setTimeInSim(0);
+		bcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lane->addCarAtEnd(bcar);
+
+		//iterate to the upper bound of 11 seconds.
+		for(t = 0; t < 4.5; t += stepTime)
+		{
+			eng->step(stepTime);
+
+			if(t <= 3.5 && bcar->getSpeed() > 39.999)
+					return 1; //finished slowing too early
+		}
+
+		//verify speed is correct
+		double speed = bcar->getSpeed();
+		if(speed < 39.8 || speed > 40.2)
+			return 2; //speed not matched
+
+		return 0;
 	}
 
 	int redLightStopTest()
@@ -514,7 +553,7 @@ private:
 		car->setSpeed(51.3);
 		car->setTurnDirection(SFCar::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(car);	
-		
+
 		//iterate to the upper bound of 11 seconds.
 		for(t = 0; t < 11; t += stepTime)
 		{
@@ -575,7 +614,7 @@ private:
 		for(t = 0; t < 16; t += stepTime)
 		{
 			eng->step(stepTime);
-			printCar(car);
+			//printCar(car);
 			if(car->getSpeed() < 0.0001)
 			{
 				stopSpeed = true; //flag that the car did stop
@@ -1070,11 +1109,6 @@ public:
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Determine Lane Test",
 				determineLaneTest() );
-
-		ret = consts::testOuptut(
-				"JPSimulationEngine: Add Car Test",
-				addCarTest() );
-
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Previous Car Deceleration Test",
 				prevCarDecelTest() );
@@ -1082,8 +1116,14 @@ public:
 				"JPSimulationEngine: Match Pace Test",
 				matchPaceTest() );
 		ret = consts::testOuptut(
+				"JPSimulationEngine: Rear Car Acceleration Test",
+				rearCarAccelerationTest() );
+
+printf("Ret: %d\n", ret);
+		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
 				rightTurnRedTest() );
+
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
 				leftTurnGreenTest() );
@@ -1093,7 +1133,15 @@ public:
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Red Light Stop Test",
 				redLightStopTest() );
-printf("Ret: %d\n", ret);
+
+		//long tests
+		if(false)
+		{
+			ret = consts::testOuptut(
+					"JPSimulationEngine: Add Car Test",
+					addCarTest() );
+
+		}
 		return ret;
 	}
 

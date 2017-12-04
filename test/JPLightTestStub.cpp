@@ -30,7 +30,7 @@ void JPLightTestStub::setTestCase(int testCase)
 	_testCase = testCase;
 }
 
-int JPLightTestStub::getTheState(int direction, int lane, double time)
+int JPLightTestStub::getState(int direction, int lane, double time)
 {
 	switch(_testCase)
 	{
