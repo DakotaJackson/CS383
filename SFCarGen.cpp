@@ -1,3 +1,4 @@
+
 /*
  * SFCarGen.cpp
  *
@@ -161,3 +162,38 @@ void Car::setWaitTime(double waitTime) {
 	_waitTime = waitTime;
 }
 
+void Car::carMember() {
+        int _randCar;
+        _randCar = (1 + rand() % 4);
+
+        Director dir;
+        SimpleCar sb; //Car
+        Minivan mvb; //Minivan
+        Truck tb; //Truck
+        Bus buss; //Bus
+
+        if (_randCar == 1){
+            Car *scar = dir.createCar(&sb);
+            scar->show();
+            delete scar;
+            }
+
+        else if (_randCar == 2){
+            Car *truck = dir.createCar(&tb);
+            truck->show();
+            delete truck;
+            }
+
+        else if (_randCar == 3){
+            Car *mvan = dir.createCar(&mvb);
+            mvan->show();
+            delete mvan;
+            }
+
+        else if (_randCar == 4){
+            Car *bus = dir.createCar(&buss);
+            bus->show();
+            delete bus;
+            }
+
+}
