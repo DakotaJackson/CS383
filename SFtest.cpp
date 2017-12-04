@@ -3,23 +3,26 @@
 #include <string.h>
 
 using namespace std;
+
 // This is the test
 
 void testOne();
 void testTwo();
 void testThree();
+void testFour();
 
 int main()
 {
-    testOne();
+    //testOne();
     //testTwo();
     //testThree();
+    testFour();
 
     return 0;
 }
 /*
     TestOne() : This test runs each of the backup functions
-
+        to test
 */
 void testOne(){
     double desiredSpeed = 0;
@@ -97,6 +100,15 @@ void testThree(){
 
 }
 
+void testFour(){
+    Car member;
+
+    for (int i = 0; i<5; i++){
+        member.carMember();
+    }
+
+}
+
 // Estimated: 6 hours meeting time
 // Actual: 4 hours meeting time
 //
@@ -104,10 +116,10 @@ void testThree(){
 // Actual: 10 hours
 //
 // Estimated Programming: 6 hours
-// Actual Programming: 8-9 hours
+// Actual Programming: 10 hours
 //
 // Total Estimated: 24 hours
-// Total Actual: 22 hours
+// Total Actual: 24 hours
 
 // Throw in detailed decorator
 // UML for decorator
