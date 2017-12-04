@@ -214,9 +214,8 @@ public:
 // CarBuilder Abstract Class
 // Means all builders should have at least these methods
 class CarBuilder{
-protected:
-    Car *_car;
 public:
+    Car *_car;
     virtual void getPartsDone() = 0;
     virtual void buildSpeed() = 0;
     virtual void buildLength() = 0;
