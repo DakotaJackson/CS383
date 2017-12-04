@@ -11,36 +11,40 @@ void testThree();
 
 int main()
 {
-    //testOne();
+    testOne();
     //testTwo();
-    testThree();
+    //testThree();
 
     return 0;
 }
+/*
+    TestOne() : This test runs each of the backup functions
 
+*/
 void testOne(){
     double desiredSpeed = 0;
     double length = 0;
     int turnDirection = 0;
 
-    ICar car;
-    car.setDesiredSpeed(desiredSpeed);
-    car.getDesiredSpeed();
+    Car carOb;
+    carOb.setDesiredSpeed2(desiredSpeed);
+    carOb.getDesiredSpeed();
     for (int i = 0; i<5; i++)
     {
-        car.setDesiredSpeed(desiredSpeed);
-        desiredSpeed = car.getDesiredSpeed();
-        cout << "Desired speed related to limit: " << car.getDesiredSpeed() << endl;
+
+        carOb.setDesiredSpeed2(desiredSpeed);
+        desiredSpeed = carOb.getDesiredSpeed();
+        cout << "Desired speed related to limit: " << carOb.getDesiredSpeed() << endl;
         cout << "Please input speed limit: ";
-        car.setSpeed(desiredSpeed);
-        car.getSpeed();
-        cout << "Actual speed related to limit: " <<car.getSpeed() << endl;
-        car.setLength(length);
-        car.getLength();
-        cout << "Car Length: " << car.getLength() << endl;
-        car.setTurnDirection(turnDirection);
-        car.getTurnDirection();
-        cout << "Turn Direction: (1-straight, 2-right, 4-left)" << car.getTurnDirection() << endl;
+        carOb.setSpeed(desiredSpeed);
+        carOb.getSpeed();
+        cout << "Actual speed related to limit: " <<carOb.getSpeed() << endl;
+        carOb.setLength2(length);
+        carOb.getLength();
+        cout << "Car Length: " << carOb.getLength() << endl;
+        carOb.setTurnDirection(turnDirection);
+        carOb.getTurnDirection();
+        cout << "Turn Direction: (1-straight, 2-right, 4-left)" << carOb.getTurnDirection() << endl;
     }
 }
 
@@ -49,20 +53,20 @@ void testTwo(){
     double length = 0;
     int turnDirection = 0;
 
-    ICar car;
-    car.setDesiredSpeed(desiredSpeed);
-    car.getDesiredSpeed();
+    Car carOb;
+    carOb.setDesiredSpeed2(desiredSpeed);
+    carOb.getDesiredSpeed();
     for (int i = 0; i<5; i++)
     {
-        car.setDesiredSpeed(desiredSpeed);
-        desiredSpeed = car.getDesiredSpeed();
-        cout << "Desired speed related to limit: " << car.getDesiredSpeed() << endl;
-        car.setLength(length);
-        car.getLength();
-        cout << "Car Length: " << car.getLength() << endl;
-        car.setTurnDirection(turnDirection);
-        car.getTurnDirection();
-        cout << "Turn Direction: (1-straight, 2-right, 4-left)" << car.getTurnDirection() << endl;
+        carOb.setDesiredSpeed2(desiredSpeed);
+        desiredSpeed = carOb.getDesiredSpeed();
+        cout << "Desired speed related to limit: " << carOb.getDesiredSpeed() << endl;
+        carOb.setLength2(length);
+        carOb.getLength();
+        cout << "Car Length: " << carOb.getLength() << endl;
+        carOb.setTurnDirection(turnDirection);
+        carOb.getTurnDirection();
+        cout << "Turn Direction: (1-straight, 2-right, 4-left)" << carOb.getTurnDirection() << endl;
     }
 }
 
@@ -92,3 +96,19 @@ void testThree(){
     }
 
 }
+
+// Estimated: 6 hours meeting time
+// Actual: 4 hours meeting time
+//
+// Estimated: 12 hours research time
+// Actual: 10 hours
+//
+// Estimated Programming: 6 hours
+// Actual Programming: 8-9 hours
+//
+// Total Estimated: 24 hours
+// Total Actual: 22 hours
+
+// Throw in detailed decorator
+// UML for decorator
+// Try except cases
