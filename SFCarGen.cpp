@@ -1,4 +1,3 @@
-
 /*
  * SFCarGen.cpp
  *
@@ -33,6 +32,12 @@ Car::Car() {
 
 }
 
+/*  Backup Desired Speed Function.
+
+    These two functions are just in case the Builder pattern
+    malfunctions in some way. These will not be used if carMethod
+    works properly. */
+
 double Car::getDesiredSpeed() const {
 	return _desiredSpeed;
 }
@@ -51,6 +56,11 @@ void Car::setDesiredSpeed2(double desiredSpeed) {
         _desiredSpeed = 0;
     }
 }
+/*  Backup Length Function.
+
+    These two functions are just in case the Builder pattern
+    malfunctions in some way. These will not be used if carMethod
+    works properly. */
 
 double Car::getLength() const {
 	return _length;
@@ -71,6 +81,11 @@ void Car::setLength2(double length) {
         _length = 40;
     }
 }
+/*  Speed Limit.
+
+    setSpeed is used to set the speed limit. In testing,
+    speed limit is provided
+    within this program module. */
 
 double Car::getSpeed() const {
 	return _speed;
@@ -95,6 +110,9 @@ void Car::setSpeed(double desiredSpeed) {
 	_speed = speed + desiredSpeed;
 }
 
+/* Theta.
+
+    Current angle of the car??? */
 
 double Car::getTheta() const {
 	return _theta;
@@ -103,6 +121,14 @@ double Car::getTheta() const {
 void Car::setTheta(double theta) {
 	_theta = theta;
 }
+
+/*  Turn Direction Decision Randomizer.
+
+    Initializes a variable which chooses a random number.
+    Based on the number chosen, the vehicle will decide where
+    it wants to go on the road from 3 possible options.
+
+    TO DO (possible in future): U-turn */
 
 int Car::getTurnDirection() const {
 	return _turnDirection;
@@ -122,6 +148,13 @@ void Car::setTurnDirection(int turnDirection) {
 	_turnDirection = turnDirection;
 }
 
+/*  Storage Variables.
+
+    Initializes variables x and y, which are used
+    to store the new coordinates of a car. These are
+    then called by the graphical UI, which updates the image to
+    its' new position on the road. */
+
 double Car::getX() const {
 	return _x;
 }
@@ -138,6 +171,12 @@ void Car::setY(double y) {
 	_y = y;
 }
 
+/*  Storage Variables.
+
+    Initializes a variable which stores the pointer for the
+    image in the graphical UI. Another function returns
+    the pointer. */
+
 void* Car::getImgPtr() const {
 	return _imgPtr;
 }
@@ -145,6 +184,11 @@ void* Car::getImgPtr() const {
 void Car::setImgPtr(void* imgPtr) {
 	_imgPtr = imgPtr;
 }
+/*  Storage Variables.
+
+    Initializes a variable which stores time spent
+    in the simulator period. Then another function returns the
+    variable stored. */
 
 double Car::getTimeInSim() const {
 	return _timeInSim;
@@ -153,6 +197,11 @@ double Car::getTimeInSim() const {
 void Car::setTimeInSim(double timeInSim) {
 	_timeInSim = timeInSim;
 }
+/*  Storage Variables.
+
+    Initializes a variable which stores time spent
+    waiting at a light. Then another function returns the
+    variable stored. */
 
 double Car::getWaitTime() const {
 	return _waitTime;
@@ -162,9 +211,16 @@ void Car::setWaitTime(double waitTime) {
 	_waitTime = waitTime;
 }
 
+/* Randomizes the Car called. Uses the Builders in SFCarGen.h
+
+    Initializes a variable which creates a random number between
+    1 and 8. Only 4 car types currently exist, but by doubling
+    possible numbers the hopeful result is further variety in
+    random generation. */
+
 void Car::carMember() {
         int _randCar;
-        _randCar = (1 + rand() % 4);
+        _randCar = (1 + rand() % 8);
 
         Director dir;
         SimpleCar sb; //Car
@@ -172,27 +228,27 @@ void Car::carMember() {
         Truck tb; //Truck
         Bus buss; //Bus
 
-        if (_randCar == 1){
-            Car *scar = dir.createCar(&sb);
-            scar->show();
+        if (_randCar == 1 | _randCar == 5){
+            Car *scar = dir.createCar(&sb); // calls the director class and passes desired vehicle type Car
+            scar->show();  // Passes information obtained into show
             delete scar;
             }
 
-        else if (_randCar == 2){
-            Car *truck = dir.createCar(&tb);
-            truck->show();
+        else if (_randCar == 2 | _randCar == 6){
+            Car *truck = dir.createCar(&tb); // calls the director class and passes desired vehicle type Truck
+            truck->show();  // Passes information obtained into show
             delete truck;
             }
 
-        else if (_randCar == 3){
-            Car *mvan = dir.createCar(&mvb);
-            mvan->show();
+        else if (_randCar == 3 | _randCar == 7){
+            Car *mvan = dir.createCar(&mvb); // calls the director class and passes desired vehicle type Minivan
+            mvan->show();  // Passes information obtained into show
             delete mvan;
             }
 
-        else if (_randCar == 4){
-            Car *bus = dir.createCar(&buss);
-            bus->show();
+        else if (_randCar == 4 | _randCar == 8){
+            Car *bus = dir.createCar(&buss); // calls the director class and passes desired vehicle type Bus
+            bus->show();  // Passes information obtained into show
             delete bus;
             }
 
