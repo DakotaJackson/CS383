@@ -34,6 +34,8 @@ public:
     virtual ~Car() { }
 	Car();
 
+    void carMember();
+
 	virtual double getDesiredSpeed() const;
 	void setDesiredSpeed2(double desiredSpeed);
 	virtual double getLength() const;
@@ -87,7 +89,6 @@ class CarAb
 public:
 	virtual void Make() = 0;
 	virtual ~CarAb() { }
-
 };
 
 class CarDecorator: public CarAb
@@ -97,9 +98,7 @@ protected:
 public:
 	CarDecorator(CarAb& decorator):m_Decorator(decorator)
 	{
-
 	}
-
 	virtual void Make()
 	{
 		m_Decorator.Make();
@@ -110,13 +109,10 @@ public:
 
 class ColorDec : public CarDecorator
 {
-
 public:
 	ColorDec(CarAb& decorator):CarDecorator(decorator)
 	{
-
 	}
-
 	virtual void Make()
 	{
 		CarDecorator::Make();
@@ -138,9 +134,7 @@ public:
         else if (_randColor== 5){
             _car->setColor("Black"); //BLACK
         }
-
 	}
-
 };
 
 class DriveDec : public CarDecorator
@@ -167,19 +161,14 @@ public:
         else if (_randDrive== 3){
              _car->setDrive("2-Wheel Rear Drive"); //RED
             }
-
-
 	}
-
 };
 
 class MusicDec : public CarDecorator
 {
-
 public:
 	MusicDec(CarAb& decorator):CarDecorator(decorator)
-	{
-
+    {
 	}
 
 	virtual void Make()
