@@ -1,7 +1,7 @@
 var searchData=
 [
   ['jjalltest',['JJallTest',['../classJJallTest.html',1,'JJallTest'],['../classJJallTest.html#abafd0a5942f5a5e711bbd887c64791d3',1,'JJallTest::JJallTest()']]],
-  ['jjdisplayoutput',['JJDisplayOutput',['../classJJDisplayOutput.html',1,'JJDisplayOutput'],['../classJJDisplayOutput.html#abbd4d33d586e7cbde9025036f08a6326',1,'JJDisplayOutput::JJDisplayOutput()']]],
+  ['jjdisplayoutput',['JJDisplayOutput',['../classJJDisplayOutput.html',1,'JJDisplayOutput'],['../classJJDisplayOutput.html#aa9e7e579d30483bd9bc6c0d3dad61d3f',1,'JJDisplayOutput::JJDisplayOutput()']]],
   ['jjdisplayoutput_2ecpp',['JJDisplayOutput.cpp',['../JJDisplayOutput_8cpp.html',1,'']]],
   ['jjdisplayoutput_2eh',['JJDisplayOutput.h',['../JJDisplayOutput_8h.html',1,'']]],
   ['jjtestoutput_2ecpp',['JJTestOutput.cpp',['../JJTestOutput_8cpp.html',1,'']]],
@@ -50,9 +50,12 @@ var searchData=
   ['jpsimulationcontroler_2eh',['JPSimulationControler.h',['../JPSimulationControler_8h.html',1,'']]],
   ['jpsimulationcontroler_5ftest_2ecpp',['JPSimulationControler_test.cpp',['../JPSimulationControler__test_8cpp.html',1,'']]],
   ['jpsimulationengine',['JPSimulationEngine',['../classJPSimulationEngine.html',1,'JPSimulationEngine'],['../classJPSimulationEngine.html#ad6a75aa716f039fe2e3c35dd349ad4bf',1,'JPSimulationEngine::JPSimulationEngine()'],['../classJPSimulationEngine.html#a8fdeb259aea98c9dfa9f80e9f4aa51ef',1,'JPSimulationEngine::JPSimulationEngine(JPSimulationEngine const &amp;)']]],
-  ['jpsimulationengine_2ecpp',['JPSimulationEngine.cpp',['../JPSimulationEngine_8cpp.html',1,'(Global Namespace)'],['../src_2james_2JPSimulationEngine_8cpp.html',1,'(Global Namespace)']]],
+  ['jpsimulationengine_2ecpp',['JPSimulationEngine.cpp',['../JPSimulationEngine_8cpp.html',1,'']]],
   ['jpsimulationengine_2eh',['JPSimulationEngine.h',['../JPSimulationEngine_8h.html',1,'']]],
-  ['jpsimulationengine_5ftest_2ecpp',['JPSimulationEngine_test.cpp',['../JPSimulationEngine__test_8cpp.html',1,'(Global Namespace)'],['../test_2JPSimulationEngine__test_8cpp.html',1,'(Global Namespace)']]],
+  ['jpsimulationengine_5ftest_2ecpp',['JPSimulationEngine_test.cpp',['../JPSimulationEngine__test_8cpp.html',1,'']]],
+  ['jptrafficlightadapter',['JPTrafficLightAdapter',['../classJPTrafficLightAdapter.html',1,'JPTrafficLightAdapter'],['../classJPTrafficLightAdapter.html#aba1eb190f2e77ac4dbfccba1dd4e3942',1,'JPTrafficLightAdapter::JPTrafficLightAdapter()']]],
+  ['jptrafficlightadapter_2ecpp',['JPTrafficLightAdapter.cpp',['../JPTrafficLightAdapter_8cpp.html',1,'']]],
+  ['jptrafficlightadapter_2eh',['JPTrafficLightAdapter.h',['../JPTrafficLightAdapter_8h.html',1,'']]],
   ['jptrafficmodel',['JPTrafficModel',['../classJPTrafficModel.html',1,'JPTrafficModel'],['../classJPTrafficModel.html#ac0b5652f28a51f1ec5cd8086f4918316',1,'JPTrafficModel::JPTrafficModel()']]],
   ['jptrafficmodel_2ecpp',['JPTrafficModel.cpp',['../JPTrafficModel_8cpp.html',1,'']]],
   ['jptrafficmodel_2eh',['JPTrafficModel.h',['../JPTrafficModel_8h.html',1,'']]],

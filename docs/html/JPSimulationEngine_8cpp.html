@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Traffic Simulator: JPSimulationEngine.cpp File Reference</title>
+<title>Traffic Simulator: src/james/JPSimulationEngine.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -57,6 +57,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c981d417af43a338b9a903e1770a1292.html">james</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -65,28 +69,31 @@ $(function() {
 <div class="title">JPSimulationEngine.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;../../inc/JPSimulationEngine.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="JPSimulationEngine_8h_source.html">../../inc/JPSimulationEngine.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a09d865f253bd69f0f1e939dfaae4a9e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="JPSimulationEngine_8cpp.html#a09d865f253bd69f0f1e939dfaae4a9e0">movingTargetDecel</a> (const double V0, const double Vt, const double dX, double &amp;time)</td></tr>
-<tr class="memdesc:a09d865f253bd69f0f1e939dfaae4a9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the required deceleration to no hit a moving target.  <a href="#a09d865f253bd69f0f1e939dfaae4a9e0">More...</a><br /></td></tr>
-<tr class="separator:a09d865f253bd69f0f1e939dfaae4a9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaeb61c37bfbc63000c3adc83c97e18b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="JPSimulationEngine_8cpp.html#aaaeb61c37bfbc63000c3adc83c97e18b">staticTargetDecel</a> (const double V0, const double dX, double &amp;time)</td></tr>
-<tr class="separator:aaaeb61c37bfbc63000c3adc83c97e18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c83e96d5ca92fef8af6dea73131741"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="JPSimulationEngine_8cpp.html#ab6c83e96d5ca92fef8af6dea73131741">getTurnedDistance</a> (const double ac, const double V0, const double tm)</td></tr>
+<tr class="separator:ab6c83e96d5ca92fef8af6dea73131741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a09d865f253bd69f0f1e939dfaae4a9e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09d865f253bd69f0f1e939dfaae4a9e0">&#9670;&nbsp;</a></span>movingTargetDecel()</h2>
+<a id="ab6c83e96d5ca92fef8af6dea73131741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6c83e96d5ca92fef8af6dea73131741">&#9670;&nbsp;</a></span>getTurnedDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double movingTargetDecel </td>
+          <td class="memname">double getTurnedDistance </td>
           <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>ac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>V0</em>, </td>
         </tr>
@@ -94,55 +101,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>Vt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>dX</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>time</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculate the required deceleration to no hit a moving target. </p>
-
-</div>
-</div>
-<a id="aaaeb61c37bfbc63000c3adc83c97e18b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaeb61c37bfbc63000c3adc83c97e18b">&#9670;&nbsp;</a></span>staticTargetDecel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double staticTargetDecel </td>
-          <td>(</td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>V0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>dX</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>time</em>&#160;</td>
+          <td class="paramname"><em>tm</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

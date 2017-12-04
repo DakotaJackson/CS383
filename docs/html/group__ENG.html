@@ -139,6 +139,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the simulation and run for a short time to populate the lanes. </p>
+<p>Checks prerequisite conditions (see <a class="el" href="classJPSimulationEngine.html#a16ad2e15269ecee7a8a9bade426f8e71">checkPrereqs()</a> ) and runs the simulation for initTime to populate the lanes. It then resets the clock to 0. Default init time is two cycles, but it can be set through <a class="el" href="classJPSimulationEngine.html#a803fc1f9cfe6d1b6ccfa4fa2376a5429">setInitTime()</a> value will be rounded up to the nearest whole cylce </p><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classJPMissingParameterException.html">JPMissingParameterException</a></td><td>if either the intersection, traffic light, traffic model are not set. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

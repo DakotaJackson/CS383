@@ -73,11 +73,14 @@ $(function() {
 , <a class="el" href="classCarBuilder.html#a37488e4a49d6808ee804f0d9e4932419">CarBuilder</a>
 </li>
 <li>_carCount
-: <a class="el" href="classSETestClass.html#a4fc49828107e4ae22f5e895e1db14f6c">SETestClass</a>
+: <a class="el" href="classSETestClass.html#acffc8caf5444306e22ecf67bf46ea743">SETestClass</a>
 </li>
 <li>_collidingLane
 : <a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a80cc2482182813887b55abec0662a2ed">JPLaneCollidesWithOncomingLaneException</a>
 , <a class="el" href="classJPTwoLanesToOneException.html#a081700102357cebf3051a976be35edd0">JPTwoLanesToOneException</a>
+</li>
+<li>_cycleTime
+: <a class="el" href="classDJTrafficLightManager.html#ad5fa18252ccc3d0be3a82594236b0445">DJTrafficLightManager</a>
 </li>
 <li>_desiredSpeed
 : <a class="el" href="classCar.html#a0ab1ff8534a7cdb3f7622b39b3b5cbb0">Car</a>
@@ -88,12 +91,18 @@ $(function() {
 : <a class="el" href="classJPConfigurationOrderException.html#a3879652c23b32f5305aa2e72d3810cbe">JPConfigurationOrderException</a>
 , <a class="el" href="classJPMissingParameterException.html#aae710143743bef1ea287c90848d0cf2b">JPMissingParameterException</a>
 </li>
+<li>_dirAndLaneLightArray
+: <a class="el" href="classDJTrafficLightManager.html#ada11edd0c2d9dacadd8e9600533ab24c">DJTrafficLightManager</a>
+</li>
 <li>_direction
 : <a class="el" href="classJPMalformedIntersectionException.html#add407a968131ff3763b34c745fbc4856">JPMalformedIntersectionException</a>
 , <a class="el" href="classSETestClass.html#a0050ba3ed6f5d165e8eb16f67a48ecd0">SETestClass</a>
 </li>
 <li>_directionMappings
 : <a class="el" href="classJPTrafficModel.html#aac5539b38f83237f7428f032801f93dc">JPTrafficModel</a>
+</li>
+<li>_dj
+: <a class="el" href="classJPTrafficLightAdapter.html#a4ae9f72fe316eaf4010d1f999a3ee580">JPTrafficLightAdapter</a>
 </li>
 <li>_dspeed
 : <a class="el" href="classJPCarTestStub.html#a24ca277336d4525e2df850a5aa9131e4">JPCarTestStub</a>
@@ -145,6 +154,9 @@ $(function() {
 <li>_iter
 : <a class="el" href="classJPLane.html#a1551157a155739be9daffe0a5fabe344">JPLane</a>
 </li>
+<li>_jp
+: <a class="el" href="classJPTrafficLightAdapter.html#a58618829ddce7da7e634c9fcbd4410f1">JPTrafficLightAdapter</a>
+</li>
 <li>_lane
 : <a class="el" href="classJPMalformedIntersectionException.html#af19451d4786c03b425576908c4dd32a1">JPMalformedIntersectionException</a>
 , <a class="el" href="classSETestClass.html#afbd66a88ac51d3dcf8010675fdd2fb67">SETestClass</a>
@@ -165,6 +177,9 @@ $(function() {
 <li>_lanes
 : <a class="el" href="classJPIntersection.html#a3bb7a4d130841d0f0fd89d3a039b504d">JPIntersection</a>
 </li>
+<li>_lastCar
+: <a class="el" href="classJPLane.html#a320b88511a5b65d5fc117f55ffa33a6f">JPLane</a>
+</li>
 <li>_leftTarget
 : <a class="el" href="classJPLane.html#aa85658e38cbd0db97ab470789a0a82c9">JPLane</a>
 </li>
@@ -177,10 +192,16 @@ $(function() {
 , <a class="el" href="classSFCar.html#a5a0d450f1841b2318ada8887fb457f17">SFCar</a>
 </li>
 <li>_light
-: <a class="el" href="classJPSimulationEngine.html#a8ea03832516351fcc9e8156e4a6ad7e5">JPSimulationEngine</a>
+: <a class="el" href="classJPSimulationEngine.html#a00b1a4cc60acec3c666c0f08d02677a5">JPSimulationEngine</a>
 </li>
 <li>_list
 : <a class="el" href="classJPLane.html#af2bcd247e7962350c1f0c6d0c6f28445">JPLane</a>
+</li>
+<li>_masterStateTable
+: <a class="el" href="classDJTrafficLightManager.html#a6def73cbbaa9e59138a4355a3e899dde">DJTrafficLightManager</a>
+</li>
+<li>_masterStateTimingTable
+: <a class="el" href="classDJTrafficLightManager.html#a30b8e1c9a1c824b7b3ede3e61446082c">DJTrafficLightManager</a>
 </li>
 <li>_multiThread
 : <a class="el" href="classJPSimulationControler.html#a5b7f2cba5dd72e7c70a66f7972961324">JPSimulationControler</a>
@@ -193,6 +214,7 @@ $(function() {
 </li>
 <li>_offsets
 : <a class="el" href="classJPIntersectionGrid.html#abdec07cfe83975e534746925c70d4ab9">JPIntersectionGrid</a>
+, <a class="el" href="classJPSimulationEngine.html#aea44d565e2a6e392381b72e2b7b6cb36">JPSimulationEngine</a>
 </li>
 <li>_ot
 : <a class="el" href="classObserverTest.html#a13cf96fd5c1be8246f6f59fa54a24173">ObserverTest</a>
@@ -226,6 +248,9 @@ $(function() {
 </li>
 <li>_simTime
 : <a class="el" href="classJPSimulationControler.html#a0cd23b723663ac40655676cf83356545">JPSimulationControler</a>
+</li>
+<li>_singleLightArray
+: <a class="el" href="classDJTrafficLightManager.html#a077f004238bcadd57b582d793754daf1">DJTrafficLightManager</a>
 </li>
 <li>_speed
 : <a class="el" href="classICar.html#aa09e2b375dba0752c009ee6fa09a5b91">ICar</a>
@@ -263,6 +288,9 @@ $(function() {
 : <a class="el" href="classICar.html#a113149f2e9bfc56e8990802ba2f3af15">ICar</a>
 , <a class="el" href="classSFCar.html#a9719002738d4ad5e92e05667199e7eed">SFCar</a>
 </li>
+<li>_timeRate
+: <a class="el" href="classDJTrafficLightManager.html#a7c6da8c40ca180dd5befd9b480ae2b95">DJTrafficLightManager</a>
+</li>
 <li>_timeScale
 : <a class="el" href="classJPSimulationControler.html#a6344edf5700f31a23426b9af4dbbcc3d">JPSimulationControler</a>
 </li>
@@ -289,6 +317,9 @@ $(function() {
 <li>_updating
 : <a class="el" href="classJPSimulationEngine.html#ad3cb7158cfc5df38696644504c53c86c">JPSimulationEngine</a>
 </li>
+<li>_useDefaults
+: <a class="el" href="classDJTrafficLightManager.html#a2cc1cb8c9a449d3acfdb1e5cc7994667">DJTrafficLightManager</a>
+</li>
 <li>_waitTime
 : <a class="el" href="classICar.html#a734e8d26b7a1df70bcb8426bca3c5c78">ICar</a>
 , <a class="el" href="classSFCar.html#a9d2a3f5c2534d09d4c992474efe7a95e">SFCar</a>
@@ -303,284 +334,6 @@ $(function() {
 </li>
 <li>_yellowTime
 : <a class="el" href="classJPSimulationEngine.html#adf6dd595813fae58084d6e0defd8ba55">JPSimulationEngine</a>
-</li>
-</ul>
-
-
-<h3><a id="index_a"></a>- a -</h3><ul>
-<li>acceleration
-: <a class="el" href="classJPSimulationEngine.html#a9e39369cb0e1331e52e943f0bc6820cb">JPSimulationEngine</a>
-</li>
-</ul>
-
-
-<h3><a id="index_c"></a>- c -</h3><ul>
-<li>carImage
-: <a class="el" href="classJJDisplayOutput.html#afb54593af5958faecbdbf824d9b93d2c">JJDisplayOutput</a>
-</li>
-<li>CONFIG_FINALIZED
-: <a class="el" href="classJPConfigurationOrderException.html#a6760e27eb0dc5d481f9b2fe68cd5de43">JPConfigurationOrderException</a>
-</li>
-<li>CONFIG_LANES_BEFORE_OFFSET
-: <a class="el" href="classJPConfigurationOrderException.html#a5036774981aea7c2baf97700f822c688">JPConfigurationOrderException</a>
-</li>
-<li>CONFIG_OFFSET_AFTER_LANES
-: <a class="el" href="classJPConfigurationOrderException.html#a7897ccbf259914166108929946f2b33a">JPConfigurationOrderException</a>
-</li>
-<li>current
-: <a class="el" href="classIterator.html#aabc1280e2d627d387bba2ce29283705a">Iterator&lt; T &gt;</a>
-</li>
-<li>currentStep
-: <a class="el" href="classObserverTest.html#a756720cb55352b4556d6050ea701ab25">ObserverTest</a>
-</li>
-</ul>
-
-
-<h3><a id="index_d"></a>- d -</h3><ul>
-<li>DESIRE_LEFT
-: <a class="el" href="classICar.html#a8ff122d9ab1e4bdd1f6e0407120e49ef">ICar</a>
-, <a class="el" href="classSFCar.html#a781b5cc0b274b1d7c8de4d3c93a3e58f">SFCar</a>
-</li>
-<li>DESIRE_RIGHT
-: <a class="el" href="classICar.html#a5219d1bc7de1bfde71e93bf939df9cf0">ICar</a>
-, <a class="el" href="classSFCar.html#a5d7f6d6434286298b9049b6fcbe94510">SFCar</a>
-</li>
-<li>DESIRE_STRAIGHT
-: <a class="el" href="classICar.html#a8b38a3039fd83419b34ea7cf620cd0fc">ICar</a>
-, <a class="el" href="classSFCar.html#a4a3583828bfe8ded0ae48196599708ee">SFCar</a>
-</li>
-<li>duration
-: <a class="el" href="classDJTrafficLightManager.html#ae2efeb4851cd48506d18cf01adcf3e36">DJTrafficLightManager</a>
-</li>
-</ul>
-
-
-<h3><a id="index_e"></a>- e -</h3><ul>
-<li>EAST
-: <a class="el" href="classJPIntersection.html#af620f3ff96083e35f17d7cdcb2b6dfb0">JPIntersection</a>
-, <a class="el" href="classJPIntersectionGrid.html#aca921fa67da190d07731b3ce1d7ece9d">JPIntersectionGrid</a>
-, <a class="el" href="classJPSimulationEngine.html#a254d2caede742ba12e1cb6e03da8464c">JPSimulationEngine</a>
-</li>
-<li>EASTBOUND
-: <a class="el" href="classJPIntersection.html#a3bc39db5805b6d86b24060b560427086">JPIntersection</a>
-</li>
-<li>element
-: <a class="el" href="classNode.html#a30f85a583923a4c56efdfc88f03a8163">Node&lt; T &gt;</a>
-</li>
-</ul>
-
-
-<h3><a id="index_f"></a>- f -</h3><ul>
-<li>FINALIZE_MISSING_LANES
-: <a class="el" href="classJPConfigurationOrderException.html#a0edc50715ce4c89b29b121463e28e25d">JPConfigurationOrderException</a>
-</li>
-</ul>
-
-
-<h3><a id="index_g"></a>- g -</h3><ul>
-<li>gen
-: <a class="el" href="classJPTrafficModel.html#aa48e0022bd90001c7f4535f49db867e9">JPTrafficModel</a>
-</li>
-</ul>
-
-
-<h3><a id="index_h"></a>- h -</h3><ul>
-<li>head
-: <a class="el" href="classLinkedList.html#a35e09287e2d2943707b011208e7a8ed2">LinkedList&lt; T &gt;</a>
-</li>
-</ul>
-
-
-<h3><a id="index_i"></a>- i -</h3><ul>
-<li>inter
-: <a class="el" href="classSETestClass.html#a85fdd39162a1739f9968f88b62b11791">SETestClass</a>
-</li>
-</ul>
-
-
-<h3><a id="index_l"></a>- l -</h3><ul>
-<li>LANE_WIDTH
-: <a class="el" href="classJPIntersection.html#ad09b58a0d5b8b30ade81838fcea70d65">JPIntersection</a>
-, <a class="el" href="classJPIntersectionGrid.html#a204cdc8504108056a06ebb0109a672c0">JPIntersectionGrid</a>
-</li>
-<li>lastAddedID
-: <a class="el" href="classObserverTest.html#a4d7d8a78f4d55fbdcc92d651b1f805fa">ObserverTest</a>
-</li>
-<li>lastAddedType
-: <a class="el" href="classObserverTest.html#ae41cac40ad4a4c67d5980c1a39acfe1e">ObserverTest</a>
-</li>
-<li>lastRemovedID
-: <a class="el" href="classObserverTest.html#a1cfa0135832abb4d6b8afbf70f2e4afd">ObserverTest</a>
-</li>
-<li>lastRemovedType
-: <a class="el" href="classObserverTest.html#a039ba77a3883923711ee450bd706cfaa">ObserverTest</a>
-</li>
-<li>LEFT
-: <a class="el" href="classJPLane.html#a2564392adbd4d9af16ad0d29f2e75111">JPLane</a>
-</li>
-<li>light
-: <a class="el" href="classSETestClass.html#a07dd9d7a9281305c55beb0b0eb8951b2">SETestClass</a>
-</li>
-<li>lightArray
-: <a class="el" href="classDJTrafficLightManager.html#ae51b04152faa8b29209dcf0df0a61cab">DJTrafficLightManager</a>
-</li>
-<li>lightImage
-: <a class="el" href="classJJDisplayOutput.html#a9ac82e1b23426c0a41dcf1e1a8eeb134">JJDisplayOutput</a>
-</li>
-</ul>
-
-
-<h3><a id="index_m"></a>- m -</h3><ul>
-<li>m_cars
-: <a class="el" href="classJJDisplayOutput.html#af306dc09e6a50d0103b43a8e9531ae20">JJDisplayOutput</a>
-</li>
-<li>m_eastLane
-: <a class="el" href="classJJDisplayOutput.html#aea981149108383e43608b46a96d669f8">JJDisplayOutput</a>
-</li>
-<li>m_laneLength
-: <a class="el" href="classJJDisplayOutput.html#a3ddc58c6c54f95a970e95081c1af91e6">JJDisplayOutput</a>
-</li>
-<li>m_laneWidth
-: <a class="el" href="classJJDisplayOutput.html#a964eeda086b9265dd7019162b4b73b94">JJDisplayOutput</a>
-</li>
-<li>m_lights
-: <a class="el" href="classJJDisplayOutput.html#a5e962e19e4f356892b8b69e148bf979e">JJDisplayOutput</a>
-</li>
-<li>m_lineLength
-: <a class="el" href="classJJDisplayOutput.html#ac72ad08e8cc42c40005c11a42b96e411">JJDisplayOutput</a>
-</li>
-<li>m_lineWidth
-: <a class="el" href="classJJDisplayOutput.html#aa473a28d95c6fe6b6a0dfcc80249049e">JJDisplayOutput</a>
-</li>
-<li>m_northLane
-: <a class="el" href="classJJDisplayOutput.html#a01b199c1e44e8a4c22543df447218efc">JJDisplayOutput</a>
-</li>
-<li>m_southLane
-: <a class="el" href="classJJDisplayOutput.html#a06a38e4e6ba6baae08bd236bb4ace694">JJDisplayOutput</a>
-</li>
-<li>m_westLane
-: <a class="el" href="classJJDisplayOutput.html#aa8d0dd808cd18ba9685c8f4c73e2979d">JJDisplayOutput</a>
-</li>
-<li>masterStateTable
-: <a class="el" href="classDJTrafficLightManager.html#ae9ce30a115aa71f4ead944b3f56409ee">DJTrafficLightManager</a>
-</li>
-<li>MAX_LANE_LENG
-: <a class="el" href="classJPIntersection.html#ab61688693491460dcbdd780be9ba7db0">JPIntersection</a>
-</li>
-<li>MAX_LANES
-: <a class="el" href="classJPIntersection.html#ae27ce1ba0a66e92b74d6946e7fc43c5f">JPIntersection</a>
-</li>
-<li>maxCarImages
-: <a class="el" href="classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da">JJDisplayOutput</a>
-</li>
-<li>maxLightImages
-: <a class="el" href="classJJDisplayOutput.html#a14bdcc31c28ca900a2bc0966c0fb0639">JJDisplayOutput</a>
-</li>
-<li>MIN_LANE_LENG
-: <a class="el" href="classJPIntersection.html#aa101c0808a8334b2a4e51e38cd6e35f5">JPIntersection</a>
-</li>
-<li>model
-: <a class="el" href="classSETestClass.html#a0ede632834f1661419588e41fd9e270b">SETestClass</a>
-</li>
-</ul>
-
-
-<h3><a id="index_n"></a>- n -</h3><ul>
-<li>next
-: <a class="el" href="classNode.html#a8bedac90cd0aedd2847dd49f671d4d4a">Node&lt; T &gt;</a>
-</li>
-<li>NORTH
-: <a class="el" href="classJPIntersection.html#a8f1da2fc7e47aab5c89b3b421d11ac57">JPIntersection</a>
-, <a class="el" href="classJPIntersectionGrid.html#aacf8da5a8a4e1ab8873aef91b083cb2d">JPIntersectionGrid</a>
-, <a class="el" href="classJPSimulationEngine.html#a17ad0ea33c25bd68b98dc654760e1fac">JPSimulationEngine</a>
-</li>
-<li>NORTHBOUND
-: <a class="el" href="classJPIntersection.html#ab34996a2189b11c1cf2cc53ffc7827f2">JPIntersection</a>
-</li>
-</ul>
-
-
-<h3><a id="index_p"></a>- p -</h3><ul>
-<li>poisson
-: <a class="el" href="classJPTrafficModel.html#a06b59bdb1528741155a54730a157dc7a">JPTrafficModel</a>
-</li>
-<li>position
-: <a class="el" href="classSETestClass.html#ac1b9deac607e66202e558a55ed6c2711">SETestClass</a>
-</li>
-</ul>
-
-
-<h3><a id="index_r"></a>- r -</h3><ul>
-<li>RIGHT
-: <a class="el" href="classJPLane.html#a25395b410dc29c206fa51a61178d54f1">JPLane</a>
-</li>
-</ul>
-
-
-<h3><a id="index_s"></a>- s -</h3><ul>
-<li>size
-: <a class="el" href="classLinkedList.html#a18f1a30371a80bc8626b0c7762517d0b">LinkedList&lt; T &gt;</a>
-</li>
-<li>SOUTH
-: <a class="el" href="classJPIntersection.html#ae2eb139dc5e0db008055878bdcbebbe2">JPIntersection</a>
-, <a class="el" href="classJPIntersectionGrid.html#a21fb07f34797c9c5eb0d0fa44c6cd081">JPIntersectionGrid</a>
-, <a class="el" href="classJPSimulationEngine.html#a251eca70bd5df980aa2df1609b339981">JPSimulationEngine</a>
-</li>
-<li>SOUTHBOUND
-: <a class="el" href="classJPIntersection.html#aaa3332ce5292ad029ef3ed94e3b03bc8">JPIntersection</a>
-</li>
-<li>state
-: <a class="el" href="classDJTrafficLightManager.html#af69f2d64d755f8f4e81973137f5074c2">DJTrafficLightManager</a>
-</li>
-<li>stateTime
-: <a class="el" href="classDJTrafficLightManager.html#ac1e2474fdabd7d00bdec6e5700814483">DJTrafficLightManager</a>
-</li>
-<li>STRAIGHT
-: <a class="el" href="classJPLane.html#a2d4e583ceddd0d61ceff6c53a4fcc8c0">JPLane</a>
-</li>
-</ul>
-
-
-<h3><a id="index_t"></a>- t -</h3><ul>
-<li>tail
-: <a class="el" href="classLinkedList.html#a292d3ee3e80138c8d801115d1d15e110">LinkedList&lt; T &gt;</a>
-</li>
-<li>test
-: <a class="el" href="classSETestClass.html#af506b7db350df4e5cc92d4e510d29d61">SETestClass</a>
-</li>
-<li>textImage
-: <a class="el" href="classJJDisplayOutput.html#a41354a8c0bd3ade4e586d6e9a12b1cb3">JJDisplayOutput</a>
-</li>
-<li>turnSpeed
-: <a class="el" href="classJPSimulationEngine.html#a4c8bec2b6224f2c380c12e1185706e62">JPSimulationEngine</a>
-</li>
-<li>TYPE_GADGET
-: <a class="el" href="classObservableTest.html#af1c2d27aed89b5046ab9b5e317813cfc">ObservableTest</a>
-</li>
-<li>TYPE_GIZMO
-: <a class="el" href="classObservableTest.html#a89c1c5c06b854f391311f34490842987">ObservableTest</a>
-</li>
-</ul>
-
-
-<h3><a id="index_u"></a>- u -</h3><ul>
-<li>ui
-: <a class="el" href="classJJDisplayOutput.html#a55b806d634546c415411d69f79de8810">JJDisplayOutput</a>
-</li>
-<li>uniform
-: <a class="el" href="classJPTrafficModel.html#adc1c037cdde0a1c9106d2be290af3144">JPTrafficModel</a>
-</li>
-</ul>
-
-
-<h3><a id="index_w"></a>- w -</h3><ul>
-<li>WEST
-: <a class="el" href="classJPIntersection.html#a11519481dc35d5ef11c9fd94f40cff6b">JPIntersection</a>
-, <a class="el" href="classJPIntersectionGrid.html#a78e43e8e1ee504a30801780c919d12f7">JPIntersectionGrid</a>
-, <a class="el" href="classJPSimulationEngine.html#a994fb0d0f3ba8bd2be0937110226e117">JPSimulationEngine</a>
-</li>
-<li>WESTBOUND
-: <a class="el" href="classJPIntersection.html#a9845edf67dff671235332e20c29db605">JPIntersection</a>
 </li>
 </ul>
 </div><!-- contents -->

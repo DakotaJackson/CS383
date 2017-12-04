@@ -63,7 +63,6 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pri-slots">Private Slots</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classJJDisplayOutput-members.html">List of all members</a>  </div>
@@ -84,18 +83,18 @@ Inheritance diagram for JJDisplayOutput:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abbd4d33d586e7cbde9025036f08a6326"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#abbd4d33d586e7cbde9025036f08a6326">JJDisplayOutput</a> (QWidget *parent=0)</td></tr>
-<tr class="separator:abbd4d33d586e7cbde9025036f08a6326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9e7e579d30483bd9bc6c0d3dad61d3f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#aa9e7e579d30483bd9bc6c0d3dad61d3f">JJDisplayOutput</a> (QWidget *parent=0, int n=2, int s=3, int e=4, int w=5)</td></tr>
+<tr class="separator:aa9e7e579d30483bd9bc6c0d3dad61d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a633096308ab029b028dcd247632514f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a633096308ab029b028dcd247632514f5">~JJDisplayOutput</a> ()</td></tr>
 <tr class="separator:a633096308ab029b028dcd247632514f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43ec8af70975b4262b64f87185f57711"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a43ec8af70975b4262b64f87185f57711">initializeRoad</a> (int n, int s, int e, int w)</td></tr>
-<tr class="separator:a43ec8af70975b4262b64f87185f57711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c5f243b12f7b6e4e99fed489a9a9ffb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a9c5f243b12f7b6e4e99fed489a9a9ffb">initBuilder</a> (int n, int s, int e, int w)</td></tr>
+<tr class="separator:a9c5f243b12f7b6e4e99fed489a9a9ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad591d3ceb5b9418340fd21d0c30b8fa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#ad591d3ceb5b9418340fd21d0c30b8fa5">step</a> ()</td></tr>
 <tr class="separator:ad591d3ceb5b9418340fd21d0c30b8fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a0aadec3de222e89f2d604c8fc9c4a0da"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da">maxCarImages</a> = 5</td></tr>
+<tr class="memitem:a0aadec3de222e89f2d604c8fc9c4a0da"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da">maxCarImages</a> = 3</td></tr>
 <tr class="separator:a0aadec3de222e89f2d604c8fc9c4a0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14bdcc31c28ca900a2bc0966c0fb0639"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a14bdcc31c28ca900a2bc0966c0fb0639">maxLightImages</a> = 3</td></tr>
 <tr class="separator:a14bdcc31c28ca900a2bc0966c0fb0639"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,17 +104,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7072b7118235d96cf0d143a17fca8764"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a7072b7118235d96cf0d143a17fca8764">paintEvent</a> (QPaintEvent *e)</td></tr>
 <tr class="separator:a7072b7118235d96cf0d143a17fca8764"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
-Private Slots</h2></td></tr>
-<tr class="memitem:aaa998b2a0b3b34f137a354d5fb010fac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#aaa998b2a0b3b34f137a354d5fb010fac">on_pushButton_clicked</a> ()</td></tr>
-<tr class="separator:aaa998b2a0b3b34f137a354d5fb010fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:aa3416256d39c51444283364761828f9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#aa3416256d39c51444283364761828f9a">initCars</a> ()</td></tr>
 <tr class="separator:aa3416256d39c51444283364761828f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb7611fd4eedc1116f2e9a2a6f623e8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#adb7611fd4eedc1116f2e9a2a6f623e8c">drawCar</a> (QPainter *qp, int x, int y, int imgIndex, int angle)</td></tr>
-<tr class="separator:adb7611fd4eedc1116f2e9a2a6f623e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12284809d4608da3c7dfd76966ab90f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a12284809d4608da3c7dfd76966ab90f4">drawImage</a> (QPainter *qp, int x, int y, int imgIndex, int angle, QImage imgArray[])</td></tr>
+<tr class="separator:a12284809d4608da3c7dfd76966ab90f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bb7938c095b4cc536359674be2b9d3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a0bb7938c095b4cc536359674be2b9d3a">drawCars</a> (QPainter *qp)</td></tr>
 <tr class="separator:a0bb7938c095b4cc536359674be2b9d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a732b7641069091f8b8dd6f88bc16cc76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a732b7641069091f8b8dd6f88bc16cc76">initLights</a> ()</td></tr>
@@ -124,6 +118,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a02b7f9aa08034a20d39768d17a85fb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05c023f3357d55cbded379e7e8596108"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a05c023f3357d55cbded379e7e8596108">drawLights</a> (QPainter *qp)</td></tr>
 <tr class="separator:a05c023f3357d55cbded379e7e8596108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd086d476c13946e2677c8959e7b7863"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#abd086d476c13946e2677c8959e7b7863">initializeRoad</a> ()</td></tr>
+<tr class="separator:abd086d476c13946e2677c8959e7b7863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecf84ff27157a72822fdfdce6a4cdaac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#aecf84ff27157a72822fdfdce6a4cdaac">drawRoad</a> (QPainter *qp)</td></tr>
 <tr class="separator:aecf84ff27157a72822fdfdce6a4cdaac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e6910f06928b2bc136b36c89b4e2d82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a6e6910f06928b2bc136b36c89b4e2d82">drawText</a> (QPainter *qp)</td></tr>
@@ -135,8 +131,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a55b806d634546c415411d69f79de8810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af306dc09e6a50d0103b43a8e9531ae20"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#af306dc09e6a50d0103b43a8e9531ae20">m_cars</a> [4][4]</td></tr>
 <tr class="separator:af306dc09e6a50d0103b43a8e9531ae20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e962e19e4f356892b8b69e148bf979e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a5e962e19e4f356892b8b69e148bf979e">m_lights</a> [3][3]</td></tr>
-<tr class="separator:a5e962e19e4f356892b8b69e148bf979e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba1f63f958cc5c89ad9e722c2ae3e453"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#aba1f63f958cc5c89ad9e722c2ae3e453">m_lights</a> [4][4]</td></tr>
+<tr class="separator:aba1f63f958cc5c89ad9e722c2ae3e453"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb54593af5958faecbdbf824d9b93d2c"><td class="memItemLeft" align="right" valign="top">QImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#afb54593af5958faecbdbf824d9b93d2c">carImage</a> [<a class="el" href="classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da">maxCarImages</a>]</td></tr>
 <tr class="separator:afb54593af5958faecbdbf824d9b93d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ac82e1b23426c0a41dcf1e1a8eeb134"><td class="memItemLeft" align="right" valign="top">QImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a9ac82e1b23426c0a41dcf1e1a8eeb134">lightImage</a> [<a class="el" href="classJJDisplayOutput.html#a14bdcc31c28ca900a2bc0966c0fb0639">maxLightImages</a>]</td></tr>
@@ -151,6 +147,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aa8d0dd808cd18ba9685c8f4c73e2979d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea981149108383e43608b46a96d669f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#aea981149108383e43608b46a96d669f8">m_eastLane</a></td></tr>
 <tr class="separator:aea981149108383e43608b46a96d669f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ace3e383d8c33a03b0fa2e1dc88ba3a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a5ace3e383d8c33a03b0fa2e1dc88ba3a">flow</a> = 0</td></tr>
+<tr class="separator:a5ace3e383d8c33a03b0fa2e1dc88ba3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a964eeda086b9265dd7019162b4b73b94"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a964eeda086b9265dd7019162b4b73b94">m_laneWidth</a> = 50</td></tr>
 <tr class="separator:a964eeda086b9265dd7019162b4b73b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ddc58c6c54f95a970e95081c1af91e6"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJJDisplayOutput.html#a3ddc58c6c54f95a970e95081c1af91e6">m_laneLength</a> = 200</td></tr>
@@ -161,8 +159,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ac72ad08e8cc42c40005c11a42b96e411"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abbd4d33d586e7cbde9025036f08a6326"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbd4d33d586e7cbde9025036f08a6326">&#9670;&nbsp;</a></span>JJDisplayOutput()</h2>
+<a id="aa9e7e579d30483bd9bc6c0d3dad61d3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e7e579d30483bd9bc6c0d3dad61d3f">&#9670;&nbsp;</a></span>JJDisplayOutput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,8 +172,36 @@ Private Attributes</h2></td></tr>
           <td class="memname">JJDisplayOutput::JJDisplayOutput </td>
           <td>(</td>
           <td class="paramtype">QWidget *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td class="paramname"><em>parent</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em> = <code>2</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>s</em> = <code>3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>e</em> = <code>4</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em> = <code>5</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -205,8 +231,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="adb7611fd4eedc1116f2e9a2a6f623e8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb7611fd4eedc1116f2e9a2a6f623e8c">&#9670;&nbsp;</a></span>drawCar()</h2>
+<a id="a0bb7938c095b4cc536359674be2b9d3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb7938c095b4cc536359674be2b9d3a">&#9670;&nbsp;</a></span>drawCars()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,7 +241,33 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void JJDisplayOutput::drawCar </td>
+          <td class="memname">void JJDisplayOutput::drawCars </td>
+          <td>(</td>
+          <td class="paramtype">QPainter *&#160;</td>
+          <td class="paramname"><em>qp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12284809d4608da3c7dfd76966ab90f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12284809d4608da3c7dfd76966ab90f4">&#9670;&nbsp;</a></span>drawImage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JJDisplayOutput::drawImage </td>
           <td>(</td>
           <td class="paramtype">QPainter *&#160;</td>
           <td class="paramname"><em>qp</em>, </td>
@@ -242,38 +294,18 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>angle</em>&#160;</td>
+          <td class="paramname"><em>angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QImage&#160;</td>
+          <td class="paramname"><em>imgArray</em>[]&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0bb7938c095b4cc536359674be2b9d3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bb7938c095b4cc536359674be2b9d3a">&#9670;&nbsp;</a></span>drawCars()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JJDisplayOutput::drawCars </td>
-          <td>(</td>
-          <td class="paramtype">QPainter *&#160;</td>
-          <td class="paramname"><em>qp</em></td><td>)</td>
-          <td></td>
         </tr>
       </table>
   </td>
@@ -417,39 +449,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa3416256d39c51444283364761828f9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3416256d39c51444283364761828f9a">&#9670;&nbsp;</a></span>initCars()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JJDisplayOutput::initCars </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a43ec8af70975b4262b64f87185f57711"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43ec8af70975b4262b64f87185f57711">&#9670;&nbsp;</a></span>initializeRoad()</h2>
+<a id="a9c5f243b12f7b6e4e99fed489a9a9ffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c5f243b12f7b6e4e99fed489a9a9ffb">&#9670;&nbsp;</a></span>initBuilder()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void JJDisplayOutput::initializeRoad </td>
+          <td class="memname">void JJDisplayOutput::initBuilder </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -482,6 +489,56 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa3416256d39c51444283364761828f9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3416256d39c51444283364761828f9a">&#9670;&nbsp;</a></span>initCars()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JJDisplayOutput::initCars </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd086d476c13946e2677c8959e7b7863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd086d476c13946e2677c8959e7b7863">&#9670;&nbsp;</a></span>initializeRoad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void JJDisplayOutput::initializeRoad </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a732b7641069091f8b8dd6f88bc16cc76"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a732b7641069091f8b8dd6f88bc16cc76">&#9670;&nbsp;</a></span>initLights()</h2>
 
@@ -501,31 +558,6 @@ Private Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aaa998b2a0b3b34f137a354d5fb010fac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa998b2a0b3b34f137a354d5fb010fac">&#9670;&nbsp;</a></span>on_pushButton_clicked</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void JJDisplayOutput::on_pushButton_clicked </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -587,6 +619,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">QImage JJDisplayOutput::carImage[<a class="el" href="classJJDisplayOutput.html#a0aadec3de222e89f2d604c8fc9c4a0da">maxCarImages</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ace3e383d8c33a03b0fa2e1dc88ba3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ace3e383d8c33a03b0fa2e1dc88ba3a">&#9670;&nbsp;</a></span>flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int JJDisplayOutput::flow = 0</td>
         </tr>
       </table>
   </td>
@@ -708,8 +762,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5e962e19e4f356892b8b69e148bf979e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e962e19e4f356892b8b69e148bf979e">&#9670;&nbsp;</a></span>m_lights</h2>
+<a id="aba1f63f958cc5c89ad9e722c2ae3e453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1f63f958cc5c89ad9e722c2ae3e453">&#9670;&nbsp;</a></span>m_lights</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,7 +772,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int JJDisplayOutput::m_lights[3][3]</td>
+          <td class="memname">int JJDisplayOutput::m_lights[4][4]</td>
         </tr>
       </table>
   </td>
@@ -850,7 +904,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int JJDisplayOutput::maxCarImages = 5</td>
+          <td class="memname">const int JJDisplayOutput::maxCarImages = 3</td>
         </tr>
       </table>
   </td>

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['_7edjtrafficlightmanager',['~DJTrafficLightManager',['../classDJTrafficLightManager.html#a7bf18ea03b5148dfa8cae60c1f324d1d',1,'DJTrafficLightManager']]],
   ['_7eicar',['~ICar',['../classICar.html#a1c5050a1e2aca8702bd4724985cdb3b0',1,'ICar']]],
   ['_7ejjalltest',['~JJallTest',['../classJJallTest.html#ad48016f7171f218e1fcd11caf669f491',1,'JJallTest']]],
   ['_7ejjdisplayoutput',['~JJDisplayOutput',['../classJJDisplayOutput.html#a633096308ab029b028dcd247632514f5',1,'JJDisplayOutput']]],
@@ -17,6 +18,7 @@ var searchData=
   ['_7ejpratelessthanzeroexception',['~JPRateLessThanZeroException',['../classJPRateLessThanZeroException.html#a73f4ff51ba1980428ba8f1324f7f55be',1,'JPRateLessThanZeroException']]],
   ['_7ejpsimulationcontroler',['~JPSimulationControler',['../classJPSimulationControler.html#a4276062e4f0ecd8dc19f5ef7bfbc8989',1,'JPSimulationControler']]],
   ['_7ejpsimulationengine',['~JPSimulationEngine',['../classJPSimulationEngine.html#a022d14f1debb5610894c5560a8927cf9',1,'JPSimulationEngine']]],
+  ['_7ejptrafficlightadapter',['~JPTrafficLightAdapter',['../classJPTrafficLightAdapter.html#a1ee4d9f735b1a317a376ff0957466670',1,'JPTrafficLightAdapter']]],
   ['_7ejptrafficmodel',['~JPTrafficModel',['../classJPTrafficModel.html#a0c90b2d63cebfc47efb15081bf47a262',1,'JPTrafficModel']]],
   ['_7ejptrafficmodelexception',['~JPTrafficModelException',['../classJPTrafficModelException.html#a7df79706466f1c1bf0016a828770ea61',1,'JPTrafficModelException']]],
   ['_7ejpupdatableinterface',['~JPUpdatableInterface',['../classJPUpdatableInterface.html#a922d9448a5eadb1385205261780cbcca',1,'JPUpdatableInterface']]],

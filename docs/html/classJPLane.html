@@ -101,12 +101,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a21f2541f4de086b18972c9ea5906c288"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#a21f2541f4de086b18972c9ea5906c288">isEmpty</a> () const</td></tr>
 <tr class="separator:a21f2541f4de086b18972c9ea5906c288"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fda8f05232c5edcf80552d025a736a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#a8fda8f05232c5edcf80552d025a736a9">getSize</a> () const</td></tr>
+<tr class="memdesc:a8fda8f05232c5edcf80552d025a736a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of cars in the lane.  <a href="#a8fda8f05232c5edcf80552d025a736a9">More...</a><br /></td></tr>
 <tr class="separator:a8fda8f05232c5edcf80552d025a736a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f2c6cf1a4bbfaa9a8eea4a1b4d60dec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#a7f2c6cf1a4bbfaa9a8eea4a1b4d60dec">getLeftTarget</a> () const</td></tr>
+<tr class="memdesc:a7f2c6cf1a4bbfaa9a8eea4a1b4d60dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the destination lane number for cars that turn left.  <a href="#a7f2c6cf1a4bbfaa9a8eea4a1b4d60dec">More...</a><br /></td></tr>
 <tr class="separator:a7f2c6cf1a4bbfaa9a8eea4a1b4d60dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb457ba2f872c23e6ec4fc97c33393e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#aecb457ba2f872c23e6ec4fc97c33393e">getRightTarget</a> () const</td></tr>
+<tr class="memdesc:aecb457ba2f872c23e6ec4fc97c33393e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the destination lane number for cars that turn right.  <a href="#aecb457ba2f872c23e6ec4fc97c33393e">More...</a><br /></td></tr>
 <tr class="separator:aecb457ba2f872c23e6ec4fc97c33393e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba07a0c4a6fd414fabb246449e2de858"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#aba07a0c4a6fd414fabb246449e2de858">getTurnOptions</a> () const</td></tr>
+<tr class="memdesc:aba07a0c4a6fd414fabb246449e2de858"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the turn configuration for this lane.  <a href="#aba07a0c4a6fd414fabb246449e2de858">More...</a><br /></td></tr>
 <tr class="separator:aba07a0c4a6fd414fabb246449e2de858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
@@ -131,6 +135,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af78a924a984b6edc9c26433d1337741f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc6ff12ff5fd6c823d87b8c27fc97fd2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#abc6ff12ff5fd6c823d87b8c27fc97fd2">_position</a></td></tr>
 <tr class="separator:abc6ff12ff5fd6c823d87b8c27fc97fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a320b88511a5b65d5fc117f55ffa33a6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSFCar.html">SFCar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#a320b88511a5b65d5fc117f55ffa33a6f">_lastCar</a></td></tr>
+<tr class="separator:a320b88511a5b65d5fc117f55ffa33a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bcd247e7962350c1f0c6d0c6f28445"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLinkedList.html">LinkedList</a>&lt; <a class="el" href="classSFCar.html">SFCar</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#af2bcd247e7962350c1f0c6d0c6f28445">_list</a></td></tr>
 <tr class="separator:af2bcd247e7962350c1f0c6d0c6f28445"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1551157a155739be9daffe0a5fabe344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIterator.html">Iterator</a>&lt; <a class="el" href="classSFCar.html">SFCar</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJPLane.html#a1551157a155739be9daffe0a5fabe344">_iter</a></td></tr>
@@ -280,6 +286,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return the destination lane number for cars that turn left. </p>
+
 </div>
 </div>
 <a id="a8bd2b8960d20a7be6466a244945e3277"></a>
@@ -317,6 +325,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return the destination lane number for cars that turn right. </p>
+
 </div>
 </div>
 <a id="a8fda8f05232c5edcf80552d025a736a9"></a>
@@ -334,6 +344,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return the number of cars in the lane. </p>
+
 </div>
 </div>
 <a id="aba07a0c4a6fd414fabb246449e2de858"></a>
@@ -350,6 +362,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>return the turn configuration for this lane. </p>
+<dl class="section return"><dt>Returns</dt><dd>A bitfield sum of the valid turn options <a class="el" href="classJPLane.html#a2d4e583ceddd0d61ceff6c53a4fcc8c0">STRAIGHT</a> <a class="el" href="classJPLane.html#a25395b410dc29c206fa51a61178d54f1">RIGHT</a> <a class="el" href="classJPLane.html#a2564392adbd4d9af16ad0d29f2e75111">LEFT</a> </dd></dl>
 
 </div>
 </div>
@@ -442,6 +457,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classIterator.html">Iterator</a>&lt;<a class="el" href="classSFCar.html">SFCar</a>*&gt;* JPLane::_iter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a320b88511a5b65d5fc117f55ffa33a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a320b88511a5b65d5fc117f55ffa33a6f">&#9670;&nbsp;</a></span>_lastCar</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSFCar.html">SFCar</a>* JPLane::_lastCar</td>
         </tr>
       </table>
   </td>

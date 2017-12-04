@@ -20,6 +20,7 @@ var searchData=
   ['jpratelessthanzeroexception',['JPRateLessThanZeroException',['../classJPRateLessThanZeroException.html',1,'']]],
   ['jpsimulationcontroler',['JPSimulationControler',['../classJPSimulationControler.html',1,'']]],
   ['jpsimulationengine',['JPSimulationEngine',['../classJPSimulationEngine.html',1,'']]],
+  ['jptrafficlightadapter',['JPTrafficLightAdapter',['../classJPTrafficLightAdapter.html',1,'']]],
   ['jptrafficmodel',['JPTrafficModel',['../classJPTrafficModel.html',1,'']]],
   ['jptrafficmodelexception',['JPTrafficModelException',['../classJPTrafficModelException.html',1,'']]],
   ['jpturninglanecrossingstraightlaneexception',['JPTurningLaneCrossingStraightLaneException',['../classJPTurningLaneCrossingStraightLaneException.html',1,'']]],

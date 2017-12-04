@@ -73,11 +73,14 @@ $(function() {
 , <a class="el" href="classCarBuilder.html#a37488e4a49d6808ee804f0d9e4932419">CarBuilder</a>
 </li>
 <li>_carCount
-: <a class="el" href="classSETestClass.html#a4fc49828107e4ae22f5e895e1db14f6c">SETestClass</a>
+: <a class="el" href="classSETestClass.html#acffc8caf5444306e22ecf67bf46ea743">SETestClass</a>
 </li>
 <li>_collidingLane
 : <a class="el" href="classJPLaneCollidesWithOncomingLaneException.html#a80cc2482182813887b55abec0662a2ed">JPLaneCollidesWithOncomingLaneException</a>
 , <a class="el" href="classJPTwoLanesToOneException.html#a081700102357cebf3051a976be35edd0">JPTwoLanesToOneException</a>
+</li>
+<li>_cycleTime
+: <a class="el" href="classDJTrafficLightManager.html#ad5fa18252ccc3d0be3a82594236b0445">DJTrafficLightManager</a>
 </li>
 <li>_desiredSpeed
 : <a class="el" href="classCar.html#a0ab1ff8534a7cdb3f7622b39b3b5cbb0">Car</a>
@@ -88,12 +91,18 @@ $(function() {
 : <a class="el" href="classJPConfigurationOrderException.html#a3879652c23b32f5305aa2e72d3810cbe">JPConfigurationOrderException</a>
 , <a class="el" href="classJPMissingParameterException.html#aae710143743bef1ea287c90848d0cf2b">JPMissingParameterException</a>
 </li>
+<li>_dirAndLaneLightArray
+: <a class="el" href="classDJTrafficLightManager.html#ada11edd0c2d9dacadd8e9600533ab24c">DJTrafficLightManager</a>
+</li>
 <li>_direction
 : <a class="el" href="classJPMalformedIntersectionException.html#add407a968131ff3763b34c745fbc4856">JPMalformedIntersectionException</a>
 , <a class="el" href="classSETestClass.html#a0050ba3ed6f5d165e8eb16f67a48ecd0">SETestClass</a>
 </li>
 <li>_directionMappings
 : <a class="el" href="classJPTrafficModel.html#aac5539b38f83237f7428f032801f93dc">JPTrafficModel</a>
+</li>
+<li>_dj
+: <a class="el" href="classJPTrafficLightAdapter.html#a4ae9f72fe316eaf4010d1f999a3ee580">JPTrafficLightAdapter</a>
 </li>
 <li>_dspeed
 : <a class="el" href="classJPCarTestStub.html#a24ca277336d4525e2df850a5aa9131e4">JPCarTestStub</a>
@@ -145,6 +154,9 @@ $(function() {
 <li>_iter
 : <a class="el" href="classJPLane.html#a1551157a155739be9daffe0a5fabe344">JPLane</a>
 </li>
+<li>_jp
+: <a class="el" href="classJPTrafficLightAdapter.html#a58618829ddce7da7e634c9fcbd4410f1">JPTrafficLightAdapter</a>
+</li>
 <li>_lane
 : <a class="el" href="classJPMalformedIntersectionException.html#af19451d4786c03b425576908c4dd32a1">JPMalformedIntersectionException</a>
 , <a class="el" href="classSETestClass.html#afbd66a88ac51d3dcf8010675fdd2fb67">SETestClass</a>
@@ -165,6 +177,9 @@ $(function() {
 <li>_lanes
 : <a class="el" href="classJPIntersection.html#a3bb7a4d130841d0f0fd89d3a039b504d">JPIntersection</a>
 </li>
+<li>_lastCar
+: <a class="el" href="classJPLane.html#a320b88511a5b65d5fc117f55ffa33a6f">JPLane</a>
+</li>
 <li>_leftTarget
 : <a class="el" href="classJPLane.html#aa85658e38cbd0db97ab470789a0a82c9">JPLane</a>
 </li>
@@ -177,10 +192,16 @@ $(function() {
 , <a class="el" href="classSFCar.html#a5a0d450f1841b2318ada8887fb457f17">SFCar</a>
 </li>
 <li>_light
-: <a class="el" href="classJPSimulationEngine.html#a8ea03832516351fcc9e8156e4a6ad7e5">JPSimulationEngine</a>
+: <a class="el" href="classJPSimulationEngine.html#a00b1a4cc60acec3c666c0f08d02677a5">JPSimulationEngine</a>
 </li>
 <li>_list
 : <a class="el" href="classJPLane.html#af2bcd247e7962350c1f0c6d0c6f28445">JPLane</a>
+</li>
+<li>_masterStateTable
+: <a class="el" href="classDJTrafficLightManager.html#a6def73cbbaa9e59138a4355a3e899dde">DJTrafficLightManager</a>
+</li>
+<li>_masterStateTimingTable
+: <a class="el" href="classDJTrafficLightManager.html#a30b8e1c9a1c824b7b3ede3e61446082c">DJTrafficLightManager</a>
 </li>
 <li>_multiThread
 : <a class="el" href="classJPSimulationControler.html#a5b7f2cba5dd72e7c70a66f7972961324">JPSimulationControler</a>
@@ -193,6 +214,7 @@ $(function() {
 </li>
 <li>_offsets
 : <a class="el" href="classJPIntersectionGrid.html#abdec07cfe83975e534746925c70d4ab9">JPIntersectionGrid</a>
+, <a class="el" href="classJPSimulationEngine.html#aea44d565e2a6e392381b72e2b7b6cb36">JPSimulationEngine</a>
 </li>
 <li>_ot
 : <a class="el" href="classObserverTest.html#a13cf96fd5c1be8246f6f59fa54a24173">ObserverTest</a>
@@ -226,6 +248,9 @@ $(function() {
 </li>
 <li>_simTime
 : <a class="el" href="classJPSimulationControler.html#a0cd23b723663ac40655676cf83356545">JPSimulationControler</a>
+</li>
+<li>_singleLightArray
+: <a class="el" href="classDJTrafficLightManager.html#a077f004238bcadd57b582d793754daf1">DJTrafficLightManager</a>
 </li>
 <li>_speed
 : <a class="el" href="classICar.html#aa09e2b375dba0752c009ee6fa09a5b91">ICar</a>
@@ -263,6 +288,9 @@ $(function() {
 : <a class="el" href="classICar.html#a113149f2e9bfc56e8990802ba2f3af15">ICar</a>
 , <a class="el" href="classSFCar.html#a9719002738d4ad5e92e05667199e7eed">SFCar</a>
 </li>
+<li>_timeRate
+: <a class="el" href="classDJTrafficLightManager.html#a7c6da8c40ca180dd5befd9b480ae2b95">DJTrafficLightManager</a>
+</li>
 <li>_timeScale
 : <a class="el" href="classJPSimulationControler.html#a6344edf5700f31a23426b9af4dbbcc3d">JPSimulationControler</a>
 </li>
@@ -288,6 +316,9 @@ $(function() {
 </li>
 <li>_updating
 : <a class="el" href="classJPSimulationEngine.html#ad3cb7158cfc5df38696644504c53c86c">JPSimulationEngine</a>
+</li>
+<li>_useDefaults
+: <a class="el" href="classDJTrafficLightManager.html#a2cc1cb8c9a449d3acfdb1e5cc7994667">DJTrafficLightManager</a>
 </li>
 <li>_waitTime
 : <a class="el" href="classICar.html#a734e8d26b7a1df70bcb8426bca3c5c78">ICar</a>
