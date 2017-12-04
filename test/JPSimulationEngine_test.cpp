@@ -68,7 +68,7 @@ private:
 		else if( SFCar::DESIRE_LEFT == turn )
 			trn = 'L';
 
-		printf("X:%3.2f Y:%3.2f Th: %2.0f %c Sp:%2.1f St:%3.1f Wt:%3.1f ptr:%d\n",
+		printf("X:%3.2f Y:%3.2f Th: %2.0f %c Sp:%2.1f St:%3.1f Wt:%3.1f ptr:%p\n",
 				x, y, theta, trn, speed, insim, wait, car);
 	}
 
@@ -1119,7 +1119,6 @@ public:
 				"JPSimulationEngine: Rear Car Acceleration Test",
 				rearCarAccelerationTest() );
 
-printf("Ret: %d\n", ret);
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
 				rightTurnRedTest() );
@@ -1133,6 +1132,7 @@ printf("Ret: %d\n", ret);
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Red Light Stop Test",
 				redLightStopTest() );
+		printf("Ret: %d\n", ret);
 
 		//long tests
 		if(false)

@@ -7,6 +7,8 @@
 
 #ifndef JPSIMULATIONENGINE_H_
 #define JPSIMULATIONENGINE_H_
+#define _USE_MATH_DEFINES //I want pi!
+
 #include "JPConstants.h"
 #include "JPLane.h"
 #include "JPIntersection.h"
@@ -92,8 +94,9 @@ public:
 	/** \brief Return the traffic model used in the simulation */
 	const JPTrafficModel* getTrafficModel() const { return _trafficModel;}
 
-	//double* getThroughput(int direction, int &laneCount);
-	//getWhateverElseWeTracked()
+	//public so iGrid can use it
+	/** \brief Retrieve the next car from the lane, and set a few variables. */
+	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
 
 private:
 	//Base configuration
@@ -119,6 +122,7 @@ private:
 	double _yellowTime[4][MAX_LANES_MACRO][2]; //0 = R/S, 1 L
 	int _turnOpts[4][MAX_LANES_MACRO]; //local copy
 	double _intersectionBounds[4];
+	double _offsets[4];
 
 	//private members for singleton control
 	static JPSimulationEngine *_unique;
@@ -129,30 +133,41 @@ private:
 	friend class SETestClass;
 
 	//Internal Methods
-	double intersectionDeceleration(double pos, double speed, double pcPos, double pcSpeed, SFCar *car);
-	//previous car's speed/pos
-	//double carDeceleration(SFCar &car, double prevSpeed, double prevPos);
-
-
-	/** \brief Determine the amount of deceleration required or acceleration possible without coming within 5 feet of the next car.*/
-	double getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
-			const double dSpeed, const double pos, const double timeStep) const;
-	void updateCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const double timeStep);
-	void processLane(int ln, int direction, double stepTime);
-	void addCars(int direction, double timeStep);
+	/** \brief Verify that all required components have been added to the simulation. */
 	void checkPrereqs();
-	/** \brief Retrieve the next car from the lane, and set a few variables. */
-	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
+	/** \brief Iterate over a lane processing each car in sequence starting from the forward-most */
+	void processLane(int ln, int direction, double stepTime);
+
+	//functions for adding and removing from the model
+	/** Add cars to the simulation and schedule the next arrival */
+	void addCars(int direction, double timeStep);
+	/** \brief Generate and initialize car. */
 	SFCar *makeCar(int direction, int &lane);
+	/** \brief Determine which lane to put the car in. */
 	int determineLane(SFCar *car, int direction) const;
+	/** \brief Push an update that the car is being removed from the simulation and free the Car's memory */
 	void dispose(SFCar *car, JPLane *lane);
-	double getIntersectionDecel(SFCar *car,const int dir, const int ln, const double pos,
-			const double speed, const double timeStep) const;
+
+	//position translation/read/write functions
+	/** \brief Update a car object by computing and setting the new speed and position */
+	void updateCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const double timeStep);
+	/** \brief Update a turning car object by computing and setting the new speed and position */
+	void updateTurnCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const int turn, const double timeStep, const double lane);
+	/** \brief perform computations for exiting a turn */
+	void exitTurn(SFCar *car, int dir, const double excess,const int turn, const int lane);
+	//light functions
 	/** \brief compute the command the light will give to the car */
 	int determineLightEffect(SFCar *car, const int dir, const int ln) const;
 	/** \brief Update tracking of how long each light has been yellow */
 	void updateYellowTimes(const double stepTime);
 
+	//deceleration/acceleration functions
+	/** \brief Determine the amount of deceleration required or acceleration possible without coming within 5 feet of the next car.*/
+	double getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
+			const double dSpeed, const double pos, const double timeStep) const;
+	/** \brief Compute the deceleration required based on the state of the intersection (e.g. blocked, red light etc. */
+	double getIntersectionDecel(SFCar *car,const int dir, const int ln, const double pos,
+			const double speed, const double timeStep) const;
 	/** \brief Calculate the time and deceleration to match pace between two cars while closing the gap. */
 	double movingTargetDecel(const double V0, const double Vt, const double dX, double &time) const;
 	/** \brief Calculate time and acceleration for deceleration from speed V0 to 0.  */
@@ -170,11 +185,12 @@ private:
 		STOP ///The car must stop. A red light in the context of going straight or turning left.
 	};
 
-	//local redeffs for brevity
+	//local redeffs for shorthand
 	const int NORTH = JPIntersection::NORTH;
 	const int SOUTH = JPIntersection::SOUTH;
 	const int EAST = JPIntersection::EAST;
 	const int WEST = JPIntersection::WEST;
+	const int LANE_WIDTH = JPIntersection::LANE_WIDTH;
 
 };
 /** @} */

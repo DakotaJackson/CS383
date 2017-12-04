@@ -72,12 +72,6 @@ void JPSimulationEngine::step(double sec)
 	updateYellowTimes(sec);
 }
 
-double JPSimulationEngine::intersectionDeceleration(double pos, double speed,
-		double pcPos, double pcSpeed, SFCar* car)
-{
-	return 0.0;
-}
-
 void JPSimulationEngine::end()
 {
 	//todo delete cars from the simulation and pushRemUppdate
@@ -191,19 +185,92 @@ double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPo
 
 		return accel;
 }
+double getTurnedDistance( const double ac, const double V0, const double tm)
+{
+	double time, dist;
+	if(25 > V0 + ac * tm)
+	{
+		time = -V0/ac;
+		dist = 0.5 * ac * time * time + V0 * time; //accelerating
+		dist += (tm - time) * 25; //steady speed
+		return dist;
+	}
+	else
+		return 0.5 * ac * tm * tm + V0 * tm;
+}
+void JPSimulationEngine::updateTurnCar(SFCar *car,const int dir, double speed,
+		double &pos,const double accel, const int turn, const double timeStep,
+		const double lane)
+{
+
+	//1 get axes and circumference
+	double r, rOrigin, rTarget, circ, radius, deg, theta, otheta;
+	if( SFCar::DESIRE_LEFT == turn)
+	{
+		rOrigin = 2 * _offsets[    dir     ] - (lane + 0.5) * LANE_WIDTH;
+		rTarget = 2 * _offsets[ (dir+1) % 2] - (lane + 0.5) * LANE_WIDTH;
+	}
+	else //right
+	{
+		rOrigin = 2 * _offsets[    dir     ] - (lane + 0.5) * LANE_WIDTH;
+		rTarget = 2 * _offsets[ (dir+1) % 2] - (lane + 0.5) * LANE_WIDTH;
+	}
+	radius = (rOrigin + rTarget)/2;
+	circ = M_PI * radius / 2;
+
+	otheta = car->getTheta();
+	//theta =  otheta % 90; //How far we are into the turn
+	double linTravel = getTurnedDistance(accel, speed, timeStep);
+	deg = 90 * linTravel/circ;
+
+	//did we exit?
+	if(theta + deg > 90) //we've completed the turn
+	{
+		exitTurn(car, dir, linTravel - circ, turn, lane);
+		return;
+	}
+
+	//double deltaPos, deltaOrth, newDeg;
+	//todo compute deltaPos and deltaOrth.
+	//car->setTheta( (deg + otheta) % 360);
+
+}
+void JPSimulationEngine::exitTurn(SFCar *car, int dir, const double excess,const int turn, const int lane)
+{
+	int target;
+	double pos;
+
+	//change directions
+	if(SFCar::DESIRE_LEFT == turn)
+	{
+		target = _intersection->getLane(dir, lane)->getLeftTarget();
+		dir = (dir + 1) % 4;
+	}
+	else
+	{
+		target = _intersection->getLane(dir, lane)->getRightTarget();
+		dir = (dir + 3) % 4;
+	}
+
+	pos = excess + _offsets[dir];
+	car->setTheta( 90 * ( (dir + 2)%2) );
+	//todo move lanes
+	//todo set positins
+
+}
 void JPSimulationEngine::updateCar(SFCar *car, int dir, double speed,double &pos,const double accel, const double timeStep)
 {
 	//calculate new position and speed
 	double dX, newSpeed, time;
 	dX = 0.5 * accel * pow(timeStep, 2) + speed * timeStep;
 	newSpeed = speed + accel * timeStep;
-
+//printf("Accel: %f\tnewSpeed%f\n",accel, newSpeed);
 	//depending on how acceleration was calculated it may lead to speed less than 0
 	//prevent that and recalculate dX assuming deceleration stops at 0
 	if(newSpeed < 0 )
 	{
-		time = speed / accel;
-		dX = 0.5 * accel * pow(timeStep, 2) + speed * timeStep;;
+		time = - speed / accel;
+		dX = 0.5 * accel * pow(time, 2) + speed * time;;
 		newSpeed = 0;
 	}
 
@@ -234,7 +301,7 @@ void JPSimulationEngine::dispose(SFCar *car, JPLane *lane)
 	if( remcar != car)
 	{
 		fprintf(stderr, "Car removal error!\n");
-		fprintf(stderr, "Car: %d\t remcar: %d\n", car, remcar);
+		fprintf(stderr, "Car: %p\t remcar: %p\n", car, remcar);
 	}
 	else
 		delete car;
@@ -243,12 +310,24 @@ void JPSimulationEngine::dispose(SFCar *car, JPLane *lane)
 int JPSimulationEngine::determineLightEffect(SFCar *car, const int dir, const int ln) const
 {
 	int state = _light->getState(dir,ln,_time);
-	if( state == consts::GREEN)
-		return GO;
-	if (consts::YELLOW == state)
-		return CAUTION;
-	//if( consts::RED)
-		return STOP;
+	int turn = car->getTurnDirection();
+
+	switch(turn)
+	{
+	case SFCar::DESIRE_RIGHT:
+		if( (state & consts::GREEN) == consts::GREEN) return GO;
+		if( (state & consts::YELLOW) == consts::YELLOW) return CAUTION;
+		return YIELD; //right turn on red
+	case SFCar::DESIRE_LEFT:
+		if( (state & consts::LEFT_GREEN) == consts::LEFT_GREEN) return GO;
+		if( (state & consts::LEFT_CAUTION) == consts::LEFT_CAUTION) return CAUTION;
+		if( (state & consts::LEFT_YIELD) == consts::LEFT_YIELD) return YIELD;
+		return STOP; //stop on red
+	default: //straight
+		if( (state & consts::GREEN) == consts::GREEN) return GO;
+		if( (state & consts::YELLOW) == consts::YELLOW) return CAUTION;
+		return STOP; //stop on red
+	}
 }
 
 /**
@@ -319,7 +398,6 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 	double intStart = - std::abs(_intersectionBounds[dir]); //position of the light
 	int intEnd = -intStart;
 	//default slow down rate is the car's normal acceleration rate
-	double accelDef = this->acceleration; //may replace with car function
 	double time;
 	int turn = car->getTurnDirection();
 
@@ -346,7 +424,7 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 			whichYellow = 1;
 
 		timeLeft = expTime - _yellowTime[dir][ln][whichYellow];
-		if( expTime < dist/speed )
+		if( timeLeft > dist/speed )
 			action = GO;
 		else
 			action = STOP;
@@ -356,7 +434,7 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 	{
 		//If yielding check on coming traffic and react accordingly
 		if(_iGrid->checkYield(dir, ln, car, speed, dist))
-			action = GO;
+			return computeGoAccel(turn, speed, timeStep);
 		else
 			action = STOP;
 	}
@@ -365,7 +443,7 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 	{
 		bool blocked = _iGrid->checkPath(dir, ln);
 
-		if(blocked)
+		if( blocked)
 			action = STOP;
 		else //if not blocked, then go
 			return computeGoAccel(turn, speed, timeStep);
@@ -379,7 +457,9 @@ double JPSimulationEngine::getIntersectionDecel(SFCar *car,const int dir, const 
 
 		//be at 0 speed when 0.5 is reached if not already there.
 		if( dist < 0.5 )
-			accel1 = staticTargetDecel(speed,dist - 0.000001, time); //fail safe
+		{
+			accel1 = staticTargetDecel(speed,dist - 0.001, time); //fail safe
+		}
 		else
 			accel1 = staticTargetDecel(speed,dist - 0.5, time);
 		return accel1;
@@ -397,7 +477,9 @@ void JPSimulationEngine::processLane(int ln, int direction, double timeStep)
 	JPLane *lane = _intersection->getLane(direction,ln);
 	double exitLength = _intersection->getTrackedExitLength(direction);
 	SFCar *car;
-	bool firstCarSet = false;
+	const double endInt = std::abs(_intersectionBounds[direction]);
+	const double beginInt = - endInt;
+	int turn;
 
 	//cycle through the entire lane
 	lane->resetToFirstCar();
@@ -411,29 +493,22 @@ void JPSimulationEngine::processLane(int ln, int direction, double timeStep)
 		lightAccel = getIntersectionDecel(car, direction, ln, pos, speed, timeStep);
 		accel = std::min(carAccel, lightAccel);
 
-		//turning? = want to turn + inside intersection bounds
-
-		//compute new position
 		double newPos = pos;
-		this->updateCar(car, direction, speed, newPos, accel, timeStep);
+		turn = car->getTurnDirection();
+		//turning? = want to turn + inside intersection bounds
+		if( pos < beginInt || SFCar::DESIRE_STRAIGHT == turn  || pos > endInt)
+			this->updateCar(car, direction, speed, newPos, accel, timeStep);
+		else
+			updateTurnCar(car, direction, speed, newPos, accel, turn, timeStep, ln);
 
-		//see if this is the first car before the intersection
-		if( (! firstCarSet) && newPos < - std::abs(_intersectionBounds[direction]))
-		{
-			firstCarSet = true;
-			_iGrid->setFirstCar(direction, ln, car);
-		}
 		prevPos = pos - leng; //make it the back of the previous car
 		prevSpeed = speed;
 
 		//if the car is outside tracking distance, remove
-		if(pos > exitLength)
+		if(newPos > exitLength)
 			dispose(car, lane);
 	}
 
-	//if we never set the first car before the intersection, it must not exist
-	if(! firstCarSet)
-		_iGrid->setFirstCar(direction, ln, NULL);
 }
 
  JPSimulationEngine* JPSimulationEngine::getInstance()
@@ -492,7 +567,7 @@ void JPSimulationEngine::init()
 	{
 		_nextCreationTime[dir] =  _trafficModel->getNextTiming(dir);
 		_laneCounts[dir] = _intersection->getLaneCount(dir);
-		_intersectionBounds[dir] = _intersection->getLaneOffsetInFeet( (dir+1)  % 4);
+		_offsets[dir] = _intersectionBounds[dir] = _intersection->getLaneOffsetInFeet( (dir+1)  % 4);
 		for(ln = 0; ln < _laneCounts[dir]; ln++)
 		{
 			_yellowTime[dir][ln][0] = -1;
@@ -534,9 +609,7 @@ void JPSimulationEngine::init()
 	_time = 0;
 }
 
-/**
- * Add cars to the simulation and schedule the next arrival
- */
+
 void JPSimulationEngine::addCars(int direction, double timeStep)
 {
 	double effTime = _time + timeStep;
@@ -558,9 +631,12 @@ void JPSimulationEngine::addCars(int direction, double timeStep)
 }
 
 /**
- * \brief Generate and initialize car.
+ * This function creates a new car. Initializes is position, speed, rotation, and times times.
+ * It adds the car to a lane. Lastly it pushes an object added update.
  *
- * Sets the location, turn desire, and orientation of the car
+ * \param direction The direction of the intersection where the car will originate.
+ * \param lane A target variable that is set to the lane number where the car is added.
+ * \return The new car.
  */
 SFCar *JPSimulationEngine::makeCar(int direction, int &lane)
 {
@@ -614,7 +690,9 @@ SFCar *JPSimulationEngine::makeCar(int direction, int &lane)
 }
 
 /**
- * \brief Determine which lane to put the car in.
+ * \param car the new car
+ * \param direction The direction of the intersection where the car is being added.
+ * \returns The lane number that the car should be added to.
  */
 int JPSimulationEngine::determineLane(SFCar* car, int direction) const
 {
