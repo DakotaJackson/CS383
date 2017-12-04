@@ -8,7 +8,7 @@
 #ifndef SRC_JAMES_JPTRAFFICLIGHTADAPTER_H_
 #define SRC_JAMES_JPTRAFFICLIGHTADAPTER_H_
 #include "DJTrafficLightManager.h"
-#include "../test/JPLightTestStub.h"
+#include "JPLightTestStub.h"
 /**
  * \brief A simple adapter class that can use either a  DJTrafficLightManager or a JPLightTestStub.
  *

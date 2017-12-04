@@ -5,10 +5,10 @@
  *      Author: james
  */
 
-#include "../inc/JPSimulationEngine.h"
+#include "JPSimulationEngine.h"
 #include "JPLightTestStub.h"
 #include "JPCarTestStub.h"
-#include "../inc/JPUpdatableInterface.h"
+#include "JPUpdatableInterface.h"
 #include <stdio.h>
 #include <string.h>
 

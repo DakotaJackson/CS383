@@ -5,8 +5,8 @@
  *      Author: james
  */
 
-#include "../inc/JPObservableSimulation.h"
-#include "../inc/JPConstants.h"
+#include "JPObservableSimulation.h"
+#include "JPConstants.h"
 #include <list>
 
 /**

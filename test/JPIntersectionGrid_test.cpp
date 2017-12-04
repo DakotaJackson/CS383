@@ -5,8 +5,8 @@
  *      Author: james
  */
 
-#include "../inc/JPIntersectionGrid.h"
-#include "../inc/JPConstants.h"
+#include "JPIntersectionGrid.h"
+#include "JPConstants.h"
 #include <stdio.h>
 
 //gird position tests

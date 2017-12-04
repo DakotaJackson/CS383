@@ -7,9 +7,9 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "../inc/JPTrafficModel.h"
-#include "../inc/JPConstants.h"
-#include "../inc/JPIntersection.h"
+#include "JPTrafficModel.h"
+#include "JPConstants.h"
+#include "JPIntersection.h"
 
 //The number of calls to
 #define ITERATIONS 20000

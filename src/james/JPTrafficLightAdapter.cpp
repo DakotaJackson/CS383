@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../../inc/JPTrafficLightAdapter.h"
+#include "JPTrafficLightAdapter.h"
 #include <stdio.h> //for NULL
 
 JPTrafficLightAdapter::JPTrafficLightAdapter()

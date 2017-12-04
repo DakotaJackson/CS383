@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../../inc/JPSimulationEngine.h"
+#include "JPSimulationEngine.h"
 #include <stdlib.h> /* rand */
 #include <time.h> /* time for seeding rand */
 

@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../../inc/JPIntersectionExceptions.h"
+#include "JPIntersectionExceptions.h"
 
 JPMalformedIntersectionException::JPMalformedIntersectionException()
 {

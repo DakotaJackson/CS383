@@ -6,8 +6,8 @@
  */
 
 #include "JPLightTestStub.h"
-#include "../inc/JPConstants.h"
-#include "../inc/JPIntersection.h"
+#include "JPConstants.h"
+#include "JPIntersection.h"
 
 JPLightTestStub::JPLightTestStub()
 {

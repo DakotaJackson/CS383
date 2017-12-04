@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../../inc/JPLane.h"
+#include "JPLane.h"
 #include <stdexcept>
 //# include "LinkedList.h
 

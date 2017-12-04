@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../inc/JPSimulationControler.h"
+#include "JPSimulationControler.h"
 #include <stdio.h>
 //every update check time and check car position
 //evolution

@@ -1,5 +1,5 @@
 //DEPRECATED
-#include "../inc/JPConstants.h"
+#include "JPConstants.h"
 
 #include <stdio.h>
 

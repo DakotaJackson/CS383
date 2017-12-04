@@ -5,8 +5,8 @@
  *      Author: james
  */
 
-#include "../../inc/JPIntersection.h"
-#include "../../inc/JPIntersectionExceptions.h"
+#include "JPIntersection.h"
+#include "JPIntersectionExceptions.h"
 
 JPIntersection::JPIntersection()
 {

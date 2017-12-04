@@ -88,10 +88,10 @@ JPOStest: test/JPObservableSimulation_test.exe
 	test/JPObservableSimulation_test.exe
 	 
 #Test Stubs and Adapters
-JPLightTestStub.o: test/JPLightTestStub.cpp test/JPLightTestStub.h #DJTrafficLightManager.o
+JPLightTestStub.o: test/JPLightTestStub.cpp inc/JPLightTestStub.h #DJTrafficLightManager.o
 	$(CPP) $(CPPFLAGS) -c test/JPLightTestStub.cpp	#DJTrafficLightManager
 	
-JPCarTestStub.o: test/JPCarTestStub.cpp test/JPCarTestStub.h SFCar.o 
+JPCarTestStub.o: test/JPCarTestStub.cpp inc/JPCarTestStub.h SFCar.o 
 	$(CPP) $(CPPFLAGS) -c test/JPCarTestStub.cpp 
 
 JPTrafficLightAdapter.o: src/james/JPTrafficLightAdapter.cpp inc/JPTrafficLightAdapter.h JPLightTestStub.o SFCar.o DJTrafficLightManager.o

@@ -5,9 +5,9 @@
  *      Author: dakota
  */
 
-#include "../inc/DJTrafficLightManager.h"
-#include "../inc/JPConstants.h"
-#include "../inc/JPLane.h"
+#include "DJTrafficLightManager.h"
+#include "JPConstants.h"
+#include "JPLane.h"
 #include <stdio.h>
 
 // TODO write tests && include/import ...manager.cpp

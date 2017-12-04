@@ -4,10 +4,10 @@
  *  Created on: Oct 21, 2017
  *      Author: james
  */
-#include "../inc/JPIntersectionExceptions.h"
-#include "../inc/JPIntersection.h"
-#include "../inc/JPConstants.h"
-#include "../inc/JPLane.h"
+#include "JPIntersectionExceptions.h"
+#include "JPIntersection.h"
+#include "JPConstants.h"
+#include "JPLane.h"
 
 #define JPEXCEPTION_REPLACE_ME JPMalformedIntersectionException
 

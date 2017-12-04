@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../../inc/JPUpdatableInterface.h"
+#include "JPUpdatableInterface.h"
 
 JPUpdatableInterface::JPUpdatableInterface() {}
 

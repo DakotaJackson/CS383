@@ -5,9 +5,9 @@
  *      Author: james
  */
 
-#include "../../inc/JPTrafficModel.h"
-#include "../../inc/JPTrafficModelExceptions.h"
-#include "../../inc/JPIntersection.h"
+#include "JPTrafficModel.h"
+#include "JPTrafficModelExceptions.h"
+#include "JPIntersection.h"
 #include <chrono> //for seeding
 #include "SFCar.h"
 

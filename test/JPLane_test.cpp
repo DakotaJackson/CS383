@@ -5,9 +5,9 @@
  *      Author: james
  */
 
-#include "../inc/JPLane.h"
+#include "JPLane.h"
 #include <stdio.h>
-#include "../inc/JPConstants.h"
+#include "JPConstants.h"
 #include <stdexcept>
 
 int iterateTest();

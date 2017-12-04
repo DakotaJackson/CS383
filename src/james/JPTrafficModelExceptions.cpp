@@ -5,7 +5,7 @@
  *      Author: james
  */
 
-#include "../../inc/JPTrafficModelExceptions.h"
+#include "JPTrafficModelExceptions.h"
 
 JPTrafficModelException::JPTrafficModelException() {
 	// TODO Auto-generated constructor stub
