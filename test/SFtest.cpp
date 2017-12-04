@@ -3,24 +3,25 @@
 #include <string.h>
 
 using namespace std;
+
 // This is the test
 
 void testOne();
 void testTwo();
 void testThree();
+void testFour();
 
 int main()
 {
-    testOne();
+    //testOne();
     //testTwo();
     //testThree();
+    testFour();
 
     return 0;
 }
-/*
-    TestOne() : This test runs each of the backup functions
 
-*/
+/* This function tests the backup functions with speed limit input. */
 void testOne(){
     double desiredSpeed = 0;
     double length = 0;
@@ -48,6 +49,7 @@ void testOne(){
     }
 }
 
+/* This function tests the backup functions without speed limit input. */
 void testTwo(){
     double desiredSpeed = 0;
     double length = 0;
@@ -70,29 +72,40 @@ void testTwo(){
     }
 }
 
+/* This function tests the Builder classes. */
 void testThree(){
 
     for (int i = 0; i<5; i++){
-        Director dir;
+        Director dir;  // Creation of objects for each Builder class
         SimpleCar sb;
         Truck tb;
         Minivan mvb;
         Bus buss;
 
-        Car *scar = dir.createCar(&sb);
-        Car *truck = dir.createCar(&tb);
-        Car *mvan = dir.createCar(&mvb);
-        Car *bus = dir.createCar(&buss);
+        Car *scar = dir.createCar(&sb);  // Calls the director class and passes in information obtained in Car Builder Class
+        Car *truck = dir.createCar(&tb);  // Calls the director class and passes in information obtained in Truck Builder Class
+        Car *mvan = dir.createCar(&mvb);  // Calls the director class and passes in information obtained in Minivan Builder Class
+        Car *bus = dir.createCar(&buss);  // Calls the director class and passes in information obtained in Bus Builder Class
 
-        scar->show();
+        scar->show();  // Calls the show function and passes in information consolidated by director class
         truck->show();
         mvan->show();
         bus->show();
 
-        delete scar;
+        delete scar;  // Deletes the objects
         delete truck;
         delete mvan;
         delete bus;
+    }
+
+}
+
+/* This function tests carMember function. */
+void testFour(){
+    Car member;
+
+    for (int i = 0; i<5; i++){  // Loop is used to ensure randomization.
+        member.carMember();
     }
 
 }
@@ -104,11 +117,7 @@ void testThree(){
 // Actual: 10 hours
 //
 // Estimated Programming: 6 hours
-// Actual Programming: 8-9 hours
+// Actual Programming: 10 hours
 //
 // Total Estimated: 24 hours
-// Total Actual: 22 hours
-
-// Throw in detailed decorator
-// UML for decorator
-// Try except cases
+// Total Actual: 24 hours
