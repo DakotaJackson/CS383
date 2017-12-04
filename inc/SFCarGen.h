@@ -18,10 +18,16 @@ class Car{
     string _car;
     double _desiredSpeed;
     double _length;
+    string _color;
+    string _drive;
+    string _music;
 public:
     Car(string carType):_car{carType} {}
     void setdesiredSpeed(double speed) { _desiredSpeed = speed; }
     void setLength(double length)   { _length = length;   }
+    void setColor(string color) {_color = color;}
+    void setDrive(string drive) {_drive = drive;}
+    void setMusic(string music) {_music = music;}
     double getEngine()          { return _desiredSpeed; }
     double getBody()            { return _length;   }
 
@@ -76,6 +82,135 @@ private:
 
 };
 
+class CarAb
+{
+public:
+	virtual void Make() = 0;
+	virtual ~CarAb() { }
+
+};
+
+class CarDecorator: public CarAb
+{
+protected:
+    Car *_car;
+public:
+	CarDecorator(CarAb& decorator):m_Decorator(decorator)
+	{
+
+	}
+
+	virtual void Make()
+	{
+		m_Decorator.Make();
+	}
+	private:
+	CarAb& m_Decorator;
+};
+
+class ColorDec : public CarDecorator
+{
+
+public:
+	ColorDec(CarAb& decorator):CarDecorator(decorator)
+	{
+
+	}
+
+	virtual void Make()
+	{
+		CarDecorator::Make();
+		int _randColor;
+		_randColor = (1 + rand() % 5);
+
+        if (_randColor == 1){
+            _car->setColor("Red"); //RED
+        }
+        else if (_randColor == 2){
+            _car->setColor("Blue"); //BLUE
+        }
+        else if (_randColor == 3){
+            _car->setColor("Green"); //GREEN
+            }
+        else if (_randColor == 4){
+            _car->setColor("Yellow"); //YELLOW
+        }
+        else if (_randColor== 5){
+            _car->setColor("Black"); //BLACK
+        }
+
+	}
+
+};
+
+class DriveDec : public CarDecorator
+{
+
+public:
+	DriveDec(CarAb& decorator):CarDecorator(decorator)
+	{
+
+	}
+
+	virtual void Make()
+	{
+		CarDecorator::Make();
+		int _randDrive;
+		_randDrive = (1 + rand() % 3);
+
+        if (_randDrive == 1){
+            _car->setDrive("4-Wheel Drive"); //RED
+        }
+        else if (_randDrive == 2){
+             _car->setDrive("2-Wheel Front Drive"); //RED
+        }
+        else if (_randDrive== 3){
+             _car->setDrive("2-Wheel Rear Drive"); //RED
+            }
+
+
+	}
+
+};
+
+class MusicDec : public CarDecorator
+{
+
+public:
+	MusicDec(CarAb& decorator):CarDecorator(decorator)
+	{
+
+	}
+
+	virtual void Make()
+	{
+		CarDecorator::Make();
+		int _randMusic;
+		_randMusic = (1 + rand() % 6);
+
+        if (_randMusic == 1){
+            _car->setMusic("Cassette Player");
+        }
+        else if (_randMusic == 2){
+            _car->setMusic("CD Player");
+        }
+        else if (_randMusic == 3){
+            _car->setMusic("Combo Player");
+            }
+        else if (_randMusic == 4){
+            _car->setMusic("USB Compatible Combo Player");
+        }
+        else if (_randMusic== 5){
+            _car->setMusic("SIRIUS RADIO Player");
+        }
+        else if (_randMusic== 6){
+            _car->setMusic("Bluetooth Player");
+        }
+
+	}
+
+};
+
 // CarBuilder Abstract Class
 // Means all builders should have at least these methods
 class CarBuilder{
@@ -88,6 +223,8 @@ public:
     //virtual ~PlaneBuilder(){}
     Car* getCar(){ return _car; }
 };
+
+
 
 // CarBuilder concrete class
 // knows only how to build Simple Car
@@ -110,6 +247,7 @@ public:
 }
     void buildLength()    { _car->setLength(15);   }
     //~SimpleCar(){delete _car;}
+
 };
 
 // PlaneBuilder concrete class
@@ -133,6 +271,7 @@ public:
 }
     void buildLength()    { _car->setLength(20);   }
     //~Truck(){delete _car;}
+
 };
 
 class Minivan: public CarBuilder {
