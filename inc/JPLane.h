@@ -133,9 +133,17 @@ public:
 
 	virtual ~JPLane();
 	bool isEmpty() const;
+
+	/** \brief Return the number of cars in the lane */
 	int getSize() const;
+
+	/** \brief Return the destination lane number for cars that turn left */
 	int getLeftTarget() const;
+
+	/** \brief Return the destination lane number for cars that turn right */
 	int getRightTarget() const;
+
+	/** \brief return the turn configuration for this lane. */
 	int getTurnOptions() const;
 
 private:
@@ -144,6 +152,7 @@ private:
 	int _rightTarget;
 	//bool _firstFlag;
 	int _position;
+	SFCar *_lastCar;
 
 	LinkedList<SFCar*> *_list;
 	Iterator<SFCar*> *_iter;

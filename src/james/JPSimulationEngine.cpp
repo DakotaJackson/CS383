@@ -198,13 +198,14 @@ double getTurnedDistance( const double ac, const double V0, const double tm)
 	else
 		return 0.5 * ac * tm * tm + V0 * tm;
 }
+
 void JPSimulationEngine::updateTurnCar(SFCar *car,const int dir, double speed,
 		double &pos,const double accel, const int turn, const double timeStep,
-		const double lane)
+		const int lane)
 {
 
 	//1 get axes and circumference
-	double r, rOrigin, rTarget, circ, radius, deg, theta, otheta;
+	double r, rOrigin, rTarget, circ, radius, deg, theta, otheta, x, y;
 	if( SFCar::DESIRE_LEFT == turn)
 	{
 		rOrigin = 2 * _offsets[    dir     ] - (lane + 0.5) * LANE_WIDTH;
@@ -219,20 +220,26 @@ void JPSimulationEngine::updateTurnCar(SFCar *car,const int dir, double speed,
 	circ = M_PI * radius / 2;
 
 	otheta = car->getTheta();
-	//theta =  otheta % 90; //How far we are into the turn
+	theta =  remainder(otheta, 90); //How far we are into the turn
 	double linTravel = getTurnedDistance(accel, speed, timeStep);
 	deg = 90 * linTravel/circ;
 
 	//did we exit?
+	double deltaPos, deltaOrth, newDeg;
 	if(theta + deg > 90) //we've completed the turn
 	{
-		exitTurn(car, dir, linTravel - circ, turn, lane);
+		deltaPos = (theta + deg - 90 ) * circ/90;
+		exitTurn(car, dir, deltaPos, turn, lane);
 		return;
 	}
 
-	//double deltaPos, deltaOrth, newDeg;
+	x = sin( theta + deg);
+	deltaPos = x - sin(theta); //pos should be incremented by this
+	y = rTarget * sqrt( 1 - pow(x/rOrigin, 2));
+
+
 	//todo compute deltaPos and deltaOrth.
-	//car->setTheta( (deg + otheta) % 360);
+	car->setTheta( remainder(deg + otheta,360));
 
 }
 void JPSimulationEngine::exitTurn(SFCar *car, int dir, const double excess,const int turn, const int lane)
@@ -241,20 +248,22 @@ void JPSimulationEngine::exitTurn(SFCar *car, int dir, const double excess,const
 	double pos;
 
 	//change directions
+	JPLane *originLane = _intersection->getLane(dir, lane);
 	if(SFCar::DESIRE_LEFT == turn)
 	{
-		target = _intersection->getLane(dir, lane)->getLeftTarget();
+		target = originLane->getLeftTarget();
 		dir = (dir + 1) % 4;
 	}
 	else
 	{
-		target = _intersection->getLane(dir, lane)->getRightTarget();
+		target = originLane->getRightTarget();
 		dir = (dir + 3) % 4;
 	}
 
 	pos = excess + _offsets[dir];
 	car->setTheta( 90 * ( (dir + 2)%2) );
-	//todo move lanes
+
+	originLane->removeCurrentCar();
 	//todo set positins
 
 }

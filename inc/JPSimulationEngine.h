@@ -152,7 +152,7 @@ private:
 	/** \brief Update a car object by computing and setting the new speed and position */
 	void updateCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const double timeStep);
 	/** \brief Update a turning car object by computing and setting the new speed and position */
-	void updateTurnCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const int turn, const double timeStep, const double lane);
+	void updateTurnCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const int turn, const double timeStep, const int lane);
 	/** \brief perform computations for exiting a turn */
 	void exitTurn(SFCar *car, int dir, const double excess,const int turn, const int lane);
 	//light functions

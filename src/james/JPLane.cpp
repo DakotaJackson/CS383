@@ -49,14 +49,17 @@ SFCar* JPLane::getNextCar()
 		return 0;
 
 	_position++;
-	return *( (*_iter)++);
+	_lastCar = *( (*_iter)++);
+	return _lastCar;
 
 }
 
 
 void JPLane::removeCurrentCar()
 {
-	//TODO write removeCurrentCar
+
+	if(_position)
+		_list->removeAt(_position - 1);
 }
 
 SFCar *JPLane::removeFirstCar()
@@ -104,4 +107,7 @@ int JPLane::getSize() const
 
 int JPLane::getLeftTarget() const { return _leftTarget; }
 int JPLane::getRightTarget() const { return _rightTarget; }
+/**
+ * \return A bitfield sum of the valid turn options \link STRAIGHT \endlink \link RIGHT \endlink \link LEFT \endlink
+ */
 int JPLane::getTurnOptions() const {return _turnOptions; }
