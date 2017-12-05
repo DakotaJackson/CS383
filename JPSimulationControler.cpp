@@ -7,8 +7,6 @@
 
 #include "JPSimulationControler.h"
 //#include <time.h> //timespec, nanosleep (the nix/cygwin way not mingw)
-#include <windows.h> //sleep function
-#include <sys/time.h> //timeval, gettimeofday
 #include <math.h> //modf
 
 JPSimulationControler *JPSimulationControler::_unique;
@@ -21,7 +19,8 @@ JPSimulationControler::JPSimulationControler()
 	_simTime = 0;
 	_timeScale = 1.0; //realtime
 	_engine = JPSimulationEngine::getInstance();
-	gettimeofday(&_simEpoch, NULL);
+	//GetSystemTime(&_simEpoch);
+	GetSystemTimeAsFileTime(&_simEpoch);
 }
 
 JPSimulationControler* JPSimulationControler::getInstance()
@@ -111,9 +110,9 @@ void JPSimulationControler::setTimeScale(double timeScale) {
 
 double JPSimulationControler::getTime()
 {
-	struct timeval now;
-	gettimeofday(&now, NULL);
-
+	SYSTEMTIME now;
+	GetSystemTime(&now);
+/*
 	//whole seconds
 	double time = now.tv_sec - _simEpoch.tv_sec;
 
@@ -124,6 +123,8 @@ double JPSimulationControler::getTime()
 		time += (_simEpoch.tv_usec- now.tv_usec) / 1.0e6;
 
 	return time;
+	*/
+	return 10;
 }
 
 void JPSimulationControler::sleepTill(double time)

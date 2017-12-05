@@ -8,7 +8,8 @@
 #ifndef SRC_JAMES_SIMULATIONCONTROLER_H_
 #define SRC_JAMES_SIMULATIONCONTROLER_H_
 #include "JPSimulationEngine.h"
-#include <sys/time.h>
+#include <windows.h> //sleep function
+//# include <sys/time.h>
 
 /**
  * \defgroup ENG Simulation Engine
@@ -58,7 +59,10 @@ private:
 	double _duration;  //not used at present
 	double _timeScale; //default 1.0 = realtime
 	double _simTime;
-	struct timeval _simEpoch;
+
+	//FILETIME fileTime;
+	//GetSystemTimeAsFileTime(&fileTime);
+	FILETIME _simEpoch;
 
 };
 /** @} */
