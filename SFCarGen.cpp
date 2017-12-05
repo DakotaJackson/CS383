@@ -1,3 +1,4 @@
+
 /*
  * SFCarGen.cpp
  *
@@ -9,6 +10,7 @@
 //#include <stdio.h>
 #include <cstdlib>
 #include <iostream>
+#include <complex>
 
 using namespace std;
 
@@ -92,8 +94,7 @@ double Car::getSpeed() const {
 }
 
 void Car::setSpeed(double desiredSpeed) {
-	/*
-    Car car;
+   /* Car car;
     car.setDesiredSpeed2(desiredSpeed);
     car.getDesiredSpeed();
     double speed;
@@ -107,8 +108,7 @@ void Car::setSpeed(double desiredSpeed) {
     catch(int c) {
         cout << "Speed Limit Cannot Be Negative. Try again.";
         cin >> speed;
-    }
-    */
+    } */ // uncomment for testing and change line below to _speed = speed + desiredSpeed
 	_speed = desiredSpeed;
 }
 
@@ -137,8 +137,7 @@ int Car::getTurnDirection() const {
 }
 
 void Car::setTurnDirection(int turnDirection) {
-	/*
-    _randTurnDirection = (1 + rand() % 3);
+    /*_randTurnDirection = (1 + rand() % 3);
     if (_randTurnDirection == 1){
         turnDirection = DESIRE_STRAIGHT; //chose this randomly
 	}
@@ -147,8 +146,7 @@ void Car::setTurnDirection(int turnDirection) {
 	}
 	else if (_randTurnDirection == 3){
         turnDirection = DESIRE_LEFT; //chose this randomly
-	}
-	*/
+	}*/  // uncomment this for testing
 	_turnDirection = turnDirection;
 }
 
@@ -222,7 +220,7 @@ void Car::setWaitTime(double waitTime) {
     possible numbers the hopeful result is further variety in
     random generation. */
 
-void Car::carMember() {
+Car* Car::carMember() {
         int _randCar;
         _randCar = (1 + rand() % 8);
 
@@ -232,28 +230,28 @@ void Car::carMember() {
         Truck tb; //Truck
         Bus buss; //Bus
 
-        if (_randCar == 1 | _randCar == 5){
+        if ((_randCar == 1) | (_randCar == 5)){
             Car *scar = dir.createCar(&sb); // calls the director class and passes desired vehicle type Car
-            scar->show();  // Passes information obtained into show
-            delete scar;
+            //scar->show();  // Passes information obtained into show
+            return scar;
             }
 
-        else if (_randCar == 2 | _randCar == 6){
+        else if ((_randCar == 2) | (_randCar == 6)){
             Car *truck = dir.createCar(&tb); // calls the director class and passes desired vehicle type Truck
-            truck->show();  // Passes information obtained into show
-            delete truck;
+           //truck->show();  // Passes information obtained into show
+            return truck;
             }
 
-        else if (_randCar == 3 | _randCar == 7){
+        else if ((_randCar == 3) | (_randCar == 7)){
             Car *mvan = dir.createCar(&mvb); // calls the director class and passes desired vehicle type Minivan
-            mvan->show();  // Passes information obtained into show
-            delete mvan;
+            //mvan->show();  // Passes information obtained into show
+            return mvan;
             }
 
-        else if (_randCar == 4 | _randCar == 8){
+        else if ((_randCar == 4) | (_randCar == 8)){
             Car *bus = dir.createCar(&buss); // calls the director class and passes desired vehicle type Bus
-            bus->show();  // Passes information obtained into show
-            delete bus;
+            //bus->show();  // Passes information obtained into show
+            return bus;
             }
-
+    return NULL;
 }
