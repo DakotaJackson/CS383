@@ -9,7 +9,7 @@
 #include "JPTrafficModelExceptions.h"
 #include "JPIntersection.h"
 #include <chrono> //for seeding
-#include "SFCar.h"
+#include "SFCarGen.h"
 
 JPTrafficModel::JPTrafficModel()
 {
@@ -27,9 +27,9 @@ JPTrafficModel::JPTrafficModel()
 	uniform = new std::uniform_real_distribution<double>(0.0, 1.0);
 
 	//todo set direction map
-	_directionMappings[0] = SFCar::DESIRE_LEFT;
-	_directionMappings[1] = SFCar::DESIRE_RIGHT;
-	_directionMappings[2] = SFCar::DESIRE_STRAIGHT;
+	_directionMappings[0] = Car::DESIRE_LEFT;
+	_directionMappings[1] = Car::DESIRE_RIGHT;
+	_directionMappings[2] = Car::DESIRE_STRAIGHT;
 }
 
 /**
