@@ -8,6 +8,7 @@
 #include "JPIntersectionGrid.h"
 #define _USE_MATH_DEFINES //I want pi!
 #include <math.h>
+#include <algorithm>
 #include "JPSimulationEngine.h" //for getNextCar Method
 JPIntersectionGrid::JPIntersectionGrid(JPIntersection *inter)
 {

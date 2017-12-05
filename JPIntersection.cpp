@@ -7,6 +7,7 @@
 
 #include "JPIntersection.h"
 #include "JPIntersectionExceptions.h"
+#include <algorithm>
 
 JPIntersection::JPIntersection()
 {

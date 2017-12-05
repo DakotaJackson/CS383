@@ -8,6 +8,7 @@
 #include "JPSimulationEngine.h"
 #include <stdlib.h> /* rand */
 #include <time.h> /* time for seeding rand */
+#include <algorithm>
 
 JPSimulationEngine *JPSimulationEngine::_unique = 0;
 
