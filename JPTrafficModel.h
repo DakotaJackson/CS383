@@ -71,7 +71,7 @@ public:
 		 * \brief Returns the desired turn direction for the next car to be created based on its original direction.
 		 *
 		 * \param direction The direction the car is going or side of the intersection being entered (e.g. JPIntersection::NORTH or JPIntersection::SOUTH)
-		 * \return The desired turn direction. One of SFCar::DESIRE_RIGHT, SFCar::DESIRE_STRAIGHT, or SFCar::DESIRE_LEFT
+		 * \return The desired turn direction. One of Car::DESIRE_RIGHT, Car::DESIRE_STRAIGHT, or Car::DESIRE_LEFT
 		 */
 	int getNextTurnDirection(int direction);
 	virtual ~JPTrafficModel();

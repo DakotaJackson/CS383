@@ -84,7 +84,7 @@ bool JPIntersectionGrid::checkPath(const int direction, const int lnNum) const
 	return true;
 }
 void JPIntersectionGrid::setFirstCar(const int direction, const int lane,
-		SFCar* car)
+		Car* car)
 {
 	_firstCars[direction][lane] = car;
 }
@@ -129,7 +129,7 @@ double JPIntersectionGrid::getMaxArcDistance(const int direction, const int lane
 		const int tLane, const int turnDir) const
 {
 	double r, rOrigin, rTarget;
-	if( SFCar::DESIRE_LEFT == turnDir)
+	if( Car::DESIRE_LEFT == turnDir)
 	{
 		rOrigin = 2 * _offsets[    direction     ] - (lane + 0.5) * LANE_WIDTH;
 		rTarget = 2 * _offsets[ (direction+1) % 2] - (lane + 0.5) * LANE_WIDTH;
@@ -155,7 +155,7 @@ double JPIntersectionGrid::getMaxArcDistance(const int direction, const int lane
  * \param distance Distance to the intersection boundary
  */
 bool JPIntersectionGrid::checkYield(const int direction, const int lane,
-		SFCar *car, const double speed,
+		Car *car, const double speed,
 		const double distance) const
 {
 	const JPLane *tgLane = _inter->getLane(direction, lane);
@@ -164,7 +164,7 @@ bool JPIntersectionGrid::checkYield(const int direction, const int lane,
 	const double Vt = 25; //target 25 FPS
 	int turn = car->getTurnDirection();
 	int tLane;
-	if(SFCar::DESIRE_LEFT == turn)
+	if(Car::DESIRE_LEFT == turn)
 		tLane = tgLane->getLeftTarget();
 	else
 		tLane = tgLane->getRightTarget();
@@ -183,7 +183,7 @@ bool JPIntersectionGrid::checkYield(const int direction, const int lane,
 
 	time = intTime + curveTime;
 
-	if(SFCar::DESIRE_LEFT == turn)
+	if(Car::DESIRE_LEFT == turn)
 		return checkLeftYield(direction, lane, tLane, time);
 	else
 		return checkRightYield(direction, lane, tLane, time);
@@ -199,7 +199,7 @@ bool JPIntersectionGrid::checkLeftYield(const int direction, const int lane,
 	JPLane *oncLane;
 	int fromLeft    = (direction + 1) %4;
 	int fromAcross = (direction + 2) %4;
-	SFCar *car;
+	Car *car;
 	double leng, pos, speed, dspeed, tail, lbound, ubound, lnBottom, lnTop;
 
 	//traffic from the right and left should be stopped so we only
@@ -283,7 +283,7 @@ bool JPIntersectionGrid::checkRightYield(const int direction, const int lane,
 	int l;
 	JPLane *oncLane;
 	int fromLeft = (direction + 1) %4;
-	SFCar *car;
+	Car *car;
 	double leng, pos, speed, dspeed, tail, lbound, ubound, lnBottom;
 
 	//2 criteria
@@ -328,7 +328,7 @@ bool JPIntersectionGrid::obstructedAboveX(const double x) const
 {
 	int ln, total;
 	JPLane *lane;
-	SFCar *car;
+	Car *car;
 	double carX, tail;
 
 	//increment over all the lanes in the direction
@@ -359,7 +359,7 @@ bool JPIntersectionGrid::obstructedBelowX(const double x) const
 {
 	int ln, total;
 	JPLane *lane;
-	SFCar *car;
+	Car *car;
 	double carX, tail;
 
 	//increment over all the lanes in the direction
@@ -391,7 +391,7 @@ bool JPIntersectionGrid::obstructedAboveY(const double y) const
 {
 	int ln, total;
 	JPLane *lane;
-	SFCar *car;
+	Car *car;
 	double carY, tail;
 
 	//increment over all the lanes in the direction
@@ -423,7 +423,7 @@ bool JPIntersectionGrid::obstructedBelowY(const double y) const
 {
 	int ln, total;
 	JPLane *lane;
-	SFCar *car;
+	Car *car;
 	double carY, tail;
 
 	//increment over all the lanes in the direction

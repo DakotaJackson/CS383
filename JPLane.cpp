@@ -16,8 +16,8 @@ JPLane::JPLane(int turnOptions, int leftTarget, int rightTarget)
 	_rightTarget = rightTarget;
 	_position = 0;
 
-	//LinkedList<SFCar>* list;
-	_list = new LinkedList<SFCar*>();
+	//LinkedList<Car>* list;
+	_list = new LinkedList<Car*>();
 
 	_iter = 0;
 }
@@ -36,11 +36,11 @@ int JPLane::resetToFirstCar()
 	_position = 0;
 
 	//set iterator
-	_iter = new Iterator<SFCar*>( _list->begin() );
+	_iter = new Iterator<Car*>( _list->begin() );
 	return size;
 }
 
-SFCar* JPLane::getNextCar()
+Car* JPLane::getNextCar()
 {
 	//Sprintf("Size: %d,\t Position %d\n", _list->getSize(), _position );
 	//if we are at the end, return 0
@@ -62,7 +62,7 @@ void JPLane::removeCurrentCar()
 		_list->removeAt(_position - 1);
 }
 
-SFCar *JPLane::removeFirstCar()
+Car *JPLane::removeFirstCar()
 {
 	//return null if list is empty
 	if( _list->isEmpty() )
@@ -71,12 +71,12 @@ SFCar *JPLane::removeFirstCar()
 	return _list->removeFirst();
 }
 
-void JPLane::addCarAtPos(SFCar* car, double position)
+void JPLane::addCarAtPos(Car* car, double position)
 {
 	//TODO write addCarAtPos
 }
 
-void JPLane::addCarAtEnd(SFCar* car)
+void JPLane::addCarAtEnd(Car* car)
 {
 	_list->addLast(car);
 }

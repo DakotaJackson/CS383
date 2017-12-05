@@ -15,7 +15,7 @@
 #include "JPIntersectionGrid.h"
 #include "JPTrafficModel.h"
 #include "JPUpdatableInterface.h"
-#include "SFCar.h"
+#include "SFCarGen.h"
 #include "DJTrafficLightManager.h"
 #include "JPObservableSimulation.h"
 #include "JPLightTestStub.h"
@@ -96,7 +96,7 @@ public:
 
 	//public so iGrid can use it
 	/** \brief Retrieve the next car from the lane, and set a few variables. */
-	SFCar *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
+	Car *getNextCar(JPLane *lane, int dir, double &leng, double &pos, double &speed, double &dspeed);
 
 private:
 	//Base configuration
@@ -142,22 +142,22 @@ private:
 	/** Add cars to the simulation and schedule the next arrival */
 	void addCars(int direction, double timeStep);
 	/** \brief Generate and initialize car. */
-	SFCar *makeCar(int direction, int &lane);
+	Car *makeCar(int direction, int &lane);
 	/** \brief Determine which lane to put the car in. */
-	int determineLane(SFCar *car, int direction) const;
+	int determineLane(Car *car, int direction) const;
 	/** \brief Push an update that the car is being removed from the simulation and free the Car's memory */
-	void dispose(SFCar *car, JPLane *lane);
+	void dispose(Car *car, JPLane *lane);
 
 	//position translation/read/write functions
 	/** \brief Update a car object by computing and setting the new speed and position */
-	void updateCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const double timeStep);
+	void updateCar(Car *car,const int dir, double speed,double &pos,const double accel, const double timeStep);
 	/** \brief Update a turning car object by computing and setting the new speed and position */
-	void updateTurnCar(SFCar *car,const int dir, double speed,double &pos,const double accel, const int turn, const double timeStep, const int lane);
+	void updateTurnCar(Car *car,const int dir, double speed,double &pos,const double accel, const int turn, const double timeStep, const int lane);
 	/** \brief perform computations for exiting a turn */
-	void exitTurn(SFCar *car, int dir, const double excess,const int turn, const int lane);
+	void exitTurn(Car *car, int dir, const double excess,const int turn, const int lane);
 	//light functions
 	/** \brief compute the command the light will give to the car */
-	int determineLightEffect(SFCar *car, const int dir, const int ln) const;
+	int determineLightEffect(Car *car, const int dir, const int ln) const;
 	/** \brief Update tracking of how long each light has been yellow */
 	void updateYellowTimes(const double stepTime);
 
@@ -166,7 +166,7 @@ private:
 	double getPrevCarDecel(const double pSpeed, const double pPos, const double speed,
 			const double dSpeed, const double pos, const double timeStep) const;
 	/** \brief Compute the deceleration required based on the state of the intersection (e.g. blocked, red light etc. */
-	double getIntersectionDecel(SFCar *car,const int dir, const int ln, const double pos,
+	double getIntersectionDecel(Car *car,const int dir, const int ln, const double pos,
 			const double speed, const double timeStep) const;
 	/** \brief Calculate the time and deceleration to match pace between two cars while closing the gap. */
 	double movingTargetDecel(const double V0, const double Vt, const double dX, double &time) const;

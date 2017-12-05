@@ -268,12 +268,12 @@ int distributionTests()
 
 			//check destination and increment appropriately
 			dest = tm.getNextTurnDirection(dir);
-			//todo check against actual direction from SFCar
-			if(SFCar::DESIRE_LEFT == dest) //left
+			//todo check against actual direction from Car
+			if(Car::DESIRE_LEFT == dest) //left
 				dircounter[dir][0]++;
-			else if(SFCar::DESIRE_RIGHT == dest) //right
+			else if(Car::DESIRE_RIGHT == dest) //right
 				dircounter[dir][1]++;
-			else if(SFCar::DESIRE_STRAIGHT == dest) //straight
+			else if(Car::DESIRE_STRAIGHT == dest) //straight
 				dircounter[dir][2]++;
 		}
 	}

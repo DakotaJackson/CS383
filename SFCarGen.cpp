@@ -92,6 +92,7 @@ double Car::getSpeed() const {
 }
 
 void Car::setSpeed(double desiredSpeed) {
+	/*
     Car car;
     car.setDesiredSpeed2(desiredSpeed);
     car.getDesiredSpeed();
@@ -107,7 +108,8 @@ void Car::setSpeed(double desiredSpeed) {
         cout << "Speed Limit Cannot Be Negative. Try again.";
         cin >> speed;
     }
-	_speed = speed + desiredSpeed;
+    */
+	_speed = desiredSpeed;
 }
 
 /* Theta.
@@ -135,6 +137,7 @@ int Car::getTurnDirection() const {
 }
 
 void Car::setTurnDirection(int turnDirection) {
+	/*
     _randTurnDirection = (1 + rand() % 3);
     if (_randTurnDirection == 1){
         turnDirection = DESIRE_STRAIGHT; //chose this randomly
@@ -145,6 +148,7 @@ void Car::setTurnDirection(int turnDirection) {
 	else if (_randTurnDirection == 3){
         turnDirection = DESIRE_LEFT; //chose this randomly
 	}
+	*/
 	_turnDirection = turnDirection;
 }
 

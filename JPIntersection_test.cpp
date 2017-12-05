@@ -798,7 +798,7 @@ inline int addLanesCheck()
 
 			//attempt to access the object this should cause a
 			//segfault if it doesn't point to the right spot
-			lanes[i]->addCarAtEnd(new SFCar);
+			lanes[i]->addCarAtEnd(new Car);
 		}
 	}
 

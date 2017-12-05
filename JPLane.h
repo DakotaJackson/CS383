@@ -9,7 +9,7 @@
 #define SRC_JAMES_JPLANE_H_
 #include <stdexcept>
 //change this when I have a real class to work with
-#include "SFCar.h"
+#include "SFCarGen.h"
 
 //using namespace::std;
 #include "LinkedList.cpp"
@@ -33,7 +33,7 @@
  *
  * Usage:
  * \code{cpp}
- * SFCar *car;
+ * Car *car;
  * lane->resetToFirstCar();
  * while(0 != (car = lane->getNextCar()) )
  * {
@@ -88,7 +88,7 @@ public:
 	 * If this is the first call since resetToFirstCar the first car will be returned.
 	 * \return Zero if there are no more cars in the lane, otherwise the next.
 	 */
-	SFCar *getNextCar();
+	Car *getNextCar();
 
 
 	/**
@@ -104,7 +104,7 @@ public:
 	 * This is when the first car has reached the tracked boundary and we no longer
 	 * care about it.
 	 */
-	SFCar *removeFirstCar();  //throw (std::runtime_error);
+	Car *removeFirstCar();  //throw (std::runtime_error);
 
 	/**
 	 * \brief Add a car at specific physical position within the lane.
@@ -113,14 +113,14 @@ public:
 	 * \param car the car to be added.
 	 * \param position the position in feet
 	 */
-	void addCarAtPos(SFCar *car, double position);
+	void addCarAtPos(Car *car, double position);
 
 	/**
 	 * \brief Add a car at the end of the lane.
 	 *
 	 * \param car the car to be added.
 	 */
-	void addCarAtEnd(SFCar *car);
+	void addCarAtEnd(Car *car);
 
 	/*//dropping
 	 * \brief Flag the current car in the iteration as the first rendered.
@@ -152,10 +152,10 @@ private:
 	int _rightTarget;
 	//bool _firstFlag;
 	int _position;
-	SFCar *_lastCar;
+	Car *_lastCar;
 
-	LinkedList<SFCar*> *_list;
-	Iterator<SFCar*> *_iter;
+	LinkedList<Car*> *_list;
+	Iterator<Car*> *_iter;
 
 	//bool _renderFlagged; //dropping this
 };

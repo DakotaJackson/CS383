@@ -52,7 +52,7 @@ private:
 		engine->destory();
 	}
 
-	void printCar(SFCar *car)
+	void printCar(Car *car)
 	{
 		double x = car->getX();
 		double y = car->getY();
@@ -63,16 +63,16 @@ private:
 		int turn = car->getTurnDirection();
 		char trn = 'S';
 
-		if( SFCar::DESIRE_RIGHT == turn )
+		if( Car::DESIRE_RIGHT == turn )
 			trn = 'R';
-		else if( SFCar::DESIRE_LEFT == turn )
+		else if( Car::DESIRE_LEFT == turn )
 			trn = 'L';
 
 		printf("X:%3.2f Y:%3.2f Th: %2.0f %c Sp:%2.1f St:%3.1f Wt:%3.1f ptr:%p\n",
 				x, y, theta, trn, speed, insim, wait, car);
 	}
 
-	void makeCarValidation(SFCar *car, double x[4][3], double y[4][3], double theta[4])
+	void makeCarValidation(Car *car, double x[4][3], double y[4][3], double theta[4])
 	{
 		//verify car is as expected.
 		int dir = _direction;
@@ -100,7 +100,7 @@ private:
 		}
 	}
 
-	void makeCarValidation(SFCar *car)
+	void makeCarValidation(Car *car)
 	{
 		//printCar(car);
 		//X, Y, Theta,
@@ -164,7 +164,7 @@ private:
 	/**
 	 * \brief Track where cars were added for testing of add car function.
 	 */
-	void addCarTracking(SFCar *car)
+	void addCarTracking(Car *car)
 	{
 		int dir = 0; //todo get dir from theta
 		double theta = car->getTheta();
@@ -184,9 +184,9 @@ private:
 
 		switch(car->getTurnDirection())
 		{
-			case SFCar::DESIRE_LEFT: _carCount[dir][1]++; break;
-			case SFCar::DESIRE_RIGHT: _carCount[dir][2]++; break;
-			case SFCar::DESIRE_STRAIGHT: _carCount[dir][3]++; break;
+			case Car::DESIRE_LEFT: _carCount[dir][1]++; break;
+			case Car::DESIRE_RIGHT: _carCount[dir][2]++; break;
+			case Car::DESIRE_STRAIGHT: _carCount[dir][3]++; break;
 		}
 
 	}
@@ -197,7 +197,7 @@ private:
 	 */
 	void updateAddObject(void *object, int objType)
 	{
-		SFCar *car = (SFCar*) object;
+		Car *car = (Car*) object;
 
 		if(MAKE_CAR == test)
 			makeCarValidation(car);
@@ -447,7 +447,7 @@ private:
 		double thirty = 30.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
 		JPCarTestStub *lcar = new JPCarTestStub(15,-10000,-15, 30, thirty);
 		lcar->setTimeInSim(0);
-		lcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lcar->setTurnDirection(Car::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(lcar);	
 
 		//Initial gap between front of lead car and front of back car is 90
@@ -459,7 +459,7 @@ private:
 		double fourty = 40.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
 		JPCarTestStub *bcar = new JPCarTestStub(15,-10090, -15, 40 , fourty);
 		bcar->setTimeInSim(0);
-		bcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		bcar->setTurnDirection(Car::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(bcar);	
 
 		//iterate to the upper bound of 11 seconds.
@@ -506,7 +506,7 @@ private:
 		double thirty = 30.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
 		JPCarTestStub *lcar = new JPCarTestStub(15,-10000,-15, 30, thirty);
 		lcar->setTimeInSim(0);
-		lcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		lcar->setTurnDirection(Car::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(lcar);
 
 		//rear car going 10, should speed up
@@ -514,7 +514,7 @@ private:
 		double fourty = 40.0 * 3600/5280 - 35; //MPH delta from FPS actual (35 speed limit)
 		JPCarTestStub *bcar = new JPCarTestStub(15,-10190, -15, 10 , fourty);
 		bcar->setTimeInSim(0);
-		bcar->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		bcar->setTurnDirection(Car::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(bcar);
 
 		//iterate to the upper bound of 11 seconds.
@@ -546,12 +546,12 @@ private:
 
 		//position car 5 seconds from light with expected stop time of 10 seconds
 		JPLane *lane = inter->getLane(3,0);
-		SFCar *car = new SFCar();
+		Car *car = new Car();
 		car->setX(-280);
 		car->setY(-15);
 		car->setTimeInSim(0);
 		car->setSpeed(51.3);
-		car->setTurnDirection(SFCar::DESIRE_STRAIGHT);
+		car->setTurnDirection(Car::DESIRE_STRAIGHT);
 		lane->addCarAtEnd(car);	
 
 		//iterate to the upper bound of 11 seconds.
@@ -762,22 +762,22 @@ private:
 		{
 			switch(i%3)
 			{
-				case 0: desire = SFCar::DESIRE_LEFT; break;
-				case 1: desire = SFCar::DESIRE_STRAIGHT; break;
-				case 2: desire = SFCar::DESIRE_RIGHT; break;
+				case 0: desire = Car::DESIRE_LEFT; break;
+				case 1: desire = Car::DESIRE_STRAIGHT; break;
+				case 2: desire = Car::DESIRE_RIGHT; break;
 			}
 
-			SFCar car;
+			Car car;
 			car.setTurnDirection(desire);
 
 			//NORTH 4 lanes 0R, 1,2S, 3L
 			ln = eng->determineLane(&car, JPIntersection::NORTH);
-			if(SFCar::DESIRE_LEFT == desire) //lane must be 3
+			if(Car::DESIRE_LEFT == desire) //lane must be 3
 				if(3 == ln )
 					valids[0]++;
 				else
 					return 1;
-			else if (SFCar::DESIRE_RIGHT == desire) //lane must be 0
+			else if (Car::DESIRE_RIGHT == desire) //lane must be 0
 				if(0 == ln )
 					valids[1]++;
 				else
@@ -792,12 +792,12 @@ private:
 
 			//SOUTH two lefs, 1 Straight, 1 straight right
 			ln = eng->determineLane(&car, JPIntersection::SOUTH);
-			if (SFCar::DESIRE_RIGHT == desire) //lane must be 0
+			if (Car::DESIRE_RIGHT == desire) //lane must be 0
 				if(0 == ln )
 					valids[4]++;
 				else
 					return 4;
-			else if(SFCar::DESIRE_STRAIGHT == desire) //lane must be 0 or 1
+			else if(Car::DESIRE_STRAIGHT == desire) //lane must be 0 or 1
 				if(0 == ln )
 					valids[5]++;
 				else if(1 == ln )
@@ -814,12 +814,12 @@ private:
 
 			//EAST a left straight, a straight, and a right
 			ln = eng->determineLane(&car, JPIntersection::EAST);
-			if (SFCar::DESIRE_RIGHT == desire) //lane must be 0
+			if (Car::DESIRE_RIGHT == desire) //lane must be 0
 				if(0 == ln )
 					valids[9]++;
 				else
 					return 7;
-			else if(SFCar::DESIRE_STRAIGHT == desire) //lane must be 1 or 2
+			else if(Car::DESIRE_STRAIGHT == desire) //lane must be 1 or 2
 				if(1 == ln )
 					valids[10]++;
 				else if(2 == ln )
@@ -834,14 +834,14 @@ private:
 
 			//WEST1 1 left, 1 straight right straight, 1 right
 			ln = eng->determineLane(&car, JPIntersection::WEST);
-			if (SFCar::DESIRE_RIGHT == desire) //lane must be 0 or 1
+			if (Car::DESIRE_RIGHT == desire) //lane must be 0 or 1
 				if(0 == ln )
 					valids[13]++;
 				else if(1 == ln )
 					valids[14]++;
 				else
 					return 10;
-			else if(SFCar::DESIRE_STRAIGHT == desire) //lane must be 1
+			else if(Car::DESIRE_STRAIGHT == desire) //lane must be 1
 				if(1 == ln )
 					valids[15]++;
 				else
@@ -974,7 +974,7 @@ private:
 		lane->resetToFirstCar();
 		double nleng, npos, nspeed, ndspeed;
 		double dspeed = inter->getSpeedLimitsInFPS(dir) - 5 *5280.0/3600;
-		SFCar *car = eng->getNextCar(lane, dir, nleng, npos, nspeed, ndspeed);
+		Car *car = eng->getNextCar(lane, dir, nleng, npos, nspeed, ndspeed);
 		stub = (JPCarTestStub*)car;
 
 		//begin checks
@@ -996,17 +996,16 @@ private:
 
 		// 1) check that we get the right cars back
 		int dir = 0;
-		SFCar *cars[10];
-		SFCar *car;
+		Car *cars[10];
+		Car *car;
 		JPLane *lane = inter->getLane(dir,1);
 
 		int i;
 		for(i = 0; i < 10; i++)
 		{
-			cars[i] = new SFCar();
+			cars[i] = new Car();
 			lane->addCarAtEnd(cars[i]);
 		}
-
 		lane->resetToFirstCar();
 		double leng, pos, speed, dspeed;
 		//verify A) all cars are retrieved in the correct order and NULL terminates the last
@@ -1027,7 +1026,6 @@ private:
 		//cleanup
 		for(i = 0; i < 10; i++)
 			delete lane->removeFirstCar();
-
 		//2 check computations and retrievals
 		int ret = 0;
 		double inx[] = {-1,	  125,	   1, -175};
@@ -1100,12 +1098,7 @@ public:
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Prerequisites",
 				prereqTest() );
-		ret = consts::testOuptut(
-				"JPSimulationEngine: Get Next Car Test",
-				getNextCarTest() );
-		ret = consts::testOuptut(
-				"JPSimulationEngine: Make Car Test",
-				makeCarTest() );
+
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Determine Lane Test",
 				determineLaneTest() );
@@ -1113,11 +1106,17 @@ public:
 				"JPSimulationEngine: Previous Car Deceleration Test",
 				prevCarDecelTest() );
 		ret = consts::testOuptut(
+				"JPSimulationEngine: Rear Car Acceleration Test",
+				rearCarAccelerationTest() );
+		ret = consts::testOuptut(
 				"JPSimulationEngine: Match Pace Test",
 				matchPaceTest() );
 		ret = consts::testOuptut(
-				"JPSimulationEngine: Rear Car Acceleration Test",
-				rearCarAccelerationTest() );
+				"JPSimulationEngine: Make Car Test",
+				makeCarTest() );
+		ret = consts::testOuptut(
+				"JPSimulationEngine: Get Next Car Test",
+				getNextCarTest() );
 
 		ret = consts::testOuptut(
 				"JPSimulationEngine: ",
@@ -1149,7 +1148,7 @@ public:
 	{
 		int dir, ln;
 		JPLane *lane;
-		SFCar *car;
+		Car *car;
 		for(dir = 0; dir < 4; dir++)
 		{
 //if(3 != dir) continue;

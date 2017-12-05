@@ -8,7 +8,7 @@
 #ifndef SRC_JAMES_JPINTERSECTIONGRID_H_
 #define SRC_JAMES_JPINTERSECTIONGRID_H_
 #define _USE_MATH_DEFINES //I want pi!
-#include "SFCar.h"
+#include "SFCarGen.h  "
 #include "JPIntersection.h"
 /**
  * \addtogroup ENG
@@ -26,16 +26,16 @@ public:
 
 	/**\brief Check the intersection and return whether it is clear. */
 	bool checkPath(const int direction, const int lane) const;
-	bool checkYield(const int direction, const int lane, SFCar *car, const double speed, const double distance) const;
+	bool checkYield(const int direction, const int lane, Car *car, const double speed, const double distance) const;
 	/** \brief Depricated */
-	void setFirstCar(const int direction, const int lane, SFCar *car);
+	void setFirstCar(const int direction, const int lane, Car *car);
 private:
-	SFCar *_firstCars[4][MAX_LANES_MACRO];
+	Car *_firstCars[4][MAX_LANES_MACRO];
 	double _offsets[4];
 	double _bounds[4];
 	int _numLanes[4];
 	JPIntersection *_inter;
-//	SFCar* getNextCar(JPLane* lane, int dir, double& leng, double& pos,
+//	Car* getNextCar(JPLane* lane, int dir, double& leng, double& pos,
 
 	bool checkLeftYield(const int direction, const int lane, const int tLane, const double clearTime) const;
 	bool checkRightYield(const int direction, const int lane, const int tLane, const double clearTime) const;

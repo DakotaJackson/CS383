@@ -7,7 +7,7 @@
 
 #ifndef TEST_JPCARTESTSTUB_H_
 #define TEST_JPCARTESTSTUB_H_
-#include "SFCar.h"
+#include "SFCarGen.h  "
 /**
  * \addtogroup TST
  * @{
@@ -15,7 +15,7 @@
 /**
  * \brief A configurable car test stub for testing the simulation.
  */
-class JPCarTestStub: public SFCar
+class JPCarTestStub: public Car
 {
 private:
 	double _dspeed;

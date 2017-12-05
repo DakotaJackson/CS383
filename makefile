@@ -1,6 +1,6 @@
 #Most classes/files will have three targets
 #target1 ClassName.o -> compile the class
-#target2 test/UnitTestName.exe -> compile the unit test program and any test stubs
+#target2  UnitTestName.exe -> compile the unit test program and any test stubs
 #target3 ABREVIATEIONtest -> run the unit test
 #
 #there are a few special targets: 
@@ -25,7 +25,7 @@
 
 LIBS = -lm
 CPP=g++ 
-CPPFLAGS = -g -Wall -pipe -O2 -std=c++11 -Iinc/
+CPPFLAGS = -g -Wall -pipe -O2 -std=c++11 
 QTFLAGS = 
 QTINC =
 QTLIB = 
@@ -34,6 +34,8 @@ QTLIB =
 ############################################################################
 #Begin Samantha
 
+SFCarGen.o: SFCarGen.cpp  SFCarGen.h
+	$(CPP) $(CPPFLAGS) -c  SFCarGen.cpp
 SFbuildTest: 
 SFallTest: 
 #End Samantha
@@ -49,8 +51,8 @@ BGallTest:
 
 ############################################################################
 #Begin Dakota 
-DJTrafficLightManager.o: src/dakota/DJTrafficLightManager.cpp inc/DJTrafficLightManager.h
-	$(CPP) $(CPPFLAGS) -c src/dakota/DJTrafficLightManager.cpp
+DJTrafficLightManager.o:  DJTrafficLightManager.cpp  DJTrafficLightManager.h
+	$(CPP) $(CPPFLAGS) -c  DJTrafficLightManager.cpp
 DJbuildTest: 
 DJallTest:
 #End Dakota 
@@ -60,7 +62,7 @@ DJallTest:
 #Begin Joe
 
 
-JJTestOutput.o: test/JJTestOutput.cpp test/JJTestOutput.h
+JJTestOutput.o:  JJTestOutput.cpp  JJTestOutput.h
 	$(CPP) $(CPPFLAGS) JJTestOutput.cpp JJTestOutput.h
 
 JJbuildTest: 
@@ -71,107 +73,107 @@ JJallTest:
 #Begin James
 ALLCOMPS=JPLane.o JPIntersection.o JPIntersectionExceptions.o  JPIntersectionGrid.o JPTrafficModel.o JPTrafficModelExceptions.o JPSimulationEngine.o JPUpdatableInterface.o JPObservableSimulation.o JPLightTestStub.o JPCarTestStub.o JPOtherException.o JPTrafficLightAdapter.o DJTrafficLightManager.o
 #car dummy #get rid of this when the real car is here also need to replace alll references to car header/src
-SFCar.o: src/james/SFCar.cpp
-	$(CPP) $(CPPFLAGS) -c src/james/SFCar.cpp 	
+#SFCar.o:  SFCar.cpp
+#	$(CPP) $(CPPFLAGS) -c  SFCar.cpp 	
 
 #Observer/Observed Interface
-JPUpdatableInterface.o: src/james/JPUpdatableInterface.cpp inc/JPUpdatableInterface.h
-	$(CPP) $(CPPFLAGS) -c src/james/JPUpdatableInterface.cpp
+JPUpdatableInterface.o:  JPUpdatableInterface.cpp  JPUpdatableInterface.h
+	$(CPP) $(CPPFLAGS) -c  JPUpdatableInterface.cpp
 
-JPObservableSimulation.o: JPUpdatableInterface.o src/james/JPObservableSimulation.cpp inc/JPObservableSimulation.h
-	$(CPP) $(CPPFLAGS) -c src/james/JPObservableSimulation.cpp
+JPObservableSimulation.o: JPUpdatableInterface.o  JPObservableSimulation.cpp  JPObservableSimulation.h
+	$(CPP) $(CPPFLAGS) -c  JPObservableSimulation.cpp
 	
-test/JPObservableSimulation_test.exe: JPObservableSimulation.o test/JPObservableSimulation_test.cpp
-	$(CPP) $(CPPFLAGS) test/JPObservableSimulation_test.cpp JPObservableSimulation.o JPUpdatableInterface.o -o test/JPObservableSimulation_test
+ JPObservableSimulation_test.exe: JPObservableSimulation.o  JPObservableSimulation_test.cpp
+	$(CPP) $(CPPFLAGS)  JPObservableSimulation_test.cpp JPObservableSimulation.o JPUpdatableInterface.o -o  JPObservableSimulation_test
 	
-JPOStest: test/JPObservableSimulation_test.exe
-	test/JPObservableSimulation_test.exe
+JPOStest:  JPObservableSimulation_test.exe
+	 JPObservableSimulation_test.exe
 	 
 #Test Stubs and Adapters
-JPLightTestStub.o: test/JPLightTestStub.cpp inc/JPLightTestStub.h #DJTrafficLightManager.o
-	$(CPP) $(CPPFLAGS) -c test/JPLightTestStub.cpp	#DJTrafficLightManager
+JPLightTestStub.o:  JPLightTestStub.cpp  JPLightTestStub.h #DJTrafficLightManager.o
+	$(CPP) $(CPPFLAGS) -c  JPLightTestStub.cpp	#DJTrafficLightManager
 	
-JPCarTestStub.o: test/JPCarTestStub.cpp inc/JPCarTestStub.h SFCar.o 
-	$(CPP) $(CPPFLAGS) -c test/JPCarTestStub.cpp 
+JPCarTestStub.o:  JPCarTestStub.cpp  JPCarTestStub.h SFCarGen.o 
+	$(CPP) $(CPPFLAGS) -c  JPCarTestStub.cpp 
 
-JPTrafficLightAdapter.o: src/james/JPTrafficLightAdapter.cpp inc/JPTrafficLightAdapter.h JPLightTestStub.o SFCar.o DJTrafficLightManager.o
-	$(CPP) $(CPPFLAGS) -c src/james/JPTrafficLightAdapter.cpp 
+JPTrafficLightAdapter.o:  JPTrafficLightAdapter.cpp  JPTrafficLightAdapter.h JPLightTestStub.o SFCarGen.o DJTrafficLightManager.o
+	$(CPP) $(CPPFLAGS) -c  JPTrafficLightAdapter.cpp 
 
 #Lane
-JPLane.o: src/james/JPLane.cpp inc/JPLane.h inc/JPConstants.h SFCar.o src/james/LinkedList.cpp
-	$(CPP) $(CPPFLAGS) -c src/james/JPLane.cpp
+JPLane.o:  JPLane.cpp  JPLane.h  JPConstants.h SFCarGen.o  LinkedList.cpp
+	$(CPP) $(CPPFLAGS) -c  JPLane.cpp
 
-test/JPLane_test.exe: JPLane.o test/JPLane_test.cpp JPCarTestStub.o
-	$(CPP) $(CPPFLAGS)  JPLane.o JPCarTestStub.o SFCar.o test/JPLane_test.cpp $(LIBS) -o test/JPLane_test
+ JPLane_test.exe: JPLane.o  JPLane_test.cpp JPCarTestStub.o
+	$(CPP) $(CPPFLAGS)  JPLane.o JPCarTestStub.o SFCarGen.o  JPLane_test.cpp $(LIBS) -o  JPLane_test
 	
-JPLtest: test/JPLane_test.exe
-	test/JPLane_test.exe
+JPLtest:  JPLane_test.exe
+	 JPLane_test.exe
 
 #Intersection
-JPIntersectionExceptions.o: src/james/JPIntersectionExceptions.cpp inc/JPIntersectionExceptions.h
-	$(CPP) $(CPPFLAGS) -c src/james/JPIntersectionExceptions.cpp
+JPIntersectionExceptions.o:  JPIntersectionExceptions.cpp  JPIntersectionExceptions.h
+	$(CPP) $(CPPFLAGS) -c  JPIntersectionExceptions.cpp
 
-JPIntersection.o: src/james/JPIntersection.cpp  inc/JPConstants.h  inc/JPIntersection.h  JPLane.o SFCar.o JPIntersectionExceptions.o
-	$(CPP) $(CPPFLAGS) -c src/james/JPIntersection.cpp
+JPIntersection.o:  JPIntersection.cpp   JPConstants.h   JPIntersection.h  JPLane.o SFCarGen.o JPIntersectionExceptions.o
+	$(CPP) $(CPPFLAGS) -c  JPIntersection.cpp
 
-test/JPIntersection_test.exe: JPLane.o  test/JPIntersection_test.cpp JPIntersection.o
-	$(CPP) $(CPPFLAGS) JPLane.o JPIntersection.o JPIntersectionExceptions.o SFCar.o test/JPIntersection_test.cpp  $(LIBS) -o test/JPIntersection_test
+ JPIntersection_test.exe: JPLane.o   JPIntersection_test.cpp JPIntersection.o
+	$(CPP) $(CPPFLAGS) JPLane.o JPIntersection.o JPIntersectionExceptions.o SFCarGen.o  JPIntersection_test.cpp  $(LIBS) -o  JPIntersection_test
 	
-JPItest: test/JPIntersection_test.exe
-	test/JPIntersection_test.exe
+JPItest:  JPIntersection_test.exe
+	 JPIntersection_test.exe
 
 #Intersection Grid
-JPIntersectionGrid.o: src/james/JPIntersectionGrid.cpp inc/JPIntersectionGrid.h JPIntersection.o JPIntersectionExceptions.o SFCar.o
-	$(CPP) $(CPPFLAGS) -c src/james/JPIntersectionGrid.cpp
+JPIntersectionGrid.o:  JPIntersectionGrid.cpp  JPIntersectionGrid.h JPIntersection.o JPIntersectionExceptions.o SFCarGen.o
+	$(CPP) $(CPPFLAGS) -c  JPIntersectionGrid.cpp
 
-test/JPIntersectionGrid_test.exe: test/JPIntersectionGrid_test.cpp $(ALLCOMPS)
-	$(CPP) $(CPPFLAGS) SFCar.o $(ALLCOMPS) test/JPIntersectionGrid_test.cpp  $(LIBS) -o test/JPIntersectionGrid_test
+ JPIntersectionGrid_test.exe:  JPIntersectionGrid_test.cpp $(ALLCOMPS)
+	$(CPP) $(CPPFLAGS) SFCarGen.o $(ALLCOMPS)  JPIntersectionGrid_test.cpp  $(LIBS) -o  JPIntersectionGrid_test
 	
-JPIGtest: test/JPIntersectionGrid_test.exe
-	test/JPIntersectionGrid_test.exe
+JPIGtest:  JPIntersectionGrid_test.exe
+	 JPIntersectionGrid_test.exe
 
 #Traffic Model
-JPTrafficModelExceptions.o: inc/JPConstants.h inc/JPTrafficModelExceptions.h src/james/JPTrafficModelExceptions.cpp
-	$(CPP) $(CPPFLAGS) -c src/james/JPTrafficModelExceptions.cpp
+JPTrafficModelExceptions.o:  JPConstants.h  JPTrafficModelExceptions.h  JPTrafficModelExceptions.cpp
+	$(CPP) $(CPPFLAGS) -c  JPTrafficModelExceptions.cpp
 
-JPTrafficModel.o: src/james/JPTrafficModel.cpp inc/JPConstants.h inc/JPTrafficModel.h  JPTrafficModelExceptions.o  JPIntersectionExceptions.o  
-	$(CPP) $(CPPFLAGS) -c src/james/JPTrafficModel.cpp 
+JPTrafficModel.o:  JPTrafficModel.cpp  JPConstants.h  JPTrafficModel.h  JPTrafficModelExceptions.o  JPIntersectionExceptions.o  
+	$(CPP) $(CPPFLAGS) -c  JPTrafficModel.cpp 
 
-test/JPTrafficModel_test.exe: JPTrafficModel.o test/JPTrafficModel_test.cpp
-	$(CPP) $(CPPFLAGS) JPTrafficModel.o JPTrafficModelExceptions.o JPIntersectionExceptions.o test/JPTrafficModel_test.cpp  $(LIBS) -o test/JPTrafficModel_test
+ JPTrafficModel_test.exe: JPTrafficModel.o  JPTrafficModel_test.cpp
+	$(CPP) $(CPPFLAGS) JPTrafficModel.o JPTrafficModelExceptions.o JPIntersectionExceptions.o  JPTrafficModel_test.cpp  $(LIBS) -o  JPTrafficModel_test
 	
-JPTMtest: test/JPTrafficModel_test.exe
-	test/JPTrafficModel_test.exe
+JPTMtest:  JPTrafficModel_test.exe
+	 JPTrafficModel_test.exe
 
 #Other Exceptions
-JPOtherException.o: src/james/JPOtherException.cpp inc/JPOtherException.h
-	$(CPP) $(CPPFLAGS) -c src/james/JPOtherException.cpp
+JPOtherException.o:  JPOtherException.cpp  JPOtherException.h
+	$(CPP) $(CPPFLAGS) -c  JPOtherException.cpp
 
 #Simulation Engine
-JPSimulationEngine.o: src/james/JPSimulationEngine.cpp inc/JPConstants.h inc/JPSimulationEngine.h SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o JPOtherException.o JPTrafficLightAdapter.o
-	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationEngine.cpp
+JPSimulationEngine.o:  JPSimulationEngine.cpp  JPConstants.h  JPSimulationEngine.h SFCarGen.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o JPOtherException.o JPTrafficLightAdapter.o
+	$(CPP) $(CPPFLAGS) -c  JPSimulationEngine.cpp
 
-test/JPSimulationEngine_test.exe: JPSimulationEngine.o test/JPSimulationEngine_test.cpp JPLightTestStub.o JPCarTestStub.o SFCar.o 
-	$(CPP) $(CPPFLAGS) SFCar.o $(ALLCOMPS) test/JPSimulationEngine_test.cpp  $(LIBS) -o test/JPSimulationEngine_test
+ JPSimulationEngine_test.exe: JPSimulationEngine.o  JPSimulationEngine_test.cpp JPLightTestStub.o JPCarTestStub.o SFCarGen.o 
+	$(CPP) $(CPPFLAGS) SFCarGen.o $(ALLCOMPS)  JPSimulationEngine_test.cpp  $(LIBS) -o  JPSimulationEngine_test
 	
-JPSEtest: test/JPSimulationEngine_test.exe
-	test/JPSimulationEngine_test.exe
+JPSEtest:  JPSimulationEngine_test.exe
+	 JPSimulationEngine_test.exe
 
 #Simulation Controler
-JPSimulationControler.o: src/james/JPSimulationControler.cpp inc/JPConstants.h inc/JPSimulationControler.h JPSimulationEngine.o SFCar.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o
-	$(CPP) $(CPPFLAGS) -c src/james/JPSimulationControler.cpp
+JPSimulationControler.o:  JPSimulationControler.cpp  JPConstants.h  JPSimulationControler.h JPSimulationEngine.o SFCarGen.o JPLane.o JPIntersection.o JPTrafficModelExceptions.o JPIntersectionGrid.o JPTrafficModel.o JPIntersectionExceptions.o JPUpdatableInterface.o JPObservableSimulation.o
+	$(CPP) $(CPPFLAGS) -c  JPSimulationControler.cpp
 
-test/JPSimulationControler_test.exe: JPSimulationControler.o test/JPSimulationControler_test.cpp JPLightTestStub.o
-	$(CPP) $(CPPFLAGS) JPSimulationControler.o SFCar.o $(ALLCOMPS) test/JPSimulationControler_test.cpp  $(LIBS) -o test/JPSimulationControler_test
+ JPSimulationControler_test.exe: JPSimulationControler.o  JPSimulationControler_test.cpp JPLightTestStub.o
+	$(CPP) $(CPPFLAGS) JPSimulationControler.o SFCarGen.o $(ALLCOMPS)  JPSimulationControler_test.cpp  $(LIBS) -o  JPSimulationControler_test
 	
-JPSCtest: test/JPSimulationControler_test.exe
-	test/JPSimulationControler_test.exe
+JPSCtest:  JPSimulationControler_test.exe
+	 JPSimulationControler_test.exe
 	
-demo: test/JPSimulationControler_test.exe
-	test/JPSimulationControler_test.exe -d
+demo:  JPSimulationControler_test.exe
+	 JPSimulationControler_test.exe -d
 	
 
-JPbuildTest: test/JPLane_test.exe test/JPIntersection_test.exe test/JPIntersectionGrid_test.exe test/JPTrafficModel_test.exe test/JPSimulationEngine_test.exe test/JPObservableSimulation_test.exe test/JPSimulationControler_test.exe
+JPbuildTest:  JPLane_test.exe  JPIntersection_test.exe  JPIntersectionGrid_test.exe  JPTrafficModel_test.exe  JPSimulationEngine_test.exe  JPObservableSimulation_test.exe  JPSimulationControler_test.exe
 JPallTest: JPLtest JPItest JPIGtest JPTMtest JPSEtest JPOStest JPSCtest
 
 buildTest: JPbuildTest BGbuildTest DJbuildTest SFbuildTest JJbuildTest 
@@ -180,8 +182,8 @@ test: JPallTest BGallTest DJallTest SFallTest JJallTest
 clean:
 	rm -f *.o
 	rm -f *.exe
-	rm -f test/*.exe
-	rm -f inc/*.gch
+	rm -f  *.exe
+	rm -f  *.gch
 
 cleandocs:
 	rm -rf docs/latex

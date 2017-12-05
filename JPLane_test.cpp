@@ -76,14 +76,14 @@ inline int iterateTest()
 
 	JPLane *lane;
 	lane = new JPLane(JPLane::STRAIGHT, 0, 0);
-	SFCar *car;
+	Car *car;
 
 	//add cars
 	int i;
-	SFCar *cars[10];
+	Car *cars[10];
 	for(i = 0; i < 10; i++)
 	{
-		cars[i] = new SFCar();
+		cars[i] = new Car();
 		lane->addCarAtEnd(cars[i]);
 	}
 
@@ -131,14 +131,14 @@ inline int removeCarTest()
 
 	JPLane *lane;
 	lane = new JPLane(JPLane::STRAIGHT, 0, 0);
-	SFCar *car, *remCar;
+	Car *car, *remCar;
 
 	//add cars
 	int i,j;
-	SFCar *cars[10];
+	Car *cars[10];
 	for(i = 0; i < 10; i++)
 	{
-		cars[i] = new SFCar();
+		cars[i] = new Car();
 		//printf("[%d]:\t%d\n", i, cars[i]);
 		lane->addCarAtEnd(cars[i]);
 	}
