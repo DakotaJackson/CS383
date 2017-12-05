@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <complex>
 
 using namespace std;
 
@@ -48,7 +49,7 @@ public:
     virtual ~Car() { }
 	Car();
 
-    void carMember();         // Uses builder classes and randomizes car selection
+    Car *carMember();         // Uses builder classes and randomizes car selection
 
 /*  Storage functions and backup functions
 
