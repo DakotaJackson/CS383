@@ -18,7 +18,7 @@
 
 class JPSimulationControler {
 public:
-	JPSimulationControler* getInstance();
+	static JPSimulationControler* getInstance();
 	void start();
 	void pause();
 	void terminate();
