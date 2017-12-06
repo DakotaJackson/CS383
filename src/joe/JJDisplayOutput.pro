@@ -26,11 +26,57 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         JJDisplayOutput.cpp \
-    JJTestOutput.cpp
+    JJTestOutput.cpp \
+    DJTrafficLightManager.cpp \
+    InputUI.cpp \
+    JJDisplayOutput.cpp \
+    JJTestOutput.cpp \
+    JPCarTestStub.cpp \
+    JPIntersection.cpp \
+    JPIntersectionExceptions.cpp \
+    JPIntersectionGrid.cpp \
+    JPLane.cpp \
+    JPLightTestStub.cpp \
+    JPObservableSimulation.cpp \
+    JPOtherException.cpp \
+    JPSimulationControler.cpp \
+    JPSimulationEngine.cpp \
+    JPTrafficLightAdapter.cpp \
+    JPTrafficModel.cpp \
+    JPTrafficModelExceptions.cpp \
+    JPUpdatableInterface.cpp \
+    LinkedList.cpp \
+    main.cpp \
+    SFCarGen.cpp
 
 HEADERS += \
         JJDisplayOutput.h \
-    JJTestOutput.h
+    JJTestOutput.h \
+    DJTrafficLightManager.h \
+    JJDisplayOutput.h \
+    JJTestOutput.h \
+    JPCarTestStub.h \
+    JPConstants.h \
+    JPIntersection.h \
+    JPIntersectionExceptions.h \
+    JPIntersectionGrid.h \
+    JPLane.h \
+    JPLightTestStub.h \
+    JPObservableSimulation.h \
+    JPOtherException.h \
+    JPSimulationControler.h \
+    JPSimulationEngine.h \
+    JPTrafficLightAdapter.h \
+    JPTrafficModel.h \
+    JPTrafficModelExceptions.h \
+    JPUpdatableInterface.h \
+    SFCarGen.h
 
 FORMS += \
-        JJDisplayOutput.ui
+        JJDisplayOutput.ui \
+    JJInputui.ui
+
+RESOURCES += \
+    resource.qrc
+
+DISTFILES +=
