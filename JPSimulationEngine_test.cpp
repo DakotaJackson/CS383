@@ -1134,7 +1134,7 @@ public:
 		printf("Ret: %d\n", ret);
 
 		//long tests
-		if(false)
+		if(true)
 		{
 			ret = consts::testOuptut(
 					"JPSimulationEngine: Add Car Test",

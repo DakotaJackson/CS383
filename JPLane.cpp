@@ -71,9 +71,45 @@ Car *JPLane::removeFirstCar()
 	return _list->removeFirst();
 }
 
-void JPLane::addCarAtPos(Car* car, double position)
+void JPLane::addCarAtPos(Car* car, int direction)
 {
 	//TODO write addCarAtPos
+	double sign = 1;
+	bool isX = true;
+	double carPos, listPos;
+	Car *listCar;
+
+	if(direction == JPIntersection::NORTHBOUND ||
+			direction == JPIntersection::SOUTHBOUND)
+	{
+		isX = false; //we want to look at Y
+		carPos = car->getY();
+	}
+	else
+		carPos = car->getX();
+
+	if(direction == JPIntersection::WESTBOUND ||
+			direction == JPIntersection::SOUTHBOUND)
+		sign = -1;
+	carPos *= sign; //orient the car
+
+	//find the position
+	int leng, i;
+	Iterator<Car*> iter = _list->begin();
+	leng = _list->getSize();
+
+	for(i = 0; i < leng; i++)
+	{
+		listCar = *(iter++);
+		if(isX)
+			listPos = sign * listCar->getX();
+		else
+			listPos = sign * listCar->getX();
+
+		if(listPos < carPos) //proceed until no cars are in front
+			break;
+	}
+	_list->add(i, car);
 }
 
 void JPLane::addCarAtEnd(Car* car)

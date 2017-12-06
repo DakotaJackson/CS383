@@ -113,7 +113,7 @@ public:
 	 * \param car the car to be added.
 	 * \param position the position in feet
 	 */
-	void addCarAtPos(Car *car, double position);
+	void addCarAtPos(Car *car, int direction);
 
 	/**
 	 * \brief Add a car at the end of the lane.
@@ -160,4 +160,5 @@ private:
 	//bool _renderFlagged; //dropping this
 };
 /** @} */
+#include "JPIntersection.h" //import for directions
 #endif /* SRC_JAMES_JPLANE_H_ */

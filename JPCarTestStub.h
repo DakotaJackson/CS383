@@ -7,7 +7,7 @@
 
 #ifndef TEST_JPCARTESTSTUB_H_
 #define TEST_JPCARTESTSTUB_H_
-#include "SFCarGen.h  "
+#include "SFCarGen.h"
 /**
  * \addtogroup TST
  * @{

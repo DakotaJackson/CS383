@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "JPConstants.h"
 #include <stdexcept>
+#include "JPCarTestStub.h"
 
 int iterateTest();
 int removeCarTest();
@@ -166,10 +167,9 @@ inline int removeCarTest()
 				//printf("[%d][%d]\t %d\t%d\n", i, j, cars[j], car);
 				if( car != cars[j])
 					return 2;
-		}
-
-		}
-	}
+			}
+		} //end j
+	}//end i
 
 	delete lane;
 	return 0;
@@ -180,15 +180,102 @@ inline int addCarAtPositionTest()
 	//TODO write this test
 	//add some cars
 	//add one at a specified position
-	return 1;
+//	return -1;
+
+	JPLane *lane;
+	lane = new JPLane(JPLane::STRAIGHT, 0, 0);
+	Car *car;
+
+	//add cars
+	int i;
+	Car *cars[10];
+	for(i = 0; i < 9; i++)
+	{
+		//skip numbers 0 and 5;
+		if(5 == i || 0 == i)
+			i++;
+		//JPCarTestStub(double leng, double X, double Y, double speed, double dspeed);
+		cars[i] = new JPCarTestStub(10, i * -20, 1, 35, 0);
+		//printf("[%d]:\t%d\n", i, cars[i]);
+		lane->addCarAtEnd(cars[i]);
+	}
+
+	//add at front (0)
+	car = new JPCarTestStub(10, 0 * -20, 1, 35, 0);
+	lane->addCarAtPos(car, JPIntersection::EASTBOUND); //increasing the positive X direction
+	cars[0] = car;
+
+	//add at 5
+	car = new JPCarTestStub(10, 5 * -20, 1, 35, 0);
+	lane->addCarAtPos(car, JPIntersection::EASTBOUND); //increasing the positive X direction
+	cars[5] = car;
+
+	//add at end (9)
+	car = new JPCarTestStub(10, 9 * -20, 1, 35, 0);
+	lane->addCarAtPos(car, JPIntersection::EASTBOUND); //increasing the positive X direction
+	cars[9] = car;
+
+
+	//test
+	lane->resetToFirstCar();
+	for(i = 0; i < 10; i++)
+	{
+		car = lane->getNextCar();
+		if(car != cars[i])
+			return i+1;
+	}
+
+	delete lane;
+	return 0;
 }
 
 
 inline int removeCarEarlyTest()
 {
-	//TODO write this test
 	//add some cars
 	//remove a car from the middle to simulate a lane change
 	//verify correct car was removed
-	return 1;
+
+	JPLane *lane;
+	lane = new JPLane(JPLane::STRAIGHT, 0, 0);
+	Car *car;
+
+	//add cars
+	int i;
+	Car *cars[10];
+	for(i = 0; i < 10; i++)
+	{
+		cars[i] = new Car();
+		//printf("[%d]:\t%d\n", i, cars[i]);
+		lane->addCarAtEnd(cars[i]);
+	}
+
+	//remove car number 5;
+	lane->resetToFirstCar();
+	for(i = 0; i < 10; i++)
+	{
+		lane->getNextCar();
+		if( 5 == i)
+		{
+			cars[i] = 0;
+			lane->removeCurrentCar();
+		}
+	}
+
+	//test
+	lane->resetToFirstCar();
+	for(i = 0; i < 10; i++)
+	{
+		//skip over 5 because it shoudln't be there
+		if( 5 == i)
+			i++;
+
+		car = lane->getNextCar();
+
+		if(car != cars[i])
+			return 1;
+	}
+
+	delete lane;
+	return 0;
 }

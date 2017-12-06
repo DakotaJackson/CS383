@@ -69,7 +69,11 @@ void JPSimulationControler::run()
 
 		//calculate when the next update should occur
 		target = steps * stepTime * _timeScale +  initialRealTime;
-		sleepTill(target);
+
+		//non adjusted sleep
+		long sleepTime = (long)(stepTime * 1000 * _timeScale);
+		Sleep(sleepTime);
+		//sleepTill(target);
 	}
 }
 
