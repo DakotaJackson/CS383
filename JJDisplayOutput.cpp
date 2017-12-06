@@ -1,14 +1,14 @@
 #include "JJDisplayOutput.h"
 #include "ui_JJDisplayOutput.h"
 
-//#include "JPIntersection.h"
-//#include "JPLane.h"
+#include "JPIntersection.h"
+#include "JPLane.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsTextItem>
 #include <QImage>
 
-JJDisplayOutput::JJDisplayOutput(QWidget *parent, int n, int s, int e, int w /*JPIntersection intersection*/) :
+JJDisplayOutput::JJDisplayOutput(QWidget *parent, int n, int s, int e, int w) :
     QDialog(parent),
     ui(new Ui::JJDisplayOutput)
 {
@@ -16,20 +16,20 @@ JJDisplayOutput::JJDisplayOutput(QWidget *parent, int n, int s, int e, int w /*J
     initBuilder(n, s, e, w);
 }
 
+JJDisplayOutput::JJDisplayOutput(JPIntersection *intersect)
+{
+    int n = intersect->getLaneCount(1);
+    int s = intersect->getLaneCount(2);
+    initCars();
+    //pass to draw cars
+}
+
 JJDisplayOutput::~JJDisplayOutput()
 {
     delete ui;
 }
 
-
-void JJDisplayOutput::initializeRoad()
-{
-    resize(m_laneLength + m_laneLength + ((m_northLane + m_southLane) * m_laneWidth), m_laneLength + m_laneLength + ((m_westLane + m_eastLane) * m_laneWidth));
-    show();
-    update();
-}
-
-
+//Virtual QT function that is automatically called on update within step
 void JJDisplayOutput::paintEvent(QPaintEvent *e)
 {
     Q_UNUSED(e);
@@ -39,11 +39,19 @@ void JJDisplayOutput::paintEvent(QPaintEvent *e)
     drawCars(&qp);
     drawLights(&qp);
 
-    // delete this
+    // delete this when timer is implemented
     step();
 }
 
+//Get lane settings, resize screen to lane size
+void JJDisplayOutput::initRoad()
+{
+    resize(m_laneLength + m_laneLength + ((m_northLane + m_southLane) * m_laneWidth), m_laneLength + m_laneLength + ((m_westLane + m_eastLane) * m_laneWidth));
+    show();
+    update();
+}
 
+//Get car images
 void JJDisplayOutput::initCars(){
     carImage[0].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\car1.png");
     carImage[1].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\car2.png");
@@ -81,37 +89,7 @@ void JJDisplayOutput::initCars(){
     m_cars[4][3]=0;
 }
 
-
-void JJDisplayOutput::drawCars(QPainter *qp){
-
-    // in JPIntersection
-    //JPLane *testLane = something.getLane();
-    //int laneCount = something.getLaneCount(direction);
-
-    // in JPLane
-    /* int size = something.getSize();
-     * SFCar *testCar = something.getNextCar();
-     */
-
-    // in SFCar
-    /* int carX = something.getX();
-     * int carY = something.getY();
-     * int angle = something.getTheta();
-     *
-     *
-     * for(int i = 0; i < size; i++)
-     * {
-     *       drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
-     *
-     */
-
-    for(int i=0; i< 4; i++)
-    {
-        drawImage(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3], carImage);
-    }
-}
-
-
+//Get light images
 void JJDisplayOutput::initLights()
 {
     lightImage[0].load("C:\\Users\\0.0\\Desktop\\JJDisplayOutput\\lightRed.png");
@@ -145,6 +123,37 @@ void JJDisplayOutput::initLights()
 
 }
 
+//Walks through car list and draws them
+void JJDisplayOutput::drawCars(QPainter *qp){
+
+    // in JPIntersection
+    //JPLane *testLane = something.getLane();
+    //int laneCount = something.getLaneCount(direction);
+
+    // in JPLane
+    /* int size = something.getSize();
+     * SFCar *testCar = something.getNextCar();
+     */
+
+    // in SFCar
+    /* int carX = something.getX();
+     * int carY = something.getY();
+     * int angle = something.getTheta();
+     *
+     *
+     * for(int i = 0; i < size; i++)
+     * {
+     *       drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
+     *
+     */
+
+    for(int i=0; i< 4; i++)
+    {
+        drawImage(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3], carImage);
+    }
+}
+
+//Walks through light list and draws them
 void JJDisplayOutput::drawLights(QPainter *qp)
 {
 
@@ -163,26 +172,7 @@ void JJDisplayOutput::drawLights(QPainter *qp)
     }
 }
 
-void JJDisplayOutput::drawImage(QPainter *qp, int x, int y, int imgIndex, int angle, QImage imgArray[]){
-    if(imgIndex >= maxCarImages || imgIndex >= maxLightImages){
-        //error
-        return;
-    }
-
-    QTransform trans;
-    // Move to the center of the image
-
-
-    trans.translate(x+imgArray[imgIndex].width()/2, y+imgArray[imgIndex].height()/2);
-    trans.rotate(angle);
-    qp->setTransform(trans);
-
-    // Draw the image at (0,0), because everything is already handled by the transformation
-    qp->drawImage(-imgArray[imgIndex].width()/2,-imgArray[imgIndex].height()/2,imgArray[imgIndex]);
-    qp->resetTransform();
-
-}
-
+//Walks through lane parameters and draws road
 void JJDisplayOutput::drawRoad(QPainter *qp){
 
     int roadWidthNS = ((m_northLane + m_southLane) * m_laneWidth);
@@ -271,12 +261,34 @@ void JJDisplayOutput::drawRoad(QPainter *qp){
 
 }
 
+//Gets throughput and draws it
 void JJDisplayOutput::drawText(QPainter *qp)
 {
 
 }
 
+//Draws images with pivot point adjusted to center of image
+void JJDisplayOutput::drawImage(QPainter *qp, int x, int y, int imgIndex, int angle, QImage imgArray[]){
+    if(imgIndex >= maxCarImages || imgIndex >= maxLightImages){
+        //error
+        return;
+    }
 
+    QTransform trans;
+    // Move to the center of the image
+
+
+    trans.translate(x+imgArray[imgIndex].width()/2, y+imgArray[imgIndex].height()/2);
+    trans.rotate(angle);
+    qp->setTransform(trans);
+
+    // Draw the image at (0,0), because everything is already handled by the transformation
+    qp->drawImage(-imgArray[imgIndex].width()/2,-imgArray[imgIndex].height()/2,imgArray[imgIndex]);
+    qp->resetTransform();
+
+}
+
+//Initializes all images
 void JJDisplayOutput::initBuilder(int n, int s, int e, int w)
 {
     m_northLane = n;
@@ -285,10 +297,10 @@ void JJDisplayOutput::initBuilder(int n, int s, int e, int w)
     m_westLane = w;
     initCars();
     initLights();
-    initializeRoad();
+    initRoad();
 }
 
-
+//Increments paintevent
 void JJDisplayOutput::step()
 {
     m_cars[0][0]++;

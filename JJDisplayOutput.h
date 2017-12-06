@@ -6,7 +6,8 @@
 #include <QGraphicsTextItem>
 #include <QObject>
 #include <QImage>
-
+#include "JJInputui.h"
+#include "JPIntersection.h"
 
 namespace Ui {
     class JJDisplayOutput;
@@ -18,28 +19,33 @@ class JJDisplayOutput : public QDialog
 
 public:
     explicit JJDisplayOutput(QWidget *parent = 0, int n = 2, int s = 3, int e = 4, int w = 5);
+    JJDisplayOutput(JPIntersection *intersect);
     ~JJDisplayOutput();
-    void initBuilder(int n, int s, int e, int w);
-    void step();
+
+    void initBuilder(int n, int s, int e, int w);   //Set up builder pattern
+    void step();                                    //Increment draw functions
+
+    //Max number of images to load
     static const int maxCarImages = 3;
     static const int maxLightImages = 3;
 
+
 protected:
+    //Virtual QT function
     void paintEvent(QPaintEvent *e);
 
 private:
-    void initCars();
+    void initRoad();    //Get lane settings
+    void initCars();    //Load car images
+    void initLights();  //Load light images
+
+    void drawCars(QPainter *qp);    //Steps through car list drawing cars
+    void drawLights(QPainter *qp);  //Steps through light list drawing lights
+    void drawRoad(QPainter *qp);    //Steps through lane list drawing lanes
+    void drawText(QPainter *qp);    //Gets throughput and displays
+
+    //Draw images, moves pivot to center of image, resets on return.
     void drawImage(QPainter *qp, int x, int y, int imgIndex, int angle, QImage imgArray[]);
-    void drawCars(QPainter *qp);
-
-    void initLights();
-    void drawLight(QPainter *qp, int x, int y, int imgIndex, int angle);
-    void drawLights(QPainter *qp);
-
-    void initializeRoad();
-    void drawRoad(QPainter *qp);
-
-    void drawText(QPainter *qp);
 
     Ui::JJDisplayOutput *ui;
 
@@ -52,12 +58,14 @@ private:
     QImage lightImage[maxLightImages];
     QImage *textImage;
 
+    //Traffic flow counter
+    int flow = 0;
+
+    //Lane draw parameters
     int m_northLane;
     int m_southLane;
     int m_westLane;
     int m_eastLane;
-
-    int flow = 0;
 
     const int m_laneWidth = 50;
     const int m_laneLength = 200;
