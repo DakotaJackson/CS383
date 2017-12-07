@@ -19,7 +19,7 @@ class JJDisplayOutput : public QDialog
 
 public:
     explicit JJDisplayOutput(QWidget *parent = 0, int n = 2, int s = 3, int e = 4, int w = 5);
-    JJDisplayOutput(JPIntersection *intersect);
+    JJDisplayOutput(JPIntersection *intersect, JPLane *lane);
     ~JJDisplayOutput();
 
     void initBuilder(int n, int s, int e, int w);   //Set up builder pattern

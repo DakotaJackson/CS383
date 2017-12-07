@@ -3,6 +3,7 @@
 
 #include "JPIntersection.h"
 #include "JPLane.h"
+#include "SFCarGen.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsTextItem>
@@ -16,10 +17,33 @@ JJDisplayOutput::JJDisplayOutput(QWidget *parent, int n, int s, int e, int w) :
     initBuilder(n, s, e, w);
 }
 
-JJDisplayOutput::JJDisplayOutput(JPIntersection *intersect)
+JJDisplayOutput::JJDisplayOutput(JPIntersection *intersect, JPLane *lane)
 {
-    int n = intersect->getLaneCount(1);
+    // in JPLane
+    /* int size = something.getSize();
+     * SFCar *testCar = something.getNextCar();
+     */
+
+    // in SFCar
+    /* int carX = something.getX();
+     * int carY = something.getY();
+     * int angle = something.getTheta();
+     *
+     *
+     * for(int i = 0; i < size; i++)
+     * {
+     *       drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
+     *
+     */
+    //N = 0, E = 1, S = 2, W = 3
+    int n = intersect->getLaneCount(0);
+    int e = intersect->getLaneCount(1);
     int s = intersect->getLaneCount(2);
+    int w = intersect->getLaneCount(3);
+
+    int size = lane->getSize();
+
+
     initCars();
     //pass to draw cars
 }
@@ -125,27 +149,6 @@ void JJDisplayOutput::initLights()
 
 //Walks through car list and draws them
 void JJDisplayOutput::drawCars(QPainter *qp){
-
-    // in JPIntersection
-    //JPLane *testLane = something.getLane();
-    //int laneCount = something.getLaneCount(direction);
-
-    // in JPLane
-    /* int size = something.getSize();
-     * SFCar *testCar = something.getNextCar();
-     */
-
-    // in SFCar
-    /* int carX = something.getX();
-     * int carY = something.getY();
-     * int angle = something.getTheta();
-     *
-     *
-     * for(int i = 0; i < size; i++)
-     * {
-     *       drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
-     *
-     */
 
     for(int i=0; i< 4; i++)
     {
