@@ -6,7 +6,6 @@
 #include <QGraphicsTextItem>
 #include <QObject>
 #include <QImage>
-#include "JJInputui.h"
 #include "JPIntersection.h"
 
 namespace Ui {
