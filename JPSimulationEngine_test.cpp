@@ -68,7 +68,7 @@ private:
 		else if( Car::DESIRE_LEFT == turn )
 			trn = 'L';
 
-		printf("X:%3.2f Y:%3.2f Th: %2.0f %c Sp:%2.1f St:%3.1f Wt:%3.1f ptr:%p\n",
+		printf("X:%3.2f Y:%3.2f Th: %2.1f %c Sp:%2.2f St:%3.2f Wt:%3.2f ptr:%p\n",
 				x, y, theta, trn, speed, insim, wait, car);
 	}
 
@@ -411,10 +411,6 @@ private:
 		return 0;
 	}
 
-	int straightGreenTest()
-	{
-		return -1;
-	}
 
 	int rightTurnRedTest()
 	{
@@ -1091,10 +1087,106 @@ private:
 		//todo maybe more
 		return 0;
 	}
+
+	int straightGreenTest()
+	{
+		JPSimulationEngine *eng = getSetup(2);
+		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::GREEN_EW));
+		eng->init();
+		JPCarTestStub *stub = new JPCarTestStub(10, -25, -15, 20, 0 );
+		stub->setTurnDirection(Car::DESIRE_STRAIGHT);
+
+		inter->getLane(3,0)->addCarAtEnd(stub);
+
+		double maxSpeed = 35 * 5280.0/3600 + 0.01;
+		double prevSpeed = 19.9;
+		double prevPos = -36;
+		double pos, speed;
+
+		for(int i = 0; i < 20; i++)
+		{
+			printCar(stub);
+			pos = stub->getX();
+			speed = stub->getSpeed();
+
+			//make sure position is increasing
+			if(prevPos >= pos)
+				return 10* i + 1;
+
+			//make sure max speed is not exceed
+			if(speed > maxSpeed)
+				return 10* i + 2;
+
+			//make sure speed is increasing unless max speed has been reached
+			if( speed < maxSpeed - 0.02 && ! (speed > prevSpeed))
+				return 10* i + 3;
+
+			eng->step(0.1);
+			prevPos  = pos;
+			prevSpeed = speed;
+		}
+
+		//make sure intersection has been cleared
+		pos = stub->getX();
+		if( pos > 20)
+			return 0;
+		return 4;
+	}
+
+	int rightTurnGreenTest()
+	{
+		JPSimulationEngine *eng = getSetup(2); //ofsets are 2 and 2
+		eng->setTrafficLight(new JPLightTestStub(JPLightTestStub::GREEN_EW));
+		eng->init();
+		JPCarTestStub *stub = new JPCarTestStub(10, -19.999, -15, 25, 0 );
+		stub->setTurnDirection(Car::DESIRE_RIGHT);
+
+		inter->getLane(3,0)->addCarAtEnd(stub);
+
+		double maxSpeed = 35 * 5280.0/3600 + 0.01;
+		double prevSpeed = 19.9;
+		double prevPos = -36;
+		double pos, speed;
+
+		for(int i = 0; i < 40; i++)
+		{
+			printCar(stub);
+			pos = stub->getX();
+			speed = stub->getSpeed();
+/*
+			//make sure position is increasing
+			if(prevPos >= pos)
+				return 10* i + 1;
+
+			//make sure max speed is not exceed
+			if(speed > maxSpeed)
+				return 10* i + 2;
+
+			//make sure speed is increasing unless max speed has been reached
+			if( speed < maxSpeed - 0.02 && ! (speed > prevSpeed))
+				return 10* i + 3;
+*/
+			eng->step(0.01);
+			prevPos  = pos;
+			prevSpeed = speed;
+		}
+
+		return -1;
+	}
 public:
 	int run()
 	{
 		int ret;
+		ret = consts::testOuptut(
+				"JPSimulationEngine: Right Turn Green Test",
+				rightTurnGreenTest() );
+
+return 0;
+
+		ret = consts::testOuptut(
+				"JPSimulationEngine: Straight Green Test",
+				straightGreenTest() );
+
 		ret = consts::testOuptut(
 				"JPSimulationEngine: Prerequisites",
 				prereqTest() );
@@ -1134,7 +1226,7 @@ public:
 		printf("Ret: %d\n", ret);
 
 		//long tests
-		if(true)
+		if(false)
 		{
 			ret = consts::testOuptut(
 					"JPSimulationEngine: Add Car Test",

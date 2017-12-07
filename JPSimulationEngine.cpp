@@ -186,83 +186,125 @@ double JPSimulationEngine::getPrevCarDecel(const double pSpeed, const double pPo
 
 		return accel;
 }
-double getTurnedDistance( const double ac, const double V0, const double tm)
+double getTurnedDistance( const double ac, double &V0, const double tm)
 {
 	double time, dist;
-	if(25 > V0 + ac * tm)
+	if(25 > V0 + ac * tm) //wille we exceed
 	{
 		time = -V0/ac;
-		dist = 0.5 * ac * time * time + V0 * time; //accelerating
-		dist += (tm - time) * 25; //steady speed
+		dist = 0.5 * ac * time * time + V0 * time; //accelerating porint
+		dist += (tm - time) * 25; //steady speed portion
+		V0 = 25;
 		return dist;
 	}
 	else
-		return 0.5 * ac * tm * tm + V0 * tm;
+	{
+		dist = 0.5 * ac * tm * tm + V0 * tm;
+		V0 =+ ac * tm;
+		return dist;
+	}
 }
 
 void JPSimulationEngine::updateTurnCar(Car *car,const int dir, double speed,
 		double &pos,const double accel, const int turn, const double timeStep,
-		const int lane)
+		const int oLane)
 {
-
+	if(3 == dir)
+printf("[%d]%p:\t %f  %f,  %f, %d\n", dir,  car, car->getX(), car->getY(),
+		car->getTheta(), turn == Car::DESIRE_RIGHT);
 	//1 get axes and circumference
-	double r, rOrigin, rTarget, circ, radius, deg, theta, otheta, x, y;
+	double rOrigin, rTarget, arcLeng, radius, dTheta, turnTheta, origTheta, x, y, x0, y0, orthPos;
+	double deg2rad = 2 * M_PI/ 360;
+	int tSign;
+	int tLane;
+	bool right = false;
 	if( Car::DESIRE_LEFT == turn)
 	{
-		rOrigin = 2 * _offsets[    dir     ] - (lane + 0.5) * LANE_WIDTH;
-		rTarget = 2 * _offsets[ (dir+1) % 2] - (lane + 0.5) * LANE_WIDTH;
+		tLane = _intersection->getLane(dir, oLane)->getLeftTarget();
+		rOrigin = 2 * _offsets[    dir     ] - (oLane + 0.5) * LANE_WIDTH;
+		rTarget = 2 * _offsets[ (dir+1) % 2] - (tLane + 0.5) * LANE_WIDTH;
+		tSign = 1;
 	}
 	else //right
 	{
-		rOrigin = 2 * _offsets[    dir     ] - (lane + 0.5) * LANE_WIDTH;
-		rTarget = 2 * _offsets[ (dir+1) % 2] - (lane + 0.5) * LANE_WIDTH;
+		tLane = _intersection->getLane(dir, oLane)->getRightTarget();
+		rOrigin =  (oLane + 0.5) * LANE_WIDTH;
+		rTarget =  (tLane + 0.5) * LANE_WIDTH;
+		tSign = -1;
 	}
 	radius = (rOrigin + rTarget)/2;
-	circ = M_PI * radius / 2;
+	arcLeng = M_PI * radius / 2; //a quarter of the circumference
 
-	otheta = car->getTheta();
-	theta =  remainder(otheta, 90); //How far we are into the turn
+	origTheta = car->getTheta();
+printf("origTheta: %2.2f\t %2.2f\n", origTheta, fmod(origTheta, 90));
+	turnTheta =  fmod(origTheta, 90); //How far we were into the turn
 	double linTravel = getTurnedDistance(accel, speed, timeStep);
-	deg = 90 * linTravel/circ;
+	dTheta = 90 * linTravel/arcLeng;// increase in theta is percent of travel of a 90 deg arc
+
+	printf("rO:%f\trT:%f\tturnTheta:%2.1f\ttrnTheta:%2.1f\tarcLeng:%2.2f\tlinTr:%2.2f\n", rOrigin, rTarget, turnTheta, dTheta, arcLeng, linTravel);
 
 	//did we exit?
-	double deltaPos, deltaOrth, newDeg;
-	if(theta + deg > 90) //we've completed the turn
+	double deltaPos, deltaOrth;
+	if(turnTheta + dTheta > 90) //we've completed the turn
 	{
-		deltaPos = (theta + deg - 90 ) * circ/90;
-		exitTurn(car, dir, deltaPos, turn, lane);
+		deltaPos = (turnTheta + dTheta - 90 ) * arcLeng/90;
+		exitTurn(car, dir, deltaPos, turn, oLane);
+		car->setSpeed(speed);
+		car->setTimeInSim(car->getTimeInSim()+timeStep);
 		return;
 	}
 
-	x = sin( theta + deg);
-	deltaPos = x - sin(theta); //pos should be incremented by this
-	y = rTarget * sqrt( 1 - pow(x/rOrigin, 2));
+	pos = sin( (turnTheta + dTheta) * deg2rad) * rTarget; //x relative to beginning of turn
+	double radical = 1 - pow(pos/rTarget, 2);
+	if( radical < 0 ) //safety check (no negative square roots!)
+		radical = 0;
+	orthPos = rOrigin * sqrt( radical);
+printf("dX:%f\tdY%f\t sign: %d\tnewTheta:%2.2f \n",pos, orthPos, tSign, fmod(dTheta + origTheta,360));
 
+	car->setTheta( fmod(dTheta + origTheta,360));
+	switch(dir)
+	{
+		case JPIntersection::SOUTHBOUND:
+			car->setX(tSign * (_offsets[SOUTH] - orthPos) );
+			car->setY( _offsets[EAST] - pos );
+			break;
+		case JPIntersection::NORTHBOUND:
+			car->setX( - tSign * (_offsets[SOUTH] - orthPos) );
+			car->setY( - _offsets[EAST] + pos );
+			break;
+		case JPIntersection::EASTBOUND:
+			car->setY(tSign * (_offsets[EAST] - orthPos) );
+			car->setX(- _offsets[SOUTH] + pos );
+			break;
+		case JPIntersection::WESTBOUND:
+			car->setY( - tSign * (_offsets[EAST] - orthPos) );
+			car->setX( _offsets[SOUTH] - pos );
+			break;
+	}
 
-	//todo compute deltaPos and deltaOrth.
-	car->setTheta( remainder(deg + otheta,360));
-
+	car->setSpeed(speed);
+	car->setTimeInSim(car->getTimeInSim()+timeStep);
 }
-void JPSimulationEngine::exitTurn(Car *car, int dir, const double excess,const int turn, const int lane)
+void JPSimulationEngine::exitTurn(Car *car, int oldDir, const double excess,const int turn, const int lane)
 {
 	int target;
 	double pos;
 
 	//change directions
-	JPLane *originLane = _intersection->getLane(dir, lane);
+	JPLane *originLane = _intersection->getLane(oldDir, lane);
 	if(Car::DESIRE_LEFT == turn)
 	{
 		target = originLane->getLeftTarget();
-		dir = (dir + 1) % 4;
+		oldDir = (oldDir + 1) % 4;
 	}
 	else
 	{
 		target = originLane->getRightTarget();
-		dir = (dir + 3) % 4;
+		oldDir = (oldDir + 3) % 4;
 	}
 
-	pos = excess + _offsets[dir];
-	car->setTheta( 90 * ( (dir + 2)%2) );
+	pos = excess + _offsets[oldDir];
+	car->setTheta( 90 * ( (oldDir + 2)%2) );
 
 	originLane->removeCurrentCar();
 	//todo set positins
@@ -403,7 +445,8 @@ double JPSimulationEngine::computeGoAccel(const int turnDir, const double speed,
 double JPSimulationEngine::getIntersectionDecel(Car *car,const int dir, const int ln,
 		const double pos, const double speed, const double timeStep) const
 {
-	double next, action, accel1, dist;
+	double next, accel1, dist;
+	int action;
 	double lookAhead = 5.0;
 	double intStart = - std::abs(_intersectionBounds[dir]); //position of the light
 	int intEnd = -intStart;
@@ -422,6 +465,7 @@ double JPSimulationEngine::getIntersectionDecel(Car *car,const int dir, const in
 		return computeGoAccel(turn, speed, timeStep);
 
 	action = determineLightEffect(car, dir, ln);
+//printf("%p:action:%d, (%d,%d,%d,%d)\n", car, action, GO, CAUTION, YIELD, STOP);
 	dist = intStart - pos; // how far we can go
 	if(CAUTION == action)
 	{
@@ -451,12 +495,13 @@ double JPSimulationEngine::getIntersectionDecel(Car *car,const int dir, const in
 
 	if(GO == action)
 	{
-		bool blocked = _iGrid->checkPath(dir, ln);
+		//make sure there's not still somebody in the intersection
+		bool clear =  _iGrid->checkPath(dir, ln);
 
-		if( blocked)
-			action = STOP;
-		else //if not blocked, then go
+		if( clear)
 			return computeGoAccel(turn, speed, timeStep);
+		else //if not blocked, then go
+			action = STOP;
 	}
 
 	if(STOP == action)
@@ -501,6 +546,7 @@ void JPSimulationEngine::processLane(int ln, int direction, double timeStep)
 
 		carAccel = getPrevCarDecel(prevSpeed, prevPos,speed, dspeed, pos, timeStep);
 		lightAccel = getIntersectionDecel(car, direction, ln, pos, speed, timeStep);
+printf("CarAc:%f\tIntAccel%f\n", carAccel, lightAccel);
 		accel = std::min(carAccel, lightAccel);
 
 		double newPos = pos;
