@@ -19,33 +19,8 @@ JJDisplayOutput::JJDisplayOutput(QWidget *parent, int n, int s, int e, int w) :
 
 JJDisplayOutput::JJDisplayOutput(JPIntersection *intersect, JPLane *lane)
 {
-    // in JPLane
-    /* int size = something.getSize();
-     * SFCar *testCar = something.getNextCar();
-     */
-
-    // in SFCar
-    /* int carX = something.getX();
-     * int carY = something.getY();
-     * int angle = something.getTheta();
-     *
-     *
-     * for(int i = 0; i < size; i++)
-     * {
-     *       drawCar(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3]);
-     *
-     */
-    //N = 0, E = 1, S = 2, W = 3
-    int n = intersect->getLaneCount(0);
-    int e = intersect->getLaneCount(1);
-    int s = intersect->getLaneCount(2);
-    int w = intersect->getLaneCount(3);
-
-    int size = lane->getSize();
-
-
-    initCars();
-    //pass to draw cars
+    m_tempIntersect = intersect;
+    m_tempLane = lane;
 }
 
 JJDisplayOutput::~JJDisplayOutput()
@@ -150,10 +125,30 @@ void JJDisplayOutput::initLights()
 //Walks through car list and draws them
 void JJDisplayOutput::drawCars(QPainter *qp){
 
+    int n = m_tempIntersect->getLaneCount(0);
+    int e = m_tempIntersect->getLaneCount(1);
+    int s = m_tempIntersect->getLaneCount(2);
+    int w = m_tempIntersect->getLaneCount(3);
+
+    int size = m_tempLane->getSize();
+
+    for(int j = 0; j < n; j++){
+        for(int i = 0; i < size; i++){
+            Car *car = m_tempLane->getNextCar();
+            int x = car->getX();
+            int y = car->getY();
+            int theta = car->getTheta();
+            int length = car->getLength();
+            drawImage(qp, x, y, length, theta, carImage);
+        }
+    }
+
+    /*
     for(int i=0; i< 4; i++)
     {
         drawImage(qp, m_cars[i][0], m_cars[i][1], m_cars[i][2], m_cars[i][3], carImage);
     }
+    */
 }
 
 //Walks through light list and draws them
